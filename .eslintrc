@@ -1,0 +1,41 @@
+{
+  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript", "prettier", "plugin:import/recommended"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["unused-imports", "prettier"],
+  "rules": {
+    "@next/next/no-html-link-for-pages": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.ts", "**/*.test.tsx"] }],
+    "import/no-named-as-default": "off",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-param-reassign": "off",
+    "no-return-assign": "off",
+    "react/button-has-type": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-no-constructed-context-values": "warn",
+    "react/jsx-props-no-spreading": ["off", { "custom": "ignore" }],
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off"
+  },
+  "overrides": [
+    {
+      "files": ["lib/store/**/*.ts"],
+      "rules": {
+        "no-param-reassign": "off"
+      }
+    },
+    {
+      "files": ["src/**/index.ts"],
+      "rules": {
+        "import/prefer-default-export": "off"
+      }
+    },
+    {
+      "files": ["src/**/*.slice.ts"],
+      "rules": {
+        "no-param-reassign": "off"
+      }
+    }
+  ]
+}
