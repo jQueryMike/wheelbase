@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "npx eslint .",
+    "lint-staged": "npx lint-staged"
   },
   "dependencies": {
     "@types/node": "20.3.1",
@@ -15,6 +16,14 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-tailwindcss": "^3.12.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "next": "13.4.5",
     "postcss": "8.4.24",
     "react": "18.2.0",
@@ -27,6 +36,7 @@
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "commitlint-config-jira": "^1.6.4",
     "commitlint-plugin-jira-rules": "^1.6.4",
+    "lint-staged": "^13.2.2",
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.8",
     "prettier-plugin-nativewind": "^0.2.3"
