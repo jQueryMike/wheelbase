@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node build-tailwind.js && next dev",
+    "build": "node build-tailwind.ts && next build",
     "start": "NODE_OPTIONS=--require=elastic-apm-node/start-next.js next start",
     "lint": "npx eslint .",
     "lint-staged": "npx lint-staged"
@@ -17,6 +17,8 @@
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
     "elastic-apm-node": "^3.46.0",
     "eslint": "8.42.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -28,6 +30,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-tailwindcss": "^3.12.1",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "flat": "^5.0.2",
     "next": "^13.4.6",
     "postcss": "8.4.24",
     "react": "18.2.0",
