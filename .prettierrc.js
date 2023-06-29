@@ -7,7 +7,7 @@ module.exports = {
   tabWidth: 2,
   plugins: [require('prettier-plugin-nativewind')],
   tailwindCustomTaggedTemplates: ['tw'],
-  importOrder: ['<THIRD_PARTY_MODULES>', '^@components$', '^@utilities$', '^[../]', '^[./]'],
+  importOrder: ['^@components$', '^@utilities$', '^[../]', '^[./]'],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
 };

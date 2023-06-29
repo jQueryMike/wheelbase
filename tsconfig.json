@@ -21,8 +21,12 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@backend": ["lib/backend"],
+      "@backend/*": ["lib/backend/*"],
       "@components": ["lib/components"],
       "@components/*": ["lib/components/*"],
+      "@interfaces": ["lib/interfaces"],
+      "@interfaces/*": ["lib/interfaces/*"],
       "@styles": ["lib/styles"],
       "@styles/*": ["lib/styles/*"],
       "@utilities": ["lib/utilities"],
