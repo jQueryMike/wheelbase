@@ -11,6 +11,7 @@
     "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.ts", "**/*.test.tsx"] }],
     "import/no-named-as-default": "off",
     "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-plusplus": "off",
     "no-param-reassign": "off",
     "no-return-assign": "off",
     "react/button-has-type": "off",

@@ -25,7 +25,7 @@ const buildFeaturesBlock = ({ id, name, content, settings }: BlockBuilderConfig)
         id: heading.id,
         name: 'Heading',
         content: heading.content.properties,
-        settings: heading.content.properties,
+        settings: heading.settings.properties,
       });
     }
 
@@ -35,7 +35,7 @@ const buildFeaturesBlock = ({ id, name, content, settings }: BlockBuilderConfig)
         id: subheading.id,
         name: 'Heading',
         content: subheading.content.properties,
-        settings: subheading.content.properties,
+        settings: subheading.settings.properties,
       });
     }
 
