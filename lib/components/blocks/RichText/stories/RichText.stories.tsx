@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Content from '../Content';
+import RichText from '../RichText';
 
-type Story = StoryObj<typeof Content>;
+type Story = StoryObj<typeof RichText>;
 
 export const ContentUtility: Story = {
   args: {
@@ -15,9 +15,9 @@ export const ContentUtility: Story = {
   },
 };
 
-const meta: Meta<typeof Content> = {
-  title: 'Utility Components/Content',
-  component: Content,
+const meta: Meta<typeof RichText> = {
+  title: 'Components/Rich Text',
+  component: RichText,
   tags: ['autodocs'],
 };
 

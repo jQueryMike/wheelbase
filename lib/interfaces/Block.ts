@@ -1,7 +1,6 @@
 interface Block {
   id: string;
-  name: string;
-  [propName: string]: any;
+  name?: string;
 }
 
 export default Block;

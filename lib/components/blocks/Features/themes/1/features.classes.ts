@@ -4,9 +4,9 @@ import { FeaturesClasses } from '../../Features';
 
 const classes = {
   root: {
-    default: tw`space-y-4 p-4`,
-    sm: tw`sm:space-y-6 sm:p-6`,
-    lg: tw`lg:space-y-8 lg:p-8`,
+    default: tw`space-y-4`,
+    sm: tw`sm:space-y-6`,
+    lg: tw`lg:space-y-8`,
   },
   heading: tw`-mb-2 text-3xl font-bold text-gray-800`,
   subheading: tw`text-xl font-bold text-gray-500`,

@@ -1,7 +1,4 @@
-/* eslint-disable no-await-in-loop */
-
-/* eslint-disable no-restricted-syntax */
-import PageSectionArea from '@interfaces/PageSectionArea';
+import { PageSectionArea } from '@components/layout/PageSection/PageSection';
 import { UmbracoBlockGridArea } from '@interfaces/Umbraco';
 import { v4 as uuidv4 } from 'uuid';
 

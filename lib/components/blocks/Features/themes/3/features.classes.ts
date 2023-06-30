@@ -4,9 +4,9 @@ import { FeaturesClasses } from '../../Features';
 
 const classes = {
   root: {
-    default: tw`space-y-4 bg-blue-800 p-4`,
-    sm: tw`sm:space-y-6 sm:p-6`,
-    lg: tw`lg:space-y-8 lg:p-8`,
+    default: tw`space-y-4 bg-blue-800`,
+    sm: tw`sm:space-y-6`,
+    lg: tw`lg:space-y-8`,
   },
   itemsContainer: {
     default: tw`grid gap-8`,

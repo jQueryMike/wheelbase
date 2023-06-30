@@ -2,6 +2,8 @@ import { FeaturesItem } from '@components/blocks/Features/Features';
 import { UmbracoBlockGridContentItem, UmbracoBlockGridItemSettings } from '@interfaces/Umbraco';
 
 import buildTheme from '../buildTheme';
+import buildHeadingBlock from './buildHeadingBlock';
+import buildTextContentBlock from './buildTextContentBlock';
 
 const buildFeaturesBlockItems = (
   items: { content: UmbracoBlockGridContentItem; settings: UmbracoBlockGridItemSettings }[],
@@ -10,27 +12,45 @@ const buildFeaturesBlockItems = (
   try {
     if (!items) return [];
 
-    let classes = {};
-
-    if (themeVariant) {
-      classes = require(`/lib/components/blocks/Features/themes/${themeVariant}/featuresItem.classes`).default;
-    }
-
-    const featureItems: FeaturesItem[] = [];
+    const featuresItems: FeaturesItem[] = [];
+    const baseClasses = require(`/lib/components/blocks/Features/themes/${themeVariant}/featuresItem.classes`).default;
 
     items.forEach((item) => {
-      const featuresItemClasses = buildTheme({ classes, overrides: item.settings.properties });
-      const featureItem: FeaturesItem = { id: item.content.id, classes: featuresItemClasses };
+      const itemContent = item.content?.properties;
+      const itemSettings = item.settings?.properties;
 
-      if (item.content.properties.heading) featureItem.heading = item.content.properties.heading;
-      if (item.content.properties.icon) featureItem.icon = item.content.properties.icon;
-      if (item.content.properties.content.markup) featureItem.content = item.content.properties.content.markup;
+      const featuresItem: FeaturesItem = { id: item.content.id };
 
-      featureItems.push(featureItem);
+      featuresItem.classes = buildTheme({ classes: baseClasses, overrides: itemSettings });
+
+      const heading = itemContent?.heading?.items[0];
+      if (heading) {
+        featuresItem.heading = buildHeadingBlock({
+          id: heading.id,
+          name: 'Heading',
+          content: heading.content.properties,
+          settings: heading.content.properties,
+        });
+      }
+
+      const textContent = itemContent?.content?.items[0];
+      if (textContent) {
+        featuresItem.content = buildTextContentBlock({
+          id: textContent.id,
+          name: 'TextContent',
+          content: textContent.content.properties,
+          settings: textContent.content.properties,
+        });
+      }
+
+      if (itemContent.icon) featuresItem.icon = itemContent.icon;
+
+      featuresItems.push(featuresItem);
     });
 
-    return featureItems;
+    return featuresItems;
   } catch (error) {
+    console.error(error);
     return [];
   }
 };

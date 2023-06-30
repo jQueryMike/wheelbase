@@ -1,49 +1,49 @@
 import { FeaturesProps } from '@components/blocks/Features';
 import Block from '@interfaces/Block';
-import { UmbracoBlockGridItem } from '@interfaces/Umbraco';
+import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildBlocks from '../buildBlocks';
 import buildTheme from '../buildTheme';
 import buildFeaturesBlockItems from './buildFeaturesBlockItems';
+import buildHeadingBlock from './buildHeadingBlock';
 
-const buildFeaturesBlock = (name: string, item: UmbracoBlockGridItem): FeaturesProps | undefined => {
+const buildFeaturesBlock = ({ id, name, content, settings }: BlockBuilderConfig): FeaturesProps | undefined => {
   try {
-    if (!item) return undefined;
+    const features: Block & FeaturesProps = { id, name };
 
-    let featuresClasses = {};
-    const themeVariant = item.content.properties.theme[0]?.name.split(' ').at(-1);
+    const themeVariant = content?.theme[0]?.name.split(' ').at(-1) || '1';
+    const baseClasses = require(`/lib/components/blocks/Features/themes/${themeVariant}/features.classes`).default;
+    features.classes = buildTheme({
+      classes: baseClasses,
+      gridColsOverrides: [{ className: 'itemsContainer', config: content }],
+      overrides: settings,
+    });
 
-    if (themeVariant) {
-      const classes = require(`/lib/components/blocks/Features/themes/${themeVariant}/features.classes`).default;
-      featuresClasses = buildTheme({
-        classes,
-        gridColsOverrides: [{ className: 'itemsContainer', config: item.content.properties }],
-        overrides: item.settings.properties,
+    const heading = content?.heading?.items[0];
+    if (heading) {
+      features.heading = buildHeadingBlock({
+        id: heading.id,
+        name: 'Heading',
+        content: heading.content.properties,
+        settings: heading.content.properties,
       });
     }
 
-    const items = buildFeaturesBlockItems(item.content.properties.items.items, themeVariant) || [];
-    const startContent = buildBlocks(item.content.properties.startContent.items) || [];
-    const endContent = buildBlocks(item.content.properties.endContent?.items) || [];
+    const subheading = content?.subheading?.items[0];
+    if (subheading) {
+      features.subheading = buildHeadingBlock({
+        id: subheading.id,
+        name: 'Heading',
+        content: subheading.content.properties,
+        settings: subheading.content.properties,
+      });
+    }
 
-    const featuresBlock: Block & FeaturesProps = {
-      id: item.content.id,
-      name,
+    features.items = buildFeaturesBlockItems(content?.items.items, themeVariant) || [];
+    features.startContent = buildBlocks(content?.startContent.items) || [];
+    features.endContent = buildBlocks(content?.endContent?.items) || [];
 
-      heading: item.content.properties.headingText || undefined,
-      headingTag: item.settings.properties.headingTag || undefined,
-
-      subheading: item.content.properties.subheadingText || undefined,
-      subheadingTag: item.settings.properties.subheadingTag || undefined,
-
-      classes: featuresClasses,
-      items,
-
-      startContent,
-      endContent,
-    };
-
-    return featuresBlock;
+    return features;
   } catch (error) {
     console.error(error);
     return undefined;

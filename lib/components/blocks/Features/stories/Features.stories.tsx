@@ -13,38 +13,44 @@ type Story = StoryObj<typeof Features>;
 const featureItems = [
   {
     id: 'feature1',
-    heading: 'Processing',
-    content: '<p>Faster processing to help you build your applications quicker and more efficiently.</p>',
+    heading: { text: 'Processing' },
+    content: { content: '<p>Faster processing to help you build your applications quicker and more efficiently.</p>' },
     icon: 'fa-regular fa-microchip',
   },
   {
     id: 'feature2',
-    heading: 'Configuration',
-    content: '<p>Easy to understand configuration options to help tailor your applications to suit your needs.</p>',
+    heading: { text: 'Configuration' },
+    content: {
+      content: '<p>Easy to understand configuration options to help tailor your applications to suit your needs.</p>',
+    },
     icon: 'fa-regular fa-gear',
   },
   {
     id: 'feature3',
-    heading: 'Bundling',
-    content: '<p>Bundling functionality to help you build your applications with ease and sustainability.</p>',
+    heading: { text: 'Bundling' },
+    content: {
+      content: '<p>Bundling functionality to help you build your applications with ease and sustainability.</p>',
+    },
     icon: 'fa-regular fa-box',
   },
   {
     id: 'feature4',
-    heading: 'Database',
-    content: '<p>Take advantage of unlimited storage and data retrieval from our global CDN date centres.</p>',
+    heading: { text: 'Database' },
+    content: {
+      content: '<p>Take advantage of unlimited storage and data retrieval from our global CDN date centres.</p>',
+    },
     icon: 'fa-regular fa-database',
   },
   {
     id: 'feature5',
-    heading: 'Integrations',
-    content: '<p>Simple, configurable integrations with your favourite apps and services.</p>',
+    heading: { text: 'Integrations' },
+    content: { content: '<p>Simple, configurable integrations with your favourite apps and services.</p>' },
     icon: 'fa-regular fa-puzzle-piece',
   },
   {
     id: 'feature6',
-    heading: 'Speed',
-    content: '<p>Our tools have been crafted for maximum speed and efficiency.</p>',
+    heading: { text: 'Speed' },
+    content: { content: '<p>Our tools have been crafted for maximum speed and efficiency.</p>' },
     icon: 'fa-regular fa-bolt',
   },
 ];
@@ -71,7 +77,7 @@ export const Features1: Story = {
   args: {
     classes: featuresClasses1,
     endContent: [],
-    heading: 'Features',
+    heading: { text: 'Features' },
     items: featureItems.map((item: FeaturesItem, index: number) => ({
       ...item,
       classes: {
@@ -87,7 +93,7 @@ export const Features2: Story = {
   args: {
     classes: featuresClasses2,
     endContent: [],
-    heading: 'Features',
+    heading: { text: 'Features' },
     items: featureItems.map((item: FeaturesItem, index: number) => ({
       ...item,
       classes: {
@@ -106,7 +112,7 @@ export const Features3: Story = {
     items: [
       {
         id: 'step1',
-        heading: 'Enter your vehicle registration',
+        heading: { text: 'Enter your vehicle registration' },
         indicator: '1',
         classes: featuresItemClasses3,
         image: {
@@ -119,7 +125,7 @@ export const Features3: Story = {
       },
       {
         id: 'step2',
-        heading: 'Appriase your car by sending images to get your guaranteed price',
+        heading: { text: 'Appriase your car by sending images to get your guaranteed price' },
         indicator: '2',
         classes: featuresItemClasses3,
         image: {
@@ -132,7 +138,7 @@ export const Features3: Story = {
       },
       {
         id: 'step3',
-        heading: "We can collect nationwide - for free. Or, we'll pay you to drop it off",
+        heading: { text: "We can collect nationwide - for free. Or, we'll pay you to drop it off" },
         indicator: '3',
         classes: featuresItemClasses3,
         image: {
@@ -145,7 +151,7 @@ export const Features3: Story = {
       },
       {
         id: 'step4',
-        heading: "Instant payment - we use fast transfer, you'll be paid in seconds",
+        heading: { text: "Instant payment - we use fast transfer, you'll be paid in seconds" },
         indicator: '4',
         classes: featuresItemClasses3,
         image: {
