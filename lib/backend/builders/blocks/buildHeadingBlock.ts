@@ -10,8 +10,10 @@ const buildHeadingBlock = ({ id, name, content, settings }: BlockBuilderConfig):
 
     const heading: Block & HeadingProps = { id, name, text: content.headingText };
 
-    const themeVariant = content?.theme[0]?.name.split(' ').at(-1) || '1';
-    const baseClasses = require(`/lib/components/blocks/Heading/themes/${themeVariant}/heading.classes`).default;
+    const themeVariant = content?.themeVariant;
+    const baseClasses = themeVariant
+      ? require(`/lib/components/blocks/Heading/themes/${themeVariant}/heading.classes`).default
+      : {};
     heading.classes = buildTheme({ classes: baseClasses, overrides: settings });
 
     heading.tag = settings?.headingTag || 'h3';

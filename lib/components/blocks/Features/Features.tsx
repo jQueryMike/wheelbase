@@ -2,8 +2,8 @@ import Block from '@interfaces/Block';
 import cn from 'classnames';
 
 import { BlockList } from '../../utility-components/BlockList';
-import { Image, ImageProps } from '../../utility-components/Image';
 import { Heading, HeadingProps } from '../Heading';
+import { Image, ImageProps } from '../Image';
 import { TextContent, TextContentProps } from '../TextContent';
 
 export type FeaturesClasses<T> = {
@@ -22,7 +22,6 @@ export type FeaturesItemClasses<T> = {
     | 'root'
     | 'headingContainer'
     | 'imageContainer'
-    | 'image'
     | 'contentContainer'
     | 'iconContainer'
     | 'icon'
@@ -85,7 +84,7 @@ const Features = ({
               )}
               {item.image && (
                 <div className={item.classes?.imageContainer}>
-                  <Image className={item.classes?.image} {...item.image} />
+                  <Image {...item.image} />
                 </div>
               )}
               {item.indicator && (

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node build-tailwind.js && next dev",
-    "build": "node build-tailwind.ts && next build",
+    "build": "node build-tailwind.js && next build",
     "start": "NODE_OPTIONS=--require=elastic-apm-node/start-next.js next start",
     "test": "jest",
     "lint": "npx eslint .",
@@ -25,9 +25,10 @@
     "elastic-apm-node": "^3.46.0",
     "flat": "^5.0.2",
     "isomorphic-dompurify": "^1.6.0",
-    "next": "^13.4.6",
+    "next": "^13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.32.1",
     "tailwind-merge": "^1.13.2",
     "uuid": "^9.0.0"
   },

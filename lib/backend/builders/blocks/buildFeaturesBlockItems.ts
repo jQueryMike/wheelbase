@@ -3,6 +3,7 @@ import { UmbracoBlockGridContentItem, UmbracoBlockGridItemSettings } from '@inte
 
 import buildTheme from '../buildTheme';
 import buildHeadingBlock from './buildHeadingBlock';
+import buildImageBlock from './buildImageBlock';
 import buildTextContentBlock from './buildTextContentBlock';
 
 const buildFeaturesBlockItems = (
@@ -26,24 +27,34 @@ const buildFeaturesBlockItems = (
       const heading = itemContent?.heading?.items[0];
       if (heading) {
         featuresItem.heading = buildHeadingBlock({
-          id: heading.id,
+          id: heading.content.id,
           name: 'Heading',
-          content: heading.content.properties,
-          settings: heading.content.properties,
+          content: heading.content?.properties,
+          settings: heading.settings?.properties,
         });
       }
 
       const textContent = itemContent?.content?.items[0];
       if (textContent) {
         featuresItem.content = buildTextContentBlock({
-          id: textContent.id,
+          id: textContent.content.id,
           name: 'TextContent',
-          content: textContent.content.properties,
-          settings: textContent.content.properties,
+          content: textContent.content?.properties,
+          settings: textContent.settings?.properties,
+        });
+      }
+
+      const image = itemContent?.image[0];
+      if (image) {
+        featuresItem.image = buildImageBlock({
+          id: 'some-id',
+          name: 'Image',
+          content: image,
         });
       }
 
       if (itemContent.icon) featuresItem.icon = itemContent.icon;
+      if (itemContent.indicator) featuresItem.indicator = itemContent.indicator;
 
       featuresItems.push(featuresItem);
     });

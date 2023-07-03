@@ -11,7 +11,7 @@ const buildFeaturesBlock = ({ id, name, content, settings }: BlockBuilderConfig)
   try {
     const features: Block & FeaturesProps = { id, name };
 
-    const themeVariant = content?.theme[0]?.name.split(' ').at(-1) || '1';
+    const themeVariant = content?.themeVariant || '1';
     const baseClasses = require(`/lib/components/blocks/Features/themes/${themeVariant}/features.classes`).default;
     features.classes = buildTheme({
       classes: baseClasses,

@@ -14,7 +14,7 @@ const buildTextContentBlock = ({ id, name, content, settings }: BlockBuilderConf
       content: content.content.markup,
     };
 
-    const themeVariant = content?.theme[0]?.name.split(' ').at(-1) || '1';
+    const themeVariant = content?.themeVariant || '1';
     const baseClasses =
       require(`/lib/components/blocks/TextContent/themes/${themeVariant}/textContent.classes`).default;
     textContent.classes = buildTheme({ classes: baseClasses, overrides: settings });
