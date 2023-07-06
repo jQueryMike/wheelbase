@@ -1,22 +1,52 @@
-import { HeadingProps } from '@components/blocks/Heading';
+import { HeadingProps, HeadingSize } from '@components/blocks/Heading';
 import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildTheme from '../buildTheme';
 
-const buildHeadingBlock = ({ id, name, content, settings }: BlockBuilderConfig): HeadingProps | undefined => {
+const getSizeKey = (size: string) => {
+  switch (size) {
+    case 'Extra Large':
+      return HeadingSize.XL;
+    case 'Large':
+      return HeadingSize.LG;
+    case 'Medium':
+      return HeadingSize.MD;
+    case 'Small':
+      return HeadingSize.SM;
+    case 'Extra Small':
+      return HeadingSize.XS;
+    default:
+      return undefined;
+  }
+};
+
+const buildHeadingBlock = ({
+  id,
+  name,
+  content,
+  settings,
+  parentSettings,
+  theme,
+}: BlockBuilderConfig): HeadingProps | undefined => {
   try {
     if (!content?.headingText) return undefined;
 
+    const blockThemeVariant = content?.themeVariant;
+    const globalTheme = theme?.headingBlockTheme?.items[0]?.content?.properties;
+
+    const themeVariant = blockThemeVariant || parentSettings?.variant || globalTheme?.variant || '1';
+    const baseVariant = require(`/lib/components/blocks/Heading/variants/${themeVariant}`).default || undefined;
+
+    const globalOverrides = globalTheme;
+    const parentOverrides = parentSettings;
+    const blockOverrides = settings;
+
     const heading: Block & HeadingProps = { id, name, text: content.headingText };
+    heading.classes = buildTheme({ classes: baseVariant.classes, globalOverrides, parentOverrides, blockOverrides });
 
-    const themeVariant = content?.themeVariant;
-    const baseClasses = themeVariant
-      ? require(`/lib/components/blocks/Heading/themes/${themeVariant}/heading.classes`).default
-      : {};
-    heading.classes = buildTheme({ classes: baseClasses, overrides: settings });
-
-    heading.tag = settings?.headingTag || 'h3';
+    if (settings?.headingTag) heading.tag = settings?.headingTag;
+    if (content?.headingSize) heading.size = getSizeKey(content?.headingSize);
 
     return heading;
   } catch (error) {

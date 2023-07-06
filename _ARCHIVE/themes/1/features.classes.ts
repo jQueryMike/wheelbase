@@ -1,3 +1,4 @@
+import { HeadingClasses, HeadingProps, HeadingTag } from '@components/blocks/Heading';
 import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 
 import { FeaturesClasses } from '../../Features';

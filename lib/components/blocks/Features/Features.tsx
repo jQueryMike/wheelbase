@@ -2,13 +2,14 @@ import Block from '@interfaces/Block';
 import cn from 'classnames';
 
 import { BlockList } from '../../utility-components/BlockList';
-import { Heading, HeadingProps } from '../Heading';
-import { Image, ImageProps } from '../Image';
+import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
+import { ImageProps } from '../Image';
 import { TextContent, TextContentProps } from '../TextContent';
 
 export type FeaturesClasses<T> = {
   [key in
     | 'root'
+    | 'headingsContainer'
     | 'headingContainer'
     | 'subheadingContainer'
     | 'itemsContainer'
@@ -57,14 +58,18 @@ const Features = ({
   endContent = [],
 }: FeaturesProps) => (
   <div className={classes.root}>
-    {heading && (
-      <div className={classes.headingContainer}>
-        <Heading {...heading} />
-      </div>
-    )}
-    {subheading && (
-      <div className={classes.subheadingContainer}>
-        <Heading {...subheading} />
+    {(heading || subheading) && (
+      <div className={classes.headingsContainer}>
+        {heading && (
+          <div className={classes.headingContainer}>
+            <Heading tag={HeadingTag.H2} size={HeadingSize.LG} {...heading} />
+          </div>
+        )}
+        {subheading && (
+          <div className={classes.subheadingContainer}>
+            <Heading tag={HeadingTag.H3} size={HeadingSize.SM} {...subheading} />
+          </div>
+        )}
       </div>
     )}
     {startContent?.length > 0 && (
@@ -82,11 +87,7 @@ const Features = ({
                   <i className={cn(item.icon, item.classes?.icon)} />
                 </div>
               )}
-              {item.image && (
-                <div className={item.classes?.imageContainer}>
-                  <Image {...item.image} />
-                </div>
-              )}
+              {item.image && <div className={item.classes?.imageContainer}>{/* <img {...item.image} /> */}</div>}
               {item.indicator && (
                 <div className={item.classes?.indicatorContainer}>
                   <div className={item.classes?.indicator}>{item.indicator}</div>

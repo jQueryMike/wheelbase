@@ -3,10 +3,18 @@ import { twMerge } from 'tailwind-merge';
 export interface BuildThemeConfig {
   classes?: { [propName: string]: string };
   gridColsOverrides?: { className: string; config?: { [propName: string]: any } }[];
-  overrides?: { [propName: string]: any };
+  globalOverrides?: { [propName: string]: any };
+  parentOverrides?: { [propName: string]: any };
+  blockOverrides?: { [propName: string]: any };
 }
 
-const buildTheme = ({ classes = {}, gridColsOverrides = [], overrides = {} }: BuildThemeConfig) => {
+const buildTheme = ({
+  classes = {},
+  gridColsOverrides = [],
+  globalOverrides = {},
+  parentOverrides = {},
+  blockOverrides = {},
+}: BuildThemeConfig) => {
   try {
     const mergedClasses = { ...classes };
 
@@ -22,11 +30,16 @@ const buildTheme = ({ classes = {}, gridColsOverrides = [], overrides = {} }: Bu
       }
     });
 
-    Object.keys(overrides)
-      .filter((key) => key.startsWith('tw_') && typeof (overrides[key] === String) && !!overrides[key])
-      .forEach((key) => {
-        mergedClasses[key.replace('tw_', '')] += ` ${overrides[key]}`;
-      });
+    [globalOverrides, parentOverrides, blockOverrides].forEach((overrides) => {
+      Object.keys(overrides)
+        .filter((key) => key.startsWith('tw_') && typeof (overrides[key] === String) && !!overrides[key])
+        .forEach((key) => {
+          const classesKey = key.replace('tw_', '');
+          mergedClasses[classesKey] = mergedClasses[classesKey]
+            ? `${mergedClasses[classesKey]} ${overrides[key]}`
+            : overrides[key];
+        });
+    });
 
     Object.keys(mergedClasses).forEach((key) => (mergedClasses[key] = twMerge(mergedClasses[key])));
 

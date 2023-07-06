@@ -13,8 +13,11 @@ const buildFeaturesBlockItems = (
   try {
     if (!items) return [];
 
+    const baseVariant = require(`/lib/components/blocks/Features/variants/${themeVariant}`).default || undefined;
+
+    if (!baseVariant) return [];
+
     const featuresItems: FeaturesItem[] = [];
-    const baseClasses = require(`/lib/components/blocks/Features/themes/${themeVariant}/featuresItem.classes`).default;
 
     items.forEach((item) => {
       const itemContent = item.content?.properties;
@@ -22,7 +25,7 @@ const buildFeaturesBlockItems = (
 
       const featuresItem: FeaturesItem = { id: item.content.id };
 
-      featuresItem.classes = buildTheme({ classes: baseClasses, overrides: itemSettings });
+      featuresItem.classes = buildTheme({ classes: baseVariant.itemClasses, blockOverrides: itemSettings });
 
       const heading = itemContent?.heading?.items[0];
       if (heading) {

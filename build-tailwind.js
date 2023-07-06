@@ -7,26 +7,26 @@ const TAILWIND_PREFIX = 'tw_';
 
 const generateSafeList = async () => {
   try {
-    const { data: homeData } = await axios.get(`${process.env.API_URL}/item/${process.env.API_ROOT_NODE_GUID}`);
-    const { data } = await axios.get(`${process.env.API_URL}`, {
-      headers: { 'Start-Item': process.env.API_ROOT_NODE_GUID },
-    });
+    const [homeData, pagesData] = await Promise.all([
+      axios.get(`${process.env.API_URL}/item/${process.env.API_ROOT_NODE_GUID}`),
+      axios.get(`${process.env.API_URL}`, {
+        headers: { 'Start-Item': process.env.API_ROOT_NODE_GUID },
+      }),
+    ]);
 
     const safeList = new Set();
-    const pages = [...data.items, homeData];
+    const pages = [...pagesData.data.items, homeData.data];
 
     pages.forEach((page) => {
-      const pageContent = page.properties.contentGrid.items;
+      const flatContent = flatten(page);
+      const keys = Object.keys(flatContent);
 
-      pageContent.forEach((content) => {
-        const flatContent = flatten(content);
-        const keys = Object.keys(flatContent);
+      keys.forEach((key) => {
+        const separatedKeys = key.split('.');
+        const lastKey = separatedKeys[separatedKeys.length - 1];
 
-        keys.forEach((key) => {
-          const separatedKeys = key.split('.');
-          const lastKey = separatedKeys[separatedKeys.length - 1];
-
-          if (lastKey.startsWith(TAILWIND_PREFIX)) {
+        if (lastKey.startsWith(TAILWIND_PREFIX)) {
+          if (flatContent[key] && typeof flatContent[key] === 'string') {
             const classes = flatContent[key].split(' ');
 
             classes.forEach((className) => {
@@ -35,7 +35,7 @@ const generateSafeList = async () => {
               }
             });
           }
-        });
+        }
       });
     });
 

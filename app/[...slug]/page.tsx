@@ -7,7 +7,7 @@ export const generateStaticParams = async () => getStaticPaths();
 const SlugPage = async ({ params }: any) => {
   const page = (await getPage(params)) || {};
 
-  return <Page sections={page.sections}/>;
+  return <Page sections={page.sections} />;
 };
 
 export default SlugPage;

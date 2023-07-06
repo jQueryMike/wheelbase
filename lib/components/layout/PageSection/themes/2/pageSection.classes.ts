@@ -3,7 +3,7 @@ import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 import { PageSectionClasses } from '../../PageSection';
 
 const classes = {
-  root: tw`p-8`,
+  root: tw``,
   areasContainer: tw`container mx-auto grid`,
 } as PageSectionClasses<ClassesProperty>;
 

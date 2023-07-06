@@ -11,7 +11,7 @@ const buildImageBlock = ({ id, name, content }: BlockBuilderConfig): ImageProps 
       name,
       width: 100,
       height: 100,
-      src: `${content.url}`,
+      src: `${process.env.MEDIA_URL}${content.url}`,
       alt: content.name,
     };
 

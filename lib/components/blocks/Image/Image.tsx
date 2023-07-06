@@ -1,5 +1,3 @@
-'use client';
-
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
 
 export interface ImageProps extends NextImageProps {}

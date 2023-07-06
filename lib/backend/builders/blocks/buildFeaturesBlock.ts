@@ -7,16 +7,23 @@ import buildTheme from '../buildTheme';
 import buildFeaturesBlockItems from './buildFeaturesBlockItems';
 import buildHeadingBlock from './buildHeadingBlock';
 
-const buildFeaturesBlock = ({ id, name, content, settings }: BlockBuilderConfig): FeaturesProps | undefined => {
+const buildFeaturesBlock = ({ id, name, content, settings, theme }: BlockBuilderConfig): FeaturesProps | undefined => {
   try {
     const features: Block & FeaturesProps = { id, name };
 
-    const themeVariant = content?.themeVariant || '1';
-    const baseClasses = require(`/lib/components/blocks/Features/themes/${themeVariant}/features.classes`).default;
+    const blockThemeVariant = content?.themeVariant;
+    const globalTheme = theme?.featuresBlockTheme?.items[0]?.content?.properties;
+
+    const themeVariant = blockThemeVariant || globalTheme?.varient || '1';
+    const baseVariant = require(`/lib/components/blocks/Features/variants/${themeVariant}`).default || undefined;
+
+    const blockOverrides = settings;
+
     features.classes = buildTheme({
-      classes: baseClasses,
+      classes: baseVariant.classes,
       gridColsOverrides: [{ className: 'itemsContainer', config: content }],
-      overrides: settings,
+      globalOverrides: globalTheme,
+      blockOverrides,
     });
 
     const heading = content?.heading?.items[0];
@@ -26,6 +33,8 @@ const buildFeaturesBlock = ({ id, name, content, settings }: BlockBuilderConfig)
         name: 'Heading',
         content: heading.content.properties,
         settings: heading.settings.properties,
+        parentSettings: globalTheme?.headingBlockTheme?.items[0]?.content?.properties,
+        theme,
       });
     }
 
@@ -40,8 +49,8 @@ const buildFeaturesBlock = ({ id, name, content, settings }: BlockBuilderConfig)
     }
 
     features.items = buildFeaturesBlockItems(content?.items.items, themeVariant) || [];
-    features.startContent = buildBlocks(content?.startContent.items) || [];
-    features.endContent = buildBlocks(content?.endContent?.items) || [];
+    features.startContent = buildBlocks(content?.startContent.items, theme) || [];
+    features.endContent = buildBlocks(content?.endContent?.items, theme) || [];
 
     return features;
   } catch (error) {

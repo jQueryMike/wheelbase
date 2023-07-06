@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [process.env.MEDIA_URL, 'https://placekitten'],
+    domains: [process.env.MEDIA_URL],
   },
 };
 

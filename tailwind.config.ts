@@ -17,6 +17,13 @@ const folders = ['lib', 'app'];
 const tailwindConfig: Config = {
   content: folders.map((folder) => `./${folder}/**/*.{js,ts,jsx,tsx,mdx}`),
   safelist: [...getGridCols(), ...safelist],
+  theme: {
+    extend: {
+      colors: {
+        primary: { DEFAULT: '#111', contrast: '#fff' },
+      },
+    },
+  },
 };
 
 export default tailwindConfig;

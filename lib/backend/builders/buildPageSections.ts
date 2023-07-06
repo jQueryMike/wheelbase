@@ -5,7 +5,7 @@ import { UmbracoBlockGridItem } from '@interfaces/Umbraco';
 import buildPageSectionAreas from './buildPageSectionAreas';
 import buildTheme from './buildTheme';
 
-const buildPageSections = (items: UmbracoBlockGridItem[]): PageSectionProps[] => {
+const buildPageSections = (items: UmbracoBlockGridItem[], theme: any): PageSectionProps[] => {
   if (!items || items.length < 1) return [];
 
   const pageSections: (Block & PageSectionProps)[] = [];
@@ -18,7 +18,7 @@ const buildPageSections = (items: UmbracoBlockGridItem[]): PageSectionProps[] =>
       const classes = require(`/lib/components/layout/PageSection/themes/${themeVariant}/pageSection.classes`).default;
       pageSectionClasses = buildTheme({
         classes,
-        overrides: item.settings?.properties,
+        blockOverrides: item.settings?.properties,
       });
     }
 
@@ -26,7 +26,7 @@ const buildPageSections = (items: UmbracoBlockGridItem[]): PageSectionProps[] =>
       id: item.content.id,
       name: 'PageSection',
 
-      areas: buildPageSectionAreas(item.areas),
+      areas: buildPageSectionAreas(item.areas, theme),
       classes: pageSectionClasses,
     });
   });

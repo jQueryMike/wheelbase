@@ -8,8 +8,8 @@ const classes = {
   },
   itemsContainer: {
     default: tw`grid gap-4`,
-    sm: tw`sm:grid-cols-2`,
-    lg: tw`lg:grid-cols-4`,
+    sm: tw`sm:grid-cols-2 sm:gap-6`,
+    lg: tw`lg:grid-cols-4 lg:gap-8`,
   },
 } as FeaturesClasses<ClassesProperty>;
 
