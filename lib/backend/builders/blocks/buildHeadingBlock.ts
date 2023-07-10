@@ -3,6 +3,7 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildTheme from '../buildTheme';
+import extractClassOverrides from '../extractClassOverrides';
 
 const getSizeKey = (size: string) => {
   switch (size) {
@@ -26,25 +27,38 @@ const buildHeadingBlock = ({
   name,
   content,
   settings,
-  parentSettings,
-  theme,
-}: BlockBuilderConfig): HeadingProps | undefined => {
+  parentVariantId,
+  parentOverrides,
+  globalTheme,
+}: BlockBuilderConfig): (Block & HeadingProps) | undefined => {
   try {
     if (!content?.headingText) return undefined;
 
-    const blockThemeVariant = content?.themeVariant;
-    const globalTheme = theme?.headingBlockTheme?.items[0]?.content?.properties;
+    // Shortcut to block theme properties from globalTheme
+    const globalHeadingThemeProperties = globalTheme?.headingTheme?.items[0]?.content?.properties;
 
-    const themeVariant = blockThemeVariant || parentSettings?.variant || globalTheme?.variant || '1';
-    const baseVariant = require(`/lib/components/blocks/Heading/variants/${themeVariant}`).default || undefined;
+    // Get active variant from instance > parent > global > default variant id
+    const instanceVariantId = content?.themeVariant;
+    const globalVariantId = globalHeadingThemeProperties?.variant;
+    const blockVariantId = instanceVariantId || parentVariantId || globalVariantId || '1';
+    const activeVariant = require(`/lib/components/blocks/Heading/variants/${blockVariantId}`).default || undefined;
 
-    const globalOverrides = globalTheme;
-    const parentOverrides = parentSettings;
-    const blockOverrides = settings;
+    // Get global and instance overrides
+    const globalOverrides = extractClassOverrides(globalHeadingThemeProperties);
+    const instanceOverrides = extractClassOverrides(settings);
 
+    // Build initial block
     const heading: Block & HeadingProps = { id, name, text: content.headingText };
-    heading.classes = buildTheme({ classes: baseVariant.classes, globalOverrides, parentOverrides, blockOverrides });
 
+    // Add classes
+    heading.classes = buildTheme({
+      classes: activeVariant.classes,
+      globalOverrides,
+      parentOverrides,
+      instanceOverrides,
+    });
+
+    // Add props
     if (settings?.headingTag) heading.tag = settings?.headingTag;
     if (content?.headingSize) heading.size = getSizeKey(content?.headingSize);
 
