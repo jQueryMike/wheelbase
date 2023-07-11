@@ -5,12 +5,12 @@ const getPage = async (params: { slug: string[] }) => {
   const pagesTags = process.env.ENVIRONMENT_NAME !== ' local' ? [`theme`, `page-${params.slug.join('-')}`] : [];
   const url = `${process.env.API_URL}/item/${process.env.API_ROOT_NODE_PATH}`;
 
-  const [{ properties: theme }, pages] = await Promise.all([
-    fetch(`${url}/website-theme`, { next: { tags: themeTags } }).then((res) => res.json()),
-    fetch(`${url}/${params.slug.join('/')}`, { next: { tags: pagesTags } }).then((res) => res.json()),
+  const [{ properties: globalTheme }, pages] = await Promise.all([
+    fetch(`${url}/theme`, { next: { tags: themeTags } }).then((res) => res.json()),
+    fetch(`${url}/home/${params.slug.join('/')}`, { next: { tags: pagesTags } }).then((res) => res.json()),
   ]);
 
-  const sections = buildPageSections(pages.properties?.contentGrid?.items || [], theme);
+  const sections = buildPageSections(pages.properties?.contentGrid?.items || [], globalTheme);
 
   return { sections };
 };

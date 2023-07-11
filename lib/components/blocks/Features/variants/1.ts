@@ -14,16 +14,20 @@ classes = {
     sm: tw`sm:space-y-6`,
     lg: tw`lg:space-y-8`,
   },
+  headingsContainer: tw`space-y-4`,
+  contentArea1Container: tw`space-y-4`,
+  contentArea2Container: tw`space-y-4`,
   itemsContainer: {
-    default: tw`grid gap-8`,
+    default: tw`grid gap-8 py-6`,
     sm: tw`sm:grid-cols-2 sm:gap-10`,
-    lg: tw`lg:grid-cols-3 lg:gap-10`,
+    lg: tw`lg:grid-cols-3 lg:gap-12`,
   },
 };
 
 itemClasses = {
   root: tw`flex flex-col space-y-4`,
-  iconContainer: tw`mb-3 flex h-10 w-10 items-center justify-center rounded-full text-2xl`,
+  iconContainer: tw``,
+  icon: tw`text-3xl text-accent`,
 };
 
 const featuresVariant: FeaturesVariant = {

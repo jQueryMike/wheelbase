@@ -4,34 +4,40 @@ import { UmbracoBlockGridItem } from '@interfaces/Umbraco';
 
 import buildPageSectionAreas from './buildPageSectionAreas';
 import buildTheme from './buildTheme';
+import extractClassOverrides from './extractClassOverrides';
 
-const buildPageSections = (items: UmbracoBlockGridItem[], theme: any): PageSectionProps[] => {
+const buildPageSections = (items: UmbracoBlockGridItem[], globalTheme: any): PageSectionProps[] => {
   if (!items || items.length < 1) return [];
 
-  const pageSections: (Block & PageSectionProps)[] = [];
+  // Shortcut to block theme properties from globalTheme
+  const globalPageSectionThemeProperties = globalTheme?.pageSectionTheme?.items[0]?.content?.properties;
 
-  items.forEach((item) => {
-    let pageSectionClasses = {};
-    const themeVariant = item.content.properties.theme[0]?.name.split(' ').at(-1);
+  // const pageSections: (Block & PageSectionProps)[] = [];
 
-    if (themeVariant) {
-      const classes = require(`/lib/components/layout/PageSection/themes/${themeVariant}/pageSection.classes`).default;
-      pageSectionClasses = buildTheme({
-        classes,
-        blockOverrides: item.settings?.properties,
-      });
-    }
+  return items.map((item) => {
+    // Get active variant from instance > global > default variant id
+    const instanceVariantId = item.content?.properties?.themeVariant;
+    const globalVariantId = globalPageSectionThemeProperties?.variant;
+    const blockVariantId = instanceVariantId || globalVariantId || '1';
+    const activeVariant = require(`/lib/components/layout/PageSection/variants/${blockVariantId}`).default || undefined;
 
-    pageSections.push({
+    // Get global and instance overrides
+    const globalOverrides = extractClassOverrides(globalPageSectionThemeProperties);
+    const instanceOverrides = extractClassOverrides(item.settings?.properties);
+
+    const pageSection: Block & PageSectionProps = {
       id: item.content.id,
       name: 'PageSection',
+    };
 
-      areas: buildPageSectionAreas(item.areas, theme),
-      classes: pageSectionClasses,
-    });
+    pageSection.classes = buildTheme({ classes: activeVariant.classes, globalOverrides, instanceOverrides });
+
+    pageSection.areas = buildPageSectionAreas(item.areas, globalTheme);
+
+    return pageSection;
   });
 
-  return pageSections;
+  // return pageSections;
 };
 
 export default buildPageSections;

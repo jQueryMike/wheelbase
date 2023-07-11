@@ -16,7 +16,7 @@ const featureItems = [
     id: 'feature2',
     heading: { text: 'Configuration' },
     content: {
-      content: '<p>Easy to understand configuration options to help tailor your applications to suit your needs.</p>',
+      content: '<p>Faster processing to help you build your applications quicker and more efficiently.</p>',
     },
     icon: 'fa-regular fa-gear',
   },
@@ -71,7 +71,8 @@ const itemClasses1 = [
 export const Features1: Story = {
   args: {
     classes: featuresVariant1.classes,
-    endContent: [],
+    contentArea1: [],
+    contentArea2: [],
     heading: { text: 'Features' },
     items: featureItems.map((item: FeaturesItem, index: number) => ({
       ...item,
@@ -80,7 +81,6 @@ export const Features1: Story = {
         iconContainer: `${featuresVariant1.itemClasses?.iconContainer} ${itemClasses1[index]}`,
       },
     })),
-    startContent: [],
   },
 };
 

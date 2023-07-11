@@ -2,8 +2,9 @@ import Block from '@interfaces/Block';
 import cn from 'classnames';
 
 import { BlockList } from '../../utility-components/BlockList';
+import { Button, ButtonProps } from '../Button';
 import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
-import { ImageProps } from '../Image';
+import { Subheading } from '../Subheading';
 import { TextContent, TextContentProps } from '../TextContent';
 
 export type FeaturesClasses<T> = {
@@ -14,30 +15,30 @@ export type FeaturesClasses<T> = {
     | 'subheadingContainer'
     | 'itemsContainer'
     | 'itemContainer'
-    | 'startContentContainer'
-    | 'endContentContainer']?: T;
+    | 'contentArea1Container'
+    | 'contentArea2Container']?: T;
 };
 
 export type FeaturesItemClasses<T> = {
   [key in
     | 'root'
-    | 'headingContainer'
-    | 'imageContainer'
-    | 'contentContainer'
+    | 'indicatorContainer'
+    | 'indicator'
     | 'iconContainer'
     | 'icon'
-    | 'indicatorContainer'
-    | 'indicator']?: T;
+    | 'headingContainer'
+    | 'textContentContainer'
+    | 'buttonContainer']?: T;
 };
 
 export interface FeaturesItem {
   classes?: FeaturesItemClasses<string>;
-  content?: TextContentProps;
   heading?: HeadingProps;
+  textContent?: TextContentProps;
+  button?: ButtonProps;
   icon?: string;
-  image?: ImageProps;
-  indicator?: string;
   id: string;
+  indicator?: string;
 }
 
 export interface FeaturesProps {
@@ -45,8 +46,8 @@ export interface FeaturesProps {
   heading?: HeadingProps;
   subheading?: HeadingProps;
   items?: FeaturesItem[];
-  startContent?: Block[];
-  endContent?: Block[];
+  contentArea1?: Block[];
+  contentArea2?: Block[];
 }
 
 const Features = ({
@@ -54,8 +55,8 @@ const Features = ({
   heading,
   subheading,
   items = [],
-  startContent = [],
-  endContent = [],
+  contentArea1 = [],
+  contentArea2 = [],
 }: FeaturesProps) => (
   <div className={classes.root}>
     {(heading || subheading) && (
@@ -67,14 +68,14 @@ const Features = ({
         )}
         {subheading && (
           <div className={classes.subheadingContainer}>
-            <Heading tag={HeadingTag.H3} size={HeadingSize.SM} {...subheading} />
+            <Subheading {...subheading} />
           </div>
         )}
       </div>
     )}
-    {startContent?.length > 0 && (
-      <div className={classes.startContentContainer}>
-        <BlockList blocks={startContent} />
+    {contentArea1?.length > 0 && (
+      <div className={classes.contentArea1Container}>
+        <BlockList blocks={contentArea1} />
       </div>
     )}
     {items?.length > 0 && (
@@ -82,25 +83,29 @@ const Features = ({
         {items.map((item) => (
           <div key={item.id} className={classes.itemContainer}>
             <div className={item.classes?.root}>
-              {item.icon && (
-                <div className={item.classes?.iconContainer}>
-                  <i className={cn(item.icon, item.classes?.icon)} />
-                </div>
-              )}
-              {item.image && <div className={item.classes?.imageContainer}>{/* <img {...item.image} /> */}</div>}
               {item.indicator && (
                 <div className={item.classes?.indicatorContainer}>
                   <div className={item.classes?.indicator}>{item.indicator}</div>
                 </div>
               )}
-              {item.heading && (
-                <div className={item.classes?.headingContainer}>
-                  <Heading {...item.heading} />
+              {item.icon && (
+                <div className={item.classes?.iconContainer}>
+                  <i className={cn(item.icon, item.classes?.icon)} />
                 </div>
               )}
-              {item.content && (
-                <div className={item.classes?.contentContainer}>
-                  <TextContent {...item.content} />
+              {item.heading && (
+                <div className={item.classes?.headingContainer}>
+                  <Heading tag={HeadingTag.H3} size={HeadingSize.MD} {...item.heading} />
+                </div>
+              )}
+              {item.textContent && (
+                <div className={item.classes?.textContentContainer}>
+                  <TextContent {...item.textContent} />
+                </div>
+              )}{' '}
+              {item.button && (
+                <div className={item.classes?.buttonContainer}>
+                  <Button {...item.button} />
                 </div>
               )}
             </div>
@@ -108,9 +113,9 @@ const Features = ({
         ))}
       </div>
     )}
-    {endContent?.length > 0 && (
-      <div className={classes.endContentContainer}>
-        <BlockList blocks={endContent} />
+    {contentArea2?.length > 0 && (
+      <div className={classes.contentArea2Container}>
+        <BlockList blocks={contentArea2} />
       </div>
     )}
   </div>

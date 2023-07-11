@@ -3,9 +3,9 @@ interface BlockBuilderConfig {
   name?: string;
   content?: { [propName: string]: any };
   settings?: { [propName: string]: any };
-  parentSettings?: { [propName: string]: any };
-  defaultProps?: { [propName: string]: any };
-  theme?: any;
+  parentVariantId?: string;
+  parentOverrides?: { [propName: string]: string };
+  globalTheme?: any;
 }
 
 export default BlockBuilderConfig;

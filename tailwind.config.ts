@@ -1,3 +1,4 @@
+import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 
 import safelist from './safelist.json';
@@ -20,10 +21,15 @@ const tailwindConfig: Config = {
   theme: {
     extend: {
       colors: {
-        primary: { DEFAULT: '#111', contrast: '#fff' },
+        primary: { DEFAULT: '#121642', contrast: '#fff' },
+        accent: { DEFAULT: '#F92D64', contrast: '#fff' },
       },
     },
   },
+  plugins: [
+    typography,
+    // ...
+  ],
 };
 
 export default tailwindConfig;

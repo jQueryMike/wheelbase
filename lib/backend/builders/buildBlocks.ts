@@ -2,7 +2,13 @@ import Block from '@interfaces/Block';
 import { UmbracoBlockGridItem } from '@interfaces/Umbraco';
 import { v4 as uuidv4 } from 'uuid';
 
-const buildBlocks = (items: UmbracoBlockGridItem[], theme: any) => {
+const buildBlocks = ({
+  items,
+  globalTheme,
+}: {
+  items: UmbracoBlockGridItem[];
+  globalTheme?: { [propName: string]: any };
+}) => {
   const blocks: Block[] = [];
 
   items.forEach((item) => {
@@ -14,7 +20,7 @@ const buildBlocks = (items: UmbracoBlockGridItem[], theme: any) => {
         name,
         content: item.content?.properties,
         settings: item.settings?.properties,
-        theme,
+        globalTheme,
       });
       if (block) blocks.push(block);
     } catch (error) {

@@ -7,15 +7,12 @@ const TAILWIND_PREFIX = 'tw_';
 
 const generateSafeList = async () => {
   try {
-    const [homeData, pagesData] = await Promise.all([
-      axios.get(`${process.env.API_URL}/item/${process.env.API_ROOT_NODE_GUID}`),
-      axios.get(`${process.env.API_URL}`, {
-        headers: { 'Start-Item': process.env.API_ROOT_NODE_GUID },
-      }),
-    ]);
+    const pagesData = await axios.get(`${process.env.API_URL}`, {
+      headers: { 'Start-Item': process.env.API_ROOT_NODE_GUID },
+    });
 
     const safeList = new Set();
-    const pages = [...pagesData.data.items, homeData.data];
+    const pages = pagesData.data.items;
 
     pages.forEach((page) => {
       const flatContent = flatten(page);

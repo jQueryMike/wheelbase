@@ -1,11 +1,11 @@
-import { TextContentProps } from '@components/blocks/TextContent/TextContent';
+import { SubheadingProps } from '@components/blocks/Subheading';
 import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
 
-const buildTextContentBlock = ({
+const buildSubheadingBlock = ({
   id,
   name,
   content,
@@ -13,43 +13,39 @@ const buildTextContentBlock = ({
   parentVariantId,
   parentOverrides,
   globalTheme,
-}: BlockBuilderConfig): (Block & TextContentProps) | undefined => {
+}: BlockBuilderConfig): (Block & SubheadingProps) | undefined => {
   try {
-    if (!content?.content.markup) return undefined;
+    if (!content?.subheadingText) return undefined;
 
     // Shortcut to block theme properties from globalTheme
-    const globalTextContentThemeProperties = globalTheme?.textContentTheme?.items[0]?.content?.properties;
+    const globalSubheadingThemeProperties = globalTheme?.subheadingTheme?.items[0]?.content?.properties;
 
     // Get active variant from instance > parent > global > default variant id
     const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalTextContentThemeProperties?.variant;
+    const globalVariantId = globalSubheadingThemeProperties?.variant;
     const blockVariantId = instanceVariantId || parentVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/TextContent/variants/${blockVariantId}`).default || undefined;
+    const activeVariant = require(`/lib/components/blocks/Subheading/variants/${blockVariantId}`).default || undefined;
 
     // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalTextContentThemeProperties);
+    const globalOverrides = extractClassOverrides(globalSubheadingThemeProperties);
     const instanceOverrides = extractClassOverrides(settings);
 
     // Build initial block
-    const textContent: Block & TextContentProps = {
-      id,
-      name,
-      content: content.content.markup,
-    };
+    const subheading: Block & SubheadingProps = { id, name, text: content.subheadingText };
 
     // Add classes
-    textContent.classes = buildTheme({
+    subheading.classes = buildTheme({
       classes: activeVariant.classes,
       globalOverrides,
       parentOverrides,
       instanceOverrides,
     });
 
-    return textContent;
+    return subheading;
   } catch (error) {
     console.error(error);
     return undefined;
   }
 };
 
-export default buildTextContentBlock;
+export default buildSubheadingBlock;
