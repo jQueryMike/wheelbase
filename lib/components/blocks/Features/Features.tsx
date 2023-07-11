@@ -2,6 +2,7 @@ import Block from '@interfaces/Block';
 import cn from 'classnames';
 
 import { BlockList } from '../../utility-components/BlockList';
+import { Button, ButtonProps } from '../Button';
 import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
 import { Subheading } from '../Subheading';
 import { TextContent, TextContentProps } from '../TextContent';
@@ -26,13 +27,15 @@ export type FeaturesItemClasses<T> = {
     | 'iconContainer'
     | 'icon'
     | 'headingContainer'
-    | 'textContentContainer']?: T;
+    | 'textContentContainer'
+    | 'buttonContainer']?: T;
 };
 
 export interface FeaturesItem {
   classes?: FeaturesItemClasses<string>;
-  textContent?: TextContentProps;
   heading?: HeadingProps;
+  textContent?: TextContentProps;
+  button?: ButtonProps;
   icon?: string;
   id: string;
   indicator?: string;
@@ -98,6 +101,11 @@ const Features = ({
               {item.textContent && (
                 <div className={item.classes?.textContentContainer}>
                   <TextContent {...item.textContent} />
+                </div>
+              )}{' '}
+              {item.button && (
+                <div className={item.classes?.buttonContainer}>
+                  <Button {...item.button} />
                 </div>
               )}
             </div>

@@ -9,7 +9,7 @@ let classes: HeadingClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  heading: tw`text-heading font-bold leading-[1em]`,
+  heading: tw`font-bold leading-[1em] text-primary`,
   headingXl: {
     default: tw`text-[20px]`,
     sm: tw`sm:text-26px]`,

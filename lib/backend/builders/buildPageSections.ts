@@ -12,7 +12,7 @@ const buildPageSections = (items: UmbracoBlockGridItem[], globalTheme: any): Pag
   // Shortcut to block theme properties from globalTheme
   const globalPageSectionThemeProperties = globalTheme?.pageSectionTheme?.items[0]?.content?.properties;
 
-  const pageSections: (Block & PageSectionProps)[] = [];
+  // const pageSections: (Block & PageSectionProps)[] = [];
 
   return items.map((item) => {
     // Get active variant from instance > global > default variant id
@@ -37,7 +37,7 @@ const buildPageSections = (items: UmbracoBlockGridItem[], globalTheme: any): Pag
     return pageSection;
   });
 
-  return pageSections;
+  // return pageSections;
 };
 
 export default buildPageSections;

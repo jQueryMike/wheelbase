@@ -16,7 +16,7 @@ export interface PageSectionProps {
   areas?: PageSectionArea[];
 }
 
-const PageSection = ({ classes = {}, areas = [] }: PageSectionProps) => (
+const PageSection = async ({ classes = {}, areas = [] }: PageSectionProps) => (
   <section className={classes.root}>
     <div className={classes.areasContainer}>
       {areas.map((area: PageSectionArea) => (

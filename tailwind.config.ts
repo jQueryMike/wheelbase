@@ -21,7 +21,7 @@ const tailwindConfig: Config = {
   theme: {
     extend: {
       colors: {
-        primary: { DEFAULT: '#111', contrast: '#fff' },
+        primary: { DEFAULT: '#121642', contrast: '#fff' },
         accent: { DEFAULT: '#F92D64', contrast: '#fff' },
       },
     },

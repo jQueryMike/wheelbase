@@ -16,6 +16,7 @@ classes = {
   },
   headingsContainer: tw`space-y-4`,
   contentArea1Container: tw`space-y-4`,
+  contentArea2Container: tw`space-y-4`,
   itemsContainer: {
     default: tw`grid gap-8 py-6`,
     sm: tw`sm:grid-cols-2 sm:gap-10`,

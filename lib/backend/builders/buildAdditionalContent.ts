@@ -1,5 +1,6 @@
 import Block from '@interfaces/Block';
 
+import buildButtonBlock from './blocks/buildButtonBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
 import extractClassOverrides from './extractClassOverrides';
@@ -39,6 +40,22 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
       });
 
       if (textContent) additionalContent.push(textContent);
+    }
+
+    if (item.content.contentType === 'button') {
+      const buttonThemeProperties = parentThemeProperties?.additionalButtonTheme?.items[0]?.content?.properties;
+
+      const button = buildButtonBlock({
+        id: item.content.id,
+        name: 'Button',
+        content: item.content?.properties,
+        settings: item.settings?.properties,
+        parentVariantId: buttonThemeProperties?.variant,
+        parentOverrides: extractClassOverrides(buttonThemeProperties),
+        globalTheme,
+      });
+
+      if (button) additionalContent.push(button);
     }
   });
 

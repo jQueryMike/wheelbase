@@ -5,6 +5,7 @@ import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 import buildAdditionalContent from '../buildAdditionalContent';
 import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
+import buildButtonBlock from './buildButtonBlock';
 import buildHeadingBlock from './buildHeadingBlock';
 import buildSubheadingBlock from './buildSubheadingBlock';
 import buildTextContentBlock from './buildTextContentBlock';
@@ -74,7 +75,7 @@ const buildFeaturesBlock = ({
     }
 
     // Build items
-    const featuresItems = content?.items.items;
+    const featuresItems = content?.items?.items;
     if (featuresItems && featuresItems.length) {
       features.items = featuresItems.map((item: any) => {
         const itemContent = item.content?.properties;
@@ -123,6 +124,23 @@ const buildFeaturesBlock = ({
             settings: itemTextContent.settings.properties,
             parentVariantId: itemTextContentThemeProperties?.variant,
             parentOverrides: extractClassOverrides(itemTextContentThemeProperties),
+            globalTheme,
+          });
+        }
+
+        // Add text content
+        const itemButton = itemContent.button?.items[0];
+        if (itemButton) {
+          const itemButtonThemeProperties =
+            globalFeaturesThemeProperties?.itemButtonTheme?.items[0]?.content?.properties;
+
+          featuresItem.button = buildButtonBlock({
+            id: itemButton.id,
+            name: 'Button',
+            content: itemButton.content.properties,
+            settings: itemButton.settings.properties,
+            parentVariantId: itemButtonThemeProperties?.variant,
+            parentOverrides: extractClassOverrides(itemButtonThemeProperties),
             globalTheme,
           });
         }
