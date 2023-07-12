@@ -6,11 +6,24 @@ const flatten = require('flat');
 const TAILWIND_PREFIX = 'tw_';
 const CONF_FILE = './tailwind-conf.json';
 
+// const getGoogleFontsName = (url) => {
+//   const replaceURLParts = 'https://fonts.googleapis.com/css2?';
+//   const urlParts = new URLSearchParams(url.replace(replaceURLParts, ''));
+//   const family = urlParts.getAll('family');
+
+//   return family.map((font) => font.replace('+', / /g).split(':')[0]);
+// };
+
 const createTailwindConfigFile = async () => {
   try {
     const confStructure = {
       safelist: [],
       content: [],
+      theme: {
+        extend: {
+          colors: {},
+        },
+      },
     };
 
     await fs.writeFile(CONF_FILE, JSON.stringify(confStructure, null, 2));
@@ -31,7 +44,7 @@ const fetchPagesData = async () => {
     ]);
 
     return {
-      themes: theme.data?.properties,
+      theme: theme.data?.properties,
       pages: [...pagesData.data.items, homeData.data],
     };
   } catch (error) {
@@ -48,28 +61,7 @@ const generateGridColsSafelist = () => {
   return screenSizes.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat();
 };
 
-const generateFontsConfig = async (theme) => {
-  try {
-    const fonts = {};
-    const keys = Object.keys(theme);
-
-    keys.forEach((key) => {
-      if (key.endsWith('Font')) {
-        const fontTag = key.replace('Font', '');
-        const fontName = theme[key].replace(' ', '+');
-        fonts[fontTag] = [fontName];
-      }
-    });
-
-    const tailwindConf = require(CONF_FILE);
-    tailwindConf.fontFamily = fonts;
-
-    await fs.writeFile(CONF_FILE, JSON.stringify(tailwindConf, null, 2));
-  } catch (error) {
-    console.error('Something went wrong while trying to generate fonts');
-    console.error(error);
-  }
-};
+const generateFontsConfig = () => {};
 
 const generateSafeList = async (pages) => {
   try {
@@ -107,6 +99,21 @@ const generateSafeList = async (pages) => {
   }
 };
 
+const generateColorPalette = async (theme) => {
+  // Your bit
+
+  const colors = {
+    primary: { DEFAULT: `oklch(50% 0.2 ${theme.primaryHue} / <alpha-value>)`, contrast: '#fff' },
+    secondary: { DEFAULT: `oklch(50% 0.2 ${theme.secondaryHue} / <alpha-value>)`, contrast: '#fff' },
+    accent: { DEFAULT: `oklch(50% 0.2 ${theme.accentHue} / <alpha-value>)`, contrast: '#fff' },
+  };
+
+  const tailwindConf = require(CONF_FILE);
+  tailwindConf.theme.extend.colors = colors;
+
+  await fs.writeFile(CONF_FILE, JSON.stringify(tailwindConf, null, 2));
+};
+
 // const generateContentPath = async (theme, pages) => {
 //   try {
 //     //
@@ -121,8 +128,9 @@ const generateTailwindConfig = async () => {
     const data = await fetchPagesData();
     await createTailwindConfigFile();
     await generateSafeList(data.pages);
-    await generateFontsConfig(data.themes);
     // await generateContentPath(data.theme, data.pages);
+    generateFontsConfig();
+    generateColorPalette(data.theme);
   } catch (error) {
     console.error('Something went wrong while trying to generate the tailwind config.');
     console.error(error);

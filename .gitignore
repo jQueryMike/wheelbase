@@ -37,4 +37,5 @@ next-env.d.ts
 
 # tailwind
 /safelist.json
+/tailwind-conf.json
 
