@@ -21,6 +21,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "dompurify": "^3.0.5",
     "dotenv": "^16.3.1",
     "elastic-apm-node": "^3.46.0",
     "flat": "^5.0.2",

@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+  .btn {
+    @apply rounded bg-[#ffce00] px-4 py-2 font-bold text-[#0c2987] transition hover:bg-[#040d29] hover:text-white;
+  }
+}
