@@ -1,3 +1,5 @@
+import cn from 'classnames';
+
 export enum HeadingTag {
   H1 = 'h1',
   H2 = 'h2',
@@ -10,22 +12,31 @@ export enum HeadingTag {
   P = 'p',
 }
 
+export enum HeadingSize {
+  XL = 'Xl',
+  LG = 'Lg',
+  MD = 'Md',
+  SM = 'Sm',
+  XS = 'Xs',
+}
+
 export type HeadingClasses<T> = {
-  [key in 'root' | 'heading']?: T;
+  [key in 'root' | 'heading' | `heading${'Xl' | 'Lg' | 'Md' | 'Sm' | 'Xs'}`]?: T;
 };
 
 export interface HeadingProps {
   classes?: HeadingClasses<string>;
   text?: string;
   tag?: HeadingTag;
+  size?: HeadingSize;
 }
 
-const Heading = ({ classes = {}, text, tag = HeadingTag.H2 }: HeadingProps) => {
+const Heading = ({ classes = {}, text, tag = HeadingTag.H2, size = HeadingSize.LG }: HeadingProps) => {
   const HeadingElement = tag;
 
   return (
     <div className={classes.root}>
-      <HeadingElement className={classes.heading} data-testid="heading">
+      <HeadingElement className={cn(classes.heading, classes[`heading${size}`])} data-testid="heading">
         {text}
       </HeadingElement>
     </div>

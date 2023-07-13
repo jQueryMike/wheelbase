@@ -8,7 +8,7 @@ const BlockList = ({ blocks = [] }: BlockListProps) => {
   const blockList = blocks.map((block) => {
     const DynamicBlock = require(`../../blocks/${block.name}/${block.name}`).default;
 
-    return <DynamicBlock key={block.key} {...block} />;
+    return <DynamicBlock key={block.id} {...block} />;
   });
 
   return blockList;

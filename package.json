@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node build-tailwind.js && next dev",
-    "build": "node build-tailwind.ts && next build",
+    "build": "node build-tailwind.js && next build",
     "start": "NODE_OPTIONS=--require=elastic-apm-node/start-next.js next start",
     "test": "jest",
     "lint": "npx eslint .",
@@ -18,6 +18,7 @@
     "lint-staged"
   ],
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "@testing-library/jest-dom": "^5.16.5",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
@@ -26,26 +27,27 @@
     "elastic-apm-node": "^3.46.0",
     "flat": "^5.0.2",
     "isomorphic-dompurify": "^1.6.0",
-    "next": "^13.4.6",
+    "next": "^13.4.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.32.1",
     "tailwind-merge": "^1.13.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
-    "@storybook/addon-a11y": "^7.0.7",
-    "@storybook/addon-essentials": "^7.0.7",
-    "@storybook/addon-interactions": "^7.0.7",
-    "@storybook/addon-links": "^7.0.7",
-    "@storybook/addon-mdx-gfm": "^7.0.7",
-    "@storybook/blocks": "^7.0.7",
-    "@storybook/manager-api": "^7.0.7",
-    "@storybook/nextjs": "^7.0.7",
-    "@storybook/react": "^7.0.7",
+    "@storybook/addon-a11y": "^7.0.26",
+    "@storybook/addon-essentials": "^7.0.26",
+    "@storybook/addon-interactions": "^7.0.26",
+    "@storybook/addon-links": "^7.0.26",
+    "@storybook/addon-mdx-gfm": "^7.0.26",
+    "@storybook/blocks": "^7.0.26",
+    "@storybook/manager-api": "^7.0.26",
+    "@storybook/nextjs": "^7.0.26",
+    "@storybook/react": "^7.0.26",
     "@storybook/storybook-deployer": "^2.8.16",
-    "@storybook/testing-library": "^0.1.0",
-    "@storybook/theming": "^7.0.7",
+    "@storybook/testing-library": "^0.2.0",
+    "@storybook/theming": "^7.0.26",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
@@ -73,9 +75,9 @@
     "prettier": "^2.8.8",
     "prettier-plugin-nativewind": "^0.2.3",
     "sass": "^1.63.6",
-    "storybook": "^7.0.7",
+    "storybook": "^7.0.26",
     "tailwindcss": "3.3.2",
     "ts-jest": "^29.1.0",
-    "typescript": "5.1.3"
+    "typescript": "5.1.6"
   }
 }

@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Heading from '../Heading';
-import headingClasses1 from '../themes/1/heading.classes';
-import headingClasses2 from '../themes/2/heading.classes';
+import headingVariant1 from '../variants/1';
+import headingVariant2 from '../variants/2';
 
 type Story = StoryObj<typeof Heading>;
 
 export const Heading1: Story = {
   args: {
-    classes: headingClasses1,
+    classes: headingVariant1.classes,
     text: 'This is a header',
   },
 };
 
 export const Heading2: Story = {
   args: {
-    classes: headingClasses2,
+    classes: headingVariant2.classes,
     text: 'This is a header',
   },
 };

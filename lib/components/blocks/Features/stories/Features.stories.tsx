@@ -1,12 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Features, { FeaturesItem } from '../Features';
-import featuresClasses1 from '../themes/1/features.classes';
-import featuresItemClasses1 from '../themes/1/featuresItem.classes';
-import featuresClasses2 from '../themes/2/features.classes';
-import featuresItemClasses2 from '../themes/2/featuresItem.classes';
-import featuresClasses3 from '../themes/3/features.classes';
-import featuresItemClasses3 from '../themes/3/featuresItem.classes';
+import featuresVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof Features>;
 
@@ -21,7 +16,7 @@ const featureItems = [
     id: 'feature2',
     heading: { text: 'Configuration' },
     content: {
-      content: '<p>Easy to understand configuration options to help tailor your applications to suit your needs.</p>',
+      content: '<p>Faster processing to help you build your applications quicker and more efficiently.</p>',
     },
     icon: 'fa-regular fa-gear',
   },
@@ -64,107 +59,107 @@ const itemClasses1 = [
   'text-green-600 bg-green-300/25',
 ];
 
-const itemClasses2 = [
-  'text-pink-600',
-  'text-cyan-600',
-  'text-amber-600',
-  'text-violet-600',
-  'text-red-600',
-  'text-green-600',
-];
+// const itemClasses2 = [
+//   'text-pink-600',
+//   'text-cyan-600',
+//   'text-amber-600',
+//   'text-violet-600',
+//   'text-red-600',
+//   'text-green-600',
+// ];
 
 export const Features1: Story = {
   args: {
-    classes: featuresClasses1,
-    endContent: [],
+    classes: featuresVariant1.classes,
+    contentArea1: [],
+    contentArea2: [],
     heading: { text: 'Features' },
     items: featureItems.map((item: FeaturesItem, index: number) => ({
       ...item,
       classes: {
-        ...featuresItemClasses1,
-        iconContainer: `${featuresItemClasses1.iconContainer} ${itemClasses1[index]}`,
+        ...featuresVariant1.itemClasses,
+        iconContainer: `${featuresVariant1.itemClasses?.iconContainer} ${itemClasses1[index]}`,
       },
     })),
-    startContent: [],
   },
 };
 
-export const Features2: Story = {
-  args: {
-    classes: featuresClasses2,
-    endContent: [],
-    heading: { text: 'Features' },
-    items: featureItems.map((item: FeaturesItem, index: number) => ({
-      ...item,
-      classes: {
-        ...featuresItemClasses2,
-        iconContainer: `${featuresItemClasses2.iconContainer} ${itemClasses2[index]}`,
-      },
-    })),
-    startContent: [],
-  },
-};
+// export const Features2: Story = {
+//   args: {
+//     classes: featuresClasses2,
+//     endContent: [],
+//     heading: { text: 'Features' },
+//     items: featureItems.map((item: FeaturesItem, index: number) => ({
+//       ...item,
+//       classes: {
+//         ...featuresItemClasses2,
+//         iconContainer: `${featuresItemClasses2.iconContainer} ${itemClasses2[index]}`,
+//       },
+//     })),
+//     startContent: [],
+//   },
+// };
 
-export const Features3: Story = {
-  args: {
-    classes: featuresClasses3,
-    endContent: [],
-    items: [
-      {
-        id: 'step1',
-        heading: { text: 'Enter your vehicle registration' },
-        indicator: '1',
-        classes: featuresItemClasses3,
-        image: {
-          src: '/image1.svg',
-          alt: 'Enter your vehicle registration',
-          fill: false,
-          width: 100,
-          height: 100,
-        },
-      },
-      {
-        id: 'step2',
-        heading: { text: 'Appriase your car by sending images to get your guaranteed price' },
-        indicator: '2',
-        classes: featuresItemClasses3,
-        image: {
-          src: '/image2.svg',
-          alt: 'Appriase your car by sending images to get your guaranteed price',
-          fill: false,
-          width: 100,
-          height: 100,
-        },
-      },
-      {
-        id: 'step3',
-        heading: { text: "We can collect nationwide - for free. Or, we'll pay you to drop it off" },
-        indicator: '3',
-        classes: featuresItemClasses3,
-        image: {
-          src: '/image3.svg',
-          alt: "We can collect nationwide - for free. Or, we'll pay you to drop it off",
-          fill: false,
-          width: 100,
-          height: 100,
-        },
-      },
-      {
-        id: 'step4',
-        heading: { text: "Instant payment - we use fast transfer, you'll be paid in seconds" },
-        indicator: '4',
-        classes: featuresItemClasses3,
-        image: {
-          src: '/image4.svg',
-          alt: "Instant payment - we use fast transfer, you'll be paid in seconds",
-          fill: false,
-          width: 100,
-          height: 100,
-        },
-      },
-    ],
-  },
-};
+// export const Features3: Story = {
+//   args: {
+//     classes: featuresClasses3,
+//     endContent: [],
+//     items: [
+//       {
+//         id: 'step1',
+//         heading: { text: 'Enter your vehicle registration' },
+//         indicator: '1',
+//         classes: featuresItemClasses3,
+//         image: {
+//           src: '/image1.svg',
+//           alt: 'Enter your vehicle registration',
+//           fill: false,
+//           width: 100,
+//           height: 100,
+//         },
+//       },
+//       {
+//         id: 'step2',
+//         heading: { text: 'Appriase your car by sending images to get your guaranteed price' },
+//         indicator: '2',
+//         classes: featuresItemClasses3,
+//         image: {
+//           src: '/image2.svg',
+//           alt: 'Appriase your car by sending images to get your guaranteed price',
+//           fill: false,
+//           width: 100,
+//           height: 100,
+//         },
+//       },
+//       {
+//         id: 'step3',
+//         heading: { text: "We can collect nationwide - for free. Or, we'll pay you to drop it off" },
+//         indicator: '3',
+//         classes: featuresItemClasses3,
+//         image: {
+//           src: '/image3.svg',
+//           alt: "We can collect nationwide - for free. Or, we'll pay you to drop it off",
+//           fill: false,
+//           width: 100,
+//           height: 100,
+//         },
+//       },
+//       {
+//         id: 'step4',
+//         heading: { text: "Instant payment - we use fast transfer, you'll be paid in seconds" },
+//         indicator: '4',
+//         classes: featuresItemClasses3,
+//         image: {
+//           src: '/image4.svg',
+//           alt: "Instant payment - we use fast transfer, you'll be paid in seconds",
+//           fill: false,
+//           width: 100,
+//           height: 100,
+//         },
+//       },
+//     ],
+//   },
+// };
 
 const meta: Meta<typeof Features> = {
   title: 'Blocks/Features',

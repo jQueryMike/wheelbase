@@ -1,1 +1,1 @@
-export { type HeadingClasses, HeadingTag, type HeadingProps, default as Heading } from './Heading';
+export { type HeadingClasses, HeadingTag, HeadingSize, type HeadingProps, default as Heading } from './Heading';
