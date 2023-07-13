@@ -48,7 +48,7 @@ const buildFeaturesBlock = ({
       const headingThemeProperties = globalFeaturesThemeProperties?.headingTheme?.items[0]?.content?.properties;
 
       features.heading = buildHeadingBlock({
-        id: heading.id,
+        id: heading.content.id,
         name: 'Heading',
         content: heading.content.properties,
         settings: heading.settings.properties,
@@ -64,7 +64,7 @@ const buildFeaturesBlock = ({
       const subheadingThemeProperties = globalFeaturesThemeProperties?.subheadingTheme?.items[0]?.content?.properties;
 
       features.subheading = buildSubheadingBlock({
-        id: subheading.id,
+        id: subheading.content.id,
         name: 'Subheading',
         content: subheading.content.properties,
         settings: subheading.settings.properties,
@@ -101,7 +101,7 @@ const buildFeaturesBlock = ({
             globalFeaturesThemeProperties?.itemHeadingTheme?.items[0]?.content?.properties;
 
           featuresItem.heading = buildHeadingBlock({
-            id: itemHeading.id,
+            id: itemHeading.content.id,
             name: 'Heading',
             content: itemHeading.content.properties,
             settings: itemHeading.settings.properties,
@@ -118,7 +118,7 @@ const buildFeaturesBlock = ({
             globalFeaturesThemeProperties?.itemTextContentTheme?.items[0]?.content?.properties;
 
           featuresItem.textContent = buildTextContentBlock({
-            id: itemTextContent.id,
+            id: itemTextContent.content.id,
             name: 'TextContent',
             content: itemTextContent.content.properties,
             settings: itemTextContent.settings.properties,
@@ -135,7 +135,7 @@ const buildFeaturesBlock = ({
             globalFeaturesThemeProperties?.itemButtonTheme?.items[0]?.content?.properties;
 
           featuresItem.button = buildButtonBlock({
-            id: itemButton.id,
+            id: itemButton.content.id,
             name: 'Button',
             content: itemButton.content.properties,
             settings: itemButton.settings.properties,
