@@ -5,7 +5,7 @@ export interface PageProps {
   sections: PageSectionProps[];
 }
 
-const Page = async ({ sections }: PageProps) => (
+const Page = ({ sections }: PageProps) => (
   <main>
     {sections?.map((section: any) => (
       <PageSection key={section.id} {...section} />

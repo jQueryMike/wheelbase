@@ -10,7 +10,7 @@ let classes: SubheadingClasses<ClassesProperty> = {};
 classes = {
   root: tw``,
   subheading: {
-    default: tw`text-lg font-medium opacity-80`,
+    default: tw`text-base font-bold text-accent`,
     lg: tw`lg:text-xl`,
   },
 };

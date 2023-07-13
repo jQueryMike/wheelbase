@@ -11,13 +11,13 @@ classes = {
   root: tw``,
   heading: tw`inline-block font-bold leading-[1em]`,
   headingXl: {
-    default: tw`bg-primary p-4 text-[20px] text-primary-contrast`,
+    default: tw`rounded-lg bg-primary p-4 text-[20px] text-primary-contrast`,
     sm: tw`sm:text-26px]`,
     md: tw`md:text-[30px]`,
     lg: tw`lg:text-[40px]`,
   },
   headingLg: {
-    default: tw`bg-primary p-3 text-[18px] text-primary-contrast`,
+    default: tw`rounded-lg bg-primary p-3 text-[18px] text-primary-contrast`,
     sm: tw`sm:text-22px]`,
     md: tw`md:text-[26px]`,
     lg: tw`lg:text-[32px]`,

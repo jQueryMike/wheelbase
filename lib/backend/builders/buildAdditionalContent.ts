@@ -15,8 +15,8 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
       const heading = buildHeadingBlock({
         id: item.content.id,
         name: 'Heading',
-        content: item.content?.properties,
-        settings: item.settings?.properties,
+        content: { headingSize: 'Medium', ...item.content?.properties },
+        settings: { headingTag: 'H3', ...item.settings?.properties },
         parentVariantId: headingThemeProperties?.variant,
         parentOverrides: extractClassOverrides(headingThemeProperties),
         globalTheme,

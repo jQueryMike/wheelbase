@@ -2,6 +2,8 @@ import cn from 'classnames';
 import NextLink from 'next/link';
 import { HTMLAttributeAnchorTarget } from 'react';
 
+import { Icon } from '../../utility-components/Icon';
+
 export enum ButtonStyle {
   Primary = 'primary',
   Accent = 'accent',
@@ -60,9 +62,9 @@ const Button = ({
       type={type === 'button' ? 'button' : 'submit'}
       onClick={onClick}
     >
-      {leftIcon && <i className={cn(leftIcon, classes.leftIcon)} />}
+      {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} />}
       {text && <span className={classes.textContainer}>{text}</span>}
-      {rightIcon && <i className={cn(rightIcon, classes.rightIcon)} />}
+      {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} />}
     </button>
   );
 
