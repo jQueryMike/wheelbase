@@ -59,15 +59,86 @@
     "2xl:grid-cols-9",
     "2xl:grid-cols-10",
     "2xl:grid-cols-11",
-    "2xl:grid-cols-12"
+    "2xl:grid-cols-12",
+    "bg-red-900",
+    "text-center"
   ],
   "content": [],
-  "fontFamily": {
-    "heading": [
-      "Caprasimo"
-    ],
-    "body": [
-      "Lumanosimo"
-    ]
+  "theme": {
+    "extend": {
+      "colors": {
+        "primary": {
+          "DEFAULT": "oklch(28% 0.07 235 / <alpha-value>)",
+          "light": "oklch(39% 0.1 235 / <alpha-value>)",
+          "dark": "oklch(19% 0.05 235 / <alpha-value>)",
+          "contrast": "#FFFFFF"
+        },
+        "secondary": {
+          "DEFAULT": null,
+          "light": null,
+          "dark": null,
+          "contrast": null
+        },
+        "accent": {
+          "DEFAULT": "oklch(60% 0.25 360 / <alpha-value>)",
+          "light": "oklch(71% 0.22 360 / <alpha-value>)",
+          "dark": "oklch(52% 0.22 360 / <alpha-value>)",
+          "contrast": "#FFFFFF"
+        },
+        "heading": {
+          "DEFAULT": "oklch(28% 0.07 235 / <alpha-value>)",
+          "light": "oklch(28% 0.07 235 / 80%)",
+          "dark": "oklch(28% 0.07 235 / <alpha-value>)"
+        },
+        "copy": {
+          "DEFAULT": "oklch(28% 0.07 235 / 75%)",
+          "light": "oklch(28% 0.07 235 / 60%)",
+          "dark": "oklch(28% 0.07 235 / 85%)"
+        },
+        "link": {
+          "DEFAULT": "oklch(66% 0.15 235)",
+          "light": "oklch(66% 0.15 235 / 80%)",
+          "dark": "oklch(66% 0.15 235)"
+        },
+        "body": {
+          "DEFAULT": "#FFFFFF",
+          "light": "#FFFFFF",
+          "dark": "#F6F6F6"
+        },
+        "custom1": {
+          "DEFAULT": null,
+          "constrast": null
+        },
+        "custom2": {
+          "DEFAULT": null,
+          "constrast": null
+        },
+        "custom3": {
+          "DEFAULT": null,
+          "constrast": null
+        },
+        "custom4": {
+          "DEFAULT": null,
+          "constrast": null
+        },
+        "custom5": {
+          "DEFAULT": null,
+          "constrast": null
+        }
+      },
+      "typography": {
+        "DEFAULT": {
+          "css": {
+            "color": "oklch(28% 0.07 235 / 75%)",
+            "a": {
+              "color": "oklch(66% 0.15 235)",
+              "&:hover": {
+                "color": "oklch(66% 0.15 235 / 80%)"
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

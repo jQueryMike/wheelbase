@@ -16,7 +16,6 @@ const Page = ({ sections, globalTheme }: PageProps) => (
       <link rel="stylesheet" href={globalTheme?.googleFontsHref} />
     </Head>
     <main>
-      <h1 className="font-body">Hello World</h1>
       {sections?.map((section: any) => (
         <PageSection key={section.id} {...section} />
       ))}

@@ -10,7 +10,7 @@ const getPage = async (params: { slug: string[] }) => {
     fetch(`${url}/home/${params.slug.join('/')}`, { next: { tags: pagesTags } }).then((res) => res.json()),
   ]);
 
-  const sections = buildPageSections(pages.properties?.contentGrid?.items || [], globalTheme);
+  const sections = await buildPageSections(pages.properties?.contentGrid?.items || [], globalTheme);
 
   return { sections, globalTheme };
 };

@@ -15,6 +15,7 @@ export type AccordionClasses<T> = {
     | 'subheadingContainer'
     | 'itemsContainer'
     | 'itemContainer'
+    | 'contentAreaContainer'
     | 'contentArea1Container'
     | 'contentArea2Container']?: T;
 };
@@ -30,9 +31,9 @@ export type AccordionItemClasses<T> = {
     | 'toggleIconContainerCollapsed'
     | 'toggleIcon'
     | 'headingContainer'
-    | 'contentContainer'
-    | 'contentExpanded'
-    | 'contentCollapsed']?: T;
+    | 'contentAreaContainer'
+    | 'contentAreaContainerExpanded'
+    | 'contentAreaContainerCollapsed']?: T;
 };
 
 export interface AccordionItem {
@@ -75,7 +76,7 @@ const Accordion = ({
         <div className={classes.headingsContainer}>
           {heading && (
             <div className={classes.headingContainer}>
-              <Heading tag={HeadingTag.H2} size={HeadingSize.LG} {...heading} />
+              <Heading tag={HeadingTag.H2} size={HeadingSize.Large} {...heading} />
             </div>
           )}
           {subheading && (
@@ -87,7 +88,7 @@ const Accordion = ({
       )}
 
       {contentArea1?.length > 0 && (
-        <div className={classes.contentArea1Container}>
+        <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
           <BlockList blocks={contentArea1} />
         </div>
       )}
@@ -108,7 +109,7 @@ const Accordion = ({
                 >
                   {item.heading && (
                     <div className={item.classes?.headingContainer}>
-                      <Heading tag={HeadingTag.H3} size={HeadingSize.MD} {...item.heading} />
+                      <Heading tag={HeadingTag.H3} size={HeadingSize.Medium} {...item.heading} />
                     </div>
                   )}
                   <div
@@ -125,8 +126,10 @@ const Accordion = ({
                 {item.content && item.content.length > 0 && (
                   <div
                     className={cn(
-                      item.classes?.contentContainer,
-                      isExpanded ? item.classes?.contentExpanded : item.classes?.contentCollapsed,
+                      item.classes?.contentAreaContainer,
+                      isExpanded
+                        ? item.classes?.contentAreaContainerExpanded
+                        : item.classes?.contentAreaContainerCollapsed,
                     )}
                   >
                     <BlockList blocks={item.content} />
@@ -139,7 +142,7 @@ const Accordion = ({
       </div>
 
       {contentArea2?.length > 0 && (
-        <div className={classes.contentArea2Container}>
+        <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
           <BlockList blocks={contentArea2} />
         </div>
       )}

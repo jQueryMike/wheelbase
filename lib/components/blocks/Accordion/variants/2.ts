@@ -15,7 +15,8 @@ classes = {
     lg: tw`lg:space-y-8`,
   },
   headingsContainer: tw`space-y-4`,
-  itemsContainer: tw`space-y-4 py-4`,
+  itemsContainer: { default: tw`space-y-4 py-4`, sm: tw`sm:space-y-6 sm:py-6` },
+  itemContainer: {},
   contentAreaContainer: {
     default: tw`space-y-4`,
     sm: tw`sm:space-y-6`,
@@ -24,18 +25,17 @@ classes = {
 };
 
 itemClasses = {
-  root: tw`overflow-hidden rounded-lg border border-gray-200`,
+  root: tw`overflow-hidden rounded-xl shadow-lg`,
   toggleButton: {
-    default: tw`flex w-full items-center justify-between p-4`,
-    hover: tw`hover:bg-gray-50`,
+    default: tw`flex w-full items-center justify-between rounded-xl p-6 transition duration-150`,
   },
-  toggleButtonExpanded: tw`border-b border-gray-200`,
+  toggleButtonExpanded: tw``,
   toggleButtonCollapsed: tw``,
-  toggleIconContainer: tw`text-sm text-accent transition duration-150`,
+  toggleIconContainer: tw`text-xl text-accent transition duration-150`,
   toggleIconContainerExpanded: tw`-rotate-180`,
   toggleIconContainerCollapsed: tw`rotate-0`,
   toggleIcon: tw`fa-solid fa-arrow-down`,
-  contentAreaContainer: tw`space-y-4 p-4`,
+  contentAreaContainer: tw`space-y-4 p-6 pt-0`,
   contentAreaContainerExpanded: tw`block`,
   contentAreaContainerCollapsed: tw`hidden`,
 };

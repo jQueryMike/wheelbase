@@ -16,6 +16,7 @@ export type FeaturesClasses<T> = {
     | 'subheadingContainer'
     | 'itemsContainer'
     | 'itemContainer'
+    | 'contentAreaContainer'
     | 'contentArea1Container'
     | 'contentArea2Container']?: T;
 };
@@ -64,7 +65,7 @@ const Features = ({
       <div className={classes.headingsContainer}>
         {heading && (
           <div className={classes.headingContainer}>
-            <Heading tag={HeadingTag.H2} size={HeadingSize.LG} {...heading} />
+            <Heading tag={HeadingTag.H2} size={HeadingSize.Large} {...heading} />
           </div>
         )}
         {subheading && (
@@ -75,7 +76,7 @@ const Features = ({
       </div>
     )}
     {contentArea1?.length > 0 && (
-      <div className={classes.contentArea1Container}>
+      <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
         <BlockList blocks={contentArea1} />
       </div>
     )}
@@ -96,7 +97,7 @@ const Features = ({
               )}
               {item.heading && (
                 <div className={item.classes?.headingContainer}>
-                  <Heading tag={HeadingTag.H3} size={HeadingSize.MD} {...item.heading} />
+                  <Heading tag={HeadingTag.H3} size={HeadingSize.Medium} {...item.heading} />
                 </div>
               )}
               {item.textContent && (
@@ -115,7 +116,7 @@ const Features = ({
       </div>
     )}
     {contentArea2?.length > 0 && (
-      <div className={classes.contentArea2Container}>
+      <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
         <BlockList blocks={contentArea2} />
       </div>
     )}
