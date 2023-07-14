@@ -1,6 +1,5 @@
 import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
-import { fontFamily } from 'tailwindcss/defaultTheme';
 
 import tailWindConf from './tailwind-conf.json';
 
@@ -12,7 +11,6 @@ const tailwindConfig: Config = {
   theme: {
     extend: {
       fontFamily: {
-        ...fontFamily,
         ...tailWindConf.fontFamily,
       },
       colors: {

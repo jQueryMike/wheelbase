@@ -12,7 +12,7 @@ const getPage = async (params: { slug: string[] }) => {
 
   const sections = buildPageSections(pages.properties?.contentGrid?.items || [], globalTheme);
 
-  return { sections };
+  return { sections, globalTheme };
 };
 
 export default getPage;
