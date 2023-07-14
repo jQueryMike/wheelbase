@@ -48,7 +48,7 @@ const buildButtonBlock = ({
 
     // Get active variant from instance > parent > global > default variant id
     const instanceVariantId = content.themeVariant;
-    const globalVariantId = globalButtonThemeProperties?.variant;
+    const globalVariantId = globalButtonThemeProperties?.themeVariant;
     const blockVariantId = instanceVariantId || parentVariantId || globalVariantId || '1';
     const activeVariant = require(`/lib/components/blocks/Button/variants/${blockVariantId}`).default || undefined;
 

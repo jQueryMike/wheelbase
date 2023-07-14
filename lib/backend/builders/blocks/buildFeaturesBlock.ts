@@ -23,7 +23,7 @@ const buildFeaturesBlock = ({
 
     // Get active variant from instance > global > default variant id
     const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalFeaturesThemeProperties?.variant;
+    const globalVariantId = globalFeaturesThemeProperties?.themeVariant;
     const blockVariantId = instanceVariantId || globalVariantId || '1';
     const activeVariant = require(`/lib/components/blocks/Features/variants/${blockVariantId}`).default || undefined;
 
@@ -52,7 +52,7 @@ const buildFeaturesBlock = ({
         name: 'Heading',
         content: heading.content.properties,
         settings: heading.settings.properties,
-        parentVariantId: headingThemeProperties?.variant,
+        parentVariantId: headingThemeProperties?.themeVariant,
         parentOverrides: extractClassOverrides(headingThemeProperties),
         globalTheme,
       });
@@ -68,7 +68,7 @@ const buildFeaturesBlock = ({
         name: 'Subheading',
         content: subheading.content.properties,
         settings: subheading.settings.properties,
-        parentVariantId: subheadingThemeProperties?.variant,
+        parentVariantId: subheadingThemeProperties?.themeVariant,
         parentOverrides: extractClassOverrides(subheadingThemeProperties),
         globalTheme,
       });
@@ -82,7 +82,7 @@ const buildFeaturesBlock = ({
         const itemSettings = item.settings?.properties;
 
         // Get global and instance overrides
-        const itemGlobalOverrides = extractClassOverrides(globalOverrides, 'tw_item_');
+        const itemGlobalOverrides = extractClassOverrides(globalOverrides, 'twitem_');
         const itemInstanceOverrides = extractClassOverrides(itemSettings);
 
         // Build intiial item
@@ -105,7 +105,7 @@ const buildFeaturesBlock = ({
             name: 'Heading',
             content: itemHeading.content.properties,
             settings: itemHeading.settings.properties,
-            parentVariantId: itemHeadingThemeProperties?.variant,
+            parentVariantId: itemHeadingThemeProperties?.themeVariant,
             parentOverrides: extractClassOverrides(itemHeadingThemeProperties),
             globalTheme,
           });
@@ -122,7 +122,7 @@ const buildFeaturesBlock = ({
             name: 'TextContent',
             content: itemTextContent.content.properties,
             settings: itemTextContent.settings.properties,
-            parentVariantId: itemTextContentThemeProperties?.variant,
+            parentVariantId: itemTextContentThemeProperties?.themeVariant,
             parentOverrides: extractClassOverrides(itemTextContentThemeProperties),
             globalTheme,
           });
@@ -139,7 +139,7 @@ const buildFeaturesBlock = ({
             name: 'Button',
             content: itemButton.content.properties,
             settings: itemButton.settings.properties,
-            parentVariantId: itemButtonThemeProperties?.variant,
+            parentVariantId: itemButtonThemeProperties?.themeVariant,
             parentOverrides: extractClassOverrides(itemButtonThemeProperties),
             globalTheme,
           });

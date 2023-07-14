@@ -17,7 +17,7 @@ const buildPageSections = async (items: UmbracoBlockGridItem[], globalTheme: any
   items.forEach(async (item) => {
     // Get active variant from instance > global > default variant id
     const instanceVariantId = item.content?.properties?.themeVariant;
-    const globalVariantId = globalPageSectionThemeProperties?.variant;
+    const globalVariantId = globalPageSectionThemeProperties?.themeVariant;
     const blockVariantId = instanceVariantId || globalVariantId || '1';
     const activeVariant = require(`/lib/components/layout/PageSection/variants/${blockVariantId}`).default || undefined;
 

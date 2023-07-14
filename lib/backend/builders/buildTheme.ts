@@ -32,11 +32,12 @@ const buildTheme = ({
 
     [globalOverrides, parentOverrides, instanceOverrides].forEach((overrides) => {
       Object.keys(overrides).forEach((key) => {
-        const classesKey = key.replace('tw_item_', '').replace('tw_', '');
-        const klasses = (outputClasses[classesKey] || '').split(' ');
-        klasses.push(overrides[key]);
-
-        outputClasses[classesKey] = klasses.join(' ');
+        const classesKey = key.split('__')[1];
+        if (classesKey) {
+          const klasses = (outputClasses[classesKey] || '').split(' ');
+          klasses.push(overrides[key]);
+          outputClasses[classesKey] = klasses.join(' ');
+        }
       });
     });
 

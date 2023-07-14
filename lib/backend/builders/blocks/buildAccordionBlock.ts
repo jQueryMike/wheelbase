@@ -21,7 +21,7 @@ const buildAccordionBlock = ({
 
     // Get active variant from instance > global > default variant id
     const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalAccordionThemeProperties?.variant;
+    const globalVariantId = globalAccordionThemeProperties?.themeVariant;
     const blockVariantId = instanceVariantId || globalVariantId || '1';
     const activeVariant = require(`/lib/components/blocks/Accordion/variants/${blockVariantId}`).default || undefined;
 
@@ -49,7 +49,7 @@ const buildAccordionBlock = ({
         name: 'Heading',
         content: heading.content.properties,
         settings: heading.settings.properties,
-        parentVariantId: headingThemeProperties?.variant,
+        parentVariantId: headingThemeProperties?.themeVariant,
         parentOverrides: extractClassOverrides(headingThemeProperties),
         globalTheme,
       });
@@ -65,7 +65,7 @@ const buildAccordionBlock = ({
         name: 'Subheading',
         content: subheading.content.properties,
         settings: subheading.settings.properties,
-        parentVariantId: subheadingThemeProperties?.variant,
+        parentVariantId: subheadingThemeProperties?.themeVariant,
         parentOverrides: extractClassOverrides(subheadingThemeProperties),
         globalTheme,
       });
@@ -79,7 +79,7 @@ const buildAccordionBlock = ({
         const itemSettings = item.settings?.properties;
 
         // Get global and instance overrides
-        const itemGlobalOverrides = extractClassOverrides(globalOverrides, 'tw_item_');
+        const itemGlobalOverrides = extractClassOverrides(globalOverrides, 'tw_item__');
         const itemInstanceOverrides = extractClassOverrides(itemSettings);
 
         // Build intiial item
@@ -102,7 +102,7 @@ const buildAccordionBlock = ({
             name: 'Heading',
             content: itemHeading.content.properties,
             settings: itemHeading.settings.properties,
-            parentVariantId: itemHeadingThemeProperties?.variant,
+            parentVariantId: itemHeadingThemeProperties?.themeVariant,
             parentOverrides: extractClassOverrides(itemHeadingThemeProperties),
             globalTheme,
           });

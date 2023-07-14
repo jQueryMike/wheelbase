@@ -21,7 +21,7 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
         name: 'Heading',
         content: item.content?.properties,
         settings: item.settings?.properties,
-        parentVariantId: headingThemeProperties?.variant,
+        parentVariantId: headingThemeProperties?.themeVariant,
         parentOverrides: extractClassOverrides(headingThemeProperties),
         globalTheme,
       });
@@ -38,7 +38,7 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
         name: 'TextContent',
         content: item.content?.properties,
         settings: item.settings?.properties,
-        parentVariantId: textContentThemeProperties?.variant,
+        parentVariantId: textContentThemeProperties?.themeVariant,
         parentOverrides: extractClassOverrides(textContentThemeProperties),
         globalTheme,
       });
@@ -54,7 +54,7 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
         name: 'Button',
         content: item.content?.properties,
         settings: item.settings?.properties,
-        parentVariantId: buttonThemeProperties?.variant,
+        parentVariantId: buttonThemeProperties?.themeVariant,
         parentOverrides: extractClassOverrides(buttonThemeProperties),
         globalTheme,
       });

@@ -22,7 +22,7 @@ const buildTextContentBlock = ({
 
     // Get active variant from instance > parent > global > default variant id
     const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalTextContentThemeProperties?.variant;
+    const globalVariantId = globalTextContentThemeProperties?.themeVariant;
     const blockVariantId = instanceVariantId || parentVariantId || globalVariantId || '1';
     const activeVariant = require(`/lib/components/blocks/TextContent/variants/${blockVariantId}`).default || undefined;
 

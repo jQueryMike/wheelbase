@@ -22,7 +22,7 @@ const buildSubheadingBlock = ({
 
     // Get active variant from instance > parent > global > default variant id
     const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalSubheadingThemeProperties?.variant;
+    const globalVariantId = globalSubheadingThemeProperties?.themeVariant;
     const blockVariantId = instanceVariantId || parentVariantId || globalVariantId || '1';
     const activeVariant = require(`/lib/components/blocks/Subheading/variants/${blockVariantId}`).default || undefined;
 

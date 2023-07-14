@@ -41,7 +41,7 @@ const buildHeadingBlock = ({
 
     // Get active variant from instance > parent > global > default variant id
     const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalHeadingThemeProperties?.variant;
+    const globalVariantId = globalHeadingThemeProperties?.themeVariant;
     const blockVariantId = instanceVariantId || parentVariantId || globalVariantId || '1';
     const activeVariant = require(`/lib/components/blocks/Heading/variants/${blockVariantId}`).default || undefined;
 
