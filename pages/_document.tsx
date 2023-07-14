@@ -2,7 +2,7 @@ import { Head, Html, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 import React from 'react';
 
-function Document(): JSX.Element {
+function Document() {
   return (
     <React.StrictMode>
       <Html>

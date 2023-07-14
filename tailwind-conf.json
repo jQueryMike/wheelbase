@@ -61,5 +61,13 @@
     "2xl:grid-cols-11",
     "2xl:grid-cols-12"
   ],
-  "content": []
+  "content": [],
+  "fontFamily": {
+    "heading": [
+      "Caprasimo"
+    ],
+    "body": [
+      "Lumanosimo"
+    ]
+  }
 }

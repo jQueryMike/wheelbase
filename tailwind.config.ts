@@ -1,5 +1,6 @@
 import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 import tailWindConf from './tailwind-conf.json';
 
@@ -10,6 +11,10 @@ const tailwindConfig: Config = {
   safelist: tailWindConf.safelist,
   theme: {
     extend: {
+      fontFamily: {
+        ...fontFamily,
+        ...tailWindConf.fontFamily,
+      },
       colors: {
         primary: { DEFAULT: '#121642', contrast: '#fff' },
         accent: { DEFAULT: '#F92D64', contrast: '#fff' },
