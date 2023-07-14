@@ -79,7 +79,7 @@ const buildAccordionBlock = ({
         const itemSettings = item.settings?.properties;
 
         // Get global and instance overrides
-        const itemGlobalOverrides = extractClassOverrides(globalOverrides, 'tw_item__');
+        const itemGlobalOverrides = extractClassOverrides(globalAccordionThemeProperties, 'tw_item__');
         const itemInstanceOverrides = extractClassOverrides(itemSettings);
 
         // Build intiial item

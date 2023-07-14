@@ -82,7 +82,7 @@ const buildFeaturesBlock = ({
         const itemSettings = item.settings?.properties;
 
         // Get global and instance overrides
-        const itemGlobalOverrides = extractClassOverrides(globalOverrides, 'twitem_');
+        const itemGlobalOverrides = extractClassOverrides(globalFeaturesThemeProperties, 'twitem_');
         const itemInstanceOverrides = extractClassOverrides(itemSettings);
 
         // Build intiial item

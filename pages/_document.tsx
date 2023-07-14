@@ -7,7 +7,7 @@ function Document() {
     <React.StrictMode>
       <Html>
         <Head />
-        <body>
+        <body className="bg-body">
           <Main />
           <NextScript />
           <Script

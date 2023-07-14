@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss';
 
 import tailWindConf from './tailwind-conf.json';
 
-const folders = ['lib', 'app'];
+const folders = ['lib', 'pages'];
 
 const tailwindConfig: Config = {
   ...tailWindConf,
