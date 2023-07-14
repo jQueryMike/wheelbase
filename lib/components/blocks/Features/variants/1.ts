@@ -15,12 +15,15 @@ classes = {
     lg: tw`lg:space-y-8`,
   },
   headingsContainer: tw`space-y-4`,
-  contentArea1Container: tw`space-y-4`,
-  contentArea2Container: tw`space-y-4`,
+  contentAreaContainer: {
+    default: tw`space-y-4`,
+    sm: tw`sm:space-y-6`,
+    lg: tw`lg:space-y-8`,
+  },
   itemsContainer: {
     default: tw`grid gap-8 py-6`,
     sm: tw`sm:grid-cols-2 sm:gap-10`,
-    lg: tw`lg:grid-cols-3 lg:gap-12`,
+    lg: tw`lg:grid-cols-3 lg:gap-16`,
   },
 };
 

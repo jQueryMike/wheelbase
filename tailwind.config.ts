@@ -13,6 +13,7 @@ const tailwindConfig: Config = {
   //     colors: tailWindConf.colors,
   //   },
   // },
+  plugins: [require('@tailwindcss/typography')],
 };
 
 export default tailwindConfig;

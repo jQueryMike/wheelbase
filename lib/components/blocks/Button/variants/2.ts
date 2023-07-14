@@ -15,8 +15,8 @@ classes = {
     hover: tw`hover:scale-105 hover:bg-primary/80`,
   },
   accentButton: {
-    default: tw`border-2 border-accent text-primary`,
-    hover: tw`hover:scale-105`,
+    default: tw`bg-accent text-accent-contrast`,
+    hover: tw`hover:scale-105 hover:bg-accent/80`,
   },
   plainButton: {
     default: tw`border-2 border-transparent bg-primary/5 text-primary`,

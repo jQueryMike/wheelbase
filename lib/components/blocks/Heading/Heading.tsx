@@ -13,15 +13,15 @@ export enum HeadingTag {
 }
 
 export enum HeadingSize {
-  XL = 'Xl',
-  LG = 'Lg',
-  MD = 'Md',
-  SM = 'Sm',
-  XS = 'Xs',
+  ExtraLarge = 'ExtraLarge',
+  Large = 'Large',
+  Medium = 'Medium',
+  Small = 'Small',
+  ExtraSmall = 'ExtraSmall',
 }
 
 export type HeadingClasses<T> = {
-  [key in 'root' | 'heading' | `heading${'Xl' | 'Lg' | 'Md' | 'Sm' | 'Xs'}`]?: T;
+  [key in 'root' | 'heading' | `heading${'ExtraLarge' | 'Large' | 'Medium' | 'Small' | 'ExtraSmall'}`]?: T;
 };
 
 export interface HeadingProps {
@@ -31,7 +31,7 @@ export interface HeadingProps {
   size?: HeadingSize;
 }
 
-const Heading = ({ classes = {}, text, tag = HeadingTag.H2, size = HeadingSize.LG }: HeadingProps) => {
+const Heading = ({ classes = {}, text, tag = HeadingTag.H2, size = HeadingSize.Large }: HeadingProps) => {
   const HeadingElement = tag;
 
   return (

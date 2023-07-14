@@ -11,6 +11,7 @@ classes = {
   root: {
     default: tw`p-8`,
     md: tw`md:p-12`,
+    lg: tw`lg:p-16`,
   },
   areasContainer: tw`container mx-auto grid`,
   area: tw`space-y-4`,

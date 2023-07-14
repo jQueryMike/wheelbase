@@ -6,17 +6,19 @@ import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
 
 const getSizeKey = (size: string) => {
+  if (!size) return undefined;
+
   switch (size) {
     case 'Extra Large':
-      return HeadingSize.XL;
+      return HeadingSize.ExtraLarge;
     case 'Large':
-      return HeadingSize.LG;
+      return HeadingSize.Large;
     case 'Medium':
-      return HeadingSize.MD;
+      return HeadingSize.Medium;
     case 'Small':
-      return HeadingSize.SM;
+      return HeadingSize.Small;
     case 'Extra Small':
-      return HeadingSize.XS;
+      return HeadingSize.ExtraSmall;
     default:
       return undefined;
   }
@@ -59,7 +61,7 @@ const buildHeadingBlock = ({
     });
 
     // Add props
-    if (settings?.headingTag) heading.tag = settings?.headingTag;
+    if (content?.headingTag) heading.tag = content?.headingTag;
     if (content?.headingSize) heading.size = getSizeKey(content?.headingSize);
 
     return heading;

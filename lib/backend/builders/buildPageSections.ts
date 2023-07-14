@@ -6,13 +6,15 @@ import buildPageSectionAreas from './buildPageSectionAreas';
 import buildTheme from './buildTheme';
 import extractClassOverrides from './extractClassOverrides';
 
-const buildPageSections = (items: UmbracoBlockGridItem[], globalTheme: any): PageSectionProps[] => {
+const buildPageSections = async (items: UmbracoBlockGridItem[], globalTheme: any): Promise<PageSectionProps[]> => {
   if (!items || items.length < 1) return [];
 
   // Shortcut to block theme properties from globalTheme
   const globalPageSectionThemeProperties = globalTheme?.pageSectionTheme?.items[0]?.content?.properties;
 
-  return items.map((item) => {
+  const pageSections: (Block & PageSectionProps)[] = [];
+
+  items.forEach(async (item) => {
     // Get active variant from instance > global > default variant id
     const instanceVariantId = item.content?.properties?.themeVariant;
     const globalVariantId = globalPageSectionThemeProperties?.variant;
@@ -30,10 +32,12 @@ const buildPageSections = (items: UmbracoBlockGridItem[], globalTheme: any): Pag
 
     pageSection.classes = buildTheme({ classes: activeVariant.classes, globalOverrides, instanceOverrides });
 
-    pageSection.areas = buildPageSectionAreas(item.areas, globalTheme);
+    pageSection.areas = await buildPageSectionAreas(item.areas, globalTheme);
 
-    return pageSection;
+    pageSections.push(pageSection);
   });
+
+  return pageSections;
 };
 
 export default buildPageSections;

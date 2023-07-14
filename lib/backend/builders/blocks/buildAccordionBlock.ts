@@ -14,7 +14,7 @@ const buildAccordionBlock = ({
   content,
   settings,
   globalTheme,
-}: BlockBuilderConfig): AccordionProps | undefined => {
+}: BlockBuilderConfig): (Block & AccordionProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
     const globalAccordionThemeProperties = globalTheme?.accordionTheme?.items[0]?.content?.properties;

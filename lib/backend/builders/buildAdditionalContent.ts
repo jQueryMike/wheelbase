@@ -1,3 +1,4 @@
+import { HeadingTag } from '@components/blocks/Heading';
 import Block from '@interfaces/Block';
 
 import buildButtonBlock from './blocks/buildButtonBlock';
@@ -12,11 +13,14 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
     if (item.content.contentType === 'heading') {
       const headingThemeProperties = parentThemeProperties?.additionalHeadingTheme?.items[0]?.content?.properties;
 
+      item.content.properties.headingSize = item.content?.properties.headingSize || 'Medium';
+      item.settings.properties.headingTag = item.settings?.properties.headingTag || HeadingTag.H3;
+
       const heading = buildHeadingBlock({
         id: item.content.id,
         name: 'Heading',
-        content: { headingSize: 'Medium', ...item.content?.properties },
-        settings: { headingTag: 'H3', ...item.settings?.properties },
+        content: item.content?.properties,
+        settings: item.settings?.properties,
         parentVariantId: headingThemeProperties?.variant,
         parentOverrides: extractClassOverrides(headingThemeProperties),
         globalTheme,
