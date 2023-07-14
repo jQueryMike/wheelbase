@@ -3,6 +3,7 @@ import { UmbracoBlockGridItem } from '@interfaces/Umbraco';
 import { v4 as uuidv4 } from 'uuid';
 
 import buildAccordionBlock from './blocks/buildAccordionBlock';
+import buildAddressBlock from './blocks/buildAddressBlock';
 import buildBlockquoteBlock from './blocks/buildBlockquoteBlock';
 import buildButtonBlock from './blocks/buildButtonBlock';
 import buildContactDetailsBlock from './blocks/buildContactDetailsBlock';
@@ -32,6 +33,11 @@ const buildBlocks = async ({
         globalTheme,
       };
 
+      if (name === 'Address') {
+        const block = buildAddressBlock(config);
+        if (block) blocks.push(block);
+      }
+
       if (name === 'Accordion') {
         const block = buildAccordionBlock(config);
         if (block) blocks.push(block);
@@ -46,7 +52,7 @@ const buildBlocks = async ({
         const block = buildContactDetailsBlock(config);
         if (block) blocks.push(block);
       }
-      
+
       if (name === 'Blockquote') {
         const block = buildBlockquoteBlock(config);
         if (block) blocks.push(block);
