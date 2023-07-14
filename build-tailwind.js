@@ -62,7 +62,28 @@ const generateGridColsSafelist = () => {
   return screenSizes.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat();
 };
 
-const generateFontsConfig = () => {};
+const generateFontsConfig = async (theme) => {
+  try {
+    const fonts = {};
+    const keys = Object.keys(theme);
+
+    keys.forEach((key) => {
+      if (key.endsWith('Font')) {
+        const fontTag = key.replace('Font', '');
+        const fontName = theme[key].replace(' ', '+');
+        fonts[fontTag] = [fontName];
+      }
+    });
+
+    const tailwindConf = require(CONF_FILE);
+    tailwindConf.fontFamily = fonts;
+
+    await fs.writeFile(CONF_FILE, JSON.stringify(tailwindConf, null, 2));
+  } catch (error) {
+    console.error('Something went wrong while trying to generate fonts');
+    console.error(error);
+  }
+};
 
 const generateSafeList = async (pages) => {
   try {
