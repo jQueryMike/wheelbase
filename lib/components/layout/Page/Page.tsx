@@ -8,7 +8,7 @@ export interface PageProps {
   googleFontsHref: string;
 }
 
-const Page = ({ sections, googleFontsHref }: PageProps) => (
+const Page = ({ googleFontsHref, sections }: PageProps) => (
   <>
     <Head>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
