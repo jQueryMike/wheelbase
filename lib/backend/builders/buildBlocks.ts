@@ -3,6 +3,7 @@ import { UmbracoBlockGridItem } from '@interfaces/Umbraco';
 import { v4 as uuidv4 } from 'uuid';
 
 import buildAccordionBlock from './blocks/buildAccordionBlock';
+import buildBlockquoteBlock from './blocks/buildBlockquoteBlock';
 import buildButtonBlock from './blocks/buildButtonBlock';
 import buildContactDetailsBlock from './blocks/buildContactDetailsBlock';
 import buildFeaturesBlock from './blocks/buildFeaturesBlock';
@@ -43,6 +44,11 @@ const buildBlocks = async ({
 
       if (name === 'ContactDetails') {
         const block = buildContactDetailsBlock(config);
+        if (block) blocks.push(block);
+      }
+      
+      if (name === 'Blockquote') {
+        const block = buildBlockquoteBlock(config);
         if (block) blocks.push(block);
       }
 
