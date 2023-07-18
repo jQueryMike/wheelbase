@@ -8,6 +8,7 @@ import buildFeaturesBlock from './blocks/buildFeaturesBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildMapBlock from './blocks/buildMapBlock';
 import buildSubheadingBlock from './blocks/buildSubheadingBlock';
+import buildTelephoneNumberBlock from './blocks/buildTelephoneNumberBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
 
 const buildBlocks = async ({
@@ -62,6 +63,11 @@ const buildBlocks = async ({
 
       if (name === 'TextContent') {
         const block = buildTextContentBlock(config);
+        if (block) blocks.push(block);
+      }
+
+      if (name === 'TelephoneNumber') {
+        const block = buildTelephoneNumberBlock(config);
         if (block) blocks.push(block);
       }
     } catch (error) {
