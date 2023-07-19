@@ -38,12 +38,10 @@ export type FeaturesItemClasses<T> = {
 
 export interface FeaturesItem {
   classes?: FeaturesItemClasses<string>;
-  heading?: HeadingProps;
-  textContent?: TextContentProps;
-  button?: ButtonProps;
   icon?: string;
   id: string;
   indicator?: string;
+  content?: Block[];
   image?: ImageProps;
 }
 
@@ -88,19 +86,9 @@ const Features = ({ classes = {}, headings, items = [], contentArea1 = [], conte
                 </div>
               )}
               <div className={item.classes?.contentAreaContainer}>
-                {item.heading && (
-                  <div className={item.classes?.headingContainer}>
-                    <Heading tag={HeadingTag.H3} size={HeadingSize.Medium} {...item.heading} />
-                  </div>
-                )}
-                {item.textContent && (
-                  <div className={item.classes?.textContentContainer}>
-                    <TextContent {...item.textContent} />
-                  </div>
-                )}
-                {item.button && (
-                  <div className={item.classes?.buttonContainer}>
-                    <Button {...item.button} />
+                {item.content && item.content.length > 0 && (
+                  <div className={cn(item.classes?.contentAreaContainer)}>
+                    <BlockList blocks={item.content} />
                   </div>
                 )}
               </div>
