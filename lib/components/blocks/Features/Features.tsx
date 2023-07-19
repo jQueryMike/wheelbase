@@ -5,6 +5,7 @@ import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
 import { Button, ButtonProps } from '../Button';
 import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
+import { Image, ImageProps } from '../Image';
 import { Subheading, SubheadingProps } from '../Subheading';
 import { TextContent, TextContentProps } from '../TextContent';
 
@@ -28,6 +29,8 @@ export type FeaturesItemClasses<T> = {
     | 'indicator'
     | 'iconContainer'
     | 'icon'
+    | 'imageContainer'
+    | 'contentAreaContainer'
     | 'headingContainer'
     | 'textContentContainer'
     | 'buttonContainer']?: T;
@@ -41,6 +44,7 @@ export interface FeaturesItem {
   icon?: string;
   id: string;
   indicator?: string;
+  image?: ImageProps;
 }
 
 export interface FeaturesProps {
@@ -95,21 +99,28 @@ const Features = ({
                   <Icon className={cn(item.icon, item.classes?.icon)} />
                 </div>
               )}
-              {item.heading && (
-                <div className={item.classes?.headingContainer}>
-                  <Heading tag={HeadingTag.H3} size={HeadingSize.Medium} {...item.heading} />
+              {item.image && (
+                <div className={item.classes?.imageContainer}>
+                  <Image {...item.image} />
                 </div>
               )}
-              {item.textContent && (
-                <div className={item.classes?.textContentContainer}>
-                  <TextContent {...item.textContent} />
-                </div>
-              )}{' '}
-              {item.button && (
-                <div className={item.classes?.buttonContainer}>
-                  <Button {...item.button} />
-                </div>
-              )}
+              <div className={item.classes?.contentAreaContainer}>
+                {item.heading && (
+                  <div className={item.classes?.headingContainer}>
+                    <Heading tag={HeadingTag.H3} size={HeadingSize.Medium} {...item.heading} />
+                  </div>
+                )}
+                {item.textContent && (
+                  <div className={item.classes?.textContentContainer}>
+                    <TextContent {...item.textContent} />
+                  </div>
+                )}
+                {item.button && (
+                  <div className={item.classes?.buttonContainer}>
+                    <Button {...item.button} />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ))}

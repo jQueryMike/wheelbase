@@ -36,6 +36,5 @@ yarn-error.log*
 next-env.d.ts
 
 # tailwind
-/safelist.json
-/tailwind-conf.json
+/tailwind.config.json
 

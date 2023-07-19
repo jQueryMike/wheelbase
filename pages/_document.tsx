@@ -6,8 +6,11 @@ function Document() {
   return (
     <React.StrictMode>
       <Html>
-        <Head />
-        <body className="bg-body">
+        <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        </Head>
+        <body className="bg-body font-body">
           <Main />
           <NextScript />
           <Script

@@ -41,7 +41,8 @@
     "elastic-apm-node.js",
     "next.config.js",
     "postcss.config.js",
-    "build-tailwind.js"
+    "tailwind.builder.js",
+    "tailwind/**/*.js"
   ],
   "exclude": ["node_modules", "_ARCHIVE"]
 }

@@ -1,7 +1,17 @@
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
 
-export interface ImageProps extends NextImageProps {}
+export type ImageClasses<T> = {
+  [key in 'root' | 'image']?: T;
+};
 
-const Image = (props: ImageProps) => <NextImage {...props} />;
+export interface ImageProps extends NextImageProps {
+  classes?: ImageClasses<string>;
+}
+
+const Image = ({ classes = {}, ...rest }: ImageProps) => (
+  <div className={classes.root}>
+    <NextImage className={classes.image} {...rest} />
+  </div>
+);
 
 export default Image;

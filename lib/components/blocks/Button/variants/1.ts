@@ -9,7 +9,7 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  button: tw`inline-flex items-center justify-center font-semibold`,
+  button: tw`inline-flex items-center justify-center font-semibold transition-all`,
   primaryButton: {
     default: tw`bg-primary text-primary-contrast`,
     hover: tw`hover:bg-primary/80`,

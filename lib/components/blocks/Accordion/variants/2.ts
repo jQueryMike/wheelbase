@@ -25,9 +25,9 @@ classes = {
 };
 
 itemClasses = {
-  root: tw`overflow-hidden rounded-xl shadow-lg`,
+  root: tw`overflow-hidden rounded-lg shadow-lg`,
   toggleButton: {
-    default: tw`flex w-full items-center justify-between rounded-xl p-6 transition duration-150`,
+    default: tw`flex w-full items-center justify-between rounded-lg p-6 transition duration-150`,
   },
   toggleButtonExpanded: tw``,
   toggleButtonCollapsed: tw``,

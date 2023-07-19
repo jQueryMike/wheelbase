@@ -7,6 +7,7 @@ import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
 import buildButtonBlock from './buildButtonBlock';
 import buildHeadingBlock from './buildHeadingBlock';
+import buildImageBlock from './buildImageBlock';
 import buildSubheadingBlock from './buildSubheadingBlock';
 import buildTextContentBlock from './buildTextContentBlock';
 
@@ -147,6 +148,23 @@ const buildFeaturesBlock = ({
 
         if (itemContent.icon) featuresItem.icon = itemContent.icon;
         if (itemContent.indicator) featuresItem.indicator = itemContent.indicator;
+
+        // Add image
+        const itemImage = itemContent.image ? itemContent.image[0] : null;
+        if (itemImage) {
+          const itemImageThemeProperties = globalFeaturesThemeProperties?.itemImageTheme?.items[0]?.content?.properties;
+
+          itemContent.alt = featuresItem.heading?.text || itemImage.name;
+
+          featuresItem.image = buildImageBlock({
+            id: itemImage.id,
+            name: 'Image',
+            content: { ...itemImage },
+            parentVariantId: itemImageThemeProperties?.themeVariant,
+            parentOverrides: extractClassOverrides(itemImageThemeProperties),
+            globalTheme,
+          });
+        }
 
         return featuresItem;
       });

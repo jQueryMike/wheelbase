@@ -26,8 +26,8 @@ classes = {
     lg: tw`lg:grid-cols-3`,
   },
   itemContainer: {
-    default: tw`cursor-pointer rounded-xl p-6 shadow-lg transition duration-150`,
-    hover: tw`hover:scale-105 hover:shadow-2xl`,
+    default: tw`cursor-pointer rounded-lg p-10 shadow-lg transition duration-150`,
+    hover: tw`hover:scale-105 hover:shadow-xl`,
   },
 };
 
@@ -36,6 +36,7 @@ itemClasses = {
   iconContainer: tw`mx-auto mb-2 flex h-[60px] w-[60px] justify-center text-[50px]`,
   icon: tw`h-[50px] w-[50px] text-[50px] text-accent`,
   textContentContainer: tw`text-center`,
+  contentAreaContainer: tw`space-y-6`,
 };
 
 const featuresVariant: FeaturesVariant = {

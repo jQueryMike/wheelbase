@@ -24,6 +24,7 @@ classes = {
     default: tw`grid gap-8 py-6`,
     sm: tw`sm:grid-cols-2 sm:gap-10`,
     lg: tw`lg:grid-cols-3 lg:gap-16`,
+    xl: tw`xl:grid-cols-4`,
   },
 };
 
@@ -31,6 +32,8 @@ itemClasses = {
   root: tw`flex flex-col space-y-4`,
   iconContainer: tw``,
   icon: tw`text-3xl text-accent`,
+  imageContainer: tw`relative aspect-[4/3] w-full`,
+  contentAreaContainer: tw`space-y-6`,
 };
 
 const featuresVariant: FeaturesVariant = {
