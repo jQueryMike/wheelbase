@@ -7,8 +7,8 @@ import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
 import buildButtonBlock from './buildButtonBlock';
 import buildHeadingBlock from './buildHeadingBlock';
+import buildHeadingsBlock from './buildHeadingsBlock';
 import buildImageBlock from './buildImageBlock';
-import buildSubheadingBlock from './buildSubheadingBlock';
 import buildTextContentBlock from './buildTextContentBlock';
 
 const buildFeaturesBlock = ({
@@ -44,33 +44,17 @@ const buildFeaturesBlock = ({
     });
 
     // Add heading
-    const heading = content?.heading?.items[0];
-    if (heading) {
-      const headingThemeProperties = globalFeaturesThemeProperties?.headingTheme?.items[0]?.content?.properties;
+    const headings = content?.headings?.items[0];
+    if (headings) {
+      const headingsThemeProperties = globalFeaturesThemeProperties?.headingsTheme?.items[0]?.content?.properties;
 
-      features.heading = buildHeadingBlock({
-        id: heading.content.id,
-        name: 'Heading',
-        content: heading.content.properties,
-        settings: heading.settings.properties,
-        parentVariantId: headingThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingThemeProperties),
-        globalTheme,
-      });
-    }
-
-    // Add subheading
-    const subheading = content?.subheading?.items[0];
-    if (subheading) {
-      const subheadingThemeProperties = globalFeaturesThemeProperties?.subheadingTheme?.items[0]?.content?.properties;
-
-      features.subheading = buildSubheadingBlock({
-        id: subheading.content.id,
-        name: 'Subheading',
-        content: subheading.content.properties,
-        settings: subheading.settings.properties,
-        parentVariantId: subheadingThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(subheadingThemeProperties),
+      features.headings = buildHeadingsBlock({
+        id: headings.content.id,
+        name: 'Headings',
+        content: headings.content.properties,
+        settings: headings.settings.properties,
+        parentVariantId: headingsThemeProperties?.themeVariant,
+        parentOverrides: extractClassOverrides(headingsThemeProperties),
         globalTheme,
       });
     }

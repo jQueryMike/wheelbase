@@ -5,8 +5,8 @@ import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
 import { Button, ButtonProps } from '../Button';
 import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
+import { Headings, HeadingsProps } from '../Headings';
 import { Image, ImageProps } from '../Image';
-import { Subheading, SubheadingProps } from '../Subheading';
 import { TextContent, TextContentProps } from '../TextContent';
 
 export type FeaturesClasses<T> = {
@@ -49,34 +49,17 @@ export interface FeaturesItem {
 
 export interface FeaturesProps {
   classes?: FeaturesClasses<string>;
-  heading?: HeadingProps;
-  subheading?: SubheadingProps;
+  headings?: HeadingsProps;
   items?: FeaturesItem[];
   contentArea1?: Block[];
   contentArea2?: Block[];
 }
 
-const Features = ({
-  classes = {},
-  heading,
-  subheading,
-  items = [],
-  contentArea1 = [],
-  contentArea2 = [],
-}: FeaturesProps) => (
+const Features = ({ classes = {}, headings, items = [], contentArea1 = [], contentArea2 = [] }: FeaturesProps) => (
   <div className={classes.root}>
-    {(heading || subheading) && (
+    {headings && (
       <div className={classes.headingsContainer}>
-        {heading && (
-          <div className={classes.headingContainer}>
-            <Heading tag={HeadingTag.H2} size={HeadingSize.Large} {...heading} />
-          </div>
-        )}
-        {subheading && (
-          <div className={classes.subheadingContainer}>
-            <Subheading {...subheading} />
-          </div>
-        )}
+        <Headings {...headings} />
       </div>
     )}
     {contentArea1?.length > 0 && (

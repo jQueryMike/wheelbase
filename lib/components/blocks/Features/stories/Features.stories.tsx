@@ -73,7 +73,7 @@ export const Features1: Story = {
     classes: featuresVariant1.classes,
     contentArea1: [],
     contentArea2: [],
-    heading: { text: 'Features' },
+    headings: { heading: { text: 'Features' } },
     items: featureItems.map((item: FeaturesItem, index: number) => ({
       ...item,
       classes: {
