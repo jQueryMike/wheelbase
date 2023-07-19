@@ -78,7 +78,6 @@ const buildTelephoneNumberBlock = ({
 
     // Build items
     const telephoneNumberItems = content?.contactItems?.items;
-    console.log(telephoneNumberItems);
     if (telephoneNumberItems && telephoneNumberItems.length) {
       telephoneNumber.contactItems = telephoneNumberItems.map((item: any) => {
         const itemContent = item.content?.properties;
