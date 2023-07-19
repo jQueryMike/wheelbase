@@ -45,8 +45,6 @@ const buildBlockquoteBlock = ({
       instanceOverrides,
     });
 
-    console.log(activeVariant.classes);
-
     // Add heading
     const heading = content?.heading?.items[0];
     if (heading) {
