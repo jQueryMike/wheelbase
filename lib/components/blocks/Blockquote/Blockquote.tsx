@@ -2,16 +2,13 @@ import { BlockList } from '@components/utility-components/BlockList';
 import Block from '@interfaces/Block';
 import cn from 'classnames';
 
-import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
-import { Subheading, SubheadingProps } from '../Subheading';
+import { Headings, HeadingsProps } from '../Headings';
 
 export type BlockquoteClasses<T> = {
   [key in
     | 'root'
     | 'container'
     | 'headingsContainer'
-    | 'headingContainer'
-    | 'subheadingContainer'
     | 'textContainer'
     | 'contentAreaContainer'
     | 'contentArea1Container'
@@ -23,39 +20,26 @@ export type BlockquoteClasses<T> = {
 
 export interface BlockquoteProps {
   classes?: BlockquoteClasses<string>;
-  heading?: HeadingProps;
-  subheading?: SubheadingProps;
+  headings?: HeadingsProps;
   contentArea1?: Block[];
   contentArea2?: Block[];
   blockquoteName: string;
   blockquoteText: string;
-  children?: React.ReactNode;
 }
 
 const Blockquote = ({
   blockquoteName,
   blockquoteText,
-  children,
+  headings,
   classes = {},
-  heading,
-  subheading,
   contentArea1,
   contentArea2,
 }: BlockquoteProps) => {
   return (
     <div className={classes.root}>
-      {(heading || subheading) && (
+      {headings && (
         <div className={classes.headingsContainer}>
-          {heading && (
-            <div className={classes.headingContainer}>
-              <Heading tag={HeadingTag.H2} size={HeadingSize.Large} {...heading} />
-            </div>
-          )}
-          {subheading && (
-            <div className={classes.subheadingContainer}>
-              <Subheading {...subheading} />
-            </div>
-          )}
+          <Headings {...headings} />
         </div>
       )}
       {contentArea1?.length && (
@@ -70,9 +54,8 @@ const Blockquote = ({
       )}
       <figure className={cn(classes.container, classes.blockquoteColour)}>
         <blockquote className={classes.blockquoteContainer}>
-          {blockquoteName && <span className={classes.headingContainer}>{blockquoteName}</span>}
-          {blockquoteText && !children && <p className={classes.textContainer}>{blockquoteText}</p>}
-          {children && !blockquoteText && <figcaption>{children}</figcaption>}
+          {blockquoteName && <span className={classes.headingsContainer}>{blockquoteName}</span>}
+          {blockquoteText && <p className={classes.textContainer}>{blockquoteText}</p>}
         </blockquote>
         <div className={cn(classes.blockquoteArrow, classes.blockquoteColour)}></div>
       </figure>
