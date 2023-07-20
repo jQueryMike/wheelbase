@@ -56,7 +56,7 @@ const buildContactDetailsBlock = ({
     }
 
     // Build items
-    const contactDetailsItems = content?.contactItems?.items;
+    const contactDetailsItems = content?.items?.items;
     if (contactDetailsItems && contactDetailsItems.length) {
       contactDetails.contactItems = contactDetailsItems.map((item: any) => {
         const itemContent = item.content?.properties;
