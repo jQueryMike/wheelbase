@@ -11,15 +11,15 @@ let itemClasses: OpeningTimesItemClasses<ClassesProperty> = {};
 classes = {
   root: tw`w-full`,
   headingsContainer: tw`mx-auto`,
-  timesContainer: tw`mx-auto`,
+  itemsContainer: tw`mx-auto`,
 };
 
 itemClasses = {
-  root: tw`flex`,
-  day: { default: tw`w-1/2`, md: tw`md:w-3/4` },
-  times: { default: tw`w-1/2`, md: tw`md:w-1/4` },
+  root: tw`flex rounded p-2`,
+  label: { default: tw`w-1/2`, md: tw`md:w-3/4` },
+  value: { default: tw`w-1/2`, md: tw`md:w-1/4` },
   closed: tw`right-0 font-semibold`,
-  highlight: tw`font-bold`,
+  highlight: tw`bg-gray-200`,
   icon: tw`mr-2`,
 };
 

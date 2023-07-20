@@ -5,15 +5,7 @@ import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 import buildAdditionalContent from '../buildAdditionalContent';
 import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
-import buildHeadingBlock from './buildHeadingBlock';
 import buildHeadingsBlock from './buildHeadingsBlock';
-import buildSubheadingBlock from './buildSubheadingBlock';
-
-export const isCurrentDay = (day: string): boolean => {
-  const currentDay = new Date().getDay();
-  const days: any[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  return day === days[currentDay];
-};
 
 const buildOpeningTimesBlock = ({
   id,
@@ -38,7 +30,7 @@ const buildOpeningTimesBlock = ({
     const instanceOverrides = extractClassOverrides(settings);
 
     // Build initial block
-    const openingTimes: Block & OpeningTimesProps = { id, name, times: content?.openingTimesList };
+    const openingTimes: Block & OpeningTimesProps = { id, name, items: content?.openingTimesItems };
 
     // Add classes
     openingTimes.classes = buildTheme({
@@ -63,9 +55,9 @@ const buildOpeningTimesBlock = ({
       });
     }
     // Build items
-    const openingTimesItems = content?.times?.items;
+    const openingTimesItems = content?.items?.items;
     if (openingTimesItems && openingTimesItems.length) {
-      openingTimes.times = openingTimesItems.map((item: any) => {
+      openingTimes.items = openingTimesItems.map((item: any) => {
         const itemContent = item.content?.properties;
         const itemSettings = item.settings?.properties;
 
@@ -73,15 +65,23 @@ const buildOpeningTimesBlock = ({
         const itemGlobalOverrides = extractClassOverrides(globalOpeningTimesThemeProperties, 'tw_item__');
         const itemInstanceOverrides = extractClassOverrides(itemSettings);
 
+        let value: string | undefined;
+
+        if (itemContent.displayType === 'Closed') value = 'Closed';
+        if (itemContent.displayType === 'Custom Text') value = itemContent.customText;
+        if (itemContent.displayType === 'Opening Time - Closing Time')
+          value = `${itemContent.openingTime} - ${itemContent.closingTime}`;
+
+        const icon = itemContent.icon || content.icon || undefined;
+
         // Build intiial item
         const openingTimesItem: OpeningTimesItemProps = {
           id: item.content.id,
-          day: itemContent.day,
-          openingTime: itemContent.openingTime,
-          closingTime: itemContent.closingTime,
+          label: itemContent.label,
+          value,
+          closed: itemContent.displayType === 'Closed',
+          icon,
         };
-
-        openingTimesItem.isCurrentDay = isCurrentDay(itemContent.day);
 
         openingTimesItem.classes = buildTheme({
           classes: activeVariant.itemClasses,
