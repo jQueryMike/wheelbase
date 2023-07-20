@@ -56,8 +56,8 @@ const ContactDetails = ({
       </div>
     )}
     {contactItems?.map((item) => (
-      <div className={item.classes?.root}>
-        <NextLink href={item.href} key={item.id} className={item.classes?.link}>
+      <div key={item.id} className={item.classes?.root}>
+        <NextLink href={item.href} className={item.classes?.link}>
           {item.icon && (
             <span className={item.classes?.iconContainer}>
               <Icon className={cn(item.icon, item.classes?.icon)} />
