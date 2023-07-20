@@ -5,14 +5,12 @@ import { useState } from 'react';
 import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
 import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
-import { Subheading, SubheadingProps } from '../Subheading';
+import { Headings, HeadingsProps } from '../Headings';
 
 export type AccordionClasses<T> = {
   [key in
     | 'root'
     | 'headingsContainer'
-    | 'headingContainer'
-    | 'subheadingContainer'
     | 'itemsContainer'
     | 'itemContainer'
     | 'contentAreaContainer'
@@ -39,27 +37,19 @@ export type AccordionItemClasses<T> = {
 export interface AccordionItem {
   classes?: AccordionItemClasses<string>;
   heading?: HeadingProps;
-  content?: Block[];
+  contentArea?: Block[];
   id: string;
 }
 
 export interface AccordionProps {
   classes?: AccordionClasses<string>;
-  heading?: HeadingProps;
-  subheading?: SubheadingProps;
+  headings?: HeadingsProps;
   items?: AccordionItem[];
   contentArea1?: Block[];
   contentArea2?: Block[];
 }
 
-const Accordion = ({
-  classes = {},
-  heading,
-  subheading,
-  items = [],
-  contentArea1 = [],
-  contentArea2 = [],
-}: AccordionProps) => {
+const Accordion = ({ classes = {}, headings, items = [], contentArea1 = [], contentArea2 = [] }: AccordionProps) => {
   const [expandedItemIds, setExpandedItemIds] = useState<string[]>([]);
 
   const toggleAccordionItem = (id: string) => {
@@ -72,18 +62,9 @@ const Accordion = ({
 
   return (
     <div className={classes.root}>
-      {(heading || subheading) && (
+      {headings && (
         <div className={classes.headingsContainer}>
-          {heading && (
-            <div className={classes.headingContainer}>
-              <Heading tag={HeadingTag.H2} size={HeadingSize.Large} {...heading} />
-            </div>
-          )}
-          {subheading && (
-            <div className={classes.subheadingContainer}>
-              <Subheading {...subheading} />
-            </div>
-          )}
+          <Headings {...headings} />
         </div>
       )}
 
@@ -123,7 +104,7 @@ const Accordion = ({
                     <Icon className={item.classes?.toggleIcon} />
                   </div>
                 </button>
-                {item.content && item.content.length > 0 && (
+                {item.contentArea && item.contentArea.length > 0 && (
                   <div
                     className={cn(
                       item.classes?.contentAreaContainer,
@@ -132,7 +113,7 @@ const Accordion = ({
                         : item.classes?.contentAreaContainerCollapsed,
                     )}
                   >
-                    <BlockList blocks={item.content} />
+                    <BlockList blocks={item.contentArea} />
                   </div>
                 )}
               </div>
