@@ -4,11 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import buildAccordionBlock from './blocks/buildAccordionBlock';
 import buildButtonBlock from './blocks/buildButtonBlock';
+import buildContactDetailsBlock from './blocks/buildContactDetailsBlock';
 import buildFeaturesBlock from './blocks/buildFeaturesBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildMapBlock from './blocks/buildMapBlock';
 import buildSubheadingBlock from './blocks/buildSubheadingBlock';
-import buildTelephoneNumberBlock from './blocks/buildTelephoneNumberBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
 
 const buildBlocks = async ({
@@ -41,6 +41,11 @@ const buildBlocks = async ({
         if (block) blocks.push(block);
       }
 
+      if (name === 'ContactDetails') {
+        const block = buildContactDetailsBlock(config);
+        if (block) blocks.push(block);
+      }
+
       if (name === 'Features') {
         const block = buildFeaturesBlock(config);
         if (block) blocks.push(block);
@@ -63,11 +68,6 @@ const buildBlocks = async ({
 
       if (name === 'TextContent') {
         const block = buildTextContentBlock(config);
-        if (block) blocks.push(block);
-      }
-
-      if (name === 'TelephoneNumber') {
-        const block = buildTelephoneNumberBlock(config);
         if (block) blocks.push(block);
       }
     } catch (error) {

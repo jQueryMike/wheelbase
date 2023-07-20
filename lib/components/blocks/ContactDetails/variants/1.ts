@@ -1,33 +1,33 @@
 import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 
-import { TelephoneNumberClasses, TelephoneNumberItemClasses } from '../TelephoneNumber';
-import TelephoneNumberVariant from './TelephoneNumberVariant';
+import { ContactDetailsClasses, ContactDetailsItemClasses } from '../ContactDetails';
+import ContactDetailsVariant from './ContactDetailsVariant';
 
-const location = 'TelephoneNumber/variants/1';
+const location = 'ContactDetails/variants/1';
 
-let classes: TelephoneNumberClasses<ClassesProperty> = {};
-let itemClasses: TelephoneNumberItemClasses<ClassesProperty> = {};
+let classes: ContactDetailsClasses<ClassesProperty> = {};
+let itemClasses: ContactDetailsItemClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`w-[100%]`,
 };
 
 itemClasses = {
-  contactItem: {
+  root: {
     default: tw`inline-flex flex-row items-center gap-2 rounded-xl bg-slate-100 pb-2 pl-2 pr-4 pt-2 text-[var(--primary)]`,
     hover: tw`hover:text-[var(--accent)]`,
   },
-  contactItemIcon: {
+  icon: {
     default: tw`fill-white text-white`,
   },
-  contactItemLabel: {
+  label: {
     default: tw`text-lg font-bold not-italic`,
   },
 };
 
-const telephoneNumberVariant: TelephoneNumberVariant = {
+const contactDetailsVariant: ContactDetailsVariant = {
   classes: new ClassesBuilder({ location, classes }).classes,
   itemClasses: new ClassesBuilder({ location, classes: itemClasses }).classes,
 };
 
-export default telephoneNumberVariant;
+export default contactDetailsVariant;
