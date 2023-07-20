@@ -6,7 +6,14 @@ import buildAdditionalContent from '../buildAdditionalContent';
 import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
 import buildHeadingBlock from './buildHeadingBlock';
+import buildHeadingsBlock from './buildHeadingsBlock';
 import buildSubheadingBlock from './buildSubheadingBlock';
+
+export const isCurrentDay = (day: string): boolean => {
+  const currentDay = new Date().getDay();
+  const days: any[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return day === days[currentDay];
+};
 
 const buildOpeningTimesBlock = ({
   id,
@@ -36,44 +43,25 @@ const buildOpeningTimesBlock = ({
     // Add classes
     openingTimes.classes = buildTheme({
       classes: activeVariant.classes,
-      gridColsOverrides: [{ className: 'itemsContainer', config: content }],
       globalOverrides,
       instanceOverrides,
     });
 
     // Add heading
-    const heading = content?.heading?.items[0];
-    if (heading) {
-      const headingThemeProperties = globalOpeningTimesThemeProperties?.headingTheme?.items[0]?.content?.properties;
+    const headings = content?.headings?.items[0];
+    if (headings) {
+      const headingsThemeProperties = globalOpeningTimesThemeProperties?.headingsTheme?.items[0]?.content?.properties;
 
-      openingTimes.heading = buildHeadingBlock({
-        id: heading.content.id,
-        name: 'Heading',
-        content: heading.content.properties,
-        settings: heading.settings.properties,
-        parentVariantId: headingThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingThemeProperties),
+      openingTimes.headings = buildHeadingsBlock({
+        id: headings.content.id,
+        name: 'Headings',
+        content: headings.content.properties,
+        settings: headings.settings.properties,
+        parentVariantId: headingsThemeProperties?.themeVariant,
+        parentOverrides: extractClassOverrides(headingsThemeProperties),
         globalTheme,
       });
     }
-
-    // Add subheading
-    const subheading = content?.subheading?.items[0];
-    if (subheading) {
-      const subheadingThemeProperties =
-        globalOpeningTimesThemeProperties?.subheadingTheme?.items[0]?.content?.properties;
-
-      openingTimes.subheading = buildSubheadingBlock({
-        id: subheading.content.id,
-        name: 'Subheading',
-        content: subheading.content.properties,
-        settings: subheading.settings.properties,
-        parentVariantId: subheadingThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(subheadingThemeProperties),
-        globalTheme,
-      });
-    }
-
     // Build items
     const openingTimesItems = content?.times?.items;
     if (openingTimesItems && openingTimesItems.length) {
@@ -87,13 +75,13 @@ const buildOpeningTimesBlock = ({
 
         // Build intiial item
         const openingTimesItem: OpeningTimesItemProps = {
-          id: itemContent.itemid,
+          id: item.content.id,
           day: itemContent.day,
           openingTime: itemContent.openingTime,
           closingTime: itemContent.closingTime,
         };
 
-        console.log(openingTimesItem);
+        openingTimesItem.isCurrentDay = isCurrentDay(itemContent.day);
 
         openingTimesItem.classes = buildTheme({
           classes: activeVariant.itemClasses,

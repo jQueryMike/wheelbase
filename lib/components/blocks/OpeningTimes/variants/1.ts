@@ -10,7 +10,7 @@ let itemClasses: OpeningTimesItemClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`w-full`,
-  headingContainer: tw`mx-auto`,
+  headingsContainer: tw`mx-auto`,
   timesContainer: tw`mx-auto`,
 };
 
