@@ -1,1 +1,1 @@
-export { type MapProps, default as Map } from './Map';
+export { type MapClasses, type MapProps, default as Map } from './Map';

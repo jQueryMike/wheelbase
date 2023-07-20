@@ -43,7 +43,7 @@ const buildFeaturesBlock = ({
       instanceOverrides,
     });
 
-    // Add heading
+    // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
       const headingsThemeProperties = globalFeaturesThemeProperties?.headingsTheme?.items[0]?.content?.properties;
