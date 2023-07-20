@@ -1,8 +1,8 @@
 import { OpeningTimesClasses, OpeningTimesItemClasses } from '../OpeningTimes';
 
-interface FeaturesVariant {
+interface OpeningTimesVariant {
   classes?: OpeningTimesClasses<string>;
   itemClasses?: OpeningTimesItemClasses<string>;
 }
 
-export default FeaturesVariant;
+export default OpeningTimesVariant;
