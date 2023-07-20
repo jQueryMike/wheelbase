@@ -15,7 +15,7 @@ classes = {
 };
 
 itemClasses = {
-  timeElement: tw`flex`,
+  root: tw`flex`,
   day: { default: tw`w-1/2`, md: tw`md:w-3/4` },
   times: { default: tw`w-1/2`, md: tw`md:w-1/4` },
   closed: tw`right-0 font-semibold`,

@@ -16,7 +16,7 @@ export type OpeningTimesClasses<T> = {
 };
 
 export type OpeningTimesItemClasses<T> = {
-  [key in 'timeElement' | 'day' | 'times' | 'closed' | 'highlight' | 'icon']?: T;
+  [key in 'root' | 'day' | 'times' | 'closed' | 'highlight' | 'icon']?: T;
 };
 
 export interface OpeningTimesItemProps {
@@ -60,7 +60,7 @@ const OpeningTimes = ({ classes = {}, times, icon, headings, contentArea1, conte
 
     <div className={classes.timesContainer}>
       {times.map((time) => (
-        <div key={time.day} className={time.classes?.timeElement}>
+        <div key={time.day} className={time.classes?.root}>
           <p className={cn(time.classes?.day, time.isCurrentDay ? time.classes?.highlight : '')}>
             {icon && <i className={cn(icon, time.classes?.icon)} />}
             {time.day}
