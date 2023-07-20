@@ -9,13 +9,13 @@ export type BlockquoteClasses<T> = {
     | 'root'
     | 'container'
     | 'headingsContainer'
-    | 'textContainer'
     | 'contentAreaContainer'
     | 'contentArea1Container'
     | 'contentArea2Container'
-    | 'blockquoteColour'
     | 'blockquoteContainer'
-    | 'blockquoteArrow']?: T;
+    | 'blockquote'
+    | 'blockquoteName'
+    | 'blockquoteText']?: T;
 };
 
 export interface BlockquoteProps {
@@ -32,35 +32,32 @@ const Blockquote = ({
   blockquoteText,
   headings,
   classes = {},
-  contentArea1,
-  contentArea2,
-}: BlockquoteProps) => {
-  return (
-    <div className={classes.root}>
-      {headings && (
-        <div className={classes.headingsContainer}>
-          <Headings {...headings} />
-        </div>
-      )}
-      {contentArea1?.length && (
-        <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
-          <BlockList blocks={contentArea1} />
-        </div>
-      )}
-      {contentArea2?.length && (
-        <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
-          <BlockList blocks={contentArea2} />
-        </div>
-      )}
-      <figure className={cn(classes.container, classes.blockquoteColour)}>
-        <blockquote className={classes.blockquoteContainer}>
-          {blockquoteName && <span className={classes.headingsContainer}>{blockquoteName}</span>}
-          {blockquoteText && <p className={classes.textContainer}>{blockquoteText}</p>}
-        </blockquote>
-        <div className={cn(classes.blockquoteArrow, classes.blockquoteColour)}></div>
-      </figure>
-    </div>
-  );
-};
+  contentArea1 = [],
+  contentArea2 = [],
+}: BlockquoteProps) => (
+  <div className={classes.root}>
+    {headings && (
+      <div className={classes.headingsContainer}>
+        <Headings {...headings} />
+      </div>
+    )}
+    {contentArea1?.length > 0 && (
+      <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
+        <BlockList blocks={contentArea1} />
+      </div>
+    )}
+    <figure className={cn(classes.blockquoteContainer)}>
+      <blockquote className={classes.blockquote}>
+        {blockquoteText && <p className={classes.blockquoteText}>{blockquoteText}</p>}
+      </blockquote>
+      {blockquoteName && <p className={classes.blockquoteName}>{blockquoteName}</p>}
+    </figure>
+    {contentArea2?.length > 0 && (
+      <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
+        <BlockList blocks={contentArea2} />
+      </div>
+    )}
+  </div>
+);
 
 export default Blockquote;

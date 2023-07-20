@@ -8,13 +8,13 @@ const location = 'Blockquote/variants/1';
 let classes: BlockquoteClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`h-auto bg-blue-900 p-2`,
-  container: tw`relative mb-2 w-1/2 flex-1 rounded-lg p-2`,
-  headingsContainer: tw`font-extrabold text-blue-900`,
-  textContainer: tw`text-blue-900`,
-  blockquoteColour: tw`bg-yellow-400`,
-  blockquoteContainer: tw`ml-4 p-2`,
-  blockquoteArrow: tw`absolute left-[90%] mt-1 h-2 w-2 -translate-x-1/2 rotate-45 transform`,
+  root: tw`space-y-4`,
+  blockquoteContainer: tw`space-y-4`,
+  blockquote: {
+    default: tw`relative bg-gray-200 p-4`,
+    after: tw`after:absolute after:-bottom-2 after:left-10 after:h-4 after:w-4 after:-translate-x-1/2 after:rotate-45 after:transform after:bg-gray-200`,
+  },
+  blockquoteName: tw`font-bold`,
 };
 
 const blockquoteVariant: BlockquoteVariant = {

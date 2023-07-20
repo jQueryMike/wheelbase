@@ -5,11 +5,7 @@ import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 import buildAdditionalContent from '../buildAdditionalContent';
 import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
-import buildButtonBlock from './buildButtonBlock';
-import buildHeadingBlock from './buildHeadingBlock';
 import buildHeadingsBlock from './buildHeadingsBlock';
-import buildSubheadingBlock from './buildSubheadingBlock';
-import buildTextContentBlock from './buildTextContentBlock';
 
 const buildBlockquoteBlock = ({
   id,
@@ -20,15 +16,15 @@ const buildBlockquoteBlock = ({
 }: BlockBuilderConfig): (Block & BlockquoteProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalblockquoteThemeProperties = globalTheme?.blockquoteTheme?.items[0]?.content?.properties;
+    const globalBlockquoteThemeProperties = globalTheme?.blockquoteTheme?.items[0]?.content?.properties;
     // Get active variant from instance > global > default variant id
     const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalblockquoteThemeProperties?.themeVariant;
+    const globalVariantId = globalBlockquoteThemeProperties?.themeVariant;
     const blockVariantId = instanceVariantId || globalVariantId || '1';
     const activeVariant = require(`/lib/components/blocks/Blockquote/variants/${blockVariantId}`).default || undefined;
 
     // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalblockquoteThemeProperties);
+    const globalOverrides = extractClassOverrides(globalBlockquoteThemeProperties);
     const instanceOverrides = extractClassOverrides(settings);
 
     // Build initial block
@@ -48,7 +44,7 @@ const buildBlockquoteBlock = ({
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
-      const headingsThemeProperties = globalblockquoteThemeProperties?.headingsTheme?.items[0]?.content?.properties;
+      const headingsThemeProperties = globalBlockquoteThemeProperties?.headingsTheme?.items[0]?.content?.properties;
 
       blockquote.headings = buildHeadingsBlock({
         id: headings.content.id,
@@ -63,13 +59,13 @@ const buildBlockquoteBlock = ({
 
     blockquote.contentArea1 = buildAdditionalContent({
       items: content?.contentArea1?.items,
-      parentThemeProperties: globalblockquoteThemeProperties,
+      parentThemeProperties: globalBlockquoteThemeProperties,
       globalTheme,
     });
 
     blockquote.contentArea2 = buildAdditionalContent({
       items: content?.contentArea2?.items,
-      parentThemeProperties: globalblockquoteThemeProperties,
+      parentThemeProperties: globalBlockquoteThemeProperties,
       globalTheme,
     });
 
