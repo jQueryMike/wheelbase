@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import buildAccordionBlock from './blocks/buildAccordionBlock';
 import buildButtonBlock from './blocks/buildButtonBlock';
+import buildContactDetailsBlock from './blocks/buildContactDetailsBlock';
 import buildFeaturesBlock from './blocks/buildFeaturesBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildMapBlock from './blocks/buildMapBlock';
@@ -37,6 +38,11 @@ const buildBlocks = async ({
 
       if (name === 'Button') {
         const block = buildButtonBlock(config);
+        if (block) blocks.push(block);
+      }
+
+      if (name === 'ContactDetails') {
+        const block = buildContactDetailsBlock(config);
         if (block) blocks.push(block);
       }
 
