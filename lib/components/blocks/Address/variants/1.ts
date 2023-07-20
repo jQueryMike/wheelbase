@@ -14,8 +14,8 @@ classes = {
   heading: tw`text-xl font-bold`,
 };
 
-const featuresVariant: AddressVariant = {
+const addressVariant: AddressVariant = {
   classes: new ClassesBuilder({ location, classes }).classes,
 };
 
-export default featuresVariant;
+export default addressVariant;
