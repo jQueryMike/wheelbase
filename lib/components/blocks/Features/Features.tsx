@@ -3,11 +3,8 @@ import cn from 'classnames';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
-import { Button, ButtonProps } from '../Button';
-import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
 import { Headings, HeadingsProps } from '../Headings';
 import { Image, ImageProps } from '../Image';
-import { TextContent, TextContentProps } from '../TextContent';
 
 export type FeaturesClasses<T> = {
   [key in
@@ -85,13 +82,11 @@ const Features = ({ classes = {}, headings, items = [], contentArea1 = [], conte
                   <Image {...item.image} />
                 </div>
               )}
-              <div className={item.classes?.contentAreaContainer}>
-                {item.content && item.content.length > 0 && (
-                  <div className={cn(item.classes?.contentAreaContainer)}>
-                    <BlockList blocks={item.content} />
-                  </div>
-                )}
-              </div>
+              {item.content && item.content.length > 0 && (
+                <div className={cn(item.classes?.contentAreaContainer)}>
+                  <BlockList blocks={item.content} />
+                </div>
+              )}
             </div>
           </div>
         ))}
