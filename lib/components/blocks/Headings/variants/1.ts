@@ -8,9 +8,10 @@ const location = 'Headings/variants/1';
 let classes: HeadingsClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`space-y-2`,
-  headingContainer: tw``,
-  subheadingContainer: tw``,
+  root: {
+    default: tw`space-y-1 @container`,
+    '@2xl': tw`@2xl:space-y-2`,
+  },
 };
 
 const headingsVariant: HeadingsVariant = {
