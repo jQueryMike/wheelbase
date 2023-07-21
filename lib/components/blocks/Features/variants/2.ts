@@ -35,7 +35,6 @@ itemClasses = {
   root: tw`flex flex-col items-center space-y-4`,
   iconContainer: tw`mx-auto mb-2 flex h-[60px] w-[60px] justify-center text-[50px]`,
   icon: tw`h-[50px] w-[50px] text-[50px] text-accent`,
-  textContentContainer: tw`text-center`,
   contentAreaContainer: tw`space-y-6`,
 };
 

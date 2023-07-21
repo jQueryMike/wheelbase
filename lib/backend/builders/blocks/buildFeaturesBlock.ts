@@ -5,11 +5,8 @@ import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 import buildAdditionalContent from '../buildAdditionalContent';
 import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
-import buildButtonBlock from './buildButtonBlock';
-import buildHeadingBlock from './buildHeadingBlock';
 import buildHeadingsBlock from './buildHeadingsBlock';
 import buildImageBlock from './buildImageBlock';
-import buildTextContentBlock from './buildTextContentBlock';
 
 const buildFeaturesBlock = ({
   id,
@@ -79,56 +76,11 @@ const buildFeaturesBlock = ({
           instanceOverrides: itemInstanceOverrides,
         });
 
-        // Add heading
-        const itemHeading = itemContent.heading?.items[0];
-        if (itemHeading) {
-          const itemHeadingThemeProperties =
-            globalFeaturesThemeProperties?.itemHeadingTheme?.items[0]?.content?.properties;
-
-          featuresItem.heading = buildHeadingBlock({
-            id: itemHeading.content.id,
-            name: 'Heading',
-            content: itemHeading.content.properties,
-            settings: itemHeading.settings.properties,
-            parentVariantId: itemHeadingThemeProperties?.themeVariant,
-            parentOverrides: extractClassOverrides(itemHeadingThemeProperties),
-            globalTheme,
-          });
-        }
-
-        // Add text content
-        const itemTextContent = itemContent.textContent?.items[0];
-        if (itemTextContent) {
-          const itemTextContentThemeProperties =
-            globalFeaturesThemeProperties?.itemTextContentTheme?.items[0]?.content?.properties;
-
-          featuresItem.textContent = buildTextContentBlock({
-            id: itemTextContent.content.id,
-            name: 'TextContent',
-            content: itemTextContent.content.properties,
-            settings: itemTextContent.settings.properties,
-            parentVariantId: itemTextContentThemeProperties?.themeVariant,
-            parentOverrides: extractClassOverrides(itemTextContentThemeProperties),
-            globalTheme,
-          });
-        }
-
-        // Add text content
-        const itemButton = itemContent.button?.items[0];
-        if (itemButton) {
-          const itemButtonThemeProperties =
-            globalFeaturesThemeProperties?.itemButtonTheme?.items[0]?.content?.properties;
-
-          featuresItem.button = buildButtonBlock({
-            id: itemButton.content.id,
-            name: 'Button',
-            content: itemButton.content.properties,
-            settings: itemButton.settings.properties,
-            parentVariantId: itemButtonThemeProperties?.themeVariant,
-            parentOverrides: extractClassOverrides(itemButtonThemeProperties),
-            globalTheme,
-          });
-        }
+        featuresItem.contentArea = buildAdditionalContent({
+          items: itemContent.contentArea?.items,
+          parentThemeProperties: globalFeaturesThemeProperties,
+          globalTheme,
+        });
 
         if (itemContent.icon) featuresItem.icon = itemContent.icon;
         if (itemContent.indicator) featuresItem.indicator = itemContent.indicator;
@@ -138,7 +90,7 @@ const buildFeaturesBlock = ({
         if (itemImage) {
           const itemImageThemeProperties = globalFeaturesThemeProperties?.itemImageTheme?.items[0]?.content?.properties;
 
-          itemContent.alt = featuresItem.heading?.text || itemImage.name;
+          itemContent.alt = itemImage.name;
 
           featuresItem.image = buildImageBlock({
             id: itemImage.id,

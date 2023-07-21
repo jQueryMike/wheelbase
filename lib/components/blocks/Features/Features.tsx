@@ -3,11 +3,8 @@ import cn from 'classnames';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
-import { Button, ButtonProps } from '../Button';
-import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
 import { Headings, HeadingsProps } from '../Headings';
 import { Image, ImageProps } from '../Image';
-import { TextContent, TextContentProps } from '../TextContent';
 
 export type FeaturesClasses<T> = {
   [key in
@@ -30,20 +27,15 @@ export type FeaturesItemClasses<T> = {
     | 'iconContainer'
     | 'icon'
     | 'imageContainer'
-    | 'contentAreaContainer'
-    | 'headingContainer'
-    | 'textContentContainer'
-    | 'buttonContainer']?: T;
+    | 'contentAreaContainer']?: T;
 };
 
 export interface FeaturesItem {
   classes?: FeaturesItemClasses<string>;
-  heading?: HeadingProps;
-  textContent?: TextContentProps;
-  button?: ButtonProps;
   icon?: string;
   id: string;
   indicator?: string;
+  contentArea?: Block[];
   image?: ImageProps;
 }
 
@@ -87,23 +79,11 @@ const Features = ({ classes = {}, headings, items = [], contentArea1 = [], conte
                   <Image {...item.image} />
                 </div>
               )}
-              <div className={item.classes?.contentAreaContainer}>
-                {item.heading && (
-                  <div className={item.classes?.headingContainer}>
-                    <Heading tag={HeadingTag.H3} size={HeadingSize.Medium} {...item.heading} />
-                  </div>
-                )}
-                {item.textContent && (
-                  <div className={item.classes?.textContentContainer}>
-                    <TextContent {...item.textContent} />
-                  </div>
-                )}
-                {item.button && (
-                  <div className={item.classes?.buttonContainer}>
-                    <Button {...item.button} />
-                  </div>
-                )}
-              </div>
+              {item.contentArea && item.contentArea.length > 0 && (
+                <div className={cn(item.classes?.contentAreaContainer)}>
+                  <BlockList blocks={item.contentArea} />
+                </div>
+              )}
             </div>
           </div>
         ))}

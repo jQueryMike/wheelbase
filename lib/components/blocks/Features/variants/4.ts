@@ -51,28 +51,8 @@ itemClasses = {
     default: tw`relative z-30 text-center`,
   },
 
-  headingContainer: tw``,
 
-  textContentContainer: {
-    default: tw`overflow-hidden pt-4 text-center transition-all duration-150`,
-    md: {
-      default: tw`md:max-h-0 md:pt-0 md:opacity-0`,
-      'group-hover': tw`md:group-hover:max-h-[200px] md:group-hover:pt-4 md:group-hover:opacity-100`,
-    },
-    '2xl': {
-      'group-hover': tw`2xl:group-hover:pt-6`,
-    },
-  },
-  buttonContainer: {
-    default: tw`overflow-hidden pt-4 transition-all duration-150`,
-    md: {
-      default: tw`md:max-h-0 md:pt-0 md:opacity-0`,
-      'group-hover': tw`md:group-hover:max-h-[70px] md:group-hover:pt-4 md:group-hover:opacity-100`,
-    },
-    '2xl': {
-      'group-hover': tw`2xl:group-hover:pt-6`,
-    },
-  },
+
 };
 
 const featuresVariant: FeaturesVariant = {
