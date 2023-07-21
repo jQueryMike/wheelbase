@@ -61,8 +61,8 @@ const Address = ({
   companyName,
   headings,
   separator = ', ',
-  contentArea1,
-  contentArea2,
+  contentArea1 = [],
+  contentArea2 = [],
 }: AddressProps) => {
   return (
     <div className={classes.root}>
@@ -72,7 +72,7 @@ const Address = ({
             <Headings {...headings} />
           </div>
         )}
-        {contentArea1?.length && (
+        {contentArea1?.length > 0 && (
           <div className={classes.contentArea1Container}>
             <BlockList blocks={contentArea1} />
           </div>
@@ -92,8 +92,8 @@ const Address = ({
             </p>
           </address>
         </div>
-        {contentArea2?.length && (
-          <div className={classes.contentArea1Container}>
+        {contentArea2?.length > 0 && (
+          <div className={classes.contentArea2Container}>
             <BlockList blocks={contentArea2} />
           </div>
         )}
