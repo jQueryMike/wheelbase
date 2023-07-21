@@ -27,10 +27,7 @@ export type FeaturesItemClasses<T> = {
     | 'iconContainer'
     | 'icon'
     | 'imageContainer'
-    | 'contentAreaContainer'
-    | 'headingContainer'
-    | 'textContentContainer'
-    | 'buttonContainer']?: T;
+    | 'contentAreaContainer']?: T;
 };
 
 export interface FeaturesItem {
@@ -38,7 +35,7 @@ export interface FeaturesItem {
   icon?: string;
   id: string;
   indicator?: string;
-  content?: Block[];
+  contentArea?: Block[];
   image?: ImageProps;
 }
 
@@ -82,9 +79,9 @@ const Features = ({ classes = {}, headings, items = [], contentArea1 = [], conte
                   <Image {...item.image} />
                 </div>
               )}
-              {item.content && item.content.length > 0 && (
+              {item.contentArea && item.contentArea.length > 0 && (
                 <div className={cn(item.classes?.contentAreaContainer)}>
-                  <BlockList blocks={item.content} />
+                  <BlockList blocks={item.contentArea} />
                 </div>
               )}
             </div>

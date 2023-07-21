@@ -37,16 +37,8 @@ itemClasses = {
   },
   imageContainer: tw`absolute inset-0 z-10`,
   contentAreaContainer: tw`flex h-full flex-col`,
-  headingContainer: tw`relative z-30 pb-4 drop-shadow-[0_0_3px_rgba(0,0,0,0.5)]`,
 
-  textContentContainer: {
-    default: tw`relative z-30 grow opacity-0 drop-shadow-[0_0_3px_rgba(0,0,0,0.5)] transition duration-150`,
-    'group-hover': tw`group-hover:opacity-100`,
-  },
-  buttonContainer: {
-    default: tw`relative z-30 opacity-0 transition duration-150`,
-    'group-hover': tw`group-hover:opacity-100`,
-  },
+
 };
 
 const featuresVariant: FeaturesVariant = {

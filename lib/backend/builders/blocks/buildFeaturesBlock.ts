@@ -5,11 +5,8 @@ import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 import buildAdditionalContent from '../buildAdditionalContent';
 import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
-import buildButtonBlock from './buildButtonBlock';
-import buildHeadingBlock from './buildHeadingBlock';
 import buildHeadingsBlock from './buildHeadingsBlock';
 import buildImageBlock from './buildImageBlock';
-import buildTextContentBlock from './buildTextContentBlock';
 
 const buildFeaturesBlock = ({
   id,
@@ -79,8 +76,8 @@ const buildFeaturesBlock = ({
           instanceOverrides: itemInstanceOverrides,
         });
 
-        featuresItem.content = buildAdditionalContent({
-          items: itemContent.content?.items,
+        featuresItem.contentArea = buildAdditionalContent({
+          items: itemContent.contentArea?.items,
           parentThemeProperties: globalFeaturesThemeProperties,
           globalTheme,
         });
@@ -93,7 +90,7 @@ const buildFeaturesBlock = ({
         if (itemImage) {
           const itemImageThemeProperties = globalFeaturesThemeProperties?.itemImageTheme?.items[0]?.content?.properties;
 
-          itemContent.alt = featuresItem.heading?.text || itemImage.name;
+          itemContent.alt = itemImage.name;
 
           featuresItem.image = buildImageBlock({
             id: itemImage.id,
