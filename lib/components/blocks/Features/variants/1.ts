@@ -31,7 +31,7 @@ classes = {
 itemClasses = {
   root: tw`flex flex-col space-y-4`,
   iconContainer: tw``,
-  icon: tw`text-3xl text-accent`,
+  icon: tw`text-accent text-3xl`,
   imageContainer: tw`relative aspect-[4/3] w-full`,
   contentAreaContainer: tw`space-y-6`,
 };

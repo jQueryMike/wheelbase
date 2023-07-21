@@ -39,6 +39,9 @@ const buildColors = (theme) => {
         light: theme.bodyLight || undefined,
         dark: theme.bodyDark || undefined,
       },
+      divider: {
+        DEFAULT: theme.divider || undefined,
+      },
       custom1: {
         DEFAULT: theme.custom1Default || undefined,
         constrast: theme.custom1Contrast || undefined,
