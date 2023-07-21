@@ -2,16 +2,14 @@ import { BlockList } from '@components/utility-components/BlockList';
 import Block from '@interfaces/Block';
 
 import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
+import { Headings, HeadingsProps } from '../Headings';
 import { Subheading, SubheadingProps } from '../Subheading';
 
 export type AddressClasses<T> = {
   [key in
     | 'root'
     | 'container'
-    | 'headingContainer'
-    | 'heading'
-    | 'subheadingContainer'
-    | 'subheading'
+    | 'headingsContainer'
     | 'contentAreaContainer'
     | 'contentArea1Container'
     | 'contentArea2Container'
@@ -47,9 +45,7 @@ export interface AddressProps {
   town?: string;
   postcode?: string;
   companyName?: string;
-  heading?: HeadingProps;
-  subheading?: SubheadingProps;
-  titleTag?: HeadingTag;
+  headings?: HeadingsProps;
   separator?: string;
   contentArea1?: Block[];
   contentArea2?: Block[];
@@ -63,8 +59,7 @@ const Address = ({
   town,
   postcode,
   companyName,
-  heading,
-  subheading,
+  headings,
   separator = ', ',
   contentArea1,
   contentArea2,
@@ -72,28 +67,14 @@ const Address = ({
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        {(heading || subheading) && (
-          <div className={classes.headingContainer}>
-            {heading && (
-              <div className={classes.headingContainer}>
-                <Heading tag={HeadingTag.H2} size={HeadingSize.Large} {...heading} />
-              </div>
-            )}
-            {subheading && (
-              <div className={classes.subheadingContainer}>
-                <Subheading {...subheading} />
-              </div>
-            )}
+        {headings && (
+          <div className={classes.headingsContainer}>
+            <Headings {...headings} />
           </div>
         )}
         {contentArea1?.length && (
           <div className={classes.contentArea1Container}>
             <BlockList blocks={contentArea1} />
-          </div>
-        )}
-        {contentArea2?.length && (
-          <div className={classes.contentArea1Container}>
-            <BlockList blocks={contentArea2} />
           </div>
         )}
         <div className={classes.addressContainer}>
@@ -111,6 +92,11 @@ const Address = ({
             </p>
           </address>
         </div>
+        {contentArea2?.length && (
+          <div className={classes.contentArea1Container}>
+            <BlockList blocks={contentArea2} />
+          </div>
+        )}
       </div>
     </div>
   );
