@@ -4,7 +4,7 @@ import generatedConfig from './tailwind.config.json';
 
 const tailwindConfig: Config = {
   ...generatedConfig,
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/container-queries'), require('@tailwindcss/typography')],
 };
 
 export default tailwindConfig;

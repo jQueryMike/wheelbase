@@ -47,7 +47,7 @@ const OpeningTimes = ({
 }: OpeningTimesProps) => {
   const isCurrentDay = useCallback((day?: string) => {
     const currentDay = new Date().toLocaleDateString('en-GB', { weekday: 'long' });
-    return day === currentDay;
+    return day?.includes(currentDay);
   }, []);
 
   return (
@@ -57,13 +57,11 @@ const OpeningTimes = ({
           <Headings {...headings} />
         </div>
       )}
-
       {contentArea1?.length > 0 && (
         <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
           <BlockList blocks={contentArea1} />
         </div>
       )}
-
       <div className={classes.itemsContainer}>
         {items.map((item) => (
           <div
@@ -79,7 +77,6 @@ const OpeningTimes = ({
           </div>
         ))}
       </div>
-
       {contentArea2?.length > 0 && (
         <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
           <BlockList blocks={contentArea2} />
