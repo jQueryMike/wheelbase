@@ -5,11 +5,7 @@ import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 import buildAdditionalContent from '../buildAdditionalContent';
 import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
-import buildButtonBlock from './buildButtonBlock';
-import buildHeadingBlock from './buildHeadingBlock';
 import buildHeadingsBlock from './buildHeadingsBlock';
-import buildSubheadingBlock from './buildSubheadingBlock';
-import buildTextContentBlock from './buildTextContentBlock';
 
 const buildAddressBlock = ({
   id,
@@ -42,14 +38,22 @@ const buildAddressBlock = ({
       instanceOverrides,
     });
 
-    // Build items
-    if (content?.line1) address.line1 = content.line1;
-    if (content?.line2) address.line2 = content.line2;
-    if (content?.town) address.town = content.town;
-    if (content?.county) address.county = content.county;
-    if (content?.postcode) address.postcode = content.postcode;
-    if (content?.companyName) address.companyName = content.companyName;
-    if (content?.separator) address.separator = content.separator;
+    // Build address
+    const addressLines: string[] = [];
+
+    if (content?.companyName) addressLines.push(content?.companyName);
+    if (content?.line1) addressLines.push(content?.line1);
+    if (content?.line2) addressLines.push(content?.line2);
+    if (content?.town) addressLines.push(content?.town);
+    if (content?.county) addressLines.push(content?.county);
+    if (content?.postcode) addressLines.push(content?.postcode);
+
+    let separator = ', ';
+
+    if (content?.separator === 'Line Break') separator = '<br/>';
+    if (content?.separator === 'Comma & Line Break') separator = ',<br/>';
+
+    address.address = addressLines.join(separator);
 
     // Add headings
     const headings = content?.headings?.items[0];
