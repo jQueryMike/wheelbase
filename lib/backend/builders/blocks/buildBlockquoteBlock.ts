@@ -31,7 +31,7 @@ const buildBlockquoteBlock = ({
     const blockquote: Block & BlockquoteProps = {
       id,
       name,
-      blockquoteText: content?.blockquoteText,
+      blockquoteText: content?.blockquoteText?.markup,
       blockquoteName: content?.blockquoteName,
     };
 

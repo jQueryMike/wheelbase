@@ -9,18 +9,26 @@ let classes: OpeningTimesClasses<ClassesProperty> = {};
 let itemClasses: OpeningTimesItemClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`relative @container`,
-  headingsContainer: tw``,
-  itemsContainer: tw`space-y-2`,
+  root: {
+    default: tw`space-y-4 @container`,
+    '@xl': tw`@xl:space-y-6`,
+  },
+  contentAreaContainer: {
+    default: tw`space-y-4`,
+    '@xl': tw`@xl:space-y-6`,
+  },
+  itemsContainer: {
+    default: tw`space-y-2 py-6`,
+  },
 };
 
 itemClasses = {
-  root: tw`flex rounded p-2`,
-  label: { default: tw`w-1/2`, md: tw`md:w-3/4` },
-  value: { default: tw`w-1/2`, md: tw`md:w-1/4` },
-  closed: tw`right-0 font-semibold`,
-  highlight: tw`bg-gray-200`,
-  icon: tw`mr-2`,
+  root: tw`text-primary flex items-center justify-between space-x-2 rounded px-3 py-2`,
+  label: tw`grow`,
+  icon: tw`text-accent`,
+  value: tw`text-right`,
+  closed: tw`opacity-50`,
+  highlight: tw`bg-body-light`,
 };
 
 const openingTimesVariant: OpeningTimesVariant = {

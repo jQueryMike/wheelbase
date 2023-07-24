@@ -26,7 +26,11 @@ classes = {
 };
 
 itemClasses = {
-  root: tw`relative flex flex-col space-y-4`,
+  root: {
+    default: tw`relative flex flex-col space-y-4`,
+    '@xl': tw`@xl:space-y-5`,
+    '@3xl': tw`@3xl:space-y-6`,
+  },
   indicatorContainer: tw`bg-primary flex h-10 w-10 items-center justify-center rounded-full`,
   indicator: tw`text-primary-contrast text-[20px] font-semibold leading-[20px]`,
   iconContainer: tw``,

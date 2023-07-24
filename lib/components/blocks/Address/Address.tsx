@@ -1,5 +1,6 @@
 /* eslint-disable react/no-danger */
 import Block from '@interfaces/Block';
+import cn from 'classnames';
 import * as DOMPurify from 'isomorphic-dompurify';
 
 import { BlockList } from '../../utility-components/BlockList';
@@ -8,7 +9,6 @@ import { Headings, HeadingsProps } from '../Headings';
 export type AddressClasses<T> = {
   [key in
     | 'root'
-    | 'container'
     | 'headingsContainer'
     | 'contentAreaContainer'
     | 'contentArea1Container'
@@ -27,28 +27,26 @@ export interface AddressProps {
 
 const Address = ({ classes = {}, headings, address, contentArea1 = [], contentArea2 = [] }: AddressProps) => (
   <div className={classes.root}>
-    <div className={classes.container}>
-      {headings && (
-        <div className={classes.headingsContainer}>
-          <Headings {...headings} />
-        </div>
-      )}
-      {contentArea1?.length > 0 && (
-        <div className={classes.contentArea1Container}>
-          <BlockList blocks={contentArea1} />
-        </div>
-      )}
-      <div className={classes.addressContainer}>
-        {address && (
-          <address className={classes.address} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(address) }} />
-        )}
+    {headings && (
+      <div className={classes.headingsContainer}>
+        <Headings {...headings} />
       </div>
-      {contentArea2?.length > 0 && (
-        <div className={classes.contentArea2Container}>
-          <BlockList blocks={contentArea2} />
-        </div>
+    )}
+    {contentArea1?.length > 0 && (
+      <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
+        <BlockList blocks={contentArea1} />
+      </div>
+    )}
+    <div className={classes.addressContainer}>
+      {address && (
+        <address className={classes.address} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(address) }} />
       )}
     </div>
+    {contentArea2?.length > 0 && (
+      <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
+        <BlockList blocks={contentArea2} />
+      </div>
+    )}
   </div>
 );
 

@@ -1,5 +1,7 @@
+/* eslint-disable react/no-danger */
 import Block from '@interfaces/Block';
 import cn from 'classnames';
+import * as DOMPurify from 'isomorphic-dompurify';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
@@ -14,8 +16,7 @@ export type BlockquoteClasses<T> = {
     | 'contentArea2Container'
     | 'blockquoteContainer'
     | 'blockquote'
-    | 'blockquoteName'
-    | 'blockquoteText']?: T;
+    | 'blockquoteName']?: T;
 };
 
 export interface BlockquoteProps {
@@ -46,12 +47,11 @@ const Blockquote = ({
         <BlockList blocks={contentArea1} />
       </div>
     )}
-    <figure className={cn(classes.blockquoteContainer)}>
-      <blockquote className={classes.blockquote}>
-        {blockquoteText && <p className={classes.blockquoteText}>{blockquoteText}</p>}
-      </blockquote>
+    <div className={cn(classes.blockquoteContainer)}>
+      <div className={classes.blockquote} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blockquoteText) }} />
+
       {blockquoteName && <p className={classes.blockquoteName}>{blockquoteName}</p>}
-    </figure>
+    </div>
     {contentArea2?.length > 0 && (
       <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
         <BlockList blocks={contentArea2} />

@@ -9,7 +9,7 @@ let classes: ImageClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  image: tw``,
+  image: tw`rounded-lg`,
 };
 
 const imageVariant: ImageVariant = { classes: new ClassesBuilder({ location, classes }).classes };

@@ -10,6 +10,7 @@ import buildContactDetailsBlock from './blocks/buildContactDetailsBlock';
 import buildFeaturesBlock from './blocks/buildFeaturesBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildHeadingsBlock from './blocks/buildHeadingsBlock';
+import buildMapBlock from './blocks/buildMapBlock';
 import buildOpeningTimesBlock from './blocks/buildOpeningTimesBlock';
 import buildSubheadingBlock from './blocks/buildSubheadingBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
@@ -71,6 +72,11 @@ const buildBlocks = async ({
 
       if (name === 'Headings') {
         const block = buildHeadingsBlock(config);
+        if (block) blocks.push(block);
+      }
+
+      if (name === 'Map') {
+        const block = buildMapBlock(config);
         if (block) blocks.push(block);
       }
 
