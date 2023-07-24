@@ -9,7 +9,7 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  button: tw`inline-flex items-center justify-center font-semibold transition-all`,
+  button: tw`inline-flex items-center justify-center rounded-lg font-semibold transition-all`,
   primaryButton: {
     default: tw`bg-primary text-primary-contrast`,
     hover: tw`hover:bg-primary/80`,
@@ -19,12 +19,12 @@ classes = {
     hover: tw`hover:bg-accent/80`,
   },
   plainButton: {
-    default: tw`border-2 border-primary/10 text-primary`,
-    hover: tw`hover:border-primary/30`,
+    default: tw`border-divider text-primary border`,
+    hover: tw`hover:border-primary/50`,
   },
-  smallButton: tw`h-8 space-x-2 px-3 text-sm`,
-  mediumButton: tw`text-md h-10 space-x-3 px-4`,
-  largeButton: tw`h-12 space-x-4 px-5 text-lg`,
+  smallButton: tw`h-8 space-x-2 px-3 text-[16px]`,
+  mediumButton: tw`h-10 space-x-3 px-4 text-[18px]`,
+  largeButton: tw`h-12 space-x-4 px-5 text-[20px]`,
 };
 
 const buttonVariant: ButtonVariant = { classes: new ClassesBuilder({ location, classes }).classes };

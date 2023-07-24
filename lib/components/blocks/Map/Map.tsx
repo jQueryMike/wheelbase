@@ -1,7 +1,7 @@
-import { BlockList } from '@components/utility-components/BlockList';
 import Block from '@interfaces/Block';
 import cn from 'classnames';
 
+import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
 
 export type MapClasses<T> = {

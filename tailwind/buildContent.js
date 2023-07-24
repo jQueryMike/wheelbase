@@ -16,6 +16,10 @@ const buildContentArray = (pages) => {
     content.add(`./pages/**/*.${EXTENSION}`);
     content.add(`./lib/components/utility-components/**/*.${EXTENSION}`);
 
+    if (process.env.ENVIRONMENT_NAME === 'local') {
+      content.add(`./lib/components/**/*.${EXTENSION}`);
+    }
+
     const usedBlocks = new Set();
     const representedBlocks = new Set();
 

@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge';
 
 export interface BuildThemeConfig {
   classes?: { [propName: string]: string };
-  gridColsOverrides?: { className: string; config?: { [propName: string]: any } }[];
+  gridColsOverrides?: { className: string; queryType?: 'media' | 'container'; content?: { [propName: string]: any } }[];
   globalOverrides?: { [propName: string]: string };
   parentOverrides?: { [propName: string]: string };
   instanceOverrides?: { [propName: string]: string };
@@ -21,11 +21,16 @@ const buildTheme = ({
     gridColsOverrides.forEach((item) => {
       outputClasses[item.className] = outputClasses[item.className] || '';
 
-      if (item.config) {
-        Object.keys(item.config)
-          .filter((key) => key.startsWith('gridCols_') && typeof (item.config![key] === String) && !!item.config![key])
+      if (item.content) {
+        Object.keys(item.content)
+          .filter(
+            (key) => key.startsWith('gridCols_') && typeof (item.content![key] === String) && !!item.content![key],
+          )
           .forEach((key) => {
-            outputClasses[item.className] += ` ${key.replace('gridCols_', '')}:grid-cols-${item.config![key]}`;
+            outputClasses[item.className] += ` ${item.queryType === 'container' ? '@' : ''}${key.replace(
+              'gridCols_',
+              '',
+            )}:grid-cols-${item.content![key]}`;
           });
       }
     });

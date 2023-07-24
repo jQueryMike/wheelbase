@@ -13,8 +13,19 @@ classes = {
     md: tw`md:p-12`,
     lg: tw`lg:p-16`,
   },
-  areasContainer: tw`container mx-auto grid`,
-  area: tw`space-y-4`,
+  container: tw`container mx-auto @container`,
+  areasContainer: {
+    default: tw`grid gap-8`,
+    '@xl': tw`@xl:gap-10`,
+    '@3xl': tw`@3xl:gap-12`,
+    '@5xl': tw`@5xl:gap-16`,
+  },
+  area: {
+    default: tw`space-y-4`,
+    '@xl': tw`@xl:space-y-5`,
+    '@3xl': tw`@3xl:space-y-6`,
+    '@5xl': tw`@5xl:space-y-8`,
+  },
 };
 
 const pageSectionVariant: PageSectionVariant = {

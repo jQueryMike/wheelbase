@@ -13,8 +13,8 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
     if (item.content.contentType === 'heading') {
       const headingThemeProperties = parentThemeProperties?.additionalHeadingTheme?.items[0]?.content?.properties;
 
-      item.content.properties.headingSize = item.content?.properties.headingSize || 'Medium';
-      item.settings.properties.headingTag = item.settings?.properties.headingTag || HeadingTag.H3;
+      item.content.properties.headingSize = item.content?.properties.headingSize || 'Small';
+      item.settings.properties.headingTag = item.settings?.properties.headingTag || HeadingTag.H4;
 
       const heading = buildHeadingBlock({
         id: item.content.id,

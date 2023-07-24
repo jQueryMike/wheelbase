@@ -5,15 +5,19 @@ import { PageSectionProps } from '../PageSection/PageSection';
 
 export interface PageProps {
   sections: PageSectionProps[];
-  googleFontsHref: string;
+  globalTheme: any;
 }
 
-const Page = ({ googleFontsHref, sections }: PageProps) => (
+const Page = ({ globalTheme, sections }: PageProps) => (
   <>
     <Head>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link rel="stylesheet" href={googleFontsHref} />
+      {globalTheme.fontProvider === 'Google' && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        </>
+      )}
+      <link rel="stylesheet" href={globalTheme.fontLinkHref} />
     </Head>
     <main>
       {sections?.map((section: any) => (

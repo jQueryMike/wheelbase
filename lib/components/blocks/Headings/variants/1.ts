@@ -9,8 +9,7 @@ let classes: HeadingsClasses<ClassesProperty> = {};
 
 classes = {
   root: {
-    default: tw`space-y-1 @container`,
-    '@2xl': tw`@2xl:space-y-2`,
+    default: tw`space-y-1`,
   },
 };
 

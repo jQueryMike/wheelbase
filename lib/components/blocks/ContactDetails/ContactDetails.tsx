@@ -1,9 +1,9 @@
-import { BlockList } from '@components/utility-components/BlockList';
-import { Icon } from '@components/utility-components/Icon';
 import Block from '@interfaces/Block';
 import cn from 'classnames';
 import NextLink from 'next/link';
 
+import { BlockList } from '../../utility-components/BlockList';
+import { Icon } from '../../utility-components/Icon';
 import { Headings, HeadingsProps } from '../Headings';
 
 export type ContactDetailsClasses<T> = {

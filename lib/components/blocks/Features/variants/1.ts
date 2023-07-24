@@ -10,30 +10,29 @@ let itemClasses: FeaturesItemClasses<ClassesProperty> = {};
 
 classes = {
   root: {
-    default: tw`space-y-4`,
-    sm: tw`sm:space-y-6`,
-    lg: tw`lg:space-y-8`,
+    default: tw`space-y-4 @container`,
+    '@xl': tw`@xl:space-y-6`,
   },
-  headingsContainer: tw`space-y-4`,
   contentAreaContainer: {
     default: tw`space-y-4`,
-    sm: tw`sm:space-y-6`,
-    lg: tw`lg:space-y-8`,
+    '@xl': tw`@xl:space-y-6`,
   },
   itemsContainer: {
-    default: tw`grid gap-8 py-6`,
-    sm: tw`sm:grid-cols-2 sm:gap-10`,
-    lg: tw`lg:grid-cols-3 lg:gap-16`,
-    xl: tw`xl:grid-cols-4`,
+    default: tw`grid gap-8 py-6 @container`,
+    '@xl': tw`@xl:gap-10`,
+    '@3xl': tw`@3xl:grid-cols-2 @3xl:gap-12`,
+    '@5xl': tw`@5xl:grid-cols-3 @5xl:gap-16`,
   },
 };
 
 itemClasses = {
-  root: tw`flex flex-col space-y-4`,
+  root: tw`relative flex flex-col space-y-4`,
+  indicatorContainer: tw`bg-primary flex h-10 w-10 items-center justify-center rounded-full`,
+  indicator: tw`text-primary-contrast text-[20px] font-semibold leading-[20px]`,
   iconContainer: tw``,
-  icon: tw`text-accent text-3xl`,
+  icon: tw`text-accent text-[40px]`,
   imageContainer: tw`relative aspect-[4/3] w-full`,
-  contentAreaContainer: tw`space-y-6`,
+  contentAreaContainer: tw`space-y-4`,
 };
 
 const featuresVariant: FeaturesVariant = {

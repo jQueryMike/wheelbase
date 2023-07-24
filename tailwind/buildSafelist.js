@@ -28,12 +28,30 @@ const buildSafelist = (pages) => {
       });
     });
 
-    const screenSizes = ['sm', 'md', 'lg', 'xl', '2xl'];
+    const queries = [
+      'sm',
+      'md',
+      'lg',
+      'xl',
+      '2xl',
+      '@xs',
+      '@sm',
+      '@md',
+      '@lg',
+      '@xl',
+      '@2xl',
+      '@3xl',
+      '@4xl',
+      '@5xl',
+      '@6xl',
+      '@7xl',
+    ];
     const colCounts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
     return [
       ...safelist,
-      ...screenSizes.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
+      ...colCounts.map((colCount) => `grid-cols-${colCount}`),
+      ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');

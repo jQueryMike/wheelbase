@@ -35,7 +35,7 @@ const buildFeaturesBlock = ({
     // Add classes
     features.classes = buildTheme({
       classes: activeVariant.classes,
-      gridColsOverrides: [{ className: 'itemsContainer', config: content }],
+      gridColsOverrides: [{ className: 'itemsContainer', content, queryType: 'container' }],
       globalOverrides,
       instanceOverrides,
     });

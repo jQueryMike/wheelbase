@@ -1,8 +1,8 @@
 /* eslint-disable react/no-danger */
-import { BlockList } from '@components/utility-components/BlockList';
 import Block from '@interfaces/Block';
 import * as DOMPurify from 'isomorphic-dompurify';
 
+import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
 
 export type AddressClasses<T> = {

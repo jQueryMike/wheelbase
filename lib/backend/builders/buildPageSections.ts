@@ -30,6 +30,11 @@ const buildPageSections = async (items: UmbracoBlockGridItem[], globalTheme: any
       name: 'PageSection',
     };
 
+    if (item.areas.length > 1) {
+      const areasContainer = instanceOverrides.areasContainer || '';
+      instanceOverrides.tw__areasContainer = [areasContainer, `xl:grid-cols-${item.areas.length}`].join(' ');
+    }
+
     pageSection.classes = buildTheme({ classes: activeVariant.classes, globalOverrides, instanceOverrides });
 
     pageSection.areas = await buildPageSectionAreas(item.areas, globalTheme);

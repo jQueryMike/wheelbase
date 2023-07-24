@@ -90,7 +90,7 @@ const Accordion = ({ classes = {}, headings, items = [], contentArea1 = [], cont
                 >
                   {item.heading && (
                     <div className={item.classes?.headingContainer}>
-                      <Heading tag={HeadingTag.H3} size={HeadingSize.Medium} {...item.heading} />
+                      <Heading tag={HeadingTag.H4} size={HeadingSize.Small} {...item.heading} />
                     </div>
                   )}
                   <div
