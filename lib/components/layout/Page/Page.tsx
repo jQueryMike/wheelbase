@@ -8,23 +8,27 @@ export interface PageProps {
   globalTheme: any;
 }
 
-const Page = ({ globalTheme, sections }: PageProps) => (
-  <>
-    <Head>
-      {globalTheme.fontProvider === 'Google' && (
-        <>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        </>
-      )}
-      <link rel="stylesheet" href={globalTheme.fontLinkHref} />
-    </Head>
-    <main>
-      {sections?.map((section: any) => (
-        <PageSection key={section.id} {...section} />
-      ))}
-    </main>
-  </>
-);
+const Page = ({ globalTheme, sections }: PageProps) => {
+  if (!globalTheme) return null;
+
+  return (
+    <>
+      <Head>
+        {globalTheme.fontProvider === 'Google' && (
+          <>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          </>
+        )}
+        <link rel="stylesheet" href={globalTheme.fontLinkHref} />
+      </Head>
+      <main>
+        {sections?.map((section: any) => (
+          <PageSection key={section.id} {...section} />
+        ))}
+      </main>
+    </>
+  );
+};
 
 export default Page;
