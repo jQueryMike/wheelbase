@@ -9,10 +9,10 @@ let classes: ContactFormClasses<ClassesProperty> = {};
 
 classes = {
   root: {
-    default: tw`space-y-4 @container`,
+    default: tw`mx-auto space-y-4 @container`,
     '@xl': tw`@xl:space-y-6`,
   },
-  form: tw`mx-auto w-full max-w-md rounded-md p-4 shadow-md`,
+  form: tw`w-full max-w-md rounded-md p-4 shadow-md`,
   inputContainer: 'mb-4',
   label: 'mb-1 block font-medium',
   inputRequired: 'w-full rounded-md border px-3 py-2 focus:outline-none',
