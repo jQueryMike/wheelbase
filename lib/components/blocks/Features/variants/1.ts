@@ -31,10 +31,10 @@ itemClasses = {
     '@xl': tw`@xl:space-y-5`,
     '@3xl': tw`@3xl:space-y-6`,
   },
-  indicatorContainer: tw`bg-primary flex h-10 w-10 items-center justify-center rounded-full`,
-  indicator: tw`text-primary-contrast text-[20px] font-semibold leading-[20px]`,
+  indicatorContainer: tw`flex h-10 w-10 items-center justify-center rounded-full bg-primary`,
+  indicator: tw`text-[20px] font-semibold leading-[20px] text-primary-contrast`,
   iconContainer: tw``,
-  icon: tw`text-accent text-[40px]`,
+  icon: tw`text-[40px] text-accent`,
   imageContainer: tw`relative aspect-[4/3] w-full`,
   contentAreaContainer: tw`space-y-4`,
 };
