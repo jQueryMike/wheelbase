@@ -8,8 +8,8 @@ import extractClassOverrides from '../extractClassOverrides';
 const getSizeKey = (size: string) => {
   if (!size) return undefined;
 
-  switch (size) {
-    case 'Extra Large':
+  switch (size.replaceAll(' ', '')) {
+    case 'ExtraLarge':
       return HeadingSize.ExtraLarge;
     case 'Large':
       return HeadingSize.Large;
@@ -17,7 +17,7 @@ const getSizeKey = (size: string) => {
       return HeadingSize.Medium;
     case 'Small':
       return HeadingSize.Small;
-    case 'Extra Small':
+    case 'ExtraSmall':
       return HeadingSize.ExtraSmall;
     default:
       return undefined;
@@ -62,7 +62,9 @@ const buildHeadingBlock = ({
 
     // Add props
     if (content?.headingTag) heading.tag = content?.headingTag;
-    if (content?.headingSize) heading.size = getSizeKey(content?.headingSize);
+
+    const headingSize = getSizeKey(content?.headingSize);
+    if (headingSize) heading.size = headingSize;
 
     return heading;
   } catch (error) {

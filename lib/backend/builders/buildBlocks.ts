@@ -14,6 +14,7 @@ import buildMapBlock from './blocks/buildMapBlock';
 import buildOpeningTimesBlock from './blocks/buildOpeningTimesBlock';
 import buildSubheadingBlock from './blocks/buildSubheadingBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
+import buildHeroBlock from './blocks/buildHeroBlock';
 
 const buildBlocks = async ({
   items,
@@ -73,6 +74,11 @@ const buildBlocks = async ({
       if (name === 'Headings') {
         const block = buildHeadingsBlock(config);
         if (block) blocks.push(block);
+      }
+
+      if (name === 'Hero') {
+        const block = buildHeroBlock(config);
+        if (block) blocks.push(block)
       }
 
       if (name === 'Map') {
