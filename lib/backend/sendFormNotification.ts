@@ -36,7 +36,6 @@ async function sendFormNotification({ recipients, fields }: SendFormNotification
     text,
     to: recipients.map((recipent: string) => ({ email: recipent })),
   };
-  console.log(message);
 
   const response: Mailchimp.MessagesSendResponse[] | any = await Mailchimp(process.env.MANDRILL_API_KEY!).messages.send(
     { message },
@@ -45,7 +44,6 @@ async function sendFormNotification({ recipients, fields }: SendFormNotification
   if (!Array.isArray(response)) {
     return { success: false };
   }
-  console.log('another success');
   return { success: true };
 }
 
