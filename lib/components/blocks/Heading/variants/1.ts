@@ -11,11 +11,11 @@ classes = {
   root: tw``,
   heading: tw`font-heading font-bold leading-tight text-heading`,
   headingExtraLarge: {
-    default: tw`text-[24px]`,
-    sm: tw`sm:text-[28px]`,
-    md: tw`md:text-[28px]`,
-    lg: tw`lg:text-[32px]`,
-    xl: tw`xl:text-[40px]`,
+    default: tw`text-[26px]`,
+    sm: tw`sm:text-[32px]`,
+    md: tw`md:text-[36px]`,
+    lg: tw`lg:text-[40px]`,
+    xl: tw`xl:text-[48px]`,
   },
   headingLarge: {
     default: tw`text-[22px]`,
