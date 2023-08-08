@@ -1,8 +1,9 @@
 import { BlockList } from '@components/utility-components/BlockList';
 import Block from '@interfaces/Block';
 import cn from 'classnames';
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { LegacyRef, useEffect, useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useForm } from 'react-hook-form';
 
 import { Headings, HeadingsProps } from '../Headings';
 
@@ -47,20 +48,62 @@ const ContactForm = ({
   emailText,
   messageText,
   buttonText,
-  globalRecipients,
+  globalRecipients = ['james.walton@clickdealer.co.uk'],
 }: ContactFormProps) => {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+  const [formError, setFormError] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>();
 
   const {
     handleSubmit,
-    control,
     formState: { errors },
+    register,
   } = useForm();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    setSubmitted(true);
+  const onSubmit = async (data: any) => {
+    if (!recaptchaRef.current) {
+      setFormError(true);
+    }
+    setSubmitting(true);
+    try {
+      const recaptchaToken = await recaptchaRef?.current?.executeAsync();
+
+      const formData = {
+        recipients: globalRecipients,
+        fields: [
+          { label: nameText, key: 'name', value: data.name },
+          { label: telephoneText, key: 'telephone', value: data.telephone },
+          { label: emailText, key: 'email', value: data.email },
+          { label: messageText, key: 'message', value: data.message },
+        ],
+        recaptchaToken,
+      };
+
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        setFormError(true);
+      }
+      setSubmitting(false);
+    } catch (error) {
+      setSubmitting(false);
+      recaptchaRef?.current?.reset();
+    }
   };
+
+  const errorMessage = 'This field is required';
+
+  useEffect(() => setHasMounted(true), [setHasMounted]);
+
+  if (!hasMounted) return null;
 
   return (
     <div className={classes.root}>
@@ -75,95 +118,55 @@ const ContactForm = ({
         </div>
       )}
       {!submitted && (
-        <form onSubmit={onSubmit} className={classes.form}>
-          <div className={classes.inputContainer}>
-            <label htmlFor="name" className={classes.label}>
-              {nameText ? `${nameText}*` : 'name*'}
-            </label>
-            <Controller
-              name="name"
-              control={control}
-              rules={{ required: 'Name is required' }}
-              render={() => (
-                <>
-                  <input
-                    type="text"
-                    id="name"
-                    className={cn(classes.inputRequired, errors.name ? classes.inputError : classes.inputSuccess)}
-                  />
-                  {errors.name && <span className={classes.formError}>{errors?.name?.message?.toString()}</span>}
-                </>
-              )}
-            />
-          </div>
-          <div className={classes.inputContainer}>
-            <label htmlFor="telephone" className={classes.label}>
-              {telephoneText ? telephoneText : 'Telephone'}
-            </label>
-            <Controller
-              name="telephone"
-              control={control}
-              render={() => <input type="text" id="telephone" className={classes.input} />}
-            />
-          </div>
-          <div className={classes.inputContainer}>
-            <label htmlFor="email" className={classes.label}>
-              {emailText ? `${emailText}*` : 'Email*'}
-            </label>
-            <Controller
-              name="email"
-              control={control}
-              rules={{
-                required: 'Email is required',
-                pattern: {
-                  value: /^\S+@\S+\.\S+$/,
-                  message: 'Invalid email address',
-                },
-              }}
-              render={() => (
-                <>
-                  <input
-                    type="email"
-                    id="email"
-                    className={cn(classes.inputRequired, errors.email ? classes.inputError : classes.inputSuccess)}
-                  />
-                  {errors.email && <span className={classes.formError}>{errors?.email?.message?.toString()}</span>}
-                </>
-              )}
-            />
-          </div>
-          <div className={classes.inputContainer}>
-            <label htmlFor="message" className={classes.label}>
-              {messageText ? `${messageText}*` : 'message*'}
-            </label>
-            <Controller
-              name="message"
-              control={control}
-              rules={{ required: 'Message is required' }}
-              render={() => (
-                <>
-                  <textarea
-                    id="message"
-                    className={cn(classes.inputRequired, errors.message ? classes.inputError : classes.inputSuccess)}
-                  />
-                  {errors.message && <span className={classes.formError}>{errors?.message?.message?.toString()}</span>}
-                </>
-              )}
-            />
-          </div>
-          <div className={classes.buttonContainer}>
-            <button type="submit">{buttonText || 'submit'}</button>
-          </div>
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+          <label className={classes.label} htmlFor="Name">
+            {nameText + '*'}
+          </label>
+          <input
+            type="text"
+            placeholder="Name"
+            {...register('name', { required: true })}
+            className={cn(classes.inputRequired, errors.name ? classes.inputError : '')}
+          />
+          {errors.name && <span className={classes.formError}>{errorMessage}</span>}
+          <label className={classes.label} htmlFor="Telephone">
+            {telephoneText}
+          </label>
+          <input type="text" placeholder="Telephone" {...register('telephone')} className={classes.input} />
+          <label className={classes.label} htmlFor="Email">
+            {emailText + '*'}
+          </label>
+          <input
+            type="text"
+            placeholder="Email"
+            {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+            className={cn(classes.inputRequired, errors.name ? classes.inputError : '')}
+          />
+          {errors.email && <span className={classes.formError}>{errorMessage}</span>}
+          <label className={classes.label} htmlFor="Message">
+            {messageText + '*'}
+          </label>
+          <textarea
+            placeholder="Message"
+            {...register('message', { required: true })}
+            className={cn(classes.inputRequired, errors.name ? classes.inputError : '')}
+          />
+          {errors.message && <span className={classes.formError}>{errorMessage}</span>}
+          <input className={classes.buttonContainer} type="submit" value={buttonText} />
+          <ReCAPTCHA
+            ref={recaptchaRef as LegacyRef<ReCAPTCHA>}
+            size="invisible"
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+          />
         </form>
       )}
 
-      {/* {formState &&  */}
       {submitted && contentArea2 && contentArea2?.length > 0 && (
         <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
           <BlockList blocks={contentArea2} />
         </div>
       )}
-      {/* } */}
+      {formError && <p>Error submitting form</p>}
     </div>
   );
 };

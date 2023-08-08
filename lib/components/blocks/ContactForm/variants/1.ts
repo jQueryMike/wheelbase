@@ -20,6 +20,7 @@ classes = {
   inputSuccess: 'border-gray-300 focus:border-blue-500',
   formError: 'mt-1 text-sm text-red-500',
   input: 'w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none',
+  buttonContainer: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-2 flex mx-auto',
 };
 
 const contactFormVariant: ContactFormVariant = { classes: new ClassesBuilder({ location, classes }).classes };

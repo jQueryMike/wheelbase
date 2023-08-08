@@ -18,6 +18,7 @@
     "lint-staged"
   ],
   "dependencies": {
+    "@mailchimp/mailchimp_transactional": "^1.0.50",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.9",
     "@testing-library/jest-dom": "^5.16.5",
@@ -28,6 +29,7 @@
     "elastic-apm-node": "^3.46.0",
     "flat": "^5.0.2",
     "isomorphic-dompurify": "^1.6.0",
+    "mjml": "^4.14.1",
     "next": "^13.4.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -57,6 +59,8 @@
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/dompurify": "^3.0.2",
     "@types/jest": "^28.1.6",
+    "@types/mailchimp__mailchimp_transactional": "^1.0.5",
+    "@types/mjml": "^4.7.1",
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
@@ -81,6 +85,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.8",
     "prettier-plugin-nativewind": "^0.2.3",
+    "raw-loader": "^4.0.2",
     "sass": "^1.63.6",
     "storybook": "^7.0.26",
     "ts-jest": "^29.1.0",
