@@ -1,7 +1,7 @@
 import { BlockList } from '@components/utility-components/BlockList';
 import Block from '@interfaces/Block';
 import cn from 'classnames';
-import { LegacyRef, useEffect, useRef, useState } from 'react';
+import { LegacyRef, useCallback, useEffect, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 
@@ -22,7 +22,9 @@ export type ContactFormClasses<T> = {
     | 'inputError'
     | 'inputSuccess'
     | 'input'
-    | 'buttonContainer']?: T;
+    | 'buttonContainer'
+    | 'submittingWrapper'
+    | 'submitting']?: T;
 };
 
 export interface ContactFormProps {
@@ -60,6 +62,7 @@ const ContactForm = ({
     handleSubmit,
     formState: { errors },
     register,
+    reset,
   } = useForm();
 
   const onSubmit = async (data: any) => {
@@ -69,24 +72,22 @@ const ContactForm = ({
     setSubmitting(true);
     try {
       const recaptchaToken = await recaptchaRef?.current?.executeAsync();
-
+      const fields = [
+        { label: nameText, key: 'name', value: data.name },
+        { label: emailText, key: 'email', value: data.email },
+        { label: messageText, key: 'message', value: data.message },
+      ];
+      if (data.telephone) fields.push({ label: telephoneText, key: 'telephone', value: data.telephone });
       const formData = {
         recipients: globalRecipients,
-        fields: [
-          { label: nameText, key: 'name', value: data.name },
-          { label: telephoneText, key: 'telephone', value: data.telephone },
-          { label: emailText, key: 'email', value: data.email },
-          { label: messageText, key: 'message', value: data.message },
-        ],
+        fields: fields,
         recaptchaToken,
       };
-
       const response = await fetch('/api/submit-form', {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: { 'Content-Type': 'application/json' },
       });
-
       if (response.ok) {
         setSubmitted(true);
       } else {
@@ -99,6 +100,13 @@ const ContactForm = ({
     }
   };
 
+  const restart = () => {
+    reset();
+    setSubmitted(false);
+    setFormError(false);
+    recaptchaRef?.current?.reset();
+  };
+
   const errorMessage = 'This field is required';
 
   useEffect(() => setHasMounted(true), [setHasMounted]);
@@ -106,7 +114,7 @@ const ContactForm = ({
   if (!hasMounted) return null;
 
   return (
-    <div className={classes.root}>
+    <div className={cn(classes.root, submitting ? classes.submitting : '')}>
       {headings && (
         <div className={classes.headingsContainer}>
           <Headings {...headings} />
@@ -117,6 +125,7 @@ const ContactForm = ({
           <BlockList blocks={contentArea1} />
         </div>
       )}
+
       {!submitted && (
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <label className={classes.label} htmlFor="Name">
@@ -152,18 +161,24 @@ const ContactForm = ({
             className={cn(classes.inputRequired, errors.name ? classes.inputError : '')}
           />
           {errors.message && <span className={classes.formError}>{errorMessage}</span>}
+          <div className="invisible">
+            <ReCAPTCHA
+              ref={recaptchaRef as LegacyRef<ReCAPTCHA>}
+              size="invisible"
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              badge="inline"
+            />
+          </div>
           <input className={classes.buttonContainer} type="submit" value={buttonText} />
-          <ReCAPTCHA
-            ref={recaptchaRef as LegacyRef<ReCAPTCHA>}
-            size="invisible"
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-          />
         </form>
       )}
 
       {submitted && contentArea2 && contentArea2?.length > 0 && (
         <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
           <BlockList blocks={contentArea2} />
+          <button className={classes.buttonContainer} onClick={() => restart()}>
+            Re-submit Form
+          </button>
         </div>
       )}
       {formError && <p>Error submitting form</p>}
