@@ -4,7 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import buildBlocks from './buildBlocks';
 
-const buildPageSectionAreas = async (areas: UmbracoBlockGridArea[], globalTheme: any): Promise<PageSectionArea[]> => {
+const buildPageSectionAreas = async (
+  areas: UmbracoBlockGridArea[],
+  globalTheme: any,
+  globalConfig?: any,
+): Promise<PageSectionArea[]> => {
   if (!areas) return [];
 
   const pageSectionAreas: PageSectionArea[] = [];
@@ -13,7 +17,7 @@ const buildPageSectionAreas = async (areas: UmbracoBlockGridArea[], globalTheme:
     pageSectionAreas.push({
       id: uuidv4(),
       columnSpan: area.columnSpan,
-      blocks: await buildBlocks({ items: area.items, globalTheme }),
+      blocks: await buildBlocks({ items: area.items, globalTheme, globalConfig }),
     });
   });
 

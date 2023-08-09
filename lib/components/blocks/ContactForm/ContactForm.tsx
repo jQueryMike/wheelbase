@@ -1,7 +1,8 @@
+import { DataProvider } from '@backend/dataContext';
 import { BlockList } from '@components/utility-components/BlockList';
 import Block from '@interfaces/Block';
 import cn from 'classnames';
-import { LegacyRef, useCallback, useEffect, useRef, useState } from 'react';
+import { LegacyRef, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 
@@ -37,7 +38,7 @@ export interface ContactFormProps {
   emailText?: string;
   messageText?: string;
   buttonText?: string;
-  globalRecipients?: string[];
+  recipients?: string[];
 }
 
 const ContactForm = ({
@@ -50,7 +51,7 @@ const ContactForm = ({
   emailText,
   messageText,
   buttonText,
-  globalRecipients = ['james.walton@clickdealer.co.uk'],
+  recipients = [],
 }: ContactFormProps) => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -64,7 +65,6 @@ const ContactForm = ({
     register,
     reset,
   } = useForm();
-
   const onSubmit = async (data: any) => {
     if (!recaptchaRef.current) {
       setFormError(true);
@@ -79,7 +79,7 @@ const ContactForm = ({
       ];
       if (data.telephone) fields.push({ label: telephoneText, key: 'telephone', value: data.telephone });
       const formData = {
-        recipients: globalRecipients,
+        recipients: recipients,
         fields: fields,
         recaptchaToken,
       };

@@ -21,9 +21,11 @@ import buildTextContentBlock from './blocks/buildTextContentBlock';
 const buildBlocks = async ({
   items,
   globalTheme,
+  globalConfig,
 }: {
   items: UmbracoBlockGridItem[];
   globalTheme?: { [propName: string]: any };
+  globalConfig?: any;
 }) => {
   const blocks: Block[] = [];
 
@@ -36,8 +38,8 @@ const buildBlocks = async ({
         content: item.content?.properties,
         settings: item.settings?.properties,
         globalTheme,
+        globalConfig,
       };
-
       if (name === 'Address') {
         const block = buildAddressBlock(config);
         if (block) blocks.push(block);

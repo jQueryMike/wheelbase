@@ -1,4 +1,4 @@
-const EXCLUDED_PATHS = ['/', '/theme/'];
+const EXCLUDED_PATHS = ['/', '/theme/', '/global-config/'];
 
 const getStaticPaths = async () => {
   const headers = { 'Start-Item': process.env.API_ROOT_NODE_GUID! };

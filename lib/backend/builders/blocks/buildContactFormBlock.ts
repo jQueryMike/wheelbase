@@ -13,6 +13,7 @@ const buildContactFormBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
 }: BlockBuilderConfig): (Block & ContactFormProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
@@ -49,6 +50,19 @@ const buildContactFormBlock = ({
 
     if (content?.buttonText) contactForm.buttonText = content.buttonText;
 
+    let recipients: string[] = [];
+
+    if (content?.formRecipients?.length)
+      content?.formRecipients.map((item: string) => {
+        recipients.push(item);
+      });
+    if (globalConfig?.defaultContactFormRecipients?.length && content?.useDefaultRecipients === true)
+      globalConfig?.defaultContactFormRecipients.map((item: string) => {
+        recipients.push(item);
+      });
+
+    let filteredRecipients = [...new Set(recipients)];
+    contactForm.recipients = filteredRecipients;
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {

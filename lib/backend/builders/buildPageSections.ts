@@ -6,7 +6,11 @@ import buildPageSectionAreas from './buildPageSectionAreas';
 import buildTheme from './buildTheme';
 import extractClassOverrides from './extractClassOverrides';
 
-const buildPageSections = async (items: UmbracoBlockGridItem[], globalTheme: any): Promise<PageSectionProps[]> => {
+const buildPageSections = async (
+  items: UmbracoBlockGridItem[],
+  globalTheme: any,
+  globalConfig?: any,
+): Promise<PageSectionProps[]> => {
   if (!items || items.length < 1) return [];
 
   // Shortcut to block theme properties from globalTheme
@@ -37,7 +41,7 @@ const buildPageSections = async (items: UmbracoBlockGridItem[], globalTheme: any
 
     pageSection.classes = buildTheme({ classes: activeVariant.classes, globalOverrides, instanceOverrides });
 
-    pageSection.areas = await buildPageSectionAreas(item.areas, globalTheme);
+    pageSection.areas = await buildPageSectionAreas(item.areas, globalTheme, globalConfig);
 
     pageSections.push(pageSection);
   });
