@@ -12,6 +12,7 @@ const buildImageBlock = ({
   parentVariantId,
   parentOverrides,
   globalTheme,
+  defaultProps,
 }: BlockBuilderConfig): (Block & ImageProps) | undefined => {
   try {
     if (!content?.url) return undefined;
@@ -37,6 +38,7 @@ const buildImageBlock = ({
       alt: content.alt || content.name,
       fill: true,
       style: { objectFit: 'cover' },
+      ...defaultProps,
     };
 
     // Add classes

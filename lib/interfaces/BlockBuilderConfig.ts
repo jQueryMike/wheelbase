@@ -6,6 +6,7 @@ interface BlockBuilderConfig {
   parentVariantId?: string;
   parentOverrides?: { [propName: string]: string };
   globalTheme?: any;
+  defaultProps?: any;
 }
 
 export default BlockBuilderConfig;
