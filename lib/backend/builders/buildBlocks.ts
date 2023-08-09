@@ -10,11 +10,12 @@ import buildContactDetailsBlock from './blocks/buildContactDetailsBlock';
 import buildFeaturesBlock from './blocks/buildFeaturesBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildHeadingsBlock from './blocks/buildHeadingsBlock';
+import buildHeroBlock from './blocks/buildHeroBlock';
+import buildImageWithContentBlock from './blocks/buildImageWithContentBlock';
 import buildMapBlock from './blocks/buildMapBlock';
 import buildOpeningTimesBlock from './blocks/buildOpeningTimesBlock';
 import buildSubheadingBlock from './blocks/buildSubheadingBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
-import buildHeroBlock from './blocks/buildHeroBlock';
 
 const buildBlocks = async ({
   items,
@@ -46,6 +47,11 @@ const buildBlocks = async ({
         if (block) blocks.push(block);
       }
 
+      if (name === 'Blockquote') {
+        const block = buildBlockquoteBlock(config);
+        if (block) blocks.push(block);
+      }
+
       if (name === 'Button') {
         const block = buildButtonBlock(config);
         if (block) blocks.push(block);
@@ -53,11 +59,6 @@ const buildBlocks = async ({
 
       if (name === 'ContactDetails') {
         const block = buildContactDetailsBlock(config);
-        if (block) blocks.push(block);
-      }
-
-      if (name === 'Blockquote') {
-        const block = buildBlockquoteBlock(config);
         if (block) blocks.push(block);
       }
 
@@ -78,7 +79,12 @@ const buildBlocks = async ({
 
       if (name === 'Hero') {
         const block = buildHeroBlock(config);
-        if (block) blocks.push(block)
+        if (block) blocks.push(block);
+      }
+
+      if (name === 'ImageWithContent') {
+        const block = buildImageWithContentBlock(config);
+        if (block) blocks.push(block);
       }
 
       if (name === 'Map') {
