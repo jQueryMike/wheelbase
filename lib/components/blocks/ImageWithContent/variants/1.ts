@@ -3,7 +3,7 @@ import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 import { ImageWithContentClasses } from '../ImageWithContent';
 import ImageWithContentVariant from './ImageWithContentVariant';
 
-const location = 'ContentBlock/variants/1';
+const location = 'ImageWithContent/variants/1';
 
 let classes: ImageWithContentClasses<ClassesProperty> = {};
 
