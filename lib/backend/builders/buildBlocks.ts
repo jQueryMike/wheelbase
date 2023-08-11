@@ -7,6 +7,7 @@ import buildAddressBlock from './blocks/buildAddressBlock';
 import buildBlockquoteBlock from './blocks/buildBlockquoteBlock';
 import buildButtonBlock from './blocks/buildButtonBlock';
 import buildContactDetailsBlock from './blocks/buildContactDetailsBlock';
+import buildContactFormBlock from './blocks/buildContactFormBlock';
 import buildFeaturesBlock from './blocks/buildFeaturesBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildHeadingsBlock from './blocks/buildHeadingsBlock';
@@ -20,9 +21,11 @@ import buildTextContentBlock from './blocks/buildTextContentBlock';
 const buildBlocks = async ({
   items,
   globalTheme,
+  globalConfig,
 }: {
   items: UmbracoBlockGridItem[];
   globalTheme?: { [propName: string]: any };
+  globalConfig?: any;
 }) => {
   const blocks: Block[] = [];
 
@@ -35,8 +38,8 @@ const buildBlocks = async ({
         content: item.content?.properties,
         settings: item.settings?.properties,
         globalTheme,
+        globalConfig,
       };
-
       if (name === 'Address') {
         const block = buildAddressBlock(config);
         if (block) blocks.push(block);
@@ -59,6 +62,11 @@ const buildBlocks = async ({
 
       if (name === 'ContactDetails') {
         const block = buildContactDetailsBlock(config);
+        if (block) blocks.push(block);
+      }
+
+      if (name === 'ContactForm') {
+        const block = buildContactFormBlock(config);
         if (block) blocks.push(block);
       }
 

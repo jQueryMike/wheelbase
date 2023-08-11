@@ -1,1 +1,1 @@
-export { HeroClasses, HeroProps, default as Hero } from './Hero';
+export { type HeroClasses, type HeroProps, default as Hero } from './Hero';
