@@ -39,30 +39,20 @@ const buildContactFormBlock = ({
       instanceOverrides,
     });
 
-    //Add content
-    if (content?.nameText) contactForm.nameText = content.nameText;
-
-    if (content?.telephoneText) contactForm.telephoneText = content.telephoneText;
-
-    if (content?.emailText) contactForm.emailText = content.emailText;
-
-    if (content?.messageText) contactForm.messageText = content.messageText;
-
+    // Add content
+    if (content?.nameLabel) contactForm.nameLabel = content.nameLabel;
+    if (content?.telephoneLabel) contactForm.telephoneLabel = content.telephoneLabel;
+    if (content?.emailLabel) contactForm.emailLabel = content.emailLabel;
+    if (content?.messageLabel) contactForm.messageLabel = content.messageLabel;
     if (content?.buttonText) contactForm.buttonText = content.buttonText;
 
-    let recipients: string[] = [];
+    const recipients: string[] = [
+      ...(content?.formRecipients?.items?.map((item: any) => item.content.properties.emailAddress) || []),
+      ...(globalConfig?.defaultContactFormRecipients?.items?.map((item: any) => item.content.properties.emailAddress) ||
+        []),
+    ];
+    contactForm.recipients = [...new Set(recipients)];
 
-    if (content?.formRecipients?.length)
-      content?.formRecipients.map((item: string) => {
-        recipients.push(item);
-      });
-    if (globalConfig?.defaultContactFormRecipients?.length && content?.useDefaultRecipients === true)
-      globalConfig?.defaultContactFormRecipients.map((item: string) => {
-        recipients.push(item);
-      });
-
-    let filteredRecipients = [...new Set(recipients)];
-    contactForm.recipients = filteredRecipients;
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
@@ -87,6 +77,18 @@ const buildContactFormBlock = ({
 
     contactForm.contentArea2 = buildAdditionalContent({
       items: content?.contentArea2?.items,
+      parentThemeProperties: globalContactFormThemeProperties,
+      globalTheme,
+    });
+
+    contactForm.thankYouContentArea = buildAdditionalContent({
+      items: content?.thankYouContentArea?.items,
+      parentThemeProperties: globalContactFormThemeProperties,
+      globalTheme,
+    });
+
+    contactForm.formContentArea = buildAdditionalContent({
+      items: content?.formContentArea?.items,
       parentThemeProperties: globalContactFormThemeProperties,
       globalTheme,
     });

@@ -1,5 +1,6 @@
-import { ContactForm } from '@components/blocks/ContactForm';
 import Block from '@interfaces/Block';
+
+// import { ContactForm } from '../../blocks/ContactForm';
 
 export interface BlockListProps {
   blocks: Block[];
@@ -7,7 +8,7 @@ export interface BlockListProps {
 
 const BlockList = ({ blocks = [] }: BlockListProps) => {
   const blockList = blocks.map((block) => {
-    if (block.name === 'ContactForm') return <ContactForm {...block} key={block.id} />;
+    // if (block.name === 'ContactForm') return <ContactForm {...block} key={block.id} />;
     const DynamicBlock = require(`../../blocks/${block.name}/${block.name}`).default;
     return DynamicBlock ? <DynamicBlock key={block.id} {...block} /> : null;
   });

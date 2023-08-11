@@ -9,19 +9,25 @@ let classes: ContactFormClasses<ClassesProperty> = {};
 
 classes = {
   root: {
-    default: tw`mx-auto space-y-4 @container`,
+    default: tw`space-y-4 @container`,
     '@xl': tw`@xl:space-y-6`,
   },
-  form: tw`w-full max-w-md rounded-md p-4 shadow-md`,
-  inputContainer: tw`mb-4`,
-  label: tw`mb-1 block font-medium`,
-  inputRequired: tw`w-full rounded-md border px-3 py-2 focus:border-blue-500 focus:outline-none`,
-  inputError: tw`border-red-500 focus:border-red-500`,
-  inputSuccess: tw`border-gray-300 focus:border-blue-500`,
-  formError: tw`mt-1 text-sm text-red-500`,
-  input: tw`w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none`,
-  buttonContainer: tw`mt-2 flex rounded-full bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700`,
-  submitting: tw`opacity-75`,
+  contentAreaContainer: {
+    default: tw`space-y-4`,
+    '@xl': tw`@xl:space-y-6`,
+  },
+  form: {
+    default: tw`max-w-[700px] space-y-4 rounded-lg border border-divider p-4`,
+    '@xl': tw`@xl:space-y-6 @xl:p-5`,
+    '@3xl': tw`@3xl:p-6`,
+    '@5xl': tw`@5xl:p-8`,
+  },
+  formField: {
+    default: tw`space-y-2`,
+  },
+  label: tw`font-semibold text-heading`,
+  inputContainer: tw`flex overflow-hidden rounded-lg border border-divider focus-within:border-primary`,
+  input: tw`flex-grow px-4 py-2 text-[16px] outline-none`,
 };
 
 const contactFormVariant: ContactFormVariant = { classes: new ClassesBuilder({ location, classes }).classes };

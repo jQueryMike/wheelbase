@@ -10,7 +10,7 @@ let classes: ImageWithContentClasses<ClassesProperty> = {};
 classes = {
   root: {
     default: tw`flex flex-col items-center space-y-8 @container`,
-    '@xl': tw`@xlspace-y-10`,
+    '@xl': tw`@xl:space-y-10`,
     '@3xl': tw`@3xl:space-y-12`,
     '@5xl': tw`@5xl:flex-row @5xl:space-x-16 @5xl:space-y-0`,
   },

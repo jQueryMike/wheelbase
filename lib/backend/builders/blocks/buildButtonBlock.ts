@@ -41,7 +41,7 @@ const buildButtonBlock = ({
   globalTheme,
 }: BlockBuilderConfig): (Block & ButtonProps) | undefined => {
   try {
-    if (!content?.link[0]?.url && !content?.link[0]?.route?.path) return undefined;
+    if (!content) return undefined;
 
     // Shortcut to block theme properties from globalTheme
     const globalButtonThemeProperties = globalTheme?.buttonTheme?.items[0]?.content?.properties;
@@ -57,12 +57,7 @@ const buildButtonBlock = ({
     const instanceOverrides = extractClassOverrides(settings);
 
     // Build initial block
-    const button: Block & ButtonProps = {
-      id,
-      name,
-      href: content.link[0].url || content.link[0].route.path,
-      target: content.link.target || '_blank',
-    };
+    const button: Block & ButtonProps = { id, name, target: content?.link[0]?.target || '_blank' };
 
     // Add classes
     button.classes = buildTheme({
@@ -73,11 +68,14 @@ const buildButtonBlock = ({
     });
 
     // Add props
-    if (content.link[0].title) button.text = content.link[0].title;
+    if (content?.link[0]?.url || content?.link[0]?.route?.path)
+      button.href = content.link[0].url || content.link[0].route.path;
+    if (content?.link[0].title) button.text = content.link[0].title;
     if (content?.buttonSize) button.size = getSizeKey(content.buttonSize);
     if (content?.buttonStyle) button.style = getStyleKey(content.buttonStyle);
     if (content?.leftIcon) button.leftIcon = content.leftIcon;
     if (content?.rightIcon) button.rightIcon = content.rightIcon;
+    if (content?.onClick) button.onClick = content.onClick;
 
     return button;
   } catch (error) {

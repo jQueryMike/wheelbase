@@ -1,4 +1,3 @@
-import { CQHelper } from '@components/utility-components/CQHelper';
 import Block from '@interfaces/Block';
 import Image from 'next/image';
 
@@ -45,7 +44,6 @@ const Hero = ({ classes = {}, headings, image, contentArea = [] }: HeroProps) =>
         </div>
       )}
     </div>
-    <CQHelper />
   </div>
 );
 

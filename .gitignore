@@ -38,3 +38,5 @@ next-env.d.ts
 # tailwind
 /tailwind.config.json
 
+# storybook
+storybook-static

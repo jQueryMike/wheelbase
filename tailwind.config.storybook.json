@@ -1,0 +1,74 @@
+{
+  "content": ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./lib/**/*.{js,ts,jsx,tsx,mdx}"],
+
+  "theme": {
+    "extend": {
+      "colors": {
+        "primary": {
+          "DEFAULT": "#f00",
+          "light": "#121643",
+          "dark": "#121643",
+          "contrast": "#FFFFFF"
+        },
+        "secondary": {
+          "DEFAULT": "#28AFB6",
+          "light": "#28AFB6",
+          "dark": "#28AFB6",
+          "contrast": "#FFFFFF"
+        },
+        "accent": {
+          "DEFAULT": "#F47F1F",
+          "light": "#F47F1F",
+          "dark": "#F47F1F",
+          "contrast": "#FFFFFF"
+        },
+        "heading": {
+          "DEFAULT": "#121643",
+          "light": "#121643",
+          "dark": "#121643"
+        },
+        "copy": {
+          "DEFAULT": "#555555",
+          "light": "#555555",
+          "dark": "#555555"
+        },
+        "link": {
+          "DEFAULT": "#28AFB6",
+          "light": "#28AFB6",
+          "dark": "#28AFB6"
+        },
+        "body": {
+          "DEFAULT": "#FFFFFF",
+          "light": "#ECEDF0",
+          "dark": "#FFFFFF"
+        },
+        "divider": {
+          "DEFAULT": "#ECEDF0"
+        },
+        "custom1": {},
+        "custom2": {},
+        "custom3": {},
+        "custom4": {},
+        "custom5": {}
+      },
+      "fontFamily": {
+        "heading": ["\"Raleway\"", "\"sans-serif\""],
+        "body": ["\"Raleway\"", "\"sans-serif\""],
+        "button": ["\"Raleway\"", "\"sans-serif\""]
+      },
+      "typography": {
+        "DEFAULT": {
+          "css": {
+            "color": "#555555",
+            "a": {
+              "color": "#28AFB6",
+              "&:hover": {
+                "color": "#28AFB6"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
