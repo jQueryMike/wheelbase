@@ -11,10 +11,6 @@ export const PrimaryAccordion: Story = {
       root: 'space-y-4 @container @xl:space-y-6',
       contentAreaContainer: 'space-y-4 @xl:space-y-6',
       itemsContainer: 'space-y-4 py-6',
-      headingsContainer: '',
-      itemContainer: '',
-      contentArea1Container: '',
-      contentArea2Container: '',
     },
     items: items,
     headings: {
@@ -37,7 +33,6 @@ export const PrimaryAccordion: Story = {
         content:
           '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non nisi at nisl ultricies molestie. Aenean pulvinar ac elit volutpat ullamcorper. Duis scelerisque, justo id interdum malesuada, urna purus tincidunt lectus, sit amet sodales erat elit in quam.</p>',
         classes: {
-          root: '',
           textContent: 'prose max-w-full',
         },
       },
