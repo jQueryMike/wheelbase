@@ -23,7 +23,6 @@ export const PrimaryImageWithContent: Story = {
         objectPosition: 'right center',
       },
       classes: {
-        root: '',
         image: 'rounded-lg',
       },
     },

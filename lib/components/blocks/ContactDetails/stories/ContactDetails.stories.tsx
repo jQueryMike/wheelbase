@@ -9,20 +9,12 @@ export const PrimaryContactDetails: Story = {
   args: {
     classes: {
       root: 'w-[100%]',
-      headingsContainer: '',
-      contentAreaContainer: '',
-      contentArea1Container: '',
-      contentArea2Container: '',
-      itemsContainer: '',
-      itemContainer: '',
     },
     headings: {
       id: '9f5c44c6-ea35-4130-8966-3cb0f1b30d44',
       name: 'Headings',
       classes: {
         root: 'space-y-1',
-        headingContainer: '',
-        subheadingContainer: '',
       },
       heading: {
         // @ts-ignore
@@ -30,7 +22,6 @@ export const PrimaryContactDetails: Story = {
         name: 'Heading',
         text: 'Contact Details',
         classes: {
-          root: '',
           heading: 'font-heading font-bold leading-tight text-heading',
           headingExtraLarge: 'text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[48px]',
           headingLarge: 'text-[22px] sm:text-[25px] md:text-[25px] lg:text-[28px] xl:text-[32px]',
@@ -94,7 +85,6 @@ export const PrimaryContactDetails: Story = {
         content:
           '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non nisi at nisl ultricies molestie. Aenean pulvinar ac elit volutpat ullamcorper. Duis scelerisque, justo id interdum malesuada, urna purus tincidunt lectus, sit amet sodales erat elit in quam.</p>',
         classes: {
-          root: '',
           textContent: 'prose max-w-full',
         },
       },

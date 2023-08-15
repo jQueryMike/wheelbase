@@ -7,7 +7,6 @@ export const items = [
       root: 'border-divider overflow-hidden rounded-lg border',
       toggleButton: 'flex w-full items-center justify-between p-4 hover:bg-body-light/50',
       toggleButtonExpanded: 'border-divider border-b',
-      toggleButtonCollapsed: '',
       toggleIconContainer: 'text-accent text-sm transition duration-150',
       toggleIconContainerExpanded: '-rotate-180',
       toggleIconContainerCollapsed: 'rotate-0',
@@ -21,7 +20,6 @@ export const items = [
       name: 'Heading',
       text: 'Lorem ipsum dolor sit amet',
       classes: {
-        root: '',
         heading: 'font-heading font-bold leading-tight text-heading',
         headingExtraLarge: 'text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[48px]',
         headingLarge: 'text-[22px] sm:text-[25px] md:text-[25px] lg:text-[28px] xl:text-[32px]',
@@ -38,7 +36,6 @@ export const items = [
         content:
           '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non nisi at nisl ultricies molestie. Aenean pulvinar ac elit volutpat ullamcorper. Duis scelerisque, justo id interdum malesuada, urna purus tincidunt lectus, sit amet sodales erat elit in quam.</p>',
         classes: {
-          root: '',
           textContent: 'prose max-w-full',
         },
       },
@@ -50,7 +47,6 @@ export const items = [
       root: 'border-divider overflow-hidden rounded-lg border',
       toggleButton: 'flex w-full items-center justify-between p-4 hover:bg-body-light/50',
       toggleButtonExpanded: 'border-divider border-b',
-      toggleButtonCollapsed: '',
       toggleIconContainer: 'text-accent text-sm transition duration-150',
       toggleIconContainerExpanded: '-rotate-180',
       toggleIconContainerCollapsed: 'rotate-0',
@@ -64,7 +60,6 @@ export const items = [
       name: 'Heading',
       text: 'Lorem ipsum 2',
       classes: {
-        root: '',
         heading: 'font-heading font-bold leading-tight text-heading',
         headingExtraLarge: 'text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[48px]',
         headingLarge: 'text-[22px] sm:text-[25px] md:text-[25px] lg:text-[28px] xl:text-[32px]',
@@ -81,7 +76,6 @@ export const items = [
         content:
           '<p><span>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam posuere erat in ipsum facilisis elementum. Pellentesque vel consectetur neque, id consectetur ipsum. Quisque lacinia sapien lectus, vitae sagittis orci rhoncus nec. Sed varius iaculis velit ac pellentesque. Nullam in magna sodales, tempus felis in, finibus diam. Nunc id porta sapien.</span></p>',
         classes: {
-          root: '',
           textContent: 'prose max-w-full',
         },
       },

@@ -46,7 +46,6 @@ export const PrimaryContactForm: Story = {
         content:
           '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non nisi at nisl ultricies molestie. Aenean pulvinar ac elit volutpat ullamcorper. Duis scelerisque, justo id interdum malesuada, urna purus tincidunt lectus, sit amet sodales erat elit in quam.</p>',
         classes: {
-          root: '',
           textContent: 'prose max-w-full',
         },
       },

@@ -14,16 +14,12 @@ export const PrimaryHeros: Story = {
         'relative z-10 flex flex-col justify-center space-y-4 bg-gradient-to-b from-white/50 to-white p-6 @xl:space-y-6 @xl:p-8 @5xl:max-w-[50%] @5xl:p-12',
       contentAreaContainer: 'space-y-4 @xl:space-y-6',
       imageContainer: 'absolute inset-0 z-0',
-      headingsContainer: '',
-      image: '',
     },
     headings: {
       id: '5a1ba3ef-e1f0-4646-a716-d8c83ed64cdc',
       name: 'Headings',
       classes: {
         root: 'space-y-1',
-        headingContainer: '',
-        subheadingContainer: '',
       },
       heading: {
         // @ts-ignore
@@ -31,7 +27,6 @@ export const PrimaryHeros: Story = {
         name: 'Heading',
         text: 'This is a hero component',
         classes: {
-          root: '',
           heading: 'font-heading font-bold leading-tight text-heading',
           headingExtraLarge: 'text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[48px]',
           headingLarge: 'text-[22px] sm:text-[25px] md:text-[25px] lg:text-[28px] xl:text-[32px]',
@@ -62,7 +57,6 @@ export const PrimaryHeros: Story = {
         objectFit: 'cover',
       },
       classes: {
-        root: '',
         image: 'rounded-lg',
       },
     },
@@ -74,7 +68,6 @@ export const PrimaryHeros: Story = {
         content:
           '<p><span> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam posuere erat in ipsum facilisis elementum. Pellentesque vel consectetur neque, id consectetur ipsum. Quisque lacinia sapien lectus, vitae sagittis orci rhoncus nec. Sed varius iaculis velit ac pellentesque. Nullam in magna sodales, tempus felis in, finibus diam. Nunc id porta sapien.</span></p>',
         classes: {
-          root: '',
           textContent: 'prose max-w-full',
         },
       },
