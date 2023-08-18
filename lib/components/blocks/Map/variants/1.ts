@@ -17,7 +17,7 @@ classes = {
     '@xl': tw`@xl:space-y-6`,
   },
   mapContainer: {
-    default: tw`aspect-video space-y-4 py-6`,
+    default: tw`aspect-[4/3] space-y-4 py-6`,
   },
 };
 

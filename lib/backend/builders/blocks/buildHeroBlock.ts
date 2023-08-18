@@ -66,7 +66,7 @@ const buildHeroBlock = ({
       });
     }
 
-    const heroImage = content?.image[0] || null;
+    const heroImage = content?.image ? content?.image[0] : null;
     if (heroImage) {
       const heroImageThemeProperties = globalHeroThemeProperties?.heroImageTheme?.items[0]?.content?.properties;
 

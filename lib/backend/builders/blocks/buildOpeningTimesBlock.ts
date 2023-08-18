@@ -63,7 +63,7 @@ const buildOpeningTimesBlock = ({
 
         // Get global and instance overrides
         const itemGlobalOverrides = extractClassOverrides(globalOpeningTimesThemeProperties, 'tw_item__');
-        const itemInstanceOverrides = extractClassOverrides(itemSettings);
+        const itemInstanceOverrides = extractClassOverrides(itemSettings, 'tw_item__');
 
         let value: string | undefined;
 

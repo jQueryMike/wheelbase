@@ -57,7 +57,7 @@ const buildButtonBlock = ({
     const instanceOverrides = extractClassOverrides(settings);
 
     // Build initial block
-    const button: Block & ButtonProps = { id, name, target: content?.link[0]?.target || '_blank' };
+    const button: Block & ButtonProps = { id, name, target: content?.link[0]?.target || '_self' };
 
     // Add classes
     button.classes = buildTheme({
