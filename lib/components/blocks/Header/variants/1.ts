@@ -22,6 +22,6 @@ classes = {
   contentAreaContainer: tw``,
 };
 
-const headingVariant: HeaderVariant = { classes: new ClassesBuilder({ location, classes }).classes };
+const headerVariant: HeaderVariant = { classes: new ClassesBuilder({ location, classes }).classes };
 
-export default headingVariant;
+export default headerVariant;

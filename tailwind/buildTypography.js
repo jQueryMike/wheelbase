@@ -12,6 +12,12 @@ const buildTypography = (theme) => {
           },
         },
       },
+      'primary-contrast': {
+        css: {
+          color: theme.primaryContrast,
+          opacity: 0.7,
+        },
+      },
     };
   } catch (error) {
     console.error('Something went wrong while trying to build typography.');

@@ -6,7 +6,7 @@ import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
 import extractClassOverrides from './extractClassOverrides';
 
-const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, globalTheme = {} }: any) => {
+const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, globalTheme = {}, globalConfig }: any) => {
   const additionalContent: Block[] = [];
 
   items.forEach((item: any) => {
@@ -41,6 +41,7 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
         parentVariantId: textContentThemeProperties?.themeVariant,
         parentOverrides: extractClassOverrides(textContentThemeProperties),
         globalTheme,
+        globalConfig,
       });
 
       if (textContent) additionalContent.push(textContent);

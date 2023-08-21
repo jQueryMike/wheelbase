@@ -14,6 +14,7 @@ const buildFeaturesBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
 }: BlockBuilderConfig): (Block & FeaturesProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
@@ -110,6 +111,7 @@ const buildFeaturesBlock = ({
       items: content?.contentArea1?.items,
       parentThemeProperties: globalFeaturesThemeProperties,
       globalTheme,
+      globalConfig,
     });
 
     features.contentArea2 = buildAdditionalContent({

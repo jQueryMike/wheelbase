@@ -1,5 +1,6 @@
 import Block from '@interfaces/Block';
 import cn from 'classnames';
+import NextLink from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { BlockList } from '../../utility-components/BlockList';
@@ -20,6 +21,7 @@ export type HeaderClasses<T> = {
 export interface HeaderProps {
   classes?: HeaderClasses<string>;
   logo?: ImageProps;
+  logoHref?: string;
   contentArea?: Block[];
   enableScrollTransition?: boolean;
   scrollTransitionPosition?: number;
@@ -28,6 +30,7 @@ export interface HeaderProps {
 const Header = ({
   classes = {},
   logo,
+  logoHref,
   contentArea = [],
   enableScrollTransition = false,
   scrollTransitionPosition = 0,
@@ -46,15 +49,25 @@ const Header = ({
 
   const addScrolledClasses = enableScrollTransition && scrollPosition >= scrollTransitionPosition;
 
+  let logoContainer = null;
+
+  if (logo) {
+    logoContainer = (
+      <div className={classes.logoContainer}>
+        <Image {...logo} />
+      </div>
+    );
+
+    if (logoHref) {
+      logoContainer = <NextLink href={logoHref}>{logoContainer}</NextLink>;
+    }
+  }
+
   return (
     <>
       <header className={cn(classes.root, { [classes.rootScrolled || '']: addScrolledClasses })}>
         <div className={cn(classes.container, { [classes.containerScrolled || '']: addScrolledClasses })}>
-          {logo && (
-            <div className={classes.logoContainer}>
-              <Image {...logo} />
-            </div>
-          )}
+          {logoContainer}
           {contentArea?.length > 0 && (
             <div className={classes.contentAreaContainer}>
               <BlockList blocks={contentArea} />

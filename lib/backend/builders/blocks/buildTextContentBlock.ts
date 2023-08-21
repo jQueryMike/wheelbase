@@ -13,6 +13,7 @@ const buildTextContentBlock = ({
   parentVariantId,
   parentOverrides,
   globalTheme,
+  globalConfig,
 }: BlockBuilderConfig): (Block & TextContentProps) | undefined => {
   try {
     if (!content?.content.markup) return undefined;
@@ -34,7 +35,7 @@ const buildTextContentBlock = ({
     const textContent: Block & TextContentProps = {
       id,
       name,
-      content: content.content.markup,
+      content: content.content.markup.replaceAll('{DISPLAY_NAME}', globalConfig?.displayName || ''),
     };
 
     // Add classes

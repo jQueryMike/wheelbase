@@ -1,3 +1,4 @@
+import buildFooterBlock from './builders/blocks/buildFooterBlock';
 import buildHeaderBlock from './builders/blocks/buildHeaderBlock';
 import buildPageSections from './builders/buildPageSections';
 
@@ -37,6 +38,18 @@ const getInitialProps = async () => {
       name: 'Header',
       content: header.content.properties,
       settings: header.settings.properties,
+      globalTheme,
+    });
+  }
+
+  const footer = globalConfig?.footer?.items ? globalConfig?.footer?.items[0] : null;
+
+  if (footer) {
+    globalProps.footer = buildFooterBlock({
+      id: footer.content.id,
+      name: 'Footer',
+      content: footer.content.properties,
+      settings: footer.settings.properties,
       globalTheme,
     });
   }

@@ -1,4 +1,5 @@
 import getInitialProps from '@backend/getInitialProps';
+import { Footer } from '@components/blocks/Footer';
 import { Header } from '@components/blocks/Header';
 import { PageSection } from '@components/layout/PageSection';
 import '@styles/globals.scss';
@@ -18,6 +19,7 @@ const App = ({ Component, pageProps, globalProps }: CustomAppProps) => (
     {globalProps?.footerSections?.map((section: any) => (
       <PageSection key={section.id} {...section} />
     ))}
+    {globalProps?.footer && <Footer {...globalProps.footer} />}
   </>
 );
 
