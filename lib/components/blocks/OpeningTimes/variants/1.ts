@@ -23,7 +23,7 @@ classes = {
 };
 
 itemClasses = {
-  root: tw`text-primary flex items-center justify-between space-x-2 rounded px-3 py-2`,
+  root: tw`flex items-center justify-between space-x-2 rounded px-3 py-2 text-copy`,
   label: tw`grow`,
   icon: tw`text-accent`,
   value: tw`text-right`,

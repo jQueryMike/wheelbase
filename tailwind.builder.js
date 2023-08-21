@@ -15,14 +15,16 @@ const generateTailwindConfig = async () => {
   try {
     const { pages, theme } = await fetchData();
 
+    const colors = buildColors(theme);
+
     const config = {
       content: buildContent(pages),
       safelist: buildSafelist(pages),
       theme: {
         extend: {
-          colors: buildColors(theme),
+          colors,
           fontFamily: buildFontFamily(theme),
-          typography: buildTypography(theme),
+          typography: buildTypography(colors),
         },
       },
     };

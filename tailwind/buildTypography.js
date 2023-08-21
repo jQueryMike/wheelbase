@@ -1,20 +1,20 @@
-const buildTypography = (theme) => {
+const buildTypography = (colors) => {
   try {
     return {
       DEFAULT: {
         css: {
-          color: theme.copyDefault,
+          color: colors.copy.DEFAULT,
           a: {
-            color: theme.linkDefault,
+            color: colors.link.DEFAULT,
             '&:hover': {
-              color: theme.linkLight,
+              color: colors.link.light,
             },
           },
         },
       },
       'primary-contrast': {
         css: {
-          color: theme.primaryContrast,
+          color: colors.primary.contrast,
           opacity: 0.7,
         },
       },
