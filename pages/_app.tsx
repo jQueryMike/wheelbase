@@ -11,7 +11,9 @@ interface CustomAppProps extends AppProps {
 
 const App = ({ Component, pageProps, globalProps }: CustomAppProps) => (
   <>
-    {globalProps?.header && <Header {...globalProps.header} />}
+      {globalProps?.header && (
+        <Header {...globalProps.header} primaryNavigationRoutes={globalProps.primaryNavigation.items} />
+      )}
     {globalProps?.headerSections?.map((section: any) => (
       <PageSection key={section.id} {...section} />
     ))}

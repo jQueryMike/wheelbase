@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Image, ImageProps } from '../Image';
+import { PrimaryNavigation, PrimaryNavigationProps, PrimaryNavigationRoutes } from '../PrimaryNavigation';
 
 export type HeaderClasses<T> = {
   [key in
@@ -25,6 +26,8 @@ export interface HeaderProps {
   contentArea?: Block[];
   enableScrollTransition?: boolean;
   scrollTransitionPosition?: number;
+  primaryNavigationRoutes?: PrimaryNavigationRoutes[];
+  primaryNavigationProps?: PrimaryNavigationProps;
 }
 
 const Header = ({
@@ -34,6 +37,7 @@ const Header = ({
   contentArea = [],
   enableScrollTransition = false,
   scrollTransitionPosition = 0,
+  primaryNavigationRoutes,
 }: HeaderProps) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => setScrollPosition(window.scrollY);
@@ -48,6 +52,11 @@ const Header = ({
   }, [enableScrollTransition]);
 
   const addScrolledClasses = enableScrollTransition && scrollPosition >= scrollTransitionPosition;
+
+  const primaryNav = {
+    routes: primaryNavigationRoutes,
+    classes: primaryNavigationRoutes,
+  };
 
   let logoContainer = null;
 
@@ -74,6 +83,7 @@ const Header = ({
             </div>
           )}
         </div>
+        <PrimaryNavigation routes={primaryNavigationRoutes} />
       </header>
       <div className={cn(classes.spacer, { [classes.spacerScrolled || '']: addScrolledClasses })} />
     </>
