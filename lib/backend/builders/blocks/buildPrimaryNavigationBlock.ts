@@ -37,6 +37,14 @@ const buildPrimaryNavigationBlock = ({
       instanceOverrides,
     });
 
+    if (content?.burgerIcon) primaryNavigation.burgerIcon = content.burgerIcon;
+
+    if (content?.menuText) primaryNavigation.menuText = content.menuText;
+
+    if (content?.closeIcon) primaryNavigation.closeIcon = content.closeIcon;
+
+    if (content?.subMenuIcon) primaryNavigation.subMenuIcon = content.subMenuIcon;
+
     return primaryNavigation;
   } catch (error) {
     console.error(error);

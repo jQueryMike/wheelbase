@@ -36,17 +36,15 @@ export interface PrimaryNavigationProps {
   menuText?: string;
   closeIcon?: string;
   subMenuIcon?: string;
-  routes?: PrimaryNavigationRoutes[];
-}
-
-export interface PrimaryNavigationRoutes {
-  id: string;
-  name: string;
-  url?: string;
-  children?: {
+  routes?: {
     id: string;
     name: string;
     url?: string;
+    children?: {
+      id: string;
+      name: string;
+      url?: string;
+    }[];
   }[];
 }
 
@@ -167,7 +165,7 @@ const PrimaryNavigation = ({
                               : classes.subMenuIconClosed
                           }
                         >
-                          <i className={classNames(subMenuIcon)}></i>
+                          <Icon className={classNames(subMenuIcon)}></Icon>
                         </div>
                       )}
                     </span>
@@ -180,7 +178,7 @@ const PrimaryNavigation = ({
 
         {menuOpen && !isDesktop && (
           <span className={classes.closeMenuContainer} onClick={closeMenu}>
-            <i className={closeIcon} data-testid="closeButton" />
+            <Icon className={closeIcon} data-testid="closeButton" />
           </span>
         )}
       </div>

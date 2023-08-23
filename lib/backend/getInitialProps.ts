@@ -52,14 +52,12 @@ const getInitialProps = async () => {
       id: primaryNavigation.content.id,
       content: primaryNavigation.content.properties,
       settings: primaryNavigation.settings?.properties,
-      name: 'PrimaryNavigation',
+      name: 'primaryNavigation',
       globalTheme,
     });
   }
 
-  console.log(globalProps.primaryNavigation.classes);
-
-  globalProps.primaryNavigation.items = primaryNavigationItems;
+  if (primaryNavigationItems) globalProps.primaryNavigation.routes = primaryNavigationItems;
 
   const footer = globalConfig?.footer?.items ? globalConfig?.footer?.items[0] : null;
 

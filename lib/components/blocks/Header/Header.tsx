@@ -26,7 +26,6 @@ export interface HeaderProps {
   contentArea?: Block[];
   enableScrollTransition?: boolean;
   scrollTransitionPosition?: number;
-  primaryNavigationRoutes?: PrimaryNavigationRoutes[];
   primaryNavigationProps?: PrimaryNavigationProps;
 }
 
@@ -37,7 +36,7 @@ const Header = ({
   contentArea = [],
   enableScrollTransition = false,
   scrollTransitionPosition = 0,
-  primaryNavigationRoutes,
+  primaryNavigationProps,
 }: HeaderProps) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => setScrollPosition(window.scrollY);
@@ -52,11 +51,6 @@ const Header = ({
   }, [enableScrollTransition]);
 
   const addScrolledClasses = enableScrollTransition && scrollPosition >= scrollTransitionPosition;
-
-  const primaryNav = {
-    routes: primaryNavigationRoutes,
-    classes: primaryNavigationRoutes,
-  };
 
   let logoContainer = null;
 
@@ -82,8 +76,8 @@ const Header = ({
               <BlockList blocks={contentArea} />
             </div>
           )}
+          <PrimaryNavigation {...primaryNavigationProps} />
         </div>
-        <PrimaryNavigation routes={primaryNavigationRoutes} />
       </header>
       <div className={cn(classes.spacer, { [classes.spacerScrolled || '']: addScrolledClasses })} />
     </>
