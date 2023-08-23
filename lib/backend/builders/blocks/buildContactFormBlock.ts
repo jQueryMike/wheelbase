@@ -1,10 +1,12 @@
 import { ContactFormProps } from '@components/blocks/ContactForm';
 import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
+import { v4 as uuidv4 } from 'uuid';
 
 import buildAdditionalContent from '../buildAdditionalContent';
 import buildTheme from '../buildTheme';
 import extractClassOverrides from '../extractClassOverrides';
+import buildButtonBlock from './buildButtonBlock';
 import buildHeadingsBlock from './buildHeadingsBlock';
 
 const buildContactFormBlock = ({
@@ -29,8 +31,28 @@ const buildContactFormBlock = ({
     const globalOverrides = extractClassOverrides(globalContactFormThemeProperties);
     const instanceOverrides = extractClassOverrides(settings);
 
+    // Build submit button
+    const buttonThemeProperties = globalContactFormThemeProperties?.submitButtonTheme?.items[0]?.content?.properties;
+
+    const submitButton = buildButtonBlock({
+      id: uuidv4(),
+      name: 'Button',
+      content: {
+        type: 'submit',
+        link: [
+          {
+            title: content?.buttonText || 'Send message',
+          },
+        ],
+      },
+      settings: {},
+      parentVariantId: buttonThemeProperties?.themeVariant,
+      parentOverrides: extractClassOverrides(buttonThemeProperties),
+      globalTheme,
+    })!;
+
     // Build initial block
-    const contactForm: Block & ContactFormProps = { id, name };
+    const contactForm: Block & ContactFormProps = { id, name, submitButton };
 
     // Add classes
     contactForm.classes = buildTheme({
@@ -39,13 +61,14 @@ const buildContactFormBlock = ({
       instanceOverrides,
     });
 
-    // Add content
+    // Add labels and button text
     if (content?.nameLabel) contactForm.nameLabel = content.nameLabel;
     if (content?.telephoneLabel) contactForm.telephoneLabel = content.telephoneLabel;
     if (content?.emailLabel) contactForm.emailLabel = content.emailLabel;
     if (content?.messageLabel) contactForm.messageLabel = content.messageLabel;
     if (content?.buttonText) contactForm.buttonText = content.buttonText;
 
+    // Create recipients array
     const recipients: string[] = [
       ...(content?.formRecipients?.items?.map((item: any) => item.content.properties.emailAddress) || []),
       ...(globalConfig?.defaultContactFormRecipients?.items?.map((item: any) => item.content.properties.emailAddress) ||
@@ -69,6 +92,7 @@ const buildContactFormBlock = ({
       });
     }
 
+    // Add content areas
     contactForm.contentArea1 = buildAdditionalContent({
       items: content?.contentArea1?.items,
       parentThemeProperties: globalContactFormThemeProperties,

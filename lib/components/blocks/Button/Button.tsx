@@ -20,6 +20,11 @@ export type ButtonClasses<T> = {
   [key in
     | 'root'
     | 'button'
+    | 'buttonLoading'
+    | 'buttonContent'
+    | 'buttonContentLoading'
+    | 'loadingIconContainer'
+    | 'loadingIcon'
     | 'textContainer'
     | 'leftIcon'
     | 'rightIcon'
@@ -28,7 +33,10 @@ export type ButtonClasses<T> = {
     | 'plainButton'
     | 'smallButton'
     | 'mediumButton'
-    | 'largeButton']?: T;
+    | 'largeButton'
+    | 'smallButtonContent'
+    | 'mediumButtonContent'
+    | 'largeButtonContent']?: T;
 };
 
 export interface ButtonProps {
@@ -42,6 +50,7 @@ export interface ButtonProps {
   style?: ButtonStyle;
   size?: ButtonSize;
   onClick?: () => void;
+  loading?: boolean;
 }
 
 const Button = ({
@@ -55,16 +64,30 @@ const Button = ({
   onClick,
   size = ButtonSize.Medium,
   style = ButtonStyle.Primary,
+  loading = false,
 }: ButtonProps) => {
   let button = (
     <button
-      className={cn(classes.button, classes[`${size}Button`], classes[`${style}Button`])}
+      className={cn(classes.button, classes[`${size}Button`], classes[`${style}Button`], {
+        [classes.buttonLoading || '']: loading,
+      })}
       type={type === 'button' ? 'button' : 'submit'}
       onClick={onClick}
     >
-      {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} />}
-      {text && <span className={classes.textContainer}>{text}</span>}
-      {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} />}
+      {loading && (
+        <span className={classes.loadingIconContainer}>
+          <Icon className={classes.loadingIcon} />
+        </span>
+      )}
+      <span
+        className={cn(classes.buttonContent, classes[`${size}ButtonContent`], {
+          [classes.buttonContentLoading || '']: loading,
+        })}
+      >
+        {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} />}
+        {text && <span className={classes.textContainer}>{text}</span>}
+        {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} />}
+      </span>
     </button>
   );
 

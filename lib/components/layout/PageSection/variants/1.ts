@@ -13,18 +13,18 @@ classes = {
     md: tw`md:p-12`,
     lg: tw`lg:p-16`,
   },
-  container: tw`container mx-auto @container`,
+  container: tw`container mx-auto`,
   areasContainer: {
     default: tw`grid gap-8`,
-    '@xl': tw`@xl:gap-10`,
-    '@3xl': tw`@3xl:gap-12`,
-    '@5xl': tw`@5xl:gap-16`,
+    xs: tw`xs:gap-10`,
+    md: tw`md:gap-12`,
+    lg: tw`lg:gap-16`,
   },
   area: {
     default: tw`space-y-4`,
-    '@xl': tw`@xl:space-y-5`,
-    '@3xl': tw`@3xl:space-y-6`,
-    '@5xl': tw`@5xl:space-y-8`,
+    xs: tw`xs:space-y-5`,
+    md: tw`md:space-y-6`,
+    lg: tw`lg:space-y-8`,
   },
 };
 

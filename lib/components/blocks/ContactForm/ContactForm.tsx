@@ -5,7 +5,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 
 import { BlockList } from '../../utility-components/BlockList';
-import { Button } from '../Button';
+import { Button, ButtonProps } from '../Button';
 import { Headings, HeadingsProps } from '../Headings';
 
 export type ContactFormClasses<T> = {
@@ -29,6 +29,8 @@ export type ContactFormClasses<T> = {
     | 'contentArea1Container'
     | 'contentArea2Container'
     | 'formContentAreaContainer'
+    | 'errorMessageContainer'
+    | 'errorMessage'
     | 'thankYouContentAreaContainer']?: T;
 };
 
@@ -45,6 +47,7 @@ export interface ContactFormProps {
   messageLabel?: string;
   buttonText?: string;
   recipients?: string[];
+  submitButton: ButtonProps;
 }
 
 const ContactForm = ({
@@ -58,7 +61,7 @@ const ContactForm = ({
   telephoneLabel = 'Your phone number',
   emailLabel = 'Your email address',
   messageLabel = 'Your message',
-  buttonText = 'Send Message',
+  submitButton,
   recipients = [],
 }: ContactFormProps) => {
   const [submitted, setSubmitted] = useState(false);
@@ -67,51 +70,46 @@ const ContactForm = ({
   const [formError, setFormError] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>();
 
-  const { handleSubmit, formState, register, reset } = useForm();
+  const { handleSubmit, formState, register } = useForm();
 
   const onSubmit = async (data: any) => {
+    setSubmitting(true);
+    setFormError(false);
+    setSubmitted(false);
+
     if (!recaptchaRef.current) {
       setFormError(true);
+      setSubmitting(false);
+      return;
     }
-    setSubmitting(true);
+
     try {
       const recaptchaToken = await recaptchaRef?.current?.executeAsync();
+
       const fields = [
         { label: nameLabel, key: 'name', value: data.name },
+        { label: telephoneLabel, key: 'telephone', value: data.telephone || '-' },
         { label: emailLabel, key: 'email', value: data.email },
         { label: messageLabel, key: 'message', value: data.message },
       ];
-      if (data.telephone) fields.push({ label: telephoneLabel, key: 'telephone', value: data.telephone });
-      const formData = {
-        recipients,
-        fields,
-        recaptchaToken,
-      };
-      const response = await fetch('/api/submit-form', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: { 'Content-Type': 'application/json' },
-      });
+
+      const formData = { recipients, fields, recaptchaToken };
+      const body = JSON.stringify(formData);
+      const headers = { 'Content-Type': 'application/json' };
+      const response = await fetch('/api/submit-form', { method: 'POST', body, headers });
+
       if (response.ok) {
         setSubmitted(true);
       } else {
         setFormError(true);
       }
-      setSubmitting(false);
     } catch (error) {
-      setSubmitting(false);
+      setFormError(true);
       recaptchaRef?.current?.reset();
     }
-  };
 
-  const restart = () => {
-    reset();
-    setSubmitted(false);
-    setFormError(false);
-    recaptchaRef?.current?.reset();
+    setSubmitting(false);
   };
-
-  const errorMessage = 'This field is required';
 
   useEffect(() => setHasMounted(true), [setHasMounted]);
 
@@ -146,7 +144,7 @@ const ContactForm = ({
             )}
             <div className={classes.formField}>
               <div className={classes.labelContainer}>
-                <label className={classes.label} htmlFor="Name">
+                <label className={classes.label} htmlFor="name">
                   {nameLabel} <span className={classes.labelRequiredMarker}>*</span>
                 </label>
               </div>
@@ -157,17 +155,18 @@ const ContactForm = ({
               >
                 <input
                   type="text"
-                  placeholder="Name"
+                  id="name"
+                  placeholder="Your name"
                   {...register('name', { required: true })}
                   className={classes.input}
                 />
               </div>
-              {formState.errors.name && <span className={classes.inputErrorMessage}>{errorMessage}</span>}
+              {formState.errors.name && <span className={classes.inputErrorMessage}>Please enter your name</span>}
             </div>
 
             <div className={classes.formField}>
               <div className={classes.labelContainer}>
-                <label className={classes.label} htmlFor="Telephone">
+                <label className={classes.label} htmlFor="telephone">
                   {telephoneLabel}
                 </label>
               </div>
@@ -176,14 +175,22 @@ const ContactForm = ({
                   [classes.inputContainerError!]: classes.inputContainerError && !!formState.errors.telephone,
                 })}
               >
-                <input type="tel" placeholder="Telephone" {...register('telephone')} className={classes.input} />
+                <input
+                  type="tel"
+                  id="telephone"
+                  placeholder="Your phone number"
+                  {...register('telephone')}
+                  className={classes.input}
+                />
               </div>
-              {formState.errors.telephone && <span className={classes.inputErrorMessage}>{errorMessage}</span>}
+              {formState.errors.telephone && (
+                <span className={classes.inputErrorMessage}>Please enter a valid phone number</span>
+              )}
             </div>
 
             <div className={classes.formField}>
               <div className={classes.labelContainer}>
-                <label className={classes.label} htmlFor="Email">
+                <label className={classes.label} htmlFor="email">
                   {emailLabel} <span className={classes.labelRequiredMarker}>*</span>
                 </label>
               </div>
@@ -193,18 +200,21 @@ const ContactForm = ({
                 })}
               >
                 <input
-                  type="text"
-                  placeholder="Email"
-                  {...register('email', { required: true })}
+                  type="email"
+                  id="email"
+                  placeholder="Your email address"
+                  {...register('email', { required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g })}
                   className={classes.input}
                 />
               </div>
-              {formState.errors.email && <span className={classes.inputErrorMessage}>{errorMessage}</span>}
+              {formState.errors.email && (
+                <span className={classes.inputErrorMessage}>Please enter a valid email address</span>
+              )}
             </div>
 
             <div className={classes.formField}>
               <div className={classes.labelContainer}>
-                <label className={classes.label} htmlFor="Message">
+                <label className={classes.label} htmlFor="message">
                   {messageLabel} <span className={classes.labelRequiredMarker}>*</span>
                 </label>
               </div>
@@ -214,25 +224,33 @@ const ContactForm = ({
                 })}
               >
                 <textarea
-                  placeholder="Message"
+                  id="message"
+                  placeholder="Your message"
+                  rows={6}
                   {...register('message', { required: true })}
                   className={classes.input}
                 />
               </div>
-              {formState.errors.message && <span className={classes.inputErrorMessage}>{errorMessage}</span>}
+              {formState.errors.message && <span className={classes.inputErrorMessage}>Please enter your message</span>}
             </div>
-            <Button type="submit" text={buttonText} />
-            {/* <input className={classes.submitButtonContainer} type="submit" value={buttonText} /> */}
+
+            {(Object.keys(formState.errors).length > 0 || formError) && (
+              <div className={classes.errorMessageContainer}>
+                <p className={classes.errorMessage}>There was an error submitting the form. Please try again.</p>
+              </div>
+            )}
+
+            <div className={classes.submitButtonContainer}>
+              <Button {...submitButton} loading={submitting} />
+            </div>
           </form>
         )}
 
         {submitted && thankYouContentArea.length > 0 && (
           <div className={cn(classes.contentAreaContainer, classes.thankYouContentAreaContainer)}>
             <BlockList blocks={thankYouContentArea} />
-            <button onClick={() => restart()}>Re-submit Form</button>
           </div>
         )}
-        {formError && <p>Error submitting form</p>}
 
         {contentArea2?.length > 0 && (
           <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>

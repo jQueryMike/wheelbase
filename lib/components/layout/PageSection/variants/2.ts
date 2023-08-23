@@ -8,7 +8,7 @@ const location = 'PageSection/variants/1';
 let classes: PageSectionClasses<ClassesProperty> = {};
 
 classes = {
-  container: tw`@container`,
+  container: tw``,
 };
 
 const pageSectionVariant: PageSectionVariant = {

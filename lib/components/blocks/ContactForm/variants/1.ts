@@ -28,6 +28,14 @@ classes = {
   label: tw`font-semibold text-heading`,
   inputContainer: tw`flex overflow-hidden rounded-lg border border-divider focus-within:border-primary`,
   input: tw`flex-grow px-4 py-2 text-[16px] outline-none`,
+  inputErrorMessage: tw`inline-block pt-1 text-sm text-error`,
+  thankYouContentAreaContainer: {
+    default: tw`max-w-[700px] space-y-4 rounded-lg border border-divider p-4`,
+    '@xl': tw`@xl:space-y-6 @xl:p-5`,
+    '@3xl': tw`@3xl:p-6`,
+    '@5xl': tw`@5xl:p-8`,
+  },
+  errorMessageContainer: tw`rounded-lg border border-error p-2 text-error`,
 };
 
 const contactFormVariant: ContactFormVariant = { classes: new ClassesBuilder({ location, classes }).classes };
