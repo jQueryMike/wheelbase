@@ -9,6 +9,7 @@ import { Image, ImageProps } from '../Image';
 export type FeaturesClasses<T> = {
   [key in
     | 'root'
+    | 'rootInner'
     | 'headingsContainer'
     | 'headingContainer'
     | 'subheadingContainer'
@@ -49,51 +50,53 @@ export interface FeaturesProps {
 
 const Features = ({ classes = {}, headings, items = [], contentArea1 = [], contentArea2 = [] }: FeaturesProps) => (
   <div className={classes.root}>
-    {headings && (
-      <div className={classes.headingsContainer}>
-        <Headings {...headings} />
-      </div>
-    )}
-    {contentArea1?.length > 0 && (
-      <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
-        <BlockList blocks={contentArea1} />
-      </div>
-    )}
-    {items?.length > 0 && (
-      <div className={classes.itemsContainer}>
-        {items.map((item) => (
-          <div key={item.id} className={classes.itemContainer}>
-            <div className={item.classes?.root}>
-              {item.indicator && (
-                <div className={item.classes?.indicatorContainer}>
-                  <div className={item.classes?.indicator}>{item.indicator}</div>
-                </div>
-              )}
-              {item.icon && (
-                <div className={item.classes?.iconContainer}>
-                  <Icon className={cn(item.icon, item.classes?.icon)} />
-                </div>
-              )}
-              {item.image && (
-                <div className={item.classes?.imageContainer}>
-                  <Image {...item.image} />
-                </div>
-              )}
-              {item.contentArea && item.contentArea.length > 0 && (
-                <div className={cn(item.classes?.contentAreaContainer)}>
-                  <BlockList blocks={item.contentArea} />
-                </div>
-              )}
+    <div className={classes.rootInner}>
+      {headings && (
+        <div className={classes.headingsContainer}>
+          <Headings {...headings} />
+        </div>
+      )}
+      {contentArea1?.length > 0 && (
+        <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
+          <BlockList blocks={contentArea1} />
+        </div>
+      )}
+      {items?.length > 0 && (
+        <div className={classes.itemsContainer}>
+          {items.map((item) => (
+            <div key={item.id} className={classes.itemContainer}>
+              <div className={item.classes?.root}>
+                {item.indicator && (
+                  <div className={item.classes?.indicatorContainer}>
+                    <div className={item.classes?.indicator}>{item.indicator}</div>
+                  </div>
+                )}
+                {item.icon && (
+                  <div className={item.classes?.iconContainer}>
+                    <Icon className={cn(item.icon, item.classes?.icon)} />
+                  </div>
+                )}
+                {item.image && (
+                  <div className={item.classes?.imageContainer}>
+                    <Image {...item.image} />
+                  </div>
+                )}
+                {item.contentArea && item.contentArea.length > 0 && (
+                  <div className={cn(item.classes?.contentAreaContainer)}>
+                    <BlockList blocks={item.contentArea} />
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    )}
-    {contentArea2?.length > 0 && (
-      <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
-        <BlockList blocks={contentArea2} />
-      </div>
-    )}
+          ))}
+        </div>
+      )}
+      {contentArea2?.length > 0 && (
+        <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
+          <BlockList blocks={contentArea2} />
+        </div>
+      )}
+    </div>
   </div>
 );
 

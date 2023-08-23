@@ -9,7 +9,7 @@ let classes: ContactDetailsClasses<ClassesProperty> = {};
 let itemClasses: ContactDetailsItemClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`w-[100%]`,
+  root: tw`tw-[100%] @container/contact-details`,
 };
 
 itemClasses = {

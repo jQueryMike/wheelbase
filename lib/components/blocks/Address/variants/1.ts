@@ -8,22 +8,23 @@ const location = 'Address/variants/1';
 let classes: AddressClasses<ClassesProperty> = {};
 
 classes = {
-  root: {
-    default: tw`space-y-4 @container`,
-    '@xl': tw`@xl:space-y-6`,
+  root: tw`@container/address`,
+  rootInner: {
+    default: tw`space-y-4`,
+    '@xl/address': tw`@xl/address:space-y-6`,
   },
   contentAreaContainer: {
     default: tw`space-y-4`,
-    '@xl': tw`@xl:space-y-6`,
+    '@xl/address': tw`@xl/address:space-y-6`,
   },
   addressContainer: {
     default: tw`space-y-2 py-6`,
   },
   address: {
-    default: tw`text-primary text-[16px] font-semibold`,
-    sm: tw`sm:text-[16px]`,
-    md: tw`md:text-[18px]`,
-    lg: tw`lg:text-[20px]`,
+    default: tw`text-[16px] font-semibold text-primary`,
+    '@xl/address': tw`sm:text-[16px]`,
+    '@3xl/address': tw`md:text-[18px]`,
+    '@5xl/address': tw`lg:text-[20px]`,
   },
 };
 

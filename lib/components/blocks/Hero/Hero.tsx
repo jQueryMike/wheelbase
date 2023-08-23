@@ -8,6 +8,7 @@ import { ImageProps } from '../Image';
 export type HeroClasses<T> = {
   [key in
     | 'root'
+    | 'rootInner'
     | 'container'
     | 'heroContentContainer'
     | 'headingsContainer'
@@ -25,24 +26,26 @@ export interface HeroProps {
 
 const Hero = ({ classes = {}, headings, image, contentArea = [] }: HeroProps) => (
   <div className={classes.root}>
-    <div className={classes.container}>
-      <div className={classes.heroContentContainer}>
-        {headings && (
-          <div className={classes.headingsContainer}>
-            <Headings {...headings} />
-          </div>
-        )}
-        {contentArea?.length > 0 && (
-          <div className={classes.contentAreaContainer}>
-            <BlockList blocks={contentArea} />
+    <div className={classes.rootInner}>
+      <div className={classes.container}>
+        <div className={classes.heroContentContainer}>
+          {headings && (
+            <div className={classes.headingsContainer}>
+              <Headings {...headings} />
+            </div>
+          )}
+          {contentArea?.length > 0 && (
+            <div className={classes.contentAreaContainer}>
+              <BlockList blocks={contentArea} />
+            </div>
+          )}
+        </div>
+        {image && (
+          <div className={classes?.imageContainer}>
+            <Image className={classes?.image} {...image} />
           </div>
         )}
       </div>
-      {image && (
-        <div className={classes?.imageContainer}>
-          <Image className={classes?.image} {...image} />
-        </div>
-      )}
     </div>
   </div>
 );

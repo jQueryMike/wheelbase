@@ -5,7 +5,13 @@ import { Headings, HeadingsProps } from '../Headings';
 import { Image, ImageProps } from '../Image';
 
 export type ImageWithContentClasses<T> = {
-  [key in 'root' | 'contentContainer' | 'headingsContainer' | 'contentAreaContainer' | 'imageContainer']?: T;
+  [key in
+    | 'root'
+    | 'rootInner'
+    | 'contentContainer'
+    | 'headingsContainer'
+    | 'contentAreaContainer'
+    | 'imageContainer']?: T;
 };
 
 export interface ImageWithContentProps {
@@ -17,23 +23,25 @@ export interface ImageWithContentProps {
 
 const ImageWithContent = ({ classes = {}, image, contentArea = [], headings }: ImageWithContentProps) => (
   <div className={classes.root}>
-    <div className={classes.contentContainer}>
-      {headings && (
-        <div className={classes.headingsContainer}>
-          <Headings {...headings} />
-        </div>
-      )}
-      {contentArea?.length > 0 && (
-        <div className={classes.contentAreaContainer}>
-          <BlockList blocks={contentArea} />
+    <div className={classes.rootInner}>
+      <div className={classes.contentContainer}>
+        {headings && (
+          <div className={classes.headingsContainer}>
+            <Headings {...headings} />
+          </div>
+        )}
+        {contentArea?.length > 0 && (
+          <div className={classes.contentAreaContainer}>
+            <BlockList blocks={contentArea} />
+          </div>
+        )}
+      </div>
+      {image && (
+        <div className={classes?.imageContainer}>
+          <Image {...image} />
         </div>
       )}
     </div>
-    {image && (
-      <div className={classes?.imageContainer}>
-        <Image {...image} />
-      </div>
-    )}
   </div>
 );
 

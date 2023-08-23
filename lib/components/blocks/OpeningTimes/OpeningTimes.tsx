@@ -9,6 +9,7 @@ import { Headings, HeadingsProps } from '../Headings';
 export type OpeningTimesClasses<T> = {
   [key in
     | 'root'
+    | 'rootInner'
     | 'headingsContainer'
     | 'contentAreaContainer'
     | 'contentArea1Container'
@@ -52,36 +53,38 @@ const OpeningTimes = ({
 
   return (
     <div className={classes.root}>
-      {headings && (
-        <div className={classes.headingsContainer}>
-          <Headings {...headings} />
-        </div>
-      )}
-      {contentArea1?.length > 0 && (
-        <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
-          <BlockList blocks={contentArea1} />
-        </div>
-      )}
-      <div className={classes.itemsContainer}>
-        {items.map((item) => (
-          <div
-            key={item.id}
-            className={cn(item.classes?.root, {
-              [item.classes?.highlight || '']: isCurrentDay(item.label),
-              [item.classes?.closed || '']: item.closed,
-            })}
-          >
-            {item.icon && <Icon className={cn(item.icon, item.classes?.icon)} />}
-            <div className={item.classes?.label}>{item.label}</div>
-            {item.value && <div className={item.classes?.value}>{item.value}</div>}
+      <div className={classes.rootInner}>
+        {headings && (
+          <div className={classes.headingsContainer}>
+            <Headings {...headings} />
           </div>
-        ))}
-      </div>
-      {contentArea2?.length > 0 && (
-        <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
-          <BlockList blocks={contentArea2} />
+        )}
+        {contentArea1?.length > 0 && (
+          <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
+            <BlockList blocks={contentArea1} />
+          </div>
+        )}
+        <div className={classes.itemsContainer}>
+          {items.map((item) => (
+            <div
+              key={item.id}
+              className={cn(item.classes?.root, {
+                [item.classes?.highlight || '']: isCurrentDay(item.label),
+                [item.classes?.closed || '']: item.closed,
+              })}
+            >
+              {item.icon && <Icon className={cn(item.icon, item.classes?.icon)} />}
+              <div className={item.classes?.label}>{item.label}</div>
+              {item.value && <div className={item.classes?.value}>{item.value}</div>}
+            </div>
+          ))}
         </div>
-      )}
+        {contentArea2?.length > 0 && (
+          <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
+            <BlockList blocks={contentArea2} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

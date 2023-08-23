@@ -9,6 +9,7 @@ import { Headings, HeadingsProps } from '../Headings';
 export type BlockquoteClasses<T> = {
   [key in
     | 'root'
+    | 'rootInner'
     | 'container'
     | 'headingsContainer'
     | 'contentAreaContainer'
@@ -37,26 +38,28 @@ const Blockquote = ({
   contentArea2 = [],
 }: BlockquoteProps) => (
   <div className={classes.root}>
-    {headings && (
-      <div className={classes.headingsContainer}>
-        <Headings {...headings} />
-      </div>
-    )}
-    {contentArea1?.length > 0 && (
-      <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
-        <BlockList blocks={contentArea1} />
-      </div>
-    )}
-    <div className={cn(classes.blockquoteContainer)}>
-      <div className={classes.blockquote} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blockquoteText) }} />
+    <div className={classes.rootInner}>
+      {headings && (
+        <div className={classes.headingsContainer}>
+          <Headings {...headings} />
+        </div>
+      )}
+      {contentArea1?.length > 0 && (
+        <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
+          <BlockList blocks={contentArea1} />
+        </div>
+      )}
+      <div className={cn(classes.blockquoteContainer)}>
+        <div className={classes.blockquote} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blockquoteText) }} />
 
-      {blockquoteName && <p className={classes.blockquoteName}>{blockquoteName}</p>}
-    </div>
-    {contentArea2?.length > 0 && (
-      <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
-        <BlockList blocks={contentArea2} />
+        {blockquoteName && <p className={classes.blockquoteName}>{blockquoteName}</p>}
       </div>
-    )}
+      {contentArea2?.length > 0 && (
+        <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
+          <BlockList blocks={contentArea2} />
+        </div>
+      )}
+    </div>
   </div>
 );
 

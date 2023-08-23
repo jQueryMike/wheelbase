@@ -8,13 +8,15 @@ const location = 'Map/variants/1';
 let classes: MapClasses<ClassesProperty> = {};
 
 classes = {
-  root: {
-    default: tw`space-y-4 @container`,
-    '@xl': tw`@xl:space-y-6`,
+  root: tw`@container/map`,
+  rootInner: {
+    default: tw`space-y-4`,
+    '@xl/map': tw`@xl/map:space-y-6`,
   },
+
   contentAreaContainer: {
     default: tw`space-y-4`,
-    '@xl': tw`@xl:space-y-6`,
+    '@xl/map': tw`@xl/map:space-y-6`,
   },
   mapContainer: {
     default: tw`aspect-[4/3] space-y-4 py-6`,

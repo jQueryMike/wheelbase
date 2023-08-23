@@ -45,8 +45,7 @@ const buildColors = (theme) => {
       },
       body: {
         DEFAULT: theme.bodyDefault || '#ffffff',
-        light: theme.bodyLight || '#ffffff',
-        dark: theme.bodyDark || '#000000',
+        alt: theme.bodyAlt || '#E0E0E0',
       },
       divider: {
         DEFAULT: theme.divider || '#BEBEBE',

@@ -9,13 +9,14 @@ let classes: OpeningTimesClasses<ClassesProperty> = {};
 let itemClasses: OpeningTimesItemClasses<ClassesProperty> = {};
 
 classes = {
-  root: {
-    default: tw`space-y-4 @container`,
-    '@xl': tw`@xl:space-y-6`,
+  root: tw`@container/opening-times`,
+  rootInner: {
+    default: tw`space-y-4`,
+    '@xl/opening-times': tw`@xl/opening-times:space-y-6`,
   },
   contentAreaContainer: {
     default: tw`space-y-4`,
-    '@xl': tw`@xl:space-y-6`,
+    '@xl/opening-times': tw`@xl/opening-times:space-y-6`,
   },
   itemsContainer: {
     default: tw`space-y-2 py-6`,
@@ -28,7 +29,7 @@ itemClasses = {
   icon: tw`text-accent`,
   value: tw`text-right`,
   closed: tw`opacity-50`,
-  highlight: tw`bg-body-light`,
+  highlight: tw`bg-body-alt`,
 };
 
 const openingTimesVariant: OpeningTimesVariant = {
