@@ -1,13 +1,12 @@
 interface BlockBuilderConfig {
   id: string;
-  name?: string;
+  name: string;
   content?: { [propName: string]: any };
   settings?: { [propName: string]: any };
-  parentVariantId?: string;
-  parentOverrides?: { [propName: string]: string };
   globalTheme?: any;
   globalConfig?: any;
   defaultProps?: any;
+  inheritedThemes?: any[];
 }
 
 export default BlockBuilderConfig;

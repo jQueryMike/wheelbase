@@ -28,6 +28,7 @@
     "dotenv": "^16.3.1",
     "elastic-apm-node": "^3.46.0",
     "flat": "^5.0.2",
+    "handlebars": "^4.7.8",
     "isomorphic-dompurify": "^1.6.0",
     "mjml": "^4.14.1",
     "next": "^13.4.8",

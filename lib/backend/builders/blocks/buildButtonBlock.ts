@@ -2,8 +2,7 @@ import { ButtonProps, ButtonSize, ButtonStyle } from '@components/blocks/Button'
 import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
 
 const getSizeKey = (size: string) => {
   switch (size) {
@@ -36,40 +35,30 @@ const buildButtonBlock = ({
   name,
   content,
   settings,
-  parentVariantId,
-  parentOverrides,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & ButtonProps) | undefined => {
   try {
     if (!content) return undefined;
 
     // Shortcut to block theme properties from globalTheme
-    const globalButtonThemeProperties = globalTheme?.buttonTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.buttonTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > parent > global > default variant id
-    const instanceVariantId = content.themeVariant;
-    const globalVariantId = globalButtonThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || parentVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/Button/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalButtonThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const button: Block & ButtonProps = { id, name, target: content?.link[0]?.target || '_self' };
-
-    // Add classes
-    button.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      parentOverrides,
-      instanceOverrides,
-    });
+    const button: Block & ButtonProps = { id, name, target: content?.link[0]?.target || '_self', classes };
 
     // Add props
     if (content?.link[0]?.url || content?.link[0]?.route?.path)
-      button.href = content.link[0].url || content.link[0].route.path;
+      button.href = (content.link[0].url || content.link[0].route.path).replace('/home', '');
     if (content?.link[0].title) button.text = content.link[0].title;
     if (content?.buttonSize) button.size = getSizeKey(content.buttonSize);
     if (content?.buttonStyle) button.style = getStyleKey(content.buttonStyle);

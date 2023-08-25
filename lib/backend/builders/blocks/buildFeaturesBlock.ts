@@ -3,8 +3,8 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildHeadingsBlock from './buildHeadingsBlock';
 import buildImageBlock from './buildImageBlock';
 
@@ -15,44 +15,36 @@ const buildFeaturesBlock = ({
   settings,
   globalTheme,
   globalConfig,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & FeaturesProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalFeaturesThemeProperties = globalTheme?.featuresTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.featuresTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalFeaturesThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/Features/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalFeaturesThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+      gridColsOverrides: [{ className: 'itemsContainer', content, queryType: 'container' }],
+    });
 
     // Build initial block
-    const features: Block & FeaturesProps = { id, name };
-
-    // Add classes
-    features.classes = buildTheme({
-      classes: activeVariant.classes,
-      gridColsOverrides: [{ className: 'itemsContainer', content, queryType: 'container' }],
-      globalOverrides,
-      instanceOverrides,
-    });
+    const features: Block & FeaturesProps = { id, name, classes };
 
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
-      const headingsThemeProperties = globalFeaturesThemeProperties?.headingsTheme?.items[0]?.content?.properties;
+      const headingsTheme = globalBlockTheme?.headingsTheme?.items[0]?.content?.properties;
 
       features.headings = buildHeadingsBlock({
         id: headings.content.id,
         name: 'Headings',
         content: headings.content.properties,
         settings: headings.settings.properties,
-        parentVariantId: headingsThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingsThemeProperties),
+        inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
       });
     }
@@ -64,22 +56,22 @@ const buildFeaturesBlock = ({
         const itemContent = item.content?.properties;
         const itemSettings = item.settings?.properties;
 
-        // Get global and instance overrides
-        const itemGlobalOverrides = extractClassOverrides(globalFeaturesThemeProperties, 'tw_item__');
-        const itemInstanceOverrides = extractClassOverrides(itemSettings);
+        // Build item classes
+        const itemClasses = buildBlockClasses({
+          name,
+          globalBlockTheme,
+          inheritedThemes,
+          instanceVariant: content?.themeVariant,
+          instanceSettings: itemSettings,
+          classesIdentifier: 'itemClasses',
+        });
 
         // Build intiial item
-        const featuresItem: FeaturesItem = { id: item.content.id };
-
-        featuresItem.classes = buildTheme({
-          classes: activeVariant.itemClasses,
-          globalOverrides: itemGlobalOverrides,
-          instanceOverrides: itemInstanceOverrides,
-        });
+        const featuresItem: FeaturesItem = { id: item.content.id, classes: itemClasses };
 
         featuresItem.contentArea = buildAdditionalContent({
           items: itemContent.contentArea?.items,
-          parentThemeProperties: globalFeaturesThemeProperties,
+          parentThemeProperties: globalBlockTheme,
           globalTheme,
         });
 
@@ -89,7 +81,7 @@ const buildFeaturesBlock = ({
         // Add image
         const itemImage = itemContent.image ? itemContent.image[0] : null;
         if (itemImage) {
-          const itemImageThemeProperties = globalFeaturesThemeProperties?.itemImageTheme?.items[0]?.content?.properties;
+          const itemImageTheme = globalBlockTheme?.itemImageTheme?.items[0]?.content?.properties;
 
           itemContent.alt = itemImage.name;
 
@@ -97,8 +89,7 @@ const buildFeaturesBlock = ({
             id: itemImage.id,
             name: 'Image',
             content: { ...itemImage },
-            parentVariantId: itemImageThemeProperties?.themeVariant,
-            parentOverrides: extractClassOverrides(itemImageThemeProperties),
+            inheritedThemes: [itemImageTheme],
             globalTheme,
           });
         }
@@ -109,15 +100,17 @@ const buildFeaturesBlock = ({
 
     features.contentArea1 = buildAdditionalContent({
       items: content?.contentArea1?.items,
-      parentThemeProperties: globalFeaturesThemeProperties,
+      globalBlockTheme,
       globalTheme,
       globalConfig,
+      inheritedThemes,
     });
 
     features.contentArea2 = buildAdditionalContent({
       items: content?.contentArea2?.items,
-      parentThemeProperties: globalFeaturesThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     return features;

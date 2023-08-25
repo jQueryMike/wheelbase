@@ -25,7 +25,8 @@ export type FooterClasses<T> = {
     | 'legalNavigationListItem'
     | 'copyrightContainer'
     | 'copyrightText'
-    | 'logoContainer']?: T;
+    | 'logoContainer'
+    | 'logoLink']?: T;
 };
 
 export type FooterInfoItemClasses<T> = {
@@ -97,7 +98,11 @@ const Footer = ({
     );
 
     if (logoHref) {
-      logoContainer = <NextLink href={logoHref}>{logoContainer}</NextLink>;
+      logoContainer = (
+        <NextLink href={logoHref} className={classes.logoLink}>
+          {logoContainer}
+        </NextLink>
+      );
     }
   }
 

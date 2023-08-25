@@ -3,8 +3,8 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildImageBlock from './buildImageBlock';
 
 const buildHeaderBlock = ({
@@ -13,42 +13,34 @@ const buildHeaderBlock = ({
   content,
   settings,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & HeaderProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalHeaderThemeProperties = globalTheme?.headerTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.headerTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > parent > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalHeaderThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/Header/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalHeaderThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const header: Block & HeaderProps = { id, name };
-
-    // Add classes
-    header.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const header: Block & HeaderProps = { id, name, classes };
 
     const headerLogo = content?.logoImage ? content?.logoImage[0] : null;
 
     if (headerLogo) {
-      const headerLogoThemeProperties = globalHeaderThemeProperties?.headerLogoTheme?.items[0]?.content?.properties;
+      const headerLogoTheme = globalBlockTheme?.headerLogoTheme?.items[0]?.content?.properties;
 
       header.logo = buildImageBlock({
         id: headerLogo.id,
         name: 'Image',
         content: { ...headerLogo },
-        parentVariantId: headerLogoThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headerLogoThemeProperties),
+        inheritedThemes: [headerLogoTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
         defaultProps: {
           fill: true,
@@ -59,14 +51,19 @@ const buildHeaderBlock = ({
 
     header.contentArea = buildAdditionalContent({
       items: content?.contentArea?.items,
-      parentThemeProperties: globalHeaderThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     // Add props
     if (content?.enableScrollTransition !== undefined) header.enableScrollTransition = content.enableScrollTransition;
     if (content?.scrollTransitionPosition)
       header.scrollTransitionPosition = parseInt(content.scrollTransitionPosition, 10);
+
+    if (content?.logoLink[0] && (content?.logoLink[0]?.url || content?.logoLink[0]?.route?.path)) {
+      header.logoHref = (content.logoLink[0].url || content.logoLink[0].route.path).replace('/home', '');
+    }
 
     return header;
   } catch (error) {

@@ -24,12 +24,12 @@ classes = {
 };
 
 itemClasses = {
-  root: tw`flex items-center justify-between space-x-2 rounded px-3 py-2 text-copy`,
-  label: tw`grow`,
-  icon: tw`text-accent`,
-  value: tw`text-right`,
-  closed: tw`opacity-50`,
-  highlight: tw`bg-body-alt`,
+  itemRoot: tw`flex items-center justify-between space-x-2 rounded px-3 py-2 text-copy`,
+  itemLabel: tw`grow`,
+  itemIcon: tw`text-accent`,
+  itemValue: tw`text-right`,
+  itemClosed: tw`opacity-50`,
+  itemHighlight: tw`bg-body-alt`,
 };
 
 const openingTimesVariant: OpeningTimesVariant = {

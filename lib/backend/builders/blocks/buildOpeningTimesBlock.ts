@@ -3,8 +3,8 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildHeadingsBlock from './buildHeadingsBlock';
 
 const buildOpeningTimesBlock = ({
@@ -13,44 +13,35 @@ const buildOpeningTimesBlock = ({
   content,
   settings,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & OpeningTimesProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalOpeningTimesThemeProperties = globalTheme?.openingTimesTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.openingTimesTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalOpeningTimesThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant =
-      require(`/lib/components/blocks/OpeningTimes/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalOpeningTimesThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const openingTimes: Block & OpeningTimesProps = { id, name, items: content?.openingTimesItems };
-
-    // Add classes
-    openingTimes.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const openingTimes: Block & OpeningTimesProps = { id, name, items: content?.openingTimesItems, classes };
 
     // Add heading
     const headings = content?.headings?.items[0];
     if (headings) {
-      const headingsThemeProperties = globalOpeningTimesThemeProperties?.headingsTheme?.items[0]?.content?.properties;
+      const headingsTheme = globalBlockTheme?.headingsTheme?.items[0]?.content?.properties;
 
       openingTimes.headings = buildHeadingsBlock({
         id: headings.content.id,
         name: 'Headings',
         content: headings.content.properties,
         settings: headings.settings.properties,
-        parentVariantId: headingsThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingsThemeProperties),
+        inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
       });
     }
@@ -61,10 +52,6 @@ const buildOpeningTimesBlock = ({
         const itemContent = item.content?.properties;
         const itemSettings = item.settings?.properties;
 
-        // Get global and instance overrides
-        const itemGlobalOverrides = extractClassOverrides(globalOpeningTimesThemeProperties, 'tw_item__');
-        const itemInstanceOverrides = extractClassOverrides(itemSettings, 'tw_item__');
-
         let value: string | undefined;
 
         if (itemContent.displayType === 'Closed') value = 'Closed';
@@ -74,6 +61,16 @@ const buildOpeningTimesBlock = ({
 
         const icon = itemContent.icon || content.icon || undefined;
 
+        // Build item classes
+        const itemClasses = buildBlockClasses({
+          name,
+          globalBlockTheme,
+          inheritedThemes,
+          instanceVariant: content?.themeVariant,
+          instanceSettings: itemSettings,
+          classesIdentifier: 'itemClasses',
+        });
+
         // Build intiial item
         const openingTimesItem: OpeningTimesItemProps = {
           id: item.content.id,
@@ -81,13 +78,8 @@ const buildOpeningTimesBlock = ({
           value,
           closed: itemContent.displayType === 'Closed',
           icon,
+          classes: itemClasses,
         };
-
-        openingTimesItem.classes = buildTheme({
-          classes: activeVariant.itemClasses,
-          globalOverrides: itemGlobalOverrides,
-          instanceOverrides: itemInstanceOverrides,
-        });
 
         if (itemContent.closed) openingTimesItem.closed = itemContent.closed;
 
@@ -97,14 +89,16 @@ const buildOpeningTimesBlock = ({
 
     openingTimes.contentArea1 = buildAdditionalContent({
       items: content?.contentArea1?.items,
-      parentThemeProperties: globalOpeningTimesThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     openingTimes.contentArea2 = buildAdditionalContent({
       items: content?.contentArea2?.items,
-      parentThemeProperties: globalOpeningTimesThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     return openingTimes;

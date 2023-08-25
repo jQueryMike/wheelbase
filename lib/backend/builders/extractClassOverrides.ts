@@ -1,4 +1,4 @@
-const extractClassOverrides = (input?: { [propName: string]: any }, prefix = 'tw__') => {
+const extractClassOverrides = (input?: { [propName: string]: any }, prefix = 'tw_') => {
   if (!input) return {};
 
   const output = { ...input };

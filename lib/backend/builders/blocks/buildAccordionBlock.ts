@@ -3,8 +3,8 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildHeadingBlock from './buildHeadingBlock';
 import buildHeadingsBlock from './buildHeadingsBlock';
 
@@ -14,43 +14,35 @@ const buildAccordionBlock = ({
   content,
   settings,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & AccordionProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalAccordionThemeProperties = globalTheme?.accordionTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.accordionTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalAccordionThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/Accordion/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalAccordionThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const accordion: Block & AccordionProps = { id, name };
-
-    // Add classes
-    accordion.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const accordion: Block & AccordionProps = { id, name, classes };
 
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
-      const headingsThemeProperties = globalAccordionThemeProperties?.headingsTheme?.items[0]?.content?.properties;
+      const headingsTheme = globalBlockTheme?.headingsTheme?.items[0]?.content?.properties;
 
       accordion.headings = buildHeadingsBlock({
         id: headings.content.id,
         name: 'Headings',
         content: headings.content.properties,
         settings: headings.settings.properties,
-        parentVariantId: headingsThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingsThemeProperties),
+        inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
       });
     }
@@ -62,40 +54,39 @@ const buildAccordionBlock = ({
         const itemContent = item.content?.properties;
         const itemSettings = item.settings?.properties;
 
-        // Get global and instance overrides
-        const itemGlobalOverrides = extractClassOverrides(globalAccordionThemeProperties, 'tw_item__');
-        const itemInstanceOverrides = extractClassOverrides(itemSettings);
+        // Build item classes
+        const itemClasses = buildBlockClasses({
+          name,
+          globalBlockTheme,
+          inheritedThemes,
+          instanceVariant: content?.themeVariant,
+          instanceSettings: itemSettings,
+          classesIdentifier: 'itemClasses',
+        });
 
         // Build intiial item
-        const accordionItem: AccordionItem = { id: item.content.id };
-
-        accordionItem.classes = buildTheme({
-          classes: activeVariant.itemClasses,
-          globalOverrides: itemGlobalOverrides,
-          instanceOverrides: itemInstanceOverrides,
-        });
+        const accordionItem: AccordionItem = { id: item.content.id, classes: itemClasses };
 
         // Add heading
         const itemHeading = itemContent.heading?.items[0];
         if (itemHeading) {
-          const itemHeadingThemeProperties =
-            globalAccordionThemeProperties?.itemHeadingTheme?.items[0]?.content?.properties;
+          const itemHeadingTheme = globalBlockTheme?.itemHeadingTheme?.items[0]?.content?.properties;
 
           accordionItem.heading = buildHeadingBlock({
             id: itemHeading.content.id,
             name: 'Heading',
             content: itemHeading.content.properties,
             settings: itemHeading.settings.properties,
-            parentVariantId: itemHeadingThemeProperties?.themeVariant,
-            parentOverrides: extractClassOverrides(itemHeadingThemeProperties),
+            inheritedThemes: [itemHeadingTheme, ...extractInheritedTheme('heading', inheritedThemes)],
             globalTheme,
           });
         }
 
         accordionItem.contentArea = buildAdditionalContent({
           items: itemContent.contentArea?.items,
-          parentThemeProperties: globalAccordionThemeProperties,
+          globalBlockTheme,
           globalTheme,
+          inheritedThemes,
         });
 
         return accordionItem;
@@ -104,14 +95,16 @@ const buildAccordionBlock = ({
 
     accordion.contentArea1 = buildAdditionalContent({
       items: content?.contentArea1?.items,
-      parentThemeProperties: globalAccordionThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     accordion.contentArea2 = buildAdditionalContent({
       items: content?.contentArea2?.items,
-      parentThemeProperties: globalAccordionThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     return accordion;

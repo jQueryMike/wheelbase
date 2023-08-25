@@ -3,8 +3,8 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildHeadingsBlock from './buildHeadingsBlock';
 
 const buildAddressBlock = ({
@@ -13,30 +13,23 @@ const buildAddressBlock = ({
   content,
   settings,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & AddressProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalAddressThemeProperties = globalTheme?.addressTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.addressTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalAddressThemeProperties?.variant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/Address/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalAddressThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const address: Block & AddressProps = { id, name };
-
-    // Add classes
-    address.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const address: Block & AddressProps = { id, name, classes };
 
     // Build address
     const addressLines: string[] = [];
@@ -58,29 +51,30 @@ const buildAddressBlock = ({
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
-      const headingsThemeProperties = globalAddressThemeProperties?.headingsTheme?.items[0]?.content?.properties;
+      const headingsTheme = globalBlockTheme?.headingsTheme?.items[0]?.content?.properties;
 
       address.headings = buildHeadingsBlock({
         id: headings.content.id,
         name: 'Headings',
         content: headings.content.properties,
         settings: headings.settings.properties,
-        parentVariantId: headingsThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingsThemeProperties),
+        inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
       });
     }
 
     address.contentArea1 = buildAdditionalContent({
       items: content?.contentArea1?.items,
-      parentThemeProperties: globalAddressThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     address.contentArea2 = buildAdditionalContent({
       items: content?.contentArea2?.items,
-      parentThemeProperties: globalAddressThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     return address;

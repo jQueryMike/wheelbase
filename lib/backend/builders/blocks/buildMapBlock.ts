@@ -3,8 +3,8 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildHeadingsBlock from './buildHeadingsBlock';
 
 export const extractSrcFromGoogleMaps = (googleMapLink: string): string | undefined => {
@@ -25,60 +25,54 @@ const buildMapBlock = ({
   content,
   settings,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & MapProps) | undefined => {
   try {
     const googleMapLink = extractSrcFromGoogleMaps(content?.googleMapLink);
     if (!googleMapLink) return undefined;
 
     // Shortcut to block theme properties from globalTheme
-    const globalMapThemeProperties = globalTheme?.mapTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.mapTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalMapThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/Map/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalMapThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const map: Block & MapProps = { id, name, googleMapLink };
-
-    // Add classes
-    map.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const map: Block & MapProps = { id, name, googleMapLink, classes };
 
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
-      const headingsThemeProperties = globalMapThemeProperties?.headingsTheme?.items[0]?.content?.properties;
+      const headingsTheme = globalBlockTheme?.headingsTheme?.items[0]?.content?.properties;
 
       map.headings = buildHeadingsBlock({
         id: headings.content.id,
         name: 'Headings',
         content: headings.content.properties,
         settings: headings.settings.properties,
-        parentVariantId: headingsThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingsThemeProperties),
+        inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
       });
     }
 
     map.contentArea1 = buildAdditionalContent({
       items: content?.contentArea1?.items,
-      parentThemeProperties: globalMapThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     map.contentArea2 = buildAdditionalContent({
       items: content?.contentArea2?.items,
-      parentThemeProperties: globalMapThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     return map;

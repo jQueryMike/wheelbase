@@ -8,7 +8,7 @@
     "@next/next/no-html-link-for-pages": "off",
     "global-require": "off",
     "import/no-dynamic-require": "off",
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.ts", "**/*.test.tsx"] }],
+    "import/no-extraneous-dependencies": "off",
     "import/no-named-as-default": "off",
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-plusplus": "off",

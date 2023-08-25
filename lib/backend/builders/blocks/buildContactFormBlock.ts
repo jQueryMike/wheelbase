@@ -4,8 +4,8 @@ import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 import { v4 as uuidv4 } from 'uuid';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildButtonBlock from './buildButtonBlock';
 import buildHeadingsBlock from './buildHeadingsBlock';
 
@@ -16,23 +16,23 @@ const buildContactFormBlock = ({
   settings,
   globalTheme,
   globalConfig,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & ContactFormProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalContactFormThemeProperties = globalTheme?.contactFormTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.contactFormTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalContactFormThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/ContactForm/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalContactFormThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build submit button
-    const buttonThemeProperties = globalContactFormThemeProperties?.submitButtonTheme?.items[0]?.content?.properties;
+    const buttonTheme = globalBlockTheme?.submitButtonTheme?.items[0]?.content?.properties;
 
     const submitButton = buildButtonBlock({
       id: uuidv4(),
@@ -46,20 +46,12 @@ const buildContactFormBlock = ({
         ],
       },
       settings: {},
-      parentVariantId: buttonThemeProperties?.themeVariant,
-      parentOverrides: extractClassOverrides(buttonThemeProperties),
+      inheritedThemes: [buttonTheme, ...extractInheritedTheme('button', inheritedThemes)],
       globalTheme,
     })!;
 
     // Build initial block
-    const contactForm: Block & ContactFormProps = { id, name, submitButton };
-
-    // Add classes
-    contactForm.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const contactForm: Block & ContactFormProps = { id, name, submitButton, classes };
 
     // Add labels and button text
     if (content?.nameLabel) contactForm.nameLabel = content.nameLabel;
@@ -79,15 +71,14 @@ const buildContactFormBlock = ({
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
-      const headingsThemeProperties = globalContactFormThemeProperties?.headingsTheme?.items[0]?.content?.properties;
+      const headingsTheme = globalBlockTheme?.headingsTheme?.items[0]?.content?.properties;
 
       contactForm.headings = buildHeadingsBlock({
         id: headings.content.id,
         name: 'Headings',
         content: headings.content.properties,
         settings: headings.settings.properties,
-        parentVariantId: headingsThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingsThemeProperties),
+        inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
       });
     }
@@ -95,25 +86,28 @@ const buildContactFormBlock = ({
     // Add content areas
     contactForm.contentArea1 = buildAdditionalContent({
       items: content?.contentArea1?.items,
-      parentThemeProperties: globalContactFormThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     contactForm.contentArea2 = buildAdditionalContent({
       items: content?.contentArea2?.items,
-      parentThemeProperties: globalContactFormThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     contactForm.thankYouContentArea = buildAdditionalContent({
       items: content?.thankYouContentArea?.items,
-      parentThemeProperties: globalContactFormThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     contactForm.formContentArea = buildAdditionalContent({
       items: content?.formContentArea?.items,
-      parentThemeProperties: globalContactFormThemeProperties,
+      globalBlockTheme,
       globalTheme,
     });
 

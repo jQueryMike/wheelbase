@@ -24,25 +24,25 @@ classes = {
 };
 
 itemClasses = {
-  root: tw`overflow-hidden rounded-lg border border-divider`,
-  toggleButton: {
+  itemRoot: tw`overflow-hidden rounded-lg border border-divider`,
+  itemToggleButton: {
     default: tw`flex w-full items-center justify-between p-4`,
     hover: tw`hover:bg-body-alt/50`,
   },
-  toggleButtonExpanded: tw`border-b border-divider`,
-  toggleButtonCollapsed: tw``,
-  toggleIconContainer: tw`text-sm text-accent transition duration-150`,
-  toggleIconContainerExpanded: tw`-rotate-180`,
-  toggleIconContainerCollapsed: tw`rotate-0`,
-  toggleIcon: tw`fa-solid fa-arrow-down`,
-  contentAreaContainer: {
+  itemToggleButtonExpanded: tw`border-b border-divider`,
+  itemToggleButtonCollapsed: tw``,
+  itemToggleIconContainer: tw`text-sm text-accent transition duration-150`,
+  itemToggleIconContainerExpanded: tw`-rotate-180`,
+  itemToggleIconContainerCollapsed: tw`rotate-0`,
+  itemToggleIcon: tw`fa-solid fa-arrow-down`,
+  itemContentAreaContainer: {
     default: tw`space-y-4 p-4`,
     '@xl/accordion': tw`@xl/accordion:p-5`,
     '@3xl/accordion': tw`@3xl/accordion:p-6`,
     '@5xl/accordion': tw`@5xl/accordion:p-8`,
   },
-  contentAreaContainerExpanded: tw`block`,
-  contentAreaContainerCollapsed: tw`hidden`,
+  itemContentAreaContainerExpanded: tw`block`,
+  itemContentAreaContainerCollapsed: tw`hidden`,
 };
 
 const accordionVariant: AccordionVariant = {

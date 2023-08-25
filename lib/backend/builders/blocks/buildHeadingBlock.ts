@@ -2,8 +2,7 @@ import { HeadingProps, HeadingSize } from '@components/blocks/Heading';
 import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
 
 const getSizeKey = (size: string) => {
   if (!size) return undefined;
@@ -29,36 +28,26 @@ const buildHeadingBlock = ({
   name,
   content,
   settings,
-  parentVariantId,
-  parentOverrides,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & HeadingProps) | undefined => {
   try {
     if (!content?.headingText) return undefined;
 
     // Shortcut to block theme properties from globalTheme
-    const globalHeadingThemeProperties = globalTheme?.headingTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.headingTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > parent > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalHeadingThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || parentVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/Heading/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalHeadingThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const heading: Block & HeadingProps = { id, name, text: content.headingText };
-
-    // Add classes
-    heading.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      parentOverrides,
-      instanceOverrides,
-    });
+    const heading: Block & HeadingProps = { id, name, text: content.headingText, classes };
 
     // Add props
     if (content?.headingTag) heading.tag = content?.headingTag;

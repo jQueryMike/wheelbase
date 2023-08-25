@@ -21,18 +21,18 @@ export type AccordionClasses<T> = {
 
 export type AccordionItemClasses<T> = {
   [key in
-    | 'root'
-    | 'toggleButton'
-    | 'toggleButtonExpanded'
-    | 'toggleButtonCollapsed'
-    | 'toggleIconContainer'
-    | 'toggleIconContainerExpanded'
-    | 'toggleIconContainerCollapsed'
-    | 'toggleIcon'
-    | 'headingContainer'
-    | 'contentAreaContainer'
-    | 'contentAreaContainerExpanded'
-    | 'contentAreaContainerCollapsed']?: T;
+    | 'itemRoot'
+    | 'itemToggleButton'
+    | 'itemToggleButtonExpanded'
+    | 'itemToggleButtonCollapsed'
+    | 'itemToggleIconContainer'
+    | 'itemToggleIconContainerExpanded'
+    | 'itemToggleIconContainerCollapsed'
+    | 'itemToggleIcon'
+    | 'itemHeadingContainer'
+    | 'itemContentAreaContainer'
+    | 'itemContentAreaContainerExpanded'
+    | 'itemContentAreaContainerCollapsed']?: T;
 };
 
 export interface AccordionItem {
@@ -82,37 +82,37 @@ const Accordion = ({ classes = {}, headings, items = [], contentArea1 = [], cont
 
             return (
               <div key={item.id} className={classes.itemContainer}>
-                <div className={item.classes?.root}>
+                <div className={item.classes?.itemRoot}>
                   <button
                     onClick={() => toggleAccordionItem(item.id)}
                     className={cn(
-                      item.classes?.toggleButton,
-                      isExpanded ? item.classes?.toggleButtonExpanded : item.classes?.toggleButtonCollapsed,
+                      item.classes?.itemToggleButton,
+                      isExpanded ? item.classes?.itemToggleButtonExpanded : item.classes?.itemToggleButtonCollapsed,
                     )}
                   >
                     {item.heading && (
-                      <div className={item.classes?.headingContainer}>
+                      <div className={item.classes?.itemHeadingContainer}>
                         <Heading tag={HeadingTag.H4} size={HeadingSize.Small} {...item.heading} />
                       </div>
                     )}
                     <div
                       className={cn(
-                        item.classes?.toggleIconContainer,
+                        item.classes?.itemToggleIconContainer,
                         isExpanded
-                          ? item.classes?.toggleIconContainerExpanded
-                          : item.classes?.toggleIconContainerCollapsed,
+                          ? item.classes?.itemToggleIconContainerExpanded
+                          : item.classes?.itemToggleIconContainerCollapsed,
                       )}
                     >
-                      <Icon className={item.classes?.toggleIcon} />
+                      <Icon className={item.classes?.itemToggleIcon} />
                     </div>
                   </button>
                   {item.contentArea && item.contentArea.length > 0 && (
                     <div
                       className={cn(
-                        item.classes?.contentAreaContainer,
+                        item.classes?.itemContentAreaContainer,
                         isExpanded
-                          ? item.classes?.contentAreaContainerExpanded
-                          : item.classes?.contentAreaContainerCollapsed,
+                          ? item.classes?.itemContentAreaContainerExpanded
+                          : item.classes?.itemContentAreaContainerCollapsed,
                       )}
                     >
                       <BlockList blocks={item.contentArea} />

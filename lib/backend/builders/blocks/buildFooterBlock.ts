@@ -8,8 +8,8 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildImageBlock from './buildImageBlock';
 
 const buildFooterBlock = ({
@@ -18,42 +18,34 @@ const buildFooterBlock = ({
   content,
   settings,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & FooterProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalFooterThemeProperties = globalTheme?.footerTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.footerTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > parent > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalFooterThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/Footer/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalFooterThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const footer: Block & FooterProps = { id, name };
-
-    // Add classes
-    footer.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const footer: Block & FooterProps = { id, name, classes };
 
     const footerLogo = content?.logoImage ? content?.logoImage[0] : null;
 
     if (footerLogo) {
-      const footerLogoThemeProperties = globalFooterThemeProperties?.footerLogoTheme?.items[0]?.content?.properties;
+      const footerLogoTheme = globalBlockTheme?.footerLogoTheme?.items[0]?.content?.properties;
 
       footer.logo = buildImageBlock({
         id: footerLogo.id,
         name: 'Image',
         content: { ...footerLogo },
-        parentVariantId: footerLogoThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(footerLogoThemeProperties),
+        inheritedThemes: [footerLogoTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
         defaultProps: {
           fill: true,
@@ -62,10 +54,15 @@ const buildFooterBlock = ({
       });
     }
 
+    if (content?.logoLink[0] && (content?.logoLink[0]?.url || content?.logoLink[0]?.route?.path)) {
+      footer.logoHref = (content.logoLink[0].url || content.logoLink[0].route.path).replace('/home', '');
+    }
+
     footer.contentArea = buildAdditionalContent({
       items: content?.contentArea?.items,
-      parentThemeProperties: globalFooterThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     // Build info items
@@ -75,18 +72,18 @@ const buildFooterBlock = ({
         const itemContent = item.content?.properties;
         const itemSettings = item.settings?.properties;
 
-        // Get global and instance overrides
-        const itemGlobalOverrides = extractClassOverrides(globalFooterThemeProperties, 'tw_item__');
-        const itemInstanceOverrides = extractClassOverrides(itemSettings);
+        // Build info item classes
+        const infoItemClasses = buildBlockClasses({
+          name,
+          globalBlockTheme,
+          inheritedThemes,
+          instanceVariant: content?.themeVariant,
+          instanceSettings: itemSettings,
+          classesIdentifier: 'infoItemClasses',
+        });
 
         // Build intiial item
-        const infoItem: FooterInfoItem = { id: item.content.id };
-
-        infoItem.classes = buildTheme({
-          classes: activeVariant.infoItemClasses,
-          globalOverrides: itemGlobalOverrides,
-          instanceOverrides: itemInstanceOverrides,
-        });
+        const infoItem: FooterInfoItem = { id: item.content.id, classes: infoItemClasses };
 
         if (itemContent.label) infoItem.label = itemContent.label;
         if (itemContent.value) infoItem.value = itemContent.value;
@@ -105,18 +102,21 @@ const buildFooterBlock = ({
 
           if (!itemContent.link || !itemContent.link[0]) return null;
 
-          // Get global and instance overrides
-          const itemGlobalOverrides = extractClassOverrides(globalFooterThemeProperties, 'tw_item__');
-          const itemInstanceOverrides = extractClassOverrides(itemSettings);
+          // Build soaicl navigation item classes
+          const socialNavigationItemClasses = buildBlockClasses({
+            name,
+            globalBlockTheme,
+            inheritedThemes,
+            instanceVariant: content?.themeVariant,
+            instanceSettings: itemSettings,
+            classesIdentifier: 'socialNavigationItemClasses',
+          });
 
           // Build intiial item
-          const socialNavigationItem: FooterSocialNavigationItem = { id: item.content.id };
-
-          socialNavigationItem.classes = buildTheme({
-            classes: activeVariant.socialNavigationItemClasses,
-            globalOverrides: itemGlobalOverrides,
-            instanceOverrides: itemInstanceOverrides,
-          });
+          const socialNavigationItem: FooterSocialNavigationItem = {
+            id: item.content.id,
+            classes: socialNavigationItemClasses,
+          };
 
           if (itemContent.icon) socialNavigationItem.icon = itemContent.icon;
           if (itemContent.link[0].url || itemContent.link[0].route?.path)
@@ -139,18 +139,21 @@ const buildFooterBlock = ({
 
           if (!itemContent.link || !itemContent.link[0]) return null;
 
-          // Get global and instance overrides
-          const itemGlobalOverrides = extractClassOverrides(globalFooterThemeProperties, 'tw_item__');
-          const itemInstanceOverrides = extractClassOverrides(itemSettings);
+          // Build legal navigation item classes
+          const legalNavigationItemClasses = buildBlockClasses({
+            name,
+            globalBlockTheme,
+            inheritedThemes,
+            instanceVariant: content?.themeVariant,
+            instanceSettings: itemSettings,
+            classesIdentifier: 'legalNavigationItemClasses',
+          });
 
           // Build intiial item
-          const legalNavigationItem: FooterLegalNavigationItem = { id: item.content.id };
-
-          legalNavigationItem.classes = buildTheme({
-            classes: activeVariant.legalNavigationItemClasses,
-            globalOverrides: itemGlobalOverrides,
-            instanceOverrides: itemInstanceOverrides,
-          });
+          const legalNavigationItem: FooterLegalNavigationItem = {
+            id: item.content.id,
+            classes: legalNavigationItemClasses,
+          };
 
           if (itemContent.link[0].url || itemContent.link[0].route?.path)
             legalNavigationItem.href = itemContent.link[0].url || itemContent.link[0].route.path;

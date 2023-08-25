@@ -4,14 +4,20 @@ import Block from '@interfaces/Block';
 import buildButtonBlock from './blocks/buildButtonBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
-import extractClassOverrides from './extractClassOverrides';
+import extractInheritedTheme from './extractInheritedTheme';
 
-const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, globalTheme = {}, globalConfig }: any) => {
+const buildAdditionalContent = ({
+  items = [],
+  globalBlockTheme = {},
+  globalTheme = {},
+  globalConfig,
+  inheritedThemes = [],
+}: any) => {
   const additionalContent: Block[] = [];
 
   items.forEach((item: any) => {
     if (item.content.contentType === 'heading') {
-      const headingThemeProperties = parentThemeProperties?.additionalHeadingTheme?.items[0]?.content?.properties;
+      const headingTheme = globalBlockTheme?.additionalHeadingTheme?.items[0]?.content?.properties;
 
       item.content.properties.headingSize = item.content?.properties.headingSize || 'Small';
       item.settings.properties.headingTag = item.settings?.properties.headingTag || HeadingTag.H4;
@@ -21,8 +27,7 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
         name: 'Heading',
         content: item.content?.properties,
         settings: item.settings?.properties,
-        parentVariantId: headingThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingThemeProperties),
+        inheritedThemes: [headingTheme, ...extractInheritedTheme('heading', inheritedThemes)],
         globalTheme,
       });
 
@@ -30,16 +35,14 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
     }
 
     if (item.content.contentType === 'textContent') {
-      const textContentThemeProperties =
-        parentThemeProperties?.additionalTextContentTheme?.items[0]?.content?.properties;
+      const textContentTheme = globalBlockTheme?.additionalTextContentTheme?.items[0]?.content?.properties;
 
       const textContent = buildTextContentBlock({
         id: item.content.id,
         name: 'TextContent',
         content: item.content?.properties,
         settings: item.settings?.properties,
-        parentVariantId: textContentThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(textContentThemeProperties),
+        inheritedThemes: [textContentTheme, ...extractInheritedTheme('textContent', inheritedThemes)],
         globalTheme,
         globalConfig,
       });
@@ -48,15 +51,14 @@ const buildAdditionalContent = ({ items = [], parentThemeProperties = {}, global
     }
 
     if (item.content.contentType === 'button') {
-      const buttonThemeProperties = parentThemeProperties?.additionalButtonTheme?.items[0]?.content?.properties;
+      const buttonTheme = globalBlockTheme?.additionalButtonTheme?.items[0]?.content?.properties;
 
       const button = buildButtonBlock({
         id: item.content.id,
         name: 'Button',
         content: item.content?.properties,
         settings: item.settings?.properties,
-        parentVariantId: buttonThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(buttonThemeProperties),
+        inheritedThemes: [buttonTheme, ...extractInheritedTheme('button', inheritedThemes)],
         globalTheme,
       });
 

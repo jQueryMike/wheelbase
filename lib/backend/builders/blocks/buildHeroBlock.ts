@@ -4,8 +4,8 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildHeadingsBlock from './buildHeadingsBlock';
 import buildImageBlock from './buildImageBlock';
 
@@ -15,36 +15,28 @@ const buildHeroBlock = ({
   content,
   settings,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & HeroProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalHeroThemeProperties = globalTheme?.heroTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.heroTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalHeroThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant = require(`/lib/components/blocks/Hero/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalHeroThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const hero: Block & HeroProps = { id, name };
-
-    // Add classes
-    hero.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const hero: Block & HeroProps = { id, name, classes };
 
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
-      const headingsThemeProperties = globalHeroThemeProperties?.headingsTheme?.items[0]?.content?.properties;
-
+      const headingsTheme = globalBlockTheme?.headingsTheme?.items[0]?.content?.properties;
       const headingsContent = { ...headings.content.properties };
 
       if (headingsContent?.heading?.items[0]) {
@@ -60,30 +52,29 @@ const buildHeroBlock = ({
         name: 'Headings',
         content: headingsContent,
         settings: headings.settings.properties,
-        parentVariantId: headingsThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingsThemeProperties),
+        inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
       });
     }
 
     const heroImage = content?.image ? content?.image[0] : null;
     if (heroImage) {
-      const heroImageThemeProperties = globalHeroThemeProperties?.heroImageTheme?.items[0]?.content?.properties;
+      const heroImageTheme = globalBlockTheme?.heroImageTheme?.items[0]?.content?.properties;
 
       hero.image = buildImageBlock({
         id: heroImage.id,
         name: 'Image',
         content: { ...heroImage },
-        parentVariantId: heroImageThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(heroImageThemeProperties),
+        inheritedThemes: [heroImageTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
       });
     }
 
     hero.contentArea = buildAdditionalContent({
       items: content?.contentArea?.items,
-      parentThemeProperties: globalHeroThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     return hero;

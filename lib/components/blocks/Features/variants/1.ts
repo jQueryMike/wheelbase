@@ -21,23 +21,23 @@ classes = {
   itemsContainer: {
     default: tw`grid gap-8 py-6 @container/features-item`,
     '@xl/features': tw`@xl/features:gap-10`,
-    '@3xl/features': tw`@3xl/features:grid-cols-2 @3xl:gap-12`,
-    '@5xl/features': tw`@5xl/features:grid-cols-3 @5xl:gap-16`,
+    '@3xl/features': tw`@3xl/features:grid-cols-2 @3xl/features:gap-12`,
+    '@5xl/features': tw`@5xl/features:grid-cols-3 @5xl/features:gap-16`,
   },
 };
 
 itemClasses = {
-  root: {
+  itemRoot: {
     default: tw`relative flex flex-col space-y-4`,
     '@xl/features-item': tw`@xl/features-item:space-y-5`,
     '@3xl/features-item': tw`@3xl/features-item:space-y-6`,
   },
-  indicatorContainer: tw`flex h-10 w-10 items-center justify-center rounded-full bg-primary`,
-  indicator: tw`text-[20px] font-semibold leading-[20px] text-primary-contrast`,
-  iconContainer: tw``,
-  icon: tw`text-[40px] text-accent`,
-  imageContainer: tw`relative aspect-[4/3] w-full`,
-  contentAreaContainer: tw`space-y-4`,
+  itemIndicatorContainer: tw`flex h-10 w-10 items-center justify-center rounded-full bg-primary`,
+  itemIndicator: tw`text-[20px] font-semibold leading-[20px] text-primary-contrast`,
+  itemIconContainer: tw``,
+  itemIcon: tw`text-[40px] text-accent`,
+  itemImageContainer: tw`relative aspect-[4/3] w-full`,
+  itemContentAreaContainer: tw`space-y-4`,
 };
 
 const featuresVariant: FeaturesVariant = {

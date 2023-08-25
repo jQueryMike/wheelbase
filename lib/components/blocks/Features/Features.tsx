@@ -22,13 +22,13 @@ export type FeaturesClasses<T> = {
 
 export type FeaturesItemClasses<T> = {
   [key in
-    | 'root'
-    | 'indicatorContainer'
-    | 'indicator'
-    | 'iconContainer'
-    | 'icon'
-    | 'imageContainer'
-    | 'contentAreaContainer']?: T;
+    | 'itemRoot'
+    | 'itemIndicatorContainer'
+    | 'itemIndicator'
+    | 'itemIconContainer'
+    | 'itemIcon'
+    | 'itemImageContainer'
+    | 'itemContentAreaContainer']?: T;
 };
 
 export interface FeaturesItem {
@@ -65,24 +65,24 @@ const Features = ({ classes = {}, headings, items = [], contentArea1 = [], conte
         <div className={classes.itemsContainer}>
           {items.map((item) => (
             <div key={item.id} className={classes.itemContainer}>
-              <div className={item.classes?.root}>
+              <div className={item.classes?.itemRoot}>
                 {item.indicator && (
-                  <div className={item.classes?.indicatorContainer}>
-                    <div className={item.classes?.indicator}>{item.indicator}</div>
+                  <div className={item.classes?.itemIndicatorContainer}>
+                    <div className={item.classes?.itemIndicator}>{item.indicator}</div>
                   </div>
                 )}
                 {item.icon && (
-                  <div className={item.classes?.iconContainer}>
-                    <Icon className={cn(item.icon, item.classes?.icon)} />
+                  <div className={item.classes?.itemIconContainer}>
+                    <Icon className={cn(item.icon, item.classes?.itemIcon)} />
                   </div>
                 )}
                 {item.image && (
-                  <div className={item.classes?.imageContainer}>
+                  <div className={item.classes?.itemImageContainer}>
                     <Image {...item.image} />
                   </div>
                 )}
                 {item.contentArea && item.contentArea.length > 0 && (
-                  <div className={cn(item.classes?.contentAreaContainer)}>
+                  <div className={cn(item.classes?.itemContentAreaContainer)}>
                     <BlockList blocks={item.contentArea} />
                   </div>
                 )}

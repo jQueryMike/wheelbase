@@ -3,8 +3,8 @@ import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
 import buildAdditionalContent from '../buildAdditionalContent';
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
+import extractInheritedTheme from '../extractInheritedTheme';
 import buildHeadingsBlock from './buildHeadingsBlock';
 import buildImageBlock from './buildImageBlock';
 
@@ -14,44 +14,35 @@ const buildImageWithContentBlock = ({
   content,
   settings,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & ImageWithContentProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalImageWithContentThemeProperties = globalTheme?.imageWithContentTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.imageWithContentTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalImageWithContentThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant =
-      require(`/lib/components/blocks/ImageWithContent/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalImageWithContentThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const imageWithContent: Block & ImageWithContentProps = { id, name };
-
-    // Add classes
-    imageWithContent.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const imageWithContent: Block & ImageWithContentProps = { id, name, classes };
 
     // Add content
 
     const image = content?.image ? content.image[0] : null;
 
     if (image) {
-      const imageThemeProperties = globalImageWithContentThemeProperties?.imageTheme?.items[0]?.content?.properties;
+      const imageTheme = globalBlockTheme?.imageTheme?.items[0]?.content?.properties;
       imageWithContent.image = buildImageBlock({
         id: image.id,
         name: 'Image',
         content: { ...image },
-        parentVariantId: imageThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(imageThemeProperties),
+        inheritedThemes: [imageTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
         defaultProps: {
           fill: true,
@@ -63,24 +54,23 @@ const buildImageWithContentBlock = ({
     // Add headings
     const headings = content?.headings?.items[0];
     if (headings) {
-      const headingsThemeProperties =
-        globalImageWithContentThemeProperties?.headingsTheme?.items[0]?.content?.properties;
+      const headingsTheme = globalBlockTheme?.headingsTheme?.items[0]?.content?.properties;
 
       imageWithContent.headings = buildHeadingsBlock({
         id: headings.content.id,
         name: 'Headings',
         content: headings.content.properties,
         settings: headings.settings.properties,
-        parentVariantId: headingsThemeProperties?.themeVariant,
-        parentOverrides: extractClassOverrides(headingsThemeProperties),
+        inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
       });
     }
 
     imageWithContent.contentArea = buildAdditionalContent({
       items: content?.contentArea?.items,
-      parentThemeProperties: globalImageWithContentThemeProperties,
+      globalBlockTheme,
       globalTheme,
+      inheritedThemes,
     });
 
     return imageWithContent;

@@ -19,7 +19,7 @@ export type OpeningTimesClasses<T> = {
 };
 
 export type OpeningTimesItemClasses<T> = {
-  [key in 'root' | 'label' | 'value' | 'closed' | 'highlight' | 'icon']?: T;
+  [key in 'itemRoot' | 'itemLabel' | 'itemValue' | 'itemClosed' | 'itemHighlight' | 'itemIcon']?: T;
 };
 
 export interface OpeningTimesItemProps {
@@ -68,14 +68,14 @@ const OpeningTimes = ({
           {items.map((item) => (
             <div
               key={item.id}
-              className={cn(item.classes?.root, {
-                [item.classes?.highlight || '']: isCurrentDay(item.label),
-                [item.classes?.closed || '']: item.closed,
+              className={cn(item.classes?.itemRoot, {
+                [item.classes?.itemHighlight || '']: isCurrentDay(item.label),
+                [item.classes?.itemClosed || '']: item.closed,
               })}
             >
-              {item.icon && <Icon className={cn(item.icon, item.classes?.icon)} />}
-              <div className={item.classes?.label}>{item.label}</div>
-              {item.value && <div className={item.classes?.value}>{item.value}</div>}
+              {item.icon && <Icon className={cn(item.icon, item.classes?.itemIcon)} />}
+              <div className={item.classes?.itemLabel}>{item.label}</div>
+              {item.value && <div className={item.classes?.itemValue}>{item.value}</div>}
             </div>
           ))}
         </div>

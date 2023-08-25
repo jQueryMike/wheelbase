@@ -22,9 +22,9 @@ classes = {
   },
   address: {
     default: tw`text-[16px] font-semibold text-primary`,
-    '@xl/address': tw`sm:text-[16px]`,
-    '@3xl/address': tw`md:text-[18px]`,
-    '@5xl/address': tw`lg:text-[20px]`,
+    '@xl/address': tw`@xl/address:text-[16px]`,
+    '@3xl/address': tw`@3xl/address:text-[18px]`,
+    '@5xl/address': tw`@5xl/address:text-[20px]`,
   },
 };
 
