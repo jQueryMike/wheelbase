@@ -7,7 +7,7 @@ const buildFontFamily = (theme) => {
       if (key.endsWith('Font')) {
         if (theme[key]) {
           const fontTag = key.replace('Font', '');
-          fonts[fontTag] = [`"${theme[key]}"`, `"sans-serif"`];
+          fonts[fontTag] = [`"${theme[key]}"`, `"Inter"`];
         }
       }
     });
