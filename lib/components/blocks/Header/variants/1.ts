@@ -19,7 +19,7 @@ classes = {
   container: tw`container mx-auto flex h-20 items-center justify-between`,
   containerScrolled: tw``,
   logoContainer: tw`relative h-12 w-72`,
-  contentAreaContainer: tw``,
+  contentAreaContainer: tw`flex items-center space-x-10`,
 };
 
 const headerVariant: HeaderVariant = { classes: new ClassesBuilder({ location, classes }).classes };
