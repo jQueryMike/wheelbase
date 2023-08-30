@@ -2,8 +2,7 @@ import { PrimaryNavigationProps } from '@components/blocks/PrimaryNavigation';
 import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
-import buildTheme from '../buildTheme';
-import extractClassOverrides from '../extractClassOverrides';
+import buildBlockClasses from '../buildBlockClasses';
 
 const buildPrimaryNavigationBlock = ({
   id,
@@ -11,31 +10,23 @@ const buildPrimaryNavigationBlock = ({
   content,
   settings,
   globalTheme,
+  inheritedThemes,
 }: BlockBuilderConfig): (Block & PrimaryNavigationProps) | undefined => {
   try {
     // Shortcut to block theme properties from globalTheme
-    const globalPrimaryNavigationThemeProperties = globalTheme?.primaryNavigationTheme?.items[0]?.content?.properties;
+    const globalBlockTheme = globalTheme?.primaryNavigationTheme?.items[0]?.content?.properties;
 
-    // Get active variant from instance > parent > global > default variant id
-    const instanceVariantId = content?.themeVariant;
-    const globalVariantId = globalPrimaryNavigationThemeProperties?.themeVariant;
-    const blockVariantId = instanceVariantId || globalVariantId || '1';
-    const activeVariant =
-      require(`/lib/components/blocks/PrimaryNavigation/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    const globalOverrides = extractClassOverrides(globalPrimaryNavigationThemeProperties);
-    const instanceOverrides = extractClassOverrides(settings);
+    // Build classes
+    const classes = buildBlockClasses({
+      name,
+      globalBlockTheme,
+      inheritedThemes,
+      instanceVariant: content?.themeVariant,
+      instanceSettings: settings,
+    });
 
     // Build initial block
-    const primaryNavigation: Block & PrimaryNavigationProps = { id, name };
-
-    // Add classes
-    primaryNavigation.classes = buildTheme({
-      classes: activeVariant.classes,
-      globalOverrides,
-      instanceOverrides,
-    });
+    const primaryNavigation: Block & PrimaryNavigationProps = { id, name, classes };
 
     if (content?.burgerIcon) primaryNavigation.burgerIcon = content.burgerIcon;
 

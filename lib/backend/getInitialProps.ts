@@ -3,10 +3,12 @@ import buildHeaderBlock from './builders/blocks/buildHeaderBlock';
 import buildPrimaryNavigationBlock from './builders/blocks/buildPrimaryNavigationBlock';
 import buildPageSections from './builders/buildPageSections';
 
+const CONTENT_API_URL = `${process.env.API_URL!}/umbraco/delivery/api/v1/content`;
+
 const getInitialProps = async () => {
   const themeTags = process.env.ENVIRONMENT_NAME !== ' local' ? [`theme`] : [];
   const globalConfigTags = process.env.ENVIRONMENT_NAME !== ' local' ? [`global-config`] : [];
-  const url = `${process.env.CONTENT_API_URL}/item/${process.env.API_ROOT_NODE_PATH}`;
+  const url = `${CONTENT_API_URL}/item/${process.env.API_ROOT_NODE_PATH}`;
   const navUrl = `${process.env.API_URL}/api/navigation/${process.env.API_ROOT_NODE_GUID}`;
 
   const [{ properties: globalTheme }, { properties: globalConfig }, primaryNavigationItems] = await Promise.all([
