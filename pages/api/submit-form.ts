@@ -25,6 +25,7 @@ async function handler(nextApiRequest: NextApiRequest, nextApiResponse: NextApiR
     if (!notificationResponse.success) {
       return nextApiResponse.status(422).json({ message: 'Unprocessable request, failed sending notifications.' });
     }
+
     return nextApiResponse.status(200).send('OK');
   } catch (error) {
     console.error(error);

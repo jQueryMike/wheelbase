@@ -15,7 +15,7 @@ const App = ({ Component, pageProps, globalProps }: CustomAppProps) => (
     {globalProps?.headerSections?.map((section: any) => (
       <PageSection key={section.id} {...section} />
     ))}
-    <Component {...pageProps} />;
+    <Component {...pageProps} />
     {globalProps?.footerSections?.map((section: any) => (
       <PageSection key={section.id} {...section} />
     ))}

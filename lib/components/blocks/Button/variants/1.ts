@@ -9,7 +9,7 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  button: tw`relative inline-flex items-center justify-center rounded-lg font-semibold transition-all`,
+  button: tw`relative inline-flex items-center justify-center rounded-lg font-button font-semibold transition-all`,
   buttonLoading: tw`pointer-events-none`,
   buttonContent: tw`inline-flex items-center justify-center`,
   buttonContentLoading: tw`opacity-0`,
