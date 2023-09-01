@@ -1,3 +1,5 @@
+import { DefaultSeoProps } from 'next-seo';
+
 import buildFooterBlock from './builders/blocks/buildFooterBlock';
 import buildHeaderBlock from './builders/blocks/buildHeaderBlock';
 import buildPageSections from './builders/buildPageSections';
@@ -53,6 +55,49 @@ const getInitialProps = async () => {
       globalTheme,
     });
   }
+
+  let defaultSeo = {
+    openGraph: {
+      type: null,
+      locale: null,
+      url: null,
+      sitename: null,
+      images: null,
+    },
+    title: null,
+    description: null,
+    metaKeywords: null,
+    metaRobotsNoFollow: null,
+    metaRobotsNoIndex: null,
+    sitemapChangeFrequency: null,
+    sitemapPriority: null,
+  };
+
+  if (globalConfig.openGraphType) defaultSeo.openGraph.type = globalConfig.openGraphType;
+
+  if (globalConfig.openGraphLocale) defaultSeo.openGraph.locale = globalConfig.openGraphLocale;
+
+  if (globalConfig.openGraphUrl) defaultSeo.openGraph.url = globalConfig.openGraphUrl;
+
+  if (globalConfig.openGraphSitename) defaultSeo.openGraph.sitename = globalConfig.openGraphSitename;
+
+  if (globalConfig.openGraphImages) defaultSeo.openGraph.images = globalConfig.openGraphImages;
+
+  if (globalConfig.pageTitle) defaultSeo.title = globalConfig.pageTitle;
+
+  if (globalConfig.metaDescription) defaultSeo.description = globalConfig.metaDescription;
+
+  if (globalConfig.metaKeywords) defaultSeo.metaKeywords = globalConfig.metaKeywords;
+
+  if (globalConfig.metaRobotsNoFollow) defaultSeo.metaRobotsNoFollow = globalConfig.metaRobotsNoFollow;
+
+  if (globalConfig.metaRobotsNoIndex) defaultSeo.metaRobotsNoIndex = globalConfig.metaRobotsNoIndex;
+
+  if (globalConfig.sitemapChangeFrequency) defaultSeo.sitemapChangeFrequency = globalConfig.sitemapChangeFrequency;
+
+  if (globalConfig.sitemapPriority) defaultSeo.sitemapPriority = globalConfig.sitemapPriority;
+
+  globalProps.defaultSeo = defaultSeo;
 
   return { globalProps };
 };
