@@ -78,7 +78,7 @@ export const Features1: Story = {
       ...item,
       classes: {
         ...featuresVariant1.itemClasses,
-        iconContainer: `${featuresVariant1.itemClasses?.iconContainer} ${itemClasses1[index]}`,
+        iconContainer: `${featuresVariant1.itemClasses?.itemIconContainer} ${itemClasses1[index]}`,
       },
     })),
   },

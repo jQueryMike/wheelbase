@@ -18,8 +18,9 @@ classes = {
   spacerScrolled: tw``,
   container: tw`container mx-auto flex h-20 items-center justify-between`,
   containerScrolled: tw``,
+  drawerNavigationContainer: tw`mr-10`,
   logoContainer: tw`relative h-12 w-72`,
-  contentAreaContainer: tw`flex items-center space-x-10`,
+  contentAreaContainer: tw`flex flex-grow items-center justify-end space-x-10`,
 };
 
 const headerVariant: HeaderVariant = { classes: new ClassesBuilder({ location, classes }).classes };

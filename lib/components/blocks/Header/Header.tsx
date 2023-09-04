@@ -4,8 +4,8 @@ import NextLink from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { BlockList } from '../../utility-components/BlockList';
+import { DrawerNavigation, DrawerNavigationProps } from '../DrawerNavigation';
 import { Image, ImageProps } from '../Image';
-import { PrimaryNavigation, PrimaryNavigationProps, PrimaryNavigationRoutes } from '../PrimaryNavigation';
 
 export type HeaderClasses<T> = {
   [key in
@@ -15,6 +15,7 @@ export type HeaderClasses<T> = {
     | 'spacerScrolled'
     | 'container'
     | 'containerScrolled'
+    | 'drawerNavigationContainer'
     | 'logoContainer'
     | 'contentAreaContainer']?: T;
 };
@@ -26,7 +27,7 @@ export interface HeaderProps {
   contentArea?: Block[];
   enableScrollTransition?: boolean;
   scrollTransitionPosition?: number;
-  primaryNavigationProps?: PrimaryNavigationProps;
+  drawerNavigationProps?: DrawerNavigationProps;
 }
 
 const Header = ({
@@ -36,7 +37,7 @@ const Header = ({
   contentArea = [],
   enableScrollTransition = false,
   scrollTransitionPosition = 0,
-  primaryNavigationProps,
+  drawerNavigationProps,
 }: HeaderProps) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => setScrollPosition(window.scrollY);
@@ -70,13 +71,17 @@ const Header = ({
     <>
       <header className={cn(classes.root, { [classes.rootScrolled || '']: addScrolledClasses })}>
         <div className={cn(classes.container, { [classes.containerScrolled || '']: addScrolledClasses })}>
+          {drawerNavigationProps && (
+            <div className={classes.drawerNavigationContainer}>
+              <DrawerNavigation {...drawerNavigationProps} />
+            </div>
+          )}
           {logoContainer}
           {contentArea?.length > 0 && (
             <div className={classes.contentAreaContainer}>
               <BlockList blocks={contentArea} />
             </div>
           )}
-          <PrimaryNavigation {...primaryNavigationProps} />
         </div>
       </header>
       <div className={cn(classes.spacer, { [classes.spacerScrolled || '']: addScrolledClasses })} />
