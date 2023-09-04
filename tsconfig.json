@@ -44,5 +44,5 @@
     "tailwind.builder.js",
     "tailwind/**/*.js"
   ],
-  "exclude": ["node_modules", "_ARCHIVE"]
+  "exclude": ["node_modules", "_ARCHIVE", "**/*.exclude"]
 }

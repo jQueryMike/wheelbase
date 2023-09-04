@@ -4,6 +4,7 @@ import NextLink from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { BlockList } from '../../utility-components/BlockList';
+import { DrawerNavigation, DrawerNavigationProps } from '../DrawerNavigation';
 import { Image, ImageProps } from '../Image';
 
 export type HeaderClasses<T> = {
@@ -14,6 +15,7 @@ export type HeaderClasses<T> = {
     | 'spacerScrolled'
     | 'container'
     | 'containerScrolled'
+    | 'drawerNavigationContainer'
     | 'logoContainer'
     | 'contentAreaContainer']?: T;
 };
@@ -25,6 +27,7 @@ export interface HeaderProps {
   contentArea?: Block[];
   enableScrollTransition?: boolean;
   scrollTransitionPosition?: number;
+  drawerNavigationProps?: DrawerNavigationProps;
 }
 
 const Header = ({
@@ -34,6 +37,7 @@ const Header = ({
   contentArea = [],
   enableScrollTransition = false,
   scrollTransitionPosition = 0,
+  drawerNavigationProps,
 }: HeaderProps) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => setScrollPosition(window.scrollY);
@@ -67,6 +71,11 @@ const Header = ({
     <>
       <header className={cn(classes.root, { [classes.rootScrolled || '']: addScrolledClasses })}>
         <div className={cn(classes.container, { [classes.containerScrolled || '']: addScrolledClasses })}>
+          {drawerNavigationProps && (
+            <div className={classes.drawerNavigationContainer}>
+              <DrawerNavigation {...drawerNavigationProps} />
+            </div>
+          )}
           {logoContainer}
           {contentArea?.length > 0 && (
             <div className={classes.contentAreaContainer}>

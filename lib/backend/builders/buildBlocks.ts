@@ -13,6 +13,7 @@ import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildHeadingsBlock from './blocks/buildHeadingsBlock';
 import buildHeroBlock from './blocks/buildHeroBlock';
 import buildImageWithContentBlock from './blocks/buildImageWithContentBlock';
+import buildLinkListBlock from './blocks/buildLinkListBlock';
 import buildMapBlock from './blocks/buildMapBlock';
 import buildOpeningTimesBlock from './blocks/buildOpeningTimesBlock';
 import buildSubheadingBlock from './blocks/buildSubheadingBlock';
@@ -40,6 +41,7 @@ const buildBlocks = async ({
         globalTheme,
         globalConfig,
       };
+
       if (name === 'Address') {
         const block = buildAddressBlock(config);
         if (block) blocks.push(block);
@@ -92,6 +94,11 @@ const buildBlocks = async ({
 
       if (name === 'ImageWithContent') {
         const block = buildImageWithContentBlock(config);
+        if (block) blocks.push(block);
+      }
+
+      if (name === 'LinkList') {
+        const block = buildLinkListBlock(config);
         if (block) blocks.push(block);
       }
 

@@ -1,11 +1,13 @@
 import buildPageSections from './builders/buildPageSections';
 import mergeVars from './mergeVars';
 
+const CONTENT_API_URL = `${process.env.API_URL!}/umbraco/delivery/api/v1/content`;
+
 const getPage = async (params: { slug: string[] }) => {
   const themeTags = process.env.ENVIRONMENT_NAME !== ' local' ? [`theme`] : [];
   const globalConfigTags = process.env.ENVIRONMENT_NAME !== ' local' ? [`global-config`] : [];
   const pagesTags = process.env.ENVIRONMENT_NAME !== ' local' ? [`theme`, `page-${params.slug.join('-')}`] : [];
-  const url = `${process.env.API_URL}/item/${process.env.API_ROOT_NODE_PATH}`;
+  const url = `${CONTENT_API_URL}/item/${process.env.API_ROOT_NODE_PATH}`;
 
   const [{ properties: globalTheme }, { properties: globalConfig }, page] = await Promise.all([
     fetch(`${url}/theme`, { next: { tags: themeTags } }).then((res) => res.json()),

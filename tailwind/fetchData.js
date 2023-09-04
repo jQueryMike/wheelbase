@@ -1,6 +1,8 @@
+const CONTENT_API_URL = `${process.env.API_URL}/umbraco/delivery/api/v1/content`;
+
 const fetchData = async () => {
   try {
-    const pagesResponse = await fetch(`${process.env.API_URL}`, {
+    const pagesResponse = await fetch(`${CONTENT_API_URL}`, {
       headers: { 'Start-Item': process.env.API_ROOT_NODE_GUID },
     });
     const pagesData = await pagesResponse.json();

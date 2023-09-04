@@ -3,6 +3,7 @@ import Block from '@interfaces/Block';
 
 import buildButtonBlock from './blocks/buildButtonBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
+import buildLinkListBlock from './blocks/buildLinkListBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
 import extractInheritedTheme from './extractInheritedTheme';
 
@@ -63,6 +64,21 @@ const buildAdditionalContent = ({
       });
 
       if (button) additionalContent.push(button);
+    }
+
+    if (item.content.contentType === 'linkList') {
+      const linkListTheme = globalBlockTheme?.additionalLinkListTheme?.items[0]?.content?.properties;
+
+      const linkList = buildLinkListBlock({
+        id: item.content.id,
+        name: 'LinkList',
+        content: item.content?.properties,
+        settings: item.settings?.properties,
+        inheritedThemes: [linkListTheme, ...extractInheritedTheme('linkList', inheritedThemes)],
+        globalTheme,
+      });
+
+      if (linkList) additionalContent.push(linkList);
     }
   });
 
