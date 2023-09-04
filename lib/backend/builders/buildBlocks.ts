@@ -16,6 +16,7 @@ import buildImageWithContentBlock from './blocks/buildImageWithContentBlock';
 import buildLinkListBlock from './blocks/buildLinkListBlock';
 import buildMapBlock from './blocks/buildMapBlock';
 import buildOpeningTimesBlock from './blocks/buildOpeningTimesBlock';
+import buildRegInputBlock from './blocks/buildRegInputBlock';
 import buildSubheadingBlock from './blocks/buildSubheadingBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
 
@@ -109,6 +110,11 @@ const buildBlocks = async ({
 
       if (name === 'OpeningTimes') {
         const block = buildOpeningTimesBlock(config);
+        if (block) blocks.push(block);
+      }
+
+      if (name === 'RegInput') {
+        const block = buildRegInputBlock(config);
         if (block) blocks.push(block);
       }
 
