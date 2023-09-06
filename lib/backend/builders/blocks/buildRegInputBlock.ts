@@ -1,11 +1,11 @@
 import { RegInputProps } from '@components/blocks/RegInput';
 import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
+import { v4 as uuidv4 } from 'uuid';
 
-import buildAdditionalContent from '../buildAdditionalContent';
 import buildBlockClasses from '../buildBlockClasses';
 import extractInheritedTheme from '../extractInheritedTheme';
-import buildHeadingsBlock from './buildHeadingsBlock';
+import buildButtonBlock from './buildButtonBlock';
 
 const buildRegInputBlock = ({
   id,
@@ -17,6 +17,8 @@ const buildRegInputBlock = ({
   inheritedThemes,
 }: BlockBuilderConfig): (Block & RegInputProps) | undefined => {
   try {
+    if (!globalConfig.clickBuySubdomain) return undefined;
+
     // Shortcut to block theme properties from globalTheme
     const globalBlockTheme = globalTheme?.regInputTheme?.items[0]?.content?.properties;
 
@@ -27,49 +29,37 @@ const buildRegInputBlock = ({
       inheritedThemes,
       instanceVariant: content?.themeVariant,
       instanceSettings: settings,
-      gridColsOverrides: [{ className: 'itemsContainer', content, queryType: 'container' }],
     });
 
-    // Build initial block
-    const regInput: Block & RegInputProps = { id, name, classes };
+    const buttonTheme = globalBlockTheme?.submitButtonTheme?.items[0]?.content?.properties;
 
-    // Build click-buy url
-    let clickBuyUrlSuffix = '';
-    if (process.env.ENVIRONMENT_NAME === 'local') clickBuyUrlSuffix = '.click-buy.clickdealer.dev/vrm-lookup?vrm=';
-    if (process.env.ENVIRONMENT_NAME === 'production') clickBuyUrlSuffix = '.sell-my-vehicle.co.uk/vrm-lookup?vrm=';
-    if (process.env.ENVIRONMENT_NAME === 'staging') clickBuyUrlSuffix = '.click-buy.clickdealer.guru/vrm-lookup?vrm=';
-
-    regInput.clickBuyUrl = `https://${globalConfig.clickBuyUrlPrefix}${clickBuyUrlSuffix}`;
-
-    // Add headings
-    const headings = content?.headings?.items[0];
-    if (headings) {
-      const headingsTheme = globalBlockTheme?.headingsTheme?.items[0]?.content?.properties;
-
-      regInput.headings = buildHeadingsBlock({
-        id: headings.content.id,
-        name: 'Headings',
-        content: headings.content.properties,
-        settings: headings.settings.properties,
-        inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
-        globalTheme,
-      });
-    }
-
-    regInput.contentArea1 = buildAdditionalContent({
-      items: content?.contentArea1?.items,
-      globalBlockTheme,
+    const submitButton = buildButtonBlock({
+      id: uuidv4(),
+      name: 'Button',
+      content: {
+        type: 'submit',
+        link: [
+          {
+            title: content?.buttonText || 'Get valuation',
+          },
+        ],
+      },
+      settings: {},
+      inheritedThemes: [buttonTheme, ...extractInheritedTheme('button', inheritedThemes)],
       globalTheme,
       globalConfig,
-      inheritedThemes,
-    });
+    })!;
 
-    regInput.contentArea2 = buildAdditionalContent({
-      items: content?.contentArea2?.items,
-      globalBlockTheme,
-      globalTheme,
-      inheritedThemes,
-    });
+    // Build initial block
+    const regInput: Block & RegInputProps = {
+      id,
+      name,
+      classes,
+      clickBuyUrl: `https://${globalConfig.clickBuySubdomain}.${process.env.CLICK_BUY_URL!}/vrm-lookup`,
+      submitButton,
+    };
+
+    if (content?.placeholderText) regInput.placeholderText = content.placeholderText;
 
     return regInput;
   } catch (error) {

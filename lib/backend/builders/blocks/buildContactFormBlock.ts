@@ -48,6 +48,7 @@ const buildContactFormBlock = ({
       settings: {},
       inheritedThemes: [buttonTheme, ...extractInheritedTheme('button', inheritedThemes)],
       globalTheme,
+      globalConfig,
     })!;
 
     // Build initial block
@@ -80,6 +81,7 @@ const buildContactFormBlock = ({
         settings: headings.settings.properties,
         inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 
@@ -88,6 +90,7 @@ const buildContactFormBlock = ({
       items: content?.contentArea1?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 
@@ -95,6 +98,7 @@ const buildContactFormBlock = ({
       items: content?.contentArea2?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 
@@ -102,6 +106,7 @@ const buildContactFormBlock = ({
       items: content?.thankYouContentArea?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 
@@ -109,6 +114,7 @@ const buildContactFormBlock = ({
       items: content?.formContentArea?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
     });
 
     return contactForm;

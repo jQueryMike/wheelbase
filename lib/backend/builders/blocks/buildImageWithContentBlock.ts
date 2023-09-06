@@ -14,6 +14,7 @@ const buildImageWithContentBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & ImageWithContentProps) | undefined => {
   try {
@@ -44,6 +45,7 @@ const buildImageWithContentBlock = ({
         content: { ...image },
         inheritedThemes: [imageTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
+        globalConfig,
         defaultProps: {
           fill: true,
           style: { objectFit: 'contain', objectPosition: 'right center' },
@@ -63,6 +65,7 @@ const buildImageWithContentBlock = ({
         settings: headings.settings.properties,
         inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 
@@ -70,6 +73,7 @@ const buildImageWithContentBlock = ({
       items: content?.contentArea?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 

@@ -1,72 +1,79 @@
-import { BlockList } from '@components/utility-components/BlockList';
-import Block from '@interfaces/Block';
-import cn from 'classnames';
-import Link from 'next/link';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-import { Headings, HeadingsProps } from '../Headings';
+import { Button, ButtonProps } from '../Button';
 
 export type RegInputClasses<T> = {
   [key in
     | 'root'
     | 'rootInner'
     | 'headingsContainer'
-    | 'regContainer'
-    | 'regInputWrapper'
-    | 'regInput'
-    | 'regInputButton'
-    | 'contentAreaContainer'
-    | 'contentArea1Container'
-    | 'contentArea2Container']?: T;
+    | 'formContainer'
+    | 'form'
+    | 'inputContainer'
+    | 'input'
+    | 'buttonContainer'
+    | 'errorMessageContainer'
+    | 'errorMessage']?: T;
 };
+
 export interface RegInputProps {
   classes?: RegInputClasses<string>;
-  clickBuyUrl?: string;
-  headings?: HeadingsProps;
-  contentArea1?: Block[];
-  contentArea2?: Block[];
+  clickBuyUrl: string;
+  placeholderText?: string;
+  submitButton: ButtonProps;
 }
 
-const RegInput = ({ classes = {}, clickBuyUrl, headings, contentArea1, contentArea2 }: RegInputProps) => {
-  const [inputValue, setInputValue] = useState('');
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
-  const encodedReg = (reg: string) => {
+const RegInput = ({ classes = {}, clickBuyUrl, placeholderText = 'Enter reg...', submitButton }: RegInputProps) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+  const [formError, setFormError] = useState(false);
+  const router = useRouter();
+
+  const { handleSubmit, formState, register } = useForm();
+
+  const onSubmit = async (data: any) => {
+    setSubmitting(true);
+    setFormError(false);
+
     try {
-      return btoa(reg);
+      router.push(`${clickBuyUrl}?vrm=${btoa(data.vrm)}`);
     } catch (error) {
-      console.error('Error encoding registration:', error);
-      return '';
+      setFormError(true);
     }
+
+    setSubmitting(false);
   };
+
+  useEffect(() => setHasMounted(true), [setHasMounted]);
+
+  if (!hasMounted) return null;
 
   return (
     <div className={classes.root}>
       <div className={classes.rootInner}>
-        {headings && (
-          <div className={classes.headingsContainer}>
-            <Headings {...headings} />
-          </div>
-        )}
-        {contentArea1 && contentArea1?.length > 0 && (
-          <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
-            <BlockList blocks={contentArea1} />
-          </div>
-        )}
-        <div className={classes.regContainer}>
-          <div className={classes.regInputWrapper}>
-            <input type="text" name="RegInput" className={classes.regInput} onChange={handleInputChange} />
-          </div>
-          <Link className={classes.regInputButton} href={clickBuyUrl + encodedReg(inputValue)}>
-            Get a valuation
-          </Link>
+        <div className={classes.formContainer}>
+          <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+            <div className={classes.inputContainer}>
+              <input
+                type="text"
+                id="vrm"
+                placeholder={placeholderText}
+                {...register('vrm', { required: true })}
+                className={classes.input}
+              />
+            </div>
+            <div className={classes.buttonContainer}>
+              <Button {...submitButton} loading={submitting} />
+            </div>
+          </form>
+          {(Object.keys(formState.errors).length > 0 || formError) && (
+            <div className={classes.errorMessageContainer}>
+              <p className={classes.errorMessage}>Please enter a valid registration.</p>
+            </div>
+          )}
         </div>
-        {contentArea2 && contentArea2?.length > 0 && (
-          <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
-            <BlockList blocks={contentArea2} />
-          </div>
-        )}
       </div>
     </div>
   );

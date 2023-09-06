@@ -15,6 +15,7 @@ const buildHeroBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & HeroProps) | undefined => {
   try {
@@ -54,6 +55,7 @@ const buildHeroBlock = ({
         settings: headings.settings.properties,
         inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 
@@ -67,6 +69,7 @@ const buildHeroBlock = ({
         content: { ...heroImage },
         inheritedThemes: [heroImageTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 
@@ -74,6 +77,7 @@ const buildHeroBlock = ({
       items: content?.contentArea?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 

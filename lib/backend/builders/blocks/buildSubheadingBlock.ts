@@ -9,7 +9,6 @@ const buildSubheadingBlock = ({
   name,
   content,
   settings,
-
   globalTheme,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & SubheadingProps) | undefined => {

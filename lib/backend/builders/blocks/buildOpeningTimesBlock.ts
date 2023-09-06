@@ -13,6 +13,7 @@ const buildOpeningTimesBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & OpeningTimesProps) | undefined => {
   try {
@@ -43,6 +44,7 @@ const buildOpeningTimesBlock = ({
         settings: headings.settings.properties,
         inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
     // Build items
@@ -91,6 +93,7 @@ const buildOpeningTimesBlock = ({
       items: content?.contentArea1?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 
@@ -98,6 +101,7 @@ const buildOpeningTimesBlock = ({
       items: content?.contentArea2?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 

@@ -13,6 +13,7 @@ const buildAddressBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & AddressProps) | undefined => {
   try {
@@ -60,6 +61,7 @@ const buildAddressBlock = ({
         settings: headings.settings.properties,
         inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 
@@ -67,6 +69,7 @@ const buildAddressBlock = ({
       items: content?.contentArea1?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 
@@ -74,6 +77,7 @@ const buildAddressBlock = ({
       items: content?.contentArea2?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 

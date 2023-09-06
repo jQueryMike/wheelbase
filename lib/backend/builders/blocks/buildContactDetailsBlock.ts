@@ -13,6 +13,7 @@ const buildContactDetailsBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & ContactDetailsProps) | undefined => {
   try {
@@ -43,6 +44,7 @@ const buildContactDetailsBlock = ({
         settings: headings.settings.properties,
         inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 
@@ -80,6 +82,7 @@ const buildContactDetailsBlock = ({
       items: content?.contentArea1?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 
@@ -87,6 +90,7 @@ const buildContactDetailsBlock = ({
       items: content?.contentArea2?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 

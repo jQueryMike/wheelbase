@@ -46,6 +46,7 @@ const buildFeaturesBlock = ({
         settings: headings.settings.properties,
         inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 
@@ -73,6 +74,7 @@ const buildFeaturesBlock = ({
           items: itemContent.contentArea?.items,
           parentThemeProperties: globalBlockTheme,
           globalTheme,
+          globalConfig,
         });
 
         if (itemContent.icon) featuresItem.icon = itemContent.icon;
@@ -91,6 +93,7 @@ const buildFeaturesBlock = ({
             content: { ...itemImage },
             inheritedThemes: [itemImageTheme],
             globalTheme,
+            globalConfig,
           });
         }
 
@@ -110,6 +113,7 @@ const buildFeaturesBlock = ({
       items: content?.contentArea2?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 

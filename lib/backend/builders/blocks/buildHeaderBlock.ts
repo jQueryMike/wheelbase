@@ -13,6 +13,7 @@ const buildHeaderBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & HeaderProps) | undefined => {
   try {
@@ -42,6 +43,7 @@ const buildHeaderBlock = ({
         content: { ...headerLogo },
         inheritedThemes: [headerLogoTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
+        globalConfig,
         defaultProps: {
           fill: true,
           style: { objectFit: 'contain', objectPosition: 'left center' },
@@ -53,6 +55,7 @@ const buildHeaderBlock = ({
       items: content?.contentArea?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 

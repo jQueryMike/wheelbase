@@ -18,6 +18,7 @@ const buildFooterBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & FooterProps) | undefined => {
   try {
@@ -47,6 +48,7 @@ const buildFooterBlock = ({
         content: { ...footerLogo },
         inheritedThemes: [footerLogoTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
+        globalConfig,
         defaultProps: {
           fill: true,
           style: { objectFit: 'contain' },
@@ -62,6 +64,7 @@ const buildFooterBlock = ({
       items: content?.contentArea?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 

@@ -4,6 +4,7 @@ import Block from '@interfaces/Block';
 import buildButtonBlock from './blocks/buildButtonBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildLinkListBlock from './blocks/buildLinkListBlock';
+import buildRegInputBlock from './blocks/buildRegInputBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
 import extractInheritedTheme from './extractInheritedTheme';
 
@@ -30,6 +31,7 @@ const buildAdditionalContent = ({
         settings: item.settings?.properties,
         inheritedThemes: [headingTheme, ...extractInheritedTheme('heading', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
 
       if (heading) additionalContent.push(heading);
@@ -61,6 +63,7 @@ const buildAdditionalContent = ({
         settings: item.settings?.properties,
         inheritedThemes: [buttonTheme, ...extractInheritedTheme('button', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
 
       if (button) additionalContent.push(button);
@@ -76,9 +79,26 @@ const buildAdditionalContent = ({
         settings: item.settings?.properties,
         inheritedThemes: [linkListTheme, ...extractInheritedTheme('linkList', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
 
       if (linkList) additionalContent.push(linkList);
+    }
+
+    if (item.content.contentType === 'regInput') {
+      const regInputTheme = globalBlockTheme?.additionalRegInputTheme?.items[0]?.content?.properties;
+
+      const regInput = buildRegInputBlock({
+        id: item.content.id,
+        name: 'RegInput',
+        content: item.content?.properties,
+        settings: item.settings?.properties,
+        inheritedThemes: [regInputTheme, ...extractInheritedTheme('regInput', inheritedThemes)],
+        globalTheme,
+        globalConfig,
+      });
+
+      if (regInput) additionalContent.push(regInput);
     }
   });
 

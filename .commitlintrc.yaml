@@ -5,7 +5,7 @@ rules:
   jira-commit-message-separator: [2, always, ': ']
   jira-task-id-min-length: [2, always, 3]
   jira-task-id-max-length: [0]
-  jira-task-id-project-key: [2, always, ['CLICKWEB']]
+  jira-task-id-project-key: [2, always, ['CLICKWEB', 'MONZA']]
   subject-case: [2, never, ['sentence-case', 'start-case', 'pascal-case', 'upper-case']]
   subject-full-stop: [2, never, '.']
 

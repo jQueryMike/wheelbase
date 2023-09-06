@@ -8,19 +8,17 @@ const location = 'RegInput/variants/1';
 let classes: RegInputClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`@container/regInput`,
-  rootInner: {
-    default: tw`space-y-4`,
-    '@xl/regInput': tw`@xl/regInput:space-y-6`,
+  root: tw`max-w-[500px] @container/regInput`,
+  rootInner: {},
+  formContainer: tw``,
+  form: {
+    default: tw`flex flex-col items-stretch justify-between space-y-3 rounded-xl border border-primary bg-body p-3`,
+    '@md/regInput': tw`@md/regInput:flex-row @md/regInput:items-center @md/regInput:justify-between @md/regInput:space-y-0`,
   },
-  contentAreaContainer: {
-    default: tw`space-y-4`,
-    '@xl/regInput': tw`@xl/regInput:space-y-6`,
-  },
-  regContainer: tw`flex w-full`,
-  regInputWrapper: tw``,
-  regInput: tw`w-full rounded-l-lg border bg-yellow-300 p-2 text-black`,
-  regInputButton: tw`w-[140px] rounded-r-lg bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700`,
+  inputContainer: tw`flex-grow`,
+  input: tw`h-8 w-full bg-transparent text-center text-xl font-bold uppercase text-heading outline-none`,
+  errorMessageContainer: tw`pt-2`,
+  errorMessage: tw`text-center text-sm text-error`,
 };
 
 const regInputVariant: RegInputVariant = {

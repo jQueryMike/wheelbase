@@ -13,6 +13,7 @@ const buildHeadingsBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & HeadingsProps) | undefined => {
   try {
@@ -42,6 +43,7 @@ const buildHeadingsBlock = ({
         content: heading.content.properties,
         settings: heading.settings.properties,
         globalTheme,
+        globalConfig,
         inheritedThemes: [headingTheme, ...extractInheritedTheme('heading', inheritedThemes)],
       });
     }
@@ -58,6 +60,7 @@ const buildHeadingsBlock = ({
         settings: subheading.settings.properties,
         inheritedThemes: [subheadingTheme, ...extractInheritedTheme('subheading', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 

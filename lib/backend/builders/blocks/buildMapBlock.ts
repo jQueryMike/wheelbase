@@ -25,6 +25,7 @@ const buildMapBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & MapProps) | undefined => {
   try {
@@ -58,6 +59,7 @@ const buildMapBlock = ({
         settings: headings.settings.properties,
         inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 
@@ -65,6 +67,7 @@ const buildMapBlock = ({
       items: content?.contentArea1?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 
@@ -72,6 +75,7 @@ const buildMapBlock = ({
       items: content?.contentArea2?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 

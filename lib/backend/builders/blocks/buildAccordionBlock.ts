@@ -14,6 +14,7 @@ const buildAccordionBlock = ({
   content,
   settings,
   globalTheme,
+  globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & AccordionProps) | undefined => {
   try {
@@ -44,6 +45,7 @@ const buildAccordionBlock = ({
         settings: headings.settings.properties,
         inheritedThemes: [headingsTheme, ...extractInheritedTheme('headings', inheritedThemes)],
         globalTheme,
+        globalConfig,
       });
     }
 
@@ -79,6 +81,7 @@ const buildAccordionBlock = ({
             settings: itemHeading.settings.properties,
             inheritedThemes: [itemHeadingTheme, ...extractInheritedTheme('heading', inheritedThemes)],
             globalTheme,
+            globalConfig,
           });
         }
 
@@ -86,6 +89,7 @@ const buildAccordionBlock = ({
           items: itemContent.contentArea?.items,
           globalBlockTheme,
           globalTheme,
+          globalConfig,
           inheritedThemes,
         });
 
@@ -97,6 +101,7 @@ const buildAccordionBlock = ({
       items: content?.contentArea1?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 
@@ -104,6 +109,7 @@ const buildAccordionBlock = ({
       items: content?.contentArea2?.items,
       globalBlockTheme,
       globalTheme,
+      globalConfig,
       inheritedThemes,
     });
 
