@@ -41,7 +41,6 @@ const Header = ({
 }: HeaderProps) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => setScrollPosition(window.scrollY);
-
   useEffect(() => {
     if (enableScrollTransition) {
       window.addEventListener('scroll', handleScroll, { passive: true });

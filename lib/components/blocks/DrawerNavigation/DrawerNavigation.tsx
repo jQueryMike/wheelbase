@@ -97,7 +97,6 @@ const DrawerNavigation = ({
       setExpandedIds((prevIds) => [...prevIds, id]);
     }
   };
-
   return (
     <div className={classes.root}>
       <div className={classes.menuButtonContainer}>
