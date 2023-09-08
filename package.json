@@ -9,10 +9,8 @@
     "test": "jest",
     "lint": "npx eslint .",
     "lint-staged": "npx lint-staged",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "build-and-deploy-storybook": "storybook build && vercel",
-    "build-and-deploy-storybook-prod": "storybook build && vercel --prod"
+    "storybook": "export USE_STORYBOOK_TAILWIND_CONFIG=true || set USE_STORYBOOK_TAILWIND_CONFIG=true && storybook dev -p 6006",
+    "build-storybook": "export USE_STORYBOOK_TAILWIND_CONFIG=true || set USE_STORYBOOK_TAILWIND_CONFIG=true && storybook build"
   },
   "pre-commit": [
     "lint-staged"

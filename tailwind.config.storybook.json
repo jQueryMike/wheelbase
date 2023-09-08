@@ -5,7 +5,7 @@
     "extend": {
       "colors": {
         "primary": {
-          "DEFAULT": "#f00",
+          "DEFAULT": "#121643",
           "light": "#121643",
           "dark": "#121643",
           "contrast": "#FFFFFF"
