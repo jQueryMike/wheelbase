@@ -1,25 +1,48 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Address, { AddressClasses } from '../Address';
+import buttonVariant1 from '../../Button/variants/1';
+import headingVariant1 from '../../Heading/variants/1';
+import headingsVariant1 from '../../Headings/variants/1';
+import textContentVariant1 from '../../TextContent/variants/1';
+import Address from '../Address';
+import addressVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof Address>;
 
 export const PrimaryAddress: Story = {
   args: {
-    classes: {
-      root: 'space-y-4 @container @xl:space-y-6',
-      headingsContainer:
-        'font-heading font-bold leading-tight text-heading text-[16px] sm:text-[16px] md:text-[18px] lg:text-[20px]',
-      contentAreaContainer: 'space-y-4 @xl:space-y-6',
-      addressContainer: 'space-y-2 py-6',
-      address: 'text-primary text-[16px] font-semibold sm:text-[16px] md:text-[18px] lg:text-[20px]',
-    },
-    address: 'Winton House, Stoke Rd, Stoke-on-Trent ST4 2RW',
+    classes: addressVariant1.classes,
+    address: 'Winton House,<br/>Stoke Road,<br/>Stoke-on-Trent<br/>ST4 2RW',
     headings: {
+      classes: headingsVariant1.classes,
       heading: {
         text: 'Our Address',
+        classes: headingVariant1.classes,
       },
     },
+    contentArea1: [
+      {
+        id: '1',
+        name: 'TextContent',
+        content: '<p>Some text here</p>',
+        classes: textContentVariant1.classes,
+      },
+    ],
+    contentArea2: [
+      {
+        id: '1',
+        name: 'TextContent',
+        content: '<p>Some text here</p>',
+        classes: textContentVariant1.classes,
+      },
+      {
+        id: '2',
+        name: 'Button',
+        href: '/test',
+        text: 'Test Button',
+        classes: buttonVariant1.classes,
+      },
+    ],
   },
 };
 

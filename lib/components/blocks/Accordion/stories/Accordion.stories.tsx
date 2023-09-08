@@ -1,40 +1,47 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Accordion, { AccordionClasses } from '../Accordion';
-import { items } from './items';
+import buttonVariant1 from '../../Button/variants/1';
+import headingVariant1 from '../../Heading/variants/1';
+import headingsVariant1 from '../../Headings/variants/1';
+import subheadingVariant1 from '../../Subheading/variants/1';
+import textContentVariant1 from '../../TextContent/variants/1';
+import Accordion from '../Accordion';
+import accordionVariant1 from '../variants/1';
+import items from './items';
 
 type Story = StoryObj<typeof Accordion>;
 
 export const PrimaryAccordion: Story = {
   args: {
-    classes: {
-      root: 'space-y-4 @container @xl:space-y-6',
-      contentAreaContainer: 'space-y-4 @xl:space-y-6',
-      itemsContainer: 'space-y-4 py-6',
-    },
-    items: items,
+    classes: accordionVariant1.classes,
+    items,
     headings: {
+      classes: headingsVariant1.classes,
       heading: {
         text: 'Accordion',
-        classes: {
-          heading:
-            'font-heading font-bold leading-tight text-heading text-[16px] sm:text-[16px] md:text-[18px] lg:text-[20px]',
-        },
+        classes: headingVariant1.classes,
       },
       subheading: {
         text: 'Please check our selection',
+        classes: subheadingVariant1.classes,
       },
     },
     contentArea1: [
       {
-        id: '0d5103d1-25eb-491d-99b5-e4f67bf6fccc',
+        id: '1',
         name: 'TextContent',
-        //@ts-ignore
         content:
           '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non nisi at nisl ultricies molestie. Aenean pulvinar ac elit volutpat ullamcorper. Duis scelerisque, justo id interdum malesuada, urna purus tincidunt lectus, sit amet sodales erat elit in quam.</p>',
-        classes: {
-          textContent: 'prose max-w-full',
-        },
+        classes: textContentVariant1.classes,
+      },
+    ],
+    contentArea2: [
+      {
+        id: '1',
+        name: 'Button',
+        href: '/test',
+        text: 'Find out more',
+        classes: buttonVariant1.classes,
       },
     ],
   },

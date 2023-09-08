@@ -1,32 +1,18 @@
 import { HeadingSize } from '@components/blocks/Heading';
 
-export const items = [
+import headingVariant1 from '../../Heading/variants/1';
+import textContentVariant1 from '../../TextContent/variants/1';
+import accordionVariant1 from '../variants/1';
+
+const items = [
   {
     id: '941abec1-2510-4237-bc52-5fa7b8efbc1d',
-    classes: {
-      itemRoot: 'border-divider overflow-hidden rounded-lg border',
-      itemToggleButton: 'flex w-full items-center justify-between p-4 hover:bg-body-light/50',
-      itemToggleButtonExpanded: 'border-divider border-b',
-      itemToggleIconContainer: 'text-accent text-sm transition duration-150',
-      itemToggleIconContainerExpanded: '-rotate-180',
-      itemToggleIconContainerCollapsed: 'rotate-0',
-      itemToggleIcon: 'fa-solid fa-arrow-down',
-      itemContentAreaContainer: 'space-y-4 p-4 @xl:p-5 @3xl:p-6 @5xl:p-8',
-      itemContentAreaContainerExpanded: 'block',
-      itemContentAreaContainerCollapsed: 'hidden',
-    },
+    classes: accordionVariant1.itemClasses,
     heading: {
       id: '77fdd051-cc6a-4956-ba6f-6a479915f3c3',
       name: 'Heading',
       text: 'Lorem ipsum dolor sit amet',
-      classes: {
-        heading: 'font-heading font-bold leading-tight text-heading',
-        headingExtraLarge: 'text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[48px]',
-        headingLarge: 'text-[22px] sm:text-[25px] md:text-[25px] lg:text-[28px] xl:text-[32px]',
-        headingMedium: 'text-[18px] sm:text-[20px] lg:text-[22px] xl:text-[24px]',
-        headingSmall: 'text-[16px] sm:text-[16px] md:text-[18px] lg:text-[20px]',
-        headingExtraSmall: 'text-[14px] sm:text-[16px] lg:text-[18px]',
-      },
+      classes: headingVariant1.classes,
       size: HeadingSize.Medium,
     },
     contentArea: [
@@ -35,38 +21,18 @@ export const items = [
         name: 'TextContent',
         content:
           '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non nisi at nisl ultricies molestie. Aenean pulvinar ac elit volutpat ullamcorper. Duis scelerisque, justo id interdum malesuada, urna purus tincidunt lectus, sit amet sodales erat elit in quam.</p>',
-        classes: {
-          textContent: 'prose max-w-full',
-        },
+        classes: textContentVariant1.classes,
       },
     ],
   },
   {
     id: '797415a7-58ba-4cf7-a195-98feb28dbca6',
-    classes: {
-      itemRoot: 'border-divider overflow-hidden rounded-lg border',
-      itemToggleButton: 'flex w-full items-center justify-between p-4 hover:bg-body-light/50',
-      itemToggleButtonExpanded: 'border-divider border-b',
-      itemToggleIconContainer: 'text-accent text-sm transition duration-150',
-      itemToggleIconContainerExpanded: '-rotate-180',
-      itemToggleIconContainerCollapsed: 'rotate-0',
-      itemToggleIcon: 'fa-solid fa-arrow-down',
-      itemContentAreaContainer: 'space-y-4 p-4 @xl:p-5 @3xl:p-6 @5xl:p-8',
-      itemContentAreaContainerExpanded: 'block',
-      itemContentAreaContainerCollapsed: 'hidden',
-    },
+    classes: accordionVariant1.itemClasses,
     heading: {
       id: 'b97a63a8-b39e-4d9a-bba4-ef6c26551622',
       name: 'Heading',
       text: 'Lorem ipsum 2',
-      classes: {
-        heading: 'font-heading font-bold leading-tight text-heading',
-        headingExtraLarge: 'text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[48px]',
-        headingLarge: 'text-[22px] sm:text-[25px] md:text-[25px] lg:text-[28px] xl:text-[32px]',
-        headingMedium: 'text-[18px] sm:text-[20px] lg:text-[22px] xl:text-[24px]',
-        headingSmall: 'text-[16px] sm:text-[16px] md:text-[18px] lg:text-[20px]',
-        headingExtraSmall: 'text-[14px] sm:text-[16px] lg:text-[18px]',
-      },
+      classes: headingVariant1.classes,
       size: HeadingSize.Medium,
     },
     contentArea: [
@@ -75,10 +41,10 @@ export const items = [
         name: 'TextContent',
         content:
           '<p><span>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam posuere erat in ipsum facilisis elementum. Pellentesque vel consectetur neque, id consectetur ipsum. Quisque lacinia sapien lectus, vitae sagittis orci rhoncus nec. Sed varius iaculis velit ac pellentesque. Nullam in magna sodales, tempus felis in, finibus diam. Nunc id porta sapien.</span></p>',
-        classes: {
-          textContent: 'prose max-w-full',
-        },
+        classes: textContentVariant1.classes,
       },
     ],
   },
 ];
+
+export default items;
