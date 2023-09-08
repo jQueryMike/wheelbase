@@ -1,13 +1,14 @@
-name: vercel-deploy-develop
+name: vercel-deploy-preview
 
 on:
   workflow_dispatch:
   push:
     branches:
       - 'develop'
+      - 'staging'
 
 jobs:
-  Deploy-Develop:
+  Deploy-Preview:
     runs-on: ubuntu-latest
     permissions:
       id-token: write

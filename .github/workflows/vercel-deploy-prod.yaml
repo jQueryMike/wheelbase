@@ -25,7 +25,7 @@ jobs:
           secrets: |
             secret/data/global/vercel org-id | VERCEL_ORG_ID;
             secret/data/global/vercel token | VERCEL_TOKEN;
-            secret/data/apps/click-web-ui/vercel project-id | VERCEL_PROJECT_ID
+            secret/data/apps/click-websites/vercel project-id | VERCEL_PROJECT_ID
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
         run: npm install --global vercel@^28.20.0

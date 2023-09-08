@@ -21,7 +21,7 @@ classes = {
     default: tw`space-y-2 py-6`,
   },
   address: {
-    default: tw`text-[16px] font-semibold text-primary`,
+    default: tw`text-[16px] font-semibold text-copy`,
     '@xl/address': tw`@xl/address:text-[16px]`,
     '@3xl/address': tw`@3xl/address:text-[18px]`,
     '@5xl/address': tw`@5xl/address:text-[20px]`,
