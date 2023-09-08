@@ -11,7 +11,6 @@ export interface LinkListProps {
 
 const LinkList = ({ classes = {}, items = [] }: LinkListProps) => {
   if (items.length < 1) return null;
-
   return (
     <div className={classes.root}>
       <ul className={classes.list}>

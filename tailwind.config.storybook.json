@@ -51,11 +51,6 @@
         "custom4": {},
         "custom5": {}
       },
-      "fontFamily": {
-        "heading": ["\"Raleway\"", "\"sans-serif\""],
-        "body": ["\"Raleway\"", "\"sans-serif\""],
-        "button": ["\"Raleway\"", "\"sans-serif\""]
-      },
       "typography": {
         "DEFAULT": {
           "css": {
