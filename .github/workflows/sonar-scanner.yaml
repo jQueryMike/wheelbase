@@ -1,0 +1,14 @@
+name: sonar-scanner
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonar-scanner-workflow:
+    uses: clickdealer/github-actions/.github/workflows/sonar-scanner.yaml@v1
+    secrets:
+      token: ${{ secrets.SONAR_TOKEN }}
+      url: ${{ secrets.SONAR_URL }}

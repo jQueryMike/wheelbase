@@ -1,0 +1,9 @@
+name: commitlint
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  commitlint-workflow:
+    uses: clickdealer/github-actions/.github/workflows/commitlint.yaml@v1

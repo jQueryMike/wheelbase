@@ -1,0 +1,36 @@
+name: vercel-deploy-develop
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'develop'
+
+jobs:
+  Deploy-Develop:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Retrieve Secrets from Vault
+        id: secrets
+        uses: hashicorp/vault-action@v2
+        with:
+          method: jwt
+          path: jwt
+          url: https://vault.clickdealer.tech
+          role: clickdealer-gha
+          jwtGithubAudience: sigstore
+          secrets: |
+            secret/data/global/vercel org-id | VERCEL_ORG_ID;
+            secret/data/global/vercel token | VERCEL_TOKEN;
+            secret/data/apps/click-websites/vercel project-id | VERCEL_PROJECT_ID
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@^28.20.0
+      - name: Deploy to Vercel
+        run: vercel --token=${{ steps.secrets.outputs.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ steps.secrets.outputs.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ steps.secrets.outputs.VERCEL_PROJECT_ID }}
