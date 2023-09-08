@@ -1,3 +1,4 @@
+import { NextSeo, NextSeoProps } from 'next-seo';
 import Head from 'next/head';
 
 import { PageSection } from '../PageSection';
@@ -6,13 +7,15 @@ import { PageSectionProps } from '../PageSection/PageSection';
 export interface PageProps {
   sections: PageSectionProps[];
   globalTheme: any;
+  seo?: NextSeoProps;
 }
 
-const Page = ({ globalTheme, sections }: PageProps) => {
+const Page = ({ globalTheme, sections, seo }: PageProps) => {
   if (!globalTheme) return null;
 
   return (
     <>
+      <NextSeo {...seo} />
       <Head>
         {globalTheme.fontProvider === 'Google' && (
           <>

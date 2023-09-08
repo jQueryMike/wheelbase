@@ -10,13 +10,14 @@ import { Icon } from '../../utility-components/Icon';
 export type DrawerNavigationClasses<T> = {
   [key in
     | 'root'
+    | 'rootInner'
     | 'menuButtonContainer'
     | 'menuButton'
     | 'menuButtonIcon'
     | 'menuButtonText'
     | 'navContainer'
-    | 'navContainerClosed'
     | 'navContainerOpen'
+    | 'navContainerClosed'
     | 'navBackdrop'
     | 'navBackdropOpen'
     | 'navBackdropClosed'
@@ -100,109 +101,114 @@ const DrawerNavigation = ({
 
   return (
     <div className={classes.root}>
-      <div className={classes.menuButtonContainer}>
-        <button className={classes.menuButton} onClick={toggleMenu} data-testid="menuButton">
-          {menuButtonIcon && <Icon className={cn(menuButtonIcon, classes.menuButtonIcon)} />}
-          {menuButtonText && <span className={classes.menuButtonText}>{menuButtonText}</span>}
-        </button>
-      </div>
-      <div className={cn(classes.navContainer, menuOpen ? classes.navContainerOpen : classes.navContainerClosed)}>
-        <button
-          className={cn(classes.navBackdrop, menuOpen ? classes.navBackdropOpen : classes.navBackdropClosed)}
-          onClick={closeMenu}
-        />
-        <nav className={cn(classes.nav, menuOpen ? classes.navOpen : classes.navClosed)}>
-          {menuOpen && (
-            <div className={classes.closeButtonContainer}>
-              <button className={classes.closeButton} onClick={closeMenu} data-testid="closeMenuButton">
-                {closeButtonIcon && <Icon className={cn(closeButtonIcon, classes.closeButtonIcon)} />}
-                {closeButtonText && <span className={classes.closeButtonText}>{closeButtonText}</span>}
-              </button>
-            </div>
-          )}
-          <ul className={classes.list1}>
-            {items.map((item: DrawerNavigationItem) => (
-              <li key={item.id} className={classes.listItem1}>
-                <div
-                  className={twMerge(
-                    cn(classes.linkContainer1, { [classes.linkContainer1Selected || '']: isSelected(item.href) }),
-                  )}
-                >
-                  <NextLink className={classes.link1} href={item.href} onClick={closeMenu}>
-                    {item.text}
-                  </NextLink>
-                  {item.children.length > 0 && (
-                    <button
-                      className={cn(
-                        classes.toggleButton1,
-                        isExpanded(item.id) ? classes.toggleButton1Expanded : classes.toggleButton1Collapsed,
-                      )}
-                      onClick={() => toggleSubMenu(item.id)}
-                    >
-                      <Icon className={cn(toggleButtonIcon, classes.toggleButtonIcon1)} />
-                    </button>
-                  )}
-                </div>
-                {item.children.length > 0 && (
-                  <ul
-                    className={cn(classes.list2, isExpanded(item.id) ? classes.list2Expanded : classes.list2Collapsed)}
+      <div className={classes.rootInner}>
+        <div className={classes.menuButtonContainer}>
+          <button className={classes.menuButton} onClick={toggleMenu} data-testid="menuButton">
+            {menuButtonIcon && <Icon className={cn(menuButtonIcon, classes.menuButtonIcon)} />}
+            {menuButtonText && <span className={classes.menuButtonText}>{menuButtonText}</span>}
+          </button>
+        </div>
+        <div className={cn(classes.navContainer, menuOpen ? classes.navContainerOpen : classes.navContainerClosed)}>
+          <button
+            className={cn(classes.navBackdrop, menuOpen ? classes.navBackdropOpen : classes.navBackdropClosed)}
+            onClick={closeMenu}
+          />
+          <nav className={cn(classes.nav, menuOpen ? classes.navOpen : classes.navClosed)}>
+            {menuOpen && (
+              <div className={classes.closeButtonContainer}>
+                <button className={classes.closeButton} onClick={closeMenu} data-testid="closeMenuButton">
+                  {closeButtonIcon && <Icon className={cn(closeButtonIcon, classes.closeButtonIcon)} />}
+                  {closeButtonText && <span className={classes.closeButtonText}>{closeButtonText}</span>}
+                </button>
+              </div>
+            )}
+            <ul className={classes.list1}>
+              {items.map((item: DrawerNavigationItem) => (
+                <li key={item.id} className={classes.listItem1}>
+                  <div
+                    className={twMerge(
+                      cn(classes.linkContainer1, { [classes.linkContainer1Selected || '']: isSelected(item.href) }),
+                    )}
                   >
-                    {item.children.map((child: DrawerNavigationItem) => (
-                      <li key={child.id} className={classes.listItem2}>
-                        <div
-                          className={twMerge(
-                            cn(classes.linkContainer2, {
-                              [classes.linkContainer2Selected || '']: isSelected(child.href),
-                            }),
-                          )}
-                        >
-                          <NextLink className={classes.link2} href={child.href} onClick={closeMenu}>
-                            {child.text}
-                          </NextLink>
-                          {child.children.length > 0 && (
-                            <button
-                              className={cn(
-                                classes.toggleButton2,
-                                isExpanded(child.id) ? classes.toggleButton2Expanded : classes.toggleButton2Collapsed,
-                              )}
-                              onClick={() => toggleSubMenu(child.id)}
-                            >
-                              <Icon className={cn(toggleButtonIcon, classes.toggleButtonIcon2)} />
-                            </button>
-                          )}
-                        </div>
-                        {child.children && child.children.length > 0 && (
-                          <ul
-                            className={cn(
-                              classes.list3,
-                              isExpanded(child.id) ? classes.list3Expanded : classes.list3Collapsed,
+                    <NextLink className={classes.link1} href={item.href} onClick={closeMenu}>
+                      {item.text}
+                    </NextLink>
+                    {item.children.length > 0 && (
+                      <button
+                        className={cn(
+                          classes.toggleButton1,
+                          isExpanded(item.id) ? classes.toggleButton1Expanded : classes.toggleButton1Collapsed,
+                        )}
+                        onClick={() => toggleSubMenu(item.id)}
+                      >
+                        <Icon className={cn(toggleButtonIcon, classes.toggleButtonIcon1)} />
+                      </button>
+                    )}
+                  </div>
+                  {item.children.length > 0 && (
+                    <ul
+                      className={cn(
+                        classes.list2,
+                        isExpanded(item.id) ? classes.list2Expanded : classes.list2Collapsed,
+                      )}
+                    >
+                      {item.children.map((child: DrawerNavigationItem) => (
+                        <li key={child.id} className={classes.listItem2}>
+                          <div
+                            className={twMerge(
+                              cn(classes.linkContainer2, {
+                                [classes.linkContainer2Selected || '']: isSelected(child.href),
+                              }),
                             )}
                           >
-                            {child.children.map((grandchild: DrawerNavigationItem) => (
-                              <li key={grandchild.id} className={classes.listItem3}>
-                                <NextLink
-                                  className={twMerge(
-                                    cn(classes.link3, {
-                                      [classes.link3Selected || '']: isSelected(grandchild.href),
-                                    }),
-                                  )}
-                                  href={grandchild.href}
-                                  onClick={closeMenu}
-                                >
-                                  {grandchild.text}
-                                </NextLink>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
+                            <NextLink className={classes.link2} href={child.href} onClick={closeMenu}>
+                              {child.text}
+                            </NextLink>
+                            {child.children.length > 0 && (
+                              <button
+                                className={cn(
+                                  classes.toggleButton2,
+                                  isExpanded(child.id) ? classes.toggleButton2Expanded : classes.toggleButton2Collapsed,
+                                )}
+                                onClick={() => toggleSubMenu(child.id)}
+                              >
+                                <Icon className={cn(toggleButtonIcon, classes.toggleButtonIcon2)} />
+                              </button>
+                            )}
+                          </div>
+                          {child.children && child.children.length > 0 && (
+                            <ul
+                              className={cn(
+                                classes.list3,
+                                isExpanded(child.id) ? classes.list3Expanded : classes.list3Collapsed,
+                              )}
+                            >
+                              {child.children.map((grandchild: DrawerNavigationItem) => (
+                                <li key={grandchild.id} className={classes.listItem3}>
+                                  <NextLink
+                                    className={twMerge(
+                                      cn(classes.link3, {
+                                        [classes.link3Selected || '']: isSelected(grandchild.href),
+                                      }),
+                                    )}
+                                    href={grandchild.href}
+                                    onClick={closeMenu}
+                                  >
+                                    {grandchild.text}
+                                  </NextLink>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   );
