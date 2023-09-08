@@ -1,0 +1,9 @@
+name: lint-workflows
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  lint-workflows-workflow:
+    uses: clickdealer/github-actions/.github/workflows/lint-workflows.yaml@v1

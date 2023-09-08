@@ -1,0 +1,12 @@
+name: semantic-release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  semantic-release-workflow:
+    permissions: write-all
+    uses: clickdealer/github-actions/.github/workflows/semantic-release.yaml@v1
+    secrets: inherit
