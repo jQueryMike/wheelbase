@@ -14,6 +14,15 @@ export const PrimaryButton: Story = {
   },
 };
 
+export const SecondaryButton: Story = {
+  args: {
+    classes: buttonVariant1.classes,
+    style: ButtonStyle.Secondary,
+    text: "I'm a secondary button",
+    leftIcon: 'fa-solid fa-magnifying-glass',
+  },
+};
+
 export const AccentButton: Story = {
   args: {
     classes: buttonVariant1.classes,

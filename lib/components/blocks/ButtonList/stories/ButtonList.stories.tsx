@@ -1,37 +1,37 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import buttonVariant1 from '../../Button/variants/1';
 import ButtonList from '../ButtonList';
+import buttonListVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof ButtonList>;
 
 export const PrimaryButtonList: Story = {
   args: {
-    classes: {
-      list: 'flex flex-wrap gap-8',
-    },
+    classes: buttonListVariant1.classes,
     items: [
       {
-        id: 'dc312773-2aea-4aaa-b3ad-597ced8523cb',
-        target: '_self',
-        text: 'Home',
+        id: '1',
+        name: 'Button',
+        href: '/test',
+        text: 'Test Button',
+        classes: buttonVariant1.classes,
       },
       {
-        id: '6731f118-8e80-4d41-8910-c3b6de7869f7',
-        target: '_self',
-        href: '/about-us',
-        text: 'About Us',
+        id: '2',
+        name: 'Button',
+        href: '/test',
+        text: '2nd Test Button',
+        classes: buttonVariant1.classes,
+        style: 'accent',
       },
       {
-        id: '7ea87490-71d9-4c06-8879-eb830c2e60e8',
-        target: '_self',
-        href: '/contact-us',
-        text: 'Contact Us',
-      },
-      {
-        id: '89f257f9-fc2f-40de-8e8d-26945efbcaf2',
-        target: '_self',
-        href: '/gallery',
-        text: 'Gallery',
+        id: '3',
+        name: 'Button',
+        href: '/test',
+        text: '3rd Test Button',
+        classes: buttonVariant1.classes,
+        style: 'plain',
       },
     ],
   },

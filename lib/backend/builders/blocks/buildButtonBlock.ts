@@ -21,6 +21,8 @@ const getStyleKey = (style: string) => {
   switch (style) {
     case 'Primary':
       return ButtonStyle.Primary;
+    case 'Secondary':
+      return ButtonStyle.Secondary;
     case 'Accent':
       return ButtonStyle.Accent;
     case 'Plain':

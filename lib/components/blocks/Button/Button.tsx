@@ -6,6 +6,7 @@ import { Icon } from '../../utility-components/Icon';
 
 export enum ButtonStyle {
   Primary = 'primary',
+  Secondary = 'secondary',
   Accent = 'accent',
   Plain = 'plain',
 }
@@ -29,6 +30,7 @@ export type ButtonClasses<T> = {
     | 'leftIcon'
     | 'rightIcon'
     | 'primaryButton'
+    | 'secondaryButton'
     | 'accentButton'
     | 'plainButton'
     | 'smallButton'

@@ -19,6 +19,10 @@ classes = {
     default: tw`bg-primary text-primary-contrast`,
     hover: tw`hover:bg-primary/80`,
   },
+  secondaryButton: {
+    default: tw`bg-secondary text-secondary-contrast`,
+    hover: tw`hover:bg-secondary/80`,
+  },
   accentButton: {
     default: tw`bg-accent text-accent-contrast`,
     hover: tw`hover:bg-accent/80`,
