@@ -2,6 +2,7 @@ import { HeadingTag } from '@components/blocks/Heading';
 import Block from '@interfaces/Block';
 
 import buildButtonBlock from './blocks/buildButtonBlock';
+import buildButtonListBlock from './blocks/buildButtonListBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildLinkListBlock from './blocks/buildLinkListBlock';
 import buildRegInputBlock from './blocks/buildRegInputBlock';
@@ -83,6 +84,22 @@ const buildAdditionalContent = ({
       });
 
       if (linkList) additionalContent.push(linkList);
+    }
+
+    if (item.content.contentType === 'buttonList') {
+      const buttonListTheme = globalBlockTheme?.additionalButtonListTheme?.items[0]?.content?.properties;
+
+      const buttonList = buildButtonListBlock({
+        id: item.content.id,
+        name: 'ButtonList',
+        content: item.content?.properties,
+        settings: item.settings?.properties,
+        inheritedThemes: [buttonListTheme, ...extractInheritedTheme('buttonList', inheritedThemes)],
+        globalTheme,
+        globalConfig,
+      });
+
+      if (buttonList) additionalContent.push(buttonList);
     }
 
     if (item.content.contentType === 'regInput') {

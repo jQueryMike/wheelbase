@@ -6,6 +6,7 @@ import buildAccordionBlock from './blocks/buildAccordionBlock';
 import buildAddressBlock from './blocks/buildAddressBlock';
 import buildBlockquoteBlock from './blocks/buildBlockquoteBlock';
 import buildButtonBlock from './blocks/buildButtonBlock';
+import buildButtonListBlock from './blocks/buildButtonListBlock';
 import buildContactDetailsBlock from './blocks/buildContactDetailsBlock';
 import buildContactFormBlock from './blocks/buildContactFormBlock';
 import buildFeaturesBlock from './blocks/buildFeaturesBlock';
@@ -60,6 +61,11 @@ const buildBlocks = async ({
 
       if (name === 'Button') {
         const block = buildButtonBlock(config);
+        if (block) blocks.push(block);
+      }
+
+      if (name === 'ButtonList') {
+        const block = buildButtonListBlock(config);
         if (block) blocks.push(block);
       }
 
