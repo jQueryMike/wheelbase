@@ -37,8 +37,8 @@ export const PrimaryHeros: Story = {
     },
     image: {
       id: 'cf8dec67-e931-4b7c-9f76-67d4f98266ac',
-      src: 'http://localhost:30590/media/mhwi1tzr/cat-dog-_.jpg',
-      alt: 'Cat DOG',
+      src: 'http://localhost:30590/media/banabqcc/two-people-reaching-an-agreement-about-a-car-sale-royalty-free-image-1665671206.jpg',
+      alt: 'Two People Reaching An Agreement About A Car Sale Royalty Free Image 1665671206',
       fill: true,
       style: {
         objectFit: 'cover',
