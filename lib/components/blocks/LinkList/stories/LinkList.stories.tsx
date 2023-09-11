@@ -12,6 +12,7 @@ export const PrimaryLinkList: Story = {
       {
         id: 'dc312773-2aea-4aaa-b3ad-597ced8523cb',
         target: '_self',
+        href: '/home',
         text: 'Home',
       },
       {
