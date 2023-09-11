@@ -7,7 +7,7 @@ import blockquoteVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof Blockquote>;
 
-export const PrimaryBlockquote: Story = {
+export const Variant1: Story = {
   args: {
     classes: blockquoteVariant1.classes,
     blockquoteName: 'John Costello',

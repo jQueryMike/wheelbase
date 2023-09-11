@@ -11,7 +11,7 @@ import heroVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof Heros>;
 
-export const PrimaryHeros: Story = {
+export const Variant1: Story = {
   args: {
     classes: heroVariant1.classes,
     headings: {

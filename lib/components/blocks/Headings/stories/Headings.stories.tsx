@@ -7,7 +7,7 @@ import Headings, { HeadingsClasses } from '../Headings';
 
 type Story = StoryObj<typeof Headings>;
 
-export const PrimaryHeadings: Story = {
+export const Variant1: Story = {
   args: {
     heading: {
       // @ts-ignore

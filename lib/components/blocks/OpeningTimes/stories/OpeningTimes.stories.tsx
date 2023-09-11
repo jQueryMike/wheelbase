@@ -10,7 +10,7 @@ import openingTimesVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof OpeningTimes>;
 
-export const PrimaryOpeningTimes: Story = {
+export const Variant1: Story = {
   args: {
     classes: openingTimesVariant1.classes,
     items: [

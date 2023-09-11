@@ -10,7 +10,7 @@ import contactDetailsVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof ContactDetails>;
 
-export const PrimaryContactDetails: Story = {
+export const Variant1: Story = {
   args: {
     classes: contactDetailsVariant1.classes,
     headings: {

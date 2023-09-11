@@ -5,7 +5,7 @@ import linkListVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof LinkList>;
 
-export const PrimaryLinkList: Story = {
+export const Variant1: Story = {
   args: {
     classes: linkListVariant1.classes,
     items: [

@@ -10,7 +10,7 @@ import contactFormVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof ContactForm>;
 
-export const PrimaryContactForm: Story = {
+export const Variant1: Story = {
   args: {
     classes: contactFormVariant1.classes,
     headings: {

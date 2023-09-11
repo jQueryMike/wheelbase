@@ -68,7 +68,7 @@ const itemClasses1 = [
 //   'text-green-600',
 // ];
 
-export const Features1: Story = {
+export const Variant1: Story = {
   args: {
     classes: featuresVariant1.classes,
     contentArea1: [],

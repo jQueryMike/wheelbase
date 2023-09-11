@@ -10,7 +10,7 @@ import imageWithContentVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof ImageWithContent>;
 
-export const PrimaryImageWithContent: Story = {
+export const Variant1: Story = {
   args: {
     classes: imageWithContentVariant1.classes,
     image: {

@@ -6,7 +6,7 @@ import regInputVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof RegInput>;
 
-export const PrimaryRegInput: Story = {
+export const Variant1: Story = {
   args: {
     classes: regInputVariant1.classes,
     placeholderText: 'REGISTRATION',

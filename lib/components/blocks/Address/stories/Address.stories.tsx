@@ -9,7 +9,7 @@ import addressVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof Address>;
 
-export const PrimaryAddress: Story = {
+export const Variant1: Story = {
   args: {
     classes: addressVariant1.classes,
     address: 'Winton House,<br/>Stoke Road,<br/>Stoke-on-Trent<br/>ST4 2RW',

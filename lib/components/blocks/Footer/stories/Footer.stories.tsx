@@ -7,7 +7,7 @@ import footerVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof Footer>;
 
-export const PrimaryFooter: Story = {
+export const Variant1: Story = {
   args: {
     classes: footerVariant1.classes,
     infoItems: [

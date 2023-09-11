@@ -11,7 +11,7 @@ import items from './items';
 
 type Story = StoryObj<typeof Accordion>;
 
-export const PrimaryAccordion: Story = {
+export const Variant1: Story = {
   args: {
     classes: accordionVariant1.classes,
     items,

@@ -5,7 +5,7 @@ import drawerNavigationVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof DrawerNavigation>;
 
-export const PrimaryDrawerNavigation: Story = {
+export const Variant1: Story = {
   args: {
     classes: drawerNavigationVariant1.classes,
     menuButtonIcon: 'fa-solid fa-bars',

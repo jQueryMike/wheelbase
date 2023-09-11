@@ -10,7 +10,7 @@ import mapVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof Map>;
 
-export const PrimaryMap: Story = {
+export const Variant1: Story = {
   args: {
     classes: mapVariant1.classes,
     headings: {

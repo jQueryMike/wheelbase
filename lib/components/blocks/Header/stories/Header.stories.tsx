@@ -8,7 +8,7 @@ import headerVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof Header>;
 
-export const PrimaryHeader: Story = {
+export const Variant1: Story = {
   args: {
     classes: headerVariant1.classes,
     logo: {
