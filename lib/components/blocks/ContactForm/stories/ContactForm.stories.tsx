@@ -1,3 +1,4 @@
+import buttonVariant1 from '@components/blocks/Button/variants/1';
 import { HeadingSize } from '@components/blocks/Heading';
 import headingVariant1 from '@components/blocks/Heading/variants/1';
 import headingsVariant1 from '@components/blocks/Headings/variants/1';
@@ -44,6 +45,11 @@ export const PrimaryContactForm: Story = {
     messageLabel: 'Your message',
     buttonText: 'Submit',
     recipients: [],
+    submitButton: {
+      target: '_self',
+      classes: buttonVariant1.classes,
+      text: 'Send message',
+    },
   },
 };
 
