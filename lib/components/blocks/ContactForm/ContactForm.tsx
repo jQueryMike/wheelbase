@@ -263,11 +263,13 @@ const ContactForm = ({
           )}
         </div>
       </div>
-      <ReCAPTCHA
-        ref={recaptchaRef as LegacyRef<ReCAPTCHA>}
-        size="invisible"
-        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-      />
+      {process.env.USE_STORYBOOK_TAILWIND_CONFIG == 'true' && (
+        <ReCAPTCHA
+          ref={recaptchaRef as LegacyRef<ReCAPTCHA>}
+          size="invisible"
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+        />
+      )}
     </>
   );
 };

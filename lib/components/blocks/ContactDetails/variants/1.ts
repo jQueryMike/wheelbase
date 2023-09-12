@@ -14,7 +14,7 @@ classes = {
 
 itemClasses = {
   root: {
-    default: tw`inline-flex flex-row items-center gap-2 rounded-xl bg-slate-100 pb-2 pl-2 pr-4 pt-2 text-[var(--primary)]`,
+    default: tw`mr-2 inline-flex flex-row items-center gap-2 rounded-xl bg-slate-100 pb-2 pl-2 pr-4 pt-2 text-[var(--primary)]`,
     hover: tw`hover:text-[var(--accent)]`,
   },
   icon: {
@@ -22,6 +22,9 @@ itemClasses = {
   },
   label: {
     default: tw`text-lg font-bold not-italic`,
+  },
+  labelContainer: {
+    default: tw`pl-2`,
   },
 };
 
