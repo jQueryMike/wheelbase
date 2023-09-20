@@ -11,12 +11,19 @@ const IS_PRODUCTION = process.env.ENVIRONMENT_NAME === 'production';
 const getInitialProps = async () => {
   const themeTags = process.env.ENVIRONMENT_NAME !== ' local' ? [`theme`] : [];
   const globalConfigTags = process.env.ENVIRONMENT_NAME !== ' local' ? [`global-config`] : [];
+  const sharedContentTags = process.env.ENVIRONMENT_NAME !== ' local' ? [`shared-content`] : [];
   const url = `${CONTENT_API_URL}/item/${process.env.API_ROOT_NODE_PATH}`;
   const navUrl = `${process.env.API_URL}/api/navigation/${process.env.API_ROOT_NODE_GUID}?maxLevel=3`;
 
-  const [{ properties: globalTheme }, { properties: globalConfig }, drawerNavigationItems] = await Promise.all([
+  const [
+    { properties: globalTheme },
+    { properties: globalConfig },
+    { properties: sharedContent },
+    drawerNavigationItems,
+  ] = await Promise.all([
     fetch(`${url}/theme`, { next: { tags: themeTags } }).then((res) => res.json()),
     fetch(`${url}/global-config`, { next: { tags: globalConfigTags } }).then((res) => res.json()),
+    fetch(`${url}/shared-content`, { next: { tags: sharedContentTags } }).then((res) => res.json()),
     fetch(navUrl).then((res) => res.json()),
   ]);
 
@@ -113,79 +120,8 @@ const getInitialProps = async () => {
 
   globalProps.defaultSeo = defaultSeo;
 
-  if (globalTheme.globalCSS) globalProps.globalCSS = globalTheme.globalCSS;
-
-  globalProps.colorPalette = {
-    primary: {
-      DEFAULT: globalTheme.primaryDefault,
-      light: globalTheme.primaryLight,
-      dark: globalTheme.primaryDark,
-      contrast: globalTheme.primaryContrast,
-    },
-    secondary: {
-      DEFAULT: globalTheme.secondaryDefault,
-      light: globalTheme.secondaryLight,
-      dark: globalTheme.secondaryDark,
-      contrast: globalTheme.secondaryContrast,
-    },
-    accent: {
-      DEFAULT: globalTheme.accentDefault,
-      light: globalTheme.accentLight,
-      dark: globalTheme.accentDark,
-      contrast: globalTheme.accentContrast,
-    },
-    success: {
-      DEFAULT: globalTheme.successDefault,
-      contrast: globalTheme.successContrast,
-    },
-    error: {
-      DEFAULT: globalTheme.errorDefault,
-      contrast: globalTheme.errorContrast,
-    },
-    heading: {
-      DEFAULT: globalTheme.headingDefault,
-      light: globalTheme.headingLight,
-      dark: globalTheme.headingDark,
-    },
-    copy: {
-      DEFAULT: globalTheme.copyDefault,
-      light: globalTheme.copyLight,
-      dark: globalTheme.copyDark,
-    },
-    link: {
-      DEFAULT: globalTheme.linkDefault,
-      light: globalTheme.linkLight,
-      dark: globalTheme.linkDark,
-    },
-    body: {
-      DEFAULT: globalTheme.bodyDefault,
-      alt: globalTheme.bodyAlt,
-    },
-    divider: {
-      DEFAULT: globalTheme.dividerDefault,
-    },
-    custom1: {
-      DEFAULT: globalTheme.custom1Default,
-      contrast: globalTheme.custom1Contrast,
-    },
-    custom2: {
-      DEFAULT: globalTheme.custom2Default,
-      contrast: globalTheme.custom2Contrast,
-    },
-    custom3: {
-      DEFAULT: globalTheme.custom3Default,
-      contrast: globalTheme.custom3Contrast,
-    },
-    custom4: {
-      DEFAULT: globalTheme.custom4Default,
-      contrast: globalTheme.custom4Contrast,
-    },
-    custom5: {
-      DEFAULT: globalTheme.custom5Default,
-      contrast: globalTheme.custom5Contrast,
-    },
-  };
-
+  globalProps.sharedContent = sharedContent.termsAndConditions;
+  console.log(globalProps);
   return { globalProps };
 };
 
