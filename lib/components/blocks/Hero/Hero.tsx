@@ -1,5 +1,5 @@
 import Block from '@interfaces/Block';
-import Image from 'next/image';
+import NextImage from 'next/image';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
@@ -42,7 +42,7 @@ const Hero = ({ classes = {}, headings, image, contentArea = [] }: HeroProps) =>
         </div>
         {image && (
           <div className={classes?.imageContainer}>
-            <Image className={classes?.image} {...image} />
+            <NextImage className={classes.image} {...image} />
           </div>
         )}
       </div>

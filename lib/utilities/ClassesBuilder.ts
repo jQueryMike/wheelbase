@@ -49,7 +49,7 @@ class ClassesBuilder {
 
     const classes: { [propName: string]: string } = {};
     Object.keys(classesBuilderConfig.classes).forEach((key: string) => {
-      classes[key] = this.parse(classesBuilderConfig.classes[key], []);
+      classes[key] = `(${this.location}|${key}) ${this.parse(classesBuilderConfig.classes[key], [])}`;
     });
 
     this.classes = classes;

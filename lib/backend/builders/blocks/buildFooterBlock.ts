@@ -37,27 +37,23 @@ const buildFooterBlock = ({
     // Build initial block
     const footer: Block & FooterProps = { id, name, classes };
 
-    const footerLogo = content?.logoImage ? content?.logoImage[0] : null;
+    const footerLogo = content?.logoImage?.items.length ? content?.logoImage.items[0] : null;
 
-    if (footerLogo) {
+    if (footerLogo?.content?.properties?.img?.length > 0) {
       const footerLogoTheme = globalBlockTheme?.footerLogoTheme?.items[0]?.content?.properties;
 
       footer.logo = buildImageBlock({
-        id: footerLogo.id,
+        id: footerLogo.content.id,
         name: 'Image',
-        content: { ...footerLogo },
+        content: { ...footerLogo.content.properties },
         inheritedThemes: [footerLogoTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
         globalConfig,
-        defaultProps: {
-          fill: true,
-          style: { objectFit: 'contain' },
-        },
       });
-    }
 
-    if (content?.logoLink[0] && (content?.logoLink[0]?.url || content?.logoLink[0]?.route?.path)) {
-      footer.logoHref = (content.logoLink[0].url || content.logoLink[0].route.path).replace('/home', '');
+      if (content?.logoLink && content.logoLink[0] && (content.logoLink[0].url || content.logoLink[0].route?.path)) {
+        footer.logoHref = (content.logoLink[0].url || content.logoLink[0].route.path).replace('/home', '');
+      }
     }
 
     footer.contentArea = buildAdditionalContent({

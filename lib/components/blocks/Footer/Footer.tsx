@@ -1,11 +1,12 @@
 import Block from '@interfaces/Block';
 import cn from 'classnames';
+import NextImage from 'next/image';
 import NextLink from 'next/link';
 import { HTMLAttributeAnchorTarget } from 'react';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
-import { Image, ImageProps } from '../Image';
+import { ImageProps } from '../Image';
 
 export type FooterClasses<T> = {
   [key in
@@ -26,7 +27,8 @@ export type FooterClasses<T> = {
     | 'copyrightContainer'
     | 'copyrightText'
     | 'logoContainer'
-    | 'logoLink']?: T;
+    | 'logoLink'
+    | 'logoImage']?: T;
 };
 
 export type FooterInfoItemClasses<T> = {
@@ -93,7 +95,7 @@ const Footer = ({
   if (logo) {
     logoContainer = (
       <div className={classes.logoContainer}>
-        <Image {...logo} />
+        <NextImage className={classes.logoImage} {...logo} />
       </div>
     );
 

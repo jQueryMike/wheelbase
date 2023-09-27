@@ -7,8 +7,11 @@ const fetchData = require('./tailwind/fetchData');
 const buildContent = require('./tailwind/buildContent');
 const buildSafelist = require('./tailwind/buildSafelist');
 
+const buildContainer = require('./tailwind/buildContainer');
+
 const buildColors = require('./tailwind/buildColors');
 const buildFontFamily = require('./tailwind/buildFontFamily');
+const buildScreens = require('./tailwind/buildScreens');
 const buildTypography = require('./tailwind/buildTypography');
 
 const generateTailwindConfig = async () => {
@@ -21,7 +24,9 @@ const generateTailwindConfig = async () => {
       content: buildContent(pages),
       safelist: buildSafelist(pages),
       theme: {
+        container: buildContainer(),
         extend: {
+          screens: buildScreens(),
           colors,
           fontFamily: buildFontFamily(theme),
           typography: buildTypography(colors),

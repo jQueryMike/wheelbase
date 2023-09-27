@@ -32,23 +32,24 @@ const buildHeaderBlock = ({
     // Build initial block
     const header: Block & HeaderProps = { id, name, classes };
 
-    const headerLogo = content?.logoImage ? content?.logoImage[0] : null;
+    const headerLogo = content?.logoImage?.items.length ? content?.logoImage.items[0] : null;
 
-    if (headerLogo) {
+    if (headerLogo?.content?.properties?.img?.length > 0) {
       const headerLogoTheme = globalBlockTheme?.headerLogoTheme?.items[0]?.content?.properties;
 
       header.logo = buildImageBlock({
-        id: headerLogo.id,
+        id: headerLogo.content.id,
         name: 'Image',
-        content: { ...headerLogo },
+        content: { ...headerLogo.content.properties },
         inheritedThemes: [headerLogoTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
         globalConfig,
-        defaultProps: {
-          fill: true,
-          style: { objectFit: 'contain', objectPosition: 'left center' },
-        },
+        dontApplyClasses: true,
       });
+
+      if (content?.logoLink && content.logoLink[0] && (content.logoLink[0].url || content?.logoLink[0].route?.path)) {
+        header.logoHref = (content.logoLink[0].url || content.logoLink[0].route.path).replace('/home', '');
+      }
     }
 
     header.contentArea = buildAdditionalContent({
@@ -63,10 +64,6 @@ const buildHeaderBlock = ({
     if (content?.enableScrollTransition !== undefined) header.enableScrollTransition = content.enableScrollTransition;
     if (content?.scrollTransitionPosition)
       header.scrollTransitionPosition = parseInt(content.scrollTransitionPosition, 10);
-
-    if (content?.logoLink[0] && (content?.logoLink[0]?.url || content?.logoLink[0]?.route?.path)) {
-      header.logoHref = (content.logoLink[0].url || content.logoLink[0].route.path).replace('/home', '');
-    }
 
     return header;
   } catch (error) {

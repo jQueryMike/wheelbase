@@ -44,8 +44,8 @@ const buildRegInputBlock = ({
           },
         ],
       },
-      settings: {},
-      inheritedThemes: [buttonTheme, ...extractInheritedTheme('button', inheritedThemes)],
+      settings: buttonTheme,
+      inheritedThemes: [buttonTheme, ...extractInheritedTheme('submitButton', inheritedThemes)],
       globalTheme,
       globalConfig,
     })!;
@@ -55,7 +55,8 @@ const buildRegInputBlock = ({
       id,
       name,
       classes,
-      clickBuyUrl: `https://${globalConfig.clickBuySubdomain}.${process.env.CLICK_BUY_URL!}/vrm-lookup`,
+      vrmLookupUrl: `https://${globalConfig.clickBuySubdomain}.${process.env.CLICK_BUY_URL!}/vrm-lookup?vrm={VRM}`,
+      manualLookupUrl: `https://${globalConfig.clickBuySubdomain}.${process.env.CLICK_BUY_URL!}/manual-lookup`,
       submitButton,
     };
 

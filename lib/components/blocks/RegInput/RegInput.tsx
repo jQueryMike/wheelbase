@@ -1,35 +1,53 @@
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Button, ButtonProps } from '../Button';
+import { Button, ButtonProps, ButtonSize } from '../Button';
 
 export type RegInputClasses<T> = {
   [key in
     | 'root'
     | 'rootInner'
-    | 'headingsContainer'
     | 'formContainer'
     | 'form'
     | 'inputContainer'
     | 'input'
     | 'buttonContainer'
+    | 'manualLookupLink'
     | 'errorMessageContainer'
     | 'errorMessage']?: T;
 };
 
 export interface RegInputProps {
   classes?: RegInputClasses<string>;
-  clickBuyUrl: string;
+  defaultProps?: {
+    button?: Partial<ButtonProps>;
+  };
+  vrmLookupUrl: string;
+  manualLookupUrl?: string;
   placeholderText?: string;
   submitButton: ButtonProps;
 }
 
-const RegInput = ({ classes = {}, clickBuyUrl, placeholderText = 'Enter reg...', submitButton }: RegInputProps) => {
+const RegInput = ({
+  classes = {},
+  vrmLookupUrl,
+  manualLookupUrl,
+  placeholderText = 'Enter reg...',
+  submitButton,
+  defaultProps,
+}: RegInputProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
   const [formError, setFormError] = useState(false);
   const router = useRouter();
+
+  defaultProps = {
+    button: {
+      size: ButtonSize.Large,
+    },
+  };
 
   const { handleSubmit, formState, register } = useForm();
 
@@ -38,7 +56,7 @@ const RegInput = ({ classes = {}, clickBuyUrl, placeholderText = 'Enter reg...',
     setFormError(false);
 
     try {
-      router.push(`${clickBuyUrl}?vrm=${btoa(data.vrm)}`);
+      router.push(`${vrmLookupUrl.replace('{VRM}', btoa(data.vrm))}`);
     } catch (error) {
       setFormError(true);
     }
@@ -65,7 +83,7 @@ const RegInput = ({ classes = {}, clickBuyUrl, placeholderText = 'Enter reg...',
               />
             </div>
             <div className={classes.buttonContainer}>
-              <Button {...submitButton} loading={submitting} />
+              <Button {...submitButton} {...defaultProps?.button} loading={submitting} />
             </div>
           </form>
           {(Object.keys(formState.errors).length > 0 || formError) && (
@@ -74,6 +92,11 @@ const RegInput = ({ classes = {}, clickBuyUrl, placeholderText = 'Enter reg...',
             </div>
           )}
         </div>
+        {manualLookupUrl && (
+          <NextLink className={classes.manualLookupLink} href={manualLookupUrl}>
+            Look up your vehicle manually...
+          </NextLink>
+        )}
       </div>
     </div>
   );
