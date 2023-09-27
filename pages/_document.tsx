@@ -11,7 +11,7 @@ function Document() {
           <Main />
           <NextScript />
           <Script
-            src="https://kit.fontawesome.com/57d9e7f4ed.js"
+            src="https://kit.fontawesome.com/3bd8a6c68a.js"
             strategy="beforeInteractive"
             crossOrigin="anonymous"
           />
