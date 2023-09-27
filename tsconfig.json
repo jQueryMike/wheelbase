@@ -25,6 +25,8 @@
       "@backend/*": ["lib/backend/*"],
       "@components": ["lib/components"],
       "@components/*": ["lib/components/*"],
+      "@constants": ["lib/constants"],
+      "@constants/*": ["lib/constants/*"],
       "@interfaces": ["lib/interfaces"],
       "@interfaces/*": ["lib/interfaces/*"],
       "@styles": ["lib/styles"],

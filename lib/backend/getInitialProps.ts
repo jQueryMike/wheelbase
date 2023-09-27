@@ -113,6 +113,79 @@ const getInitialProps = async () => {
 
   globalProps.defaultSeo = defaultSeo;
 
+  if (globalTheme.globalCSS) globalProps.globalCSS = globalTheme.globalCSS;
+
+  globalProps.colorPalette = {
+    primary: {
+      DEFAULT: globalTheme.primaryDefault,
+      light: globalTheme.primaryLight,
+      dark: globalTheme.primaryDark,
+      contrast: globalTheme.primaryContrast,
+    },
+    secondary: {
+      DEFAULT: globalTheme.secondaryDefault,
+      light: globalTheme.secondaryLight,
+      dark: globalTheme.secondaryDark,
+      contrast: globalTheme.secondaryContrast,
+    },
+    accent: {
+      DEFAULT: globalTheme.accentDefault,
+      light: globalTheme.accentLight,
+      dark: globalTheme.accentDark,
+      contrast: globalTheme.accentContrast,
+    },
+    success: {
+      DEFAULT: globalTheme.successDefault,
+      contrast: globalTheme.successContrast,
+    },
+    error: {
+      DEFAULT: globalTheme.errorDefault,
+      contrast: globalTheme.errorContrast,
+    },
+    heading: {
+      DEFAULT: globalTheme.headingDefault,
+      light: globalTheme.headingLight,
+      dark: globalTheme.headingDark,
+    },
+    copy: {
+      DEFAULT: globalTheme.copyDefault,
+      light: globalTheme.copyLight,
+      dark: globalTheme.copyDark,
+    },
+    link: {
+      DEFAULT: globalTheme.linkDefault,
+      light: globalTheme.linkLight,
+      dark: globalTheme.linkDark,
+    },
+    body: {
+      DEFAULT: globalTheme.bodyDefault,
+      alt: globalTheme.bodyAlt,
+    },
+    divider: {
+      DEFAULT: globalTheme.dividerDefault,
+    },
+    custom1: {
+      DEFAULT: globalTheme.custom1Default,
+      contrast: globalTheme.custom1Contrast,
+    },
+    custom2: {
+      DEFAULT: globalTheme.custom2Default,
+      contrast: globalTheme.custom2Contrast,
+    },
+    custom3: {
+      DEFAULT: globalTheme.custom3Default,
+      contrast: globalTheme.custom3Contrast,
+    },
+    custom4: {
+      DEFAULT: globalTheme.custom4Default,
+      contrast: globalTheme.custom4Contrast,
+    },
+    custom5: {
+      DEFAULT: globalTheme.custom5Default,
+      contrast: globalTheme.custom5Contrast,
+    },
+  };
+
   return { globalProps };
 };
 
