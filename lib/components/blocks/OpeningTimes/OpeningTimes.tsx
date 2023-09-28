@@ -11,11 +11,11 @@ export type OpeningTimesClasses<T> = {
     | 'root'
     | 'rootInner'
     | 'headingsContainer'
+    | 'itemsContainer'
+    | 'itemContainer'
     | 'contentAreaContainer'
     | 'contentArea1Container'
-    | 'contentArea2Container'
-    | 'itemsContainer'
-    | 'itemContainer']?: T;
+    | 'contentArea2Container']?: T;
 };
 
 export type OpeningTimesItemClasses<T> = {
@@ -66,16 +66,17 @@ const OpeningTimes = ({
         )}
         <div className={classes.itemsContainer}>
           {items.map((item) => (
-            <div
-              key={item.id}
-              className={cn(item.classes?.itemRoot, {
-                [item.classes?.itemHighlight || '']: isCurrentDay(item.label),
-                [item.classes?.itemClosed || '']: item.closed,
-              })}
-            >
-              {item.icon && <Icon className={cn(item.icon, item.classes?.itemIcon)} />}
-              <div className={item.classes?.itemLabel}>{item.label}</div>
-              {item.value && <div className={item.classes?.itemValue}>{item.value}</div>}
+            <div key={item.id} className={classes.itemContainer}>
+              <div
+                className={cn(item.classes?.itemRoot, {
+                  [item.classes?.itemHighlight || '']: isCurrentDay(item.label),
+                  [item.classes?.itemClosed || '']: item.closed,
+                })}
+              >
+                {item.icon && <Icon className={cn(item.icon, item.classes?.itemIcon)} />}
+                <div className={item.classes?.itemLabel}>{item.label}</div>
+                {item.value && <div className={item.classes?.itemValue}>{item.value}</div>}
+              </div>
             </div>
           ))}
         </div>

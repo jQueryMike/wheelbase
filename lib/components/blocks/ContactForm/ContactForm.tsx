@@ -17,11 +17,11 @@ export type ContactFormClasses<T> = {
     | 'formWithError'
     | 'formWhilstSubmitting'
     | 'formField'
+    | 'formFieldErrorMessage'
     | 'inputContainer'
-    | 'inputContainerSuccess'
     | 'inputContainerError'
     | 'input'
-    | 'inputErrorMessage'
+    | 'textarea'
     | 'labelContainer'
     | 'label'
     | 'labelRequiredMarker'
@@ -30,9 +30,9 @@ export type ContactFormClasses<T> = {
     | 'contentArea1Container'
     | 'contentArea2Container'
     | 'formContentAreaContainer'
+    | 'thankYouContentAreaContainer'
     | 'errorMessageContainer'
-    | 'errorMessage'
-    | 'thankYouContentAreaContainer']?: T;
+    | 'errorMessage']?: T;
 };
 
 export interface ContactFormProps {
@@ -135,8 +135,8 @@ const ContactForm = ({
               onSubmit={handleSubmit(onSubmit)}
               className={cn(
                 classes.form,
-                { [classes.formWithError!]: classes.formWithError && (formError || formState.errors) },
-                { [classes.formWhilstSubmitting!]: classes.formWhilstSubmitting && submitting },
+                { [classes.formWithError!]: !!classes.formWithError && (formError || formState.errors) },
+                { [classes.formWhilstSubmitting!]: !!classes.formWhilstSubmitting && submitting },
               )}
             >
               {formContentArea?.length > 0 && (
@@ -152,7 +152,7 @@ const ContactForm = ({
                 </div>
                 <div
                   className={cn(classes.inputContainer, {
-                    [classes.inputContainerError!]: classes.inputContainerError && !!formState.errors.name,
+                    [classes.inputContainerError!]: !!classes.inputContainerError && !!formState.errors.name,
                   })}
                 >
                   <input
@@ -163,7 +163,7 @@ const ContactForm = ({
                     className={classes.input}
                   />
                 </div>
-                {formState.errors.name && <span className={classes.inputErrorMessage}>Please enter your name</span>}
+                {formState.errors.name && <span className={classes.formFieldErrorMessage}>Please enter your name</span>}
               </div>
 
               <div className={classes.formField}>
@@ -174,7 +174,7 @@ const ContactForm = ({
                 </div>
                 <div
                   className={cn(classes.inputContainer, {
-                    [classes.inputContainerError!]: classes.inputContainerError && !!formState.errors.telephone,
+                    [classes.inputContainerError!]: !!classes.inputContainerError && !!formState.errors.telephone,
                   })}
                 >
                   <input
@@ -186,7 +186,7 @@ const ContactForm = ({
                   />
                 </div>
                 {formState.errors.telephone && (
-                  <span className={classes.inputErrorMessage}>Please enter a valid phone number</span>
+                  <span className={classes.formFieldErrorMessage}>Please enter a valid phone number</span>
                 )}
               </div>
 
@@ -198,7 +198,7 @@ const ContactForm = ({
                 </div>
                 <div
                   className={cn(classes.inputContainer, {
-                    [classes.inputContainerError!]: classes.inputContainerError && !!formState.errors.email,
+                    [classes.inputContainerError!]: !!classes.inputContainerError && !!formState.errors.email,
                   })}
                 >
                   <input
@@ -210,7 +210,7 @@ const ContactForm = ({
                   />
                 </div>
                 {formState.errors.email && (
-                  <span className={classes.inputErrorMessage}>Please enter a valid email address</span>
+                  <span className={classes.formFieldErrorMessage}>Please enter a valid email address</span>
                 )}
               </div>
 
@@ -222,7 +222,7 @@ const ContactForm = ({
                 </div>
                 <div
                   className={cn(classes.inputContainer, {
-                    [classes.inputContainerError!]: classes.inputContainerError && !!formState.errors.email,
+                    [classes.inputContainerError!]: !!classes.inputContainerError && !!formState.errors.email,
                   })}
                 >
                   <textarea
@@ -230,11 +230,11 @@ const ContactForm = ({
                     placeholder="Your message"
                     rows={6}
                     {...register('message', { required: true })}
-                    className={classes.input}
+                    className={classes.textarea}
                   />
                 </div>
                 {formState.errors.message && (
-                  <span className={classes.inputErrorMessage}>Please enter your message</span>
+                  <span className={classes.formFieldErrorMessage}>Please enter your message</span>
                 )}
               </div>
 

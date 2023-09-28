@@ -38,45 +38,45 @@ classes = {
   closeButtonText: tw`hidden`,
 
   // LIST LEVEL !
-  list1: tw`mx-8 flex flex-col items-stretch justify-center space-y-2 overflow-y-auto border-t border-divider`,
-  listItem1: tw`border-b border-divider`,
-  linkContainer1: {
+  l1_list: tw`mx-8 flex flex-col items-stretch justify-center space-y-2 overflow-y-auto border-t border-divider py-2`,
+  l1_listItem: tw`border-b border-divider pb-2`,
+  l1_linkContainer: {
     default: tw`flex items-stretch justify-between space-x-2 text-accent`,
     hover: tw`hover:text-primary`,
   },
-  linkContainer1Selected: tw`text-primary`,
-  link1: tw`inline-block flex-grow py-2 font-semibold`,
-  toggleButton1: {
-    default: tw`w-10 transform rounded-lg text-accent-contrast`,
+  l1_linkContainerSelected: tw`selected text-primary`,
+  l1_link: tw`inline-block flex-grow py-2 font-semibold`,
+  l1_toggleButton: {
+    default: tw`w-10 transform text-accent`,
     hover: tw`hover:bg-accent-contrast/20`,
   },
-  toggleButton1Expanded: tw`rotate-180`,
+  l1_toggleButtonExpanded: tw`rotate-180`,
 
   // LIST LEVEL 2
-  list2: tw`-mx-8 mt-2 space-y-2 bg-accent-contrast/10 px-8 py-4 text-base`,
-  list2Collapsed: tw`hidden`,
-  linkContainer2: {
-    default: tw`flex items-stretch justify-between space-x-2 rounded-lg text-primary-contrast`,
-    hover: tw`[&:not(.selected)]:hover:bg-primary-contrast/10`,
+  l2_list: tw`mt-2 space-y-2 text-base`,
+  l2_listCollapsed: tw`hidden`,
+  l2_linkContainer: {
+    default: tw`flex items-stretch justify-between space-x-2 text-accent`,
+    hover: tw`[&:not(.selected)]:hover:text-primary`,
   },
-  linkContainer2Selected: tw`selected bg-accent text-accent-contrast`,
-  link2: tw`inline-block flex-grow px-4 py-2 pl-8 font-semibold`,
-  toggleButton2: {
-    default: tw`w-10 transform rounded-lg text-primary-contrast`,
-    hover: tw`hover:bg-primary-contrast/10`,
+  l2_linkContainerSelected: tw`selected text-primary`,
+  l2_link: tw`inline-block flex-grow px-4 py-2 font-semibold`,
+  l2_toggleButton: {
+    default: tw`w-10 transform text-accent/80`,
+    hover: tw`hover:bg-accent-contrast/50`,
   },
-  toggleButton2Expanded: tw`rotate-180`,
+  l2_toggleButtonExpanded: tw`rotate-180`,
 
   // LIST LEVEL 3
-  list3: tw`mt-2 space-y-2`,
-  list3Expanded: tw`block`,
-  list3Collapsed: tw`hidden`,
-  listItem3: tw``,
-  link3: {
-    default: tw`block rounded-lg px-3 py-2 pl-12 font-semibold text-primary-contrast/80`,
-    hover: tw`[&:not(.selected)]:hover:bg-primary-contrast/10 [&:not(.selected)]:hover:text-primary-contrast`,
+  l3_list: tw`space-y-2`,
+  l3_listExpanded: tw`block`,
+  l3_listCollapsed: tw`hidden`,
+  l3_listItem: tw``,
+  l3_link: {
+    default: tw`block px-4 py-2 pl-8 font-semibold text-accent/80`,
+    hover: tw`[&:not(.selected)]:hover:text-primary`,
   },
-  link3Selected: tw`selected bg-accent text-accent-contrast`,
+  l3_linkSelected: tw`selected text-primary`,
 };
 
 const drawerNavigationVariant: DrawerNavigationVariant = {

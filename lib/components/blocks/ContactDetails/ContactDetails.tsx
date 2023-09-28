@@ -11,15 +11,15 @@ export type ContactDetailsClasses<T> = {
     | 'root'
     | 'rootInner'
     | 'headingsContainer'
+    | 'itemsContainer'
+    | 'itemContainer'
     | 'contentAreaContainer'
     | 'contentArea1Container'
-    | 'contentArea2Container'
-    | 'itemsContainer'
-    | 'itemContainer']?: T;
+    | 'contentArea2Container']?: T;
 };
 
 export type ContactDetailsItemClasses<T> = {
-  [key in 'root' | 'link' | 'iconContainer' | 'icon' | 'labelContainer' | 'label']?: T;
+  [key in 'itemRoot' | 'itemLink' | 'itemIconContainer' | 'itemIcon' | 'itemLabelContainer' | 'itemLabel']?: T;
 };
 
 export interface ContactDetailsProps {
@@ -58,16 +58,16 @@ const ContactDetails = ({
         </div>
       )}
       {contactItems?.map((item) => (
-        <div key={item.id} className={item.classes?.root}>
-          <NextLink href={item.href} className={item.classes?.link}>
+        <div key={item.id} className={item.classes?.itemRoot}>
+          <NextLink href={item.href} className={item.classes?.itemLink}>
             {item.icon && (
-              <span className={item.classes?.iconContainer}>
-                <Icon className={cn(item.icon, item.classes?.icon)} />
+              <span className={item.classes?.itemIconContainer}>
+                <Icon className={cn(item.icon, item.classes?.itemIcon)} />
               </span>
             )}
             {item.label && (
-              <span className={item.classes?.labelContainer}>
-                <em className={item.classes?.label}>{item.label}</em>
+              <span className={item.classes?.itemLabelContainer}>
+                <em className={item.classes?.itemLabel}>{item.label}</em>
               </span>
             )}
           </NextLink>

@@ -11,11 +11,11 @@ export type AddressClasses<T> = {
     | 'root'
     | 'rootInner'
     | 'headingsContainer'
+    | 'addressContainer'
+    | 'address'
     | 'contentAreaContainer'
     | 'contentArea1Container'
-    | 'contentArea2Container'
-    | 'addressContainer'
-    | 'address']?: T;
+    | 'contentArea2Container']?: T;
 };
 
 export interface AddressProps {

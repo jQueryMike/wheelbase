@@ -69,13 +69,11 @@ const Accordion = ({ classes = {}, headings, items = [], contentArea1 = [], cont
             <Headings {...headings} />
           </div>
         )}
-
         {contentArea1?.length > 0 && (
           <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
             <BlockList blocks={contentArea1} />
           </div>
         )}
-
         <div className={classes.itemsContainer}>
           {items.map((item) => {
             const isExpanded = expandedItemIds.includes(item.id);
@@ -123,7 +121,6 @@ const Accordion = ({ classes = {}, headings, items = [], contentArea1 = [], cont
             );
           })}
         </div>
-
         {contentArea2?.length > 0 && (
           <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
             <BlockList blocks={contentArea2} />

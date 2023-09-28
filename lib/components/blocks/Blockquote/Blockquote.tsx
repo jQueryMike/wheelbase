@@ -10,14 +10,13 @@ export type BlockquoteClasses<T> = {
   [key in
     | 'root'
     | 'rootInner'
-    | 'container'
     | 'headingsContainer'
-    | 'contentAreaContainer'
-    | 'contentArea1Container'
-    | 'contentArea2Container'
     | 'blockquoteContainer'
     | 'blockquote'
-    | 'blockquoteName']?: T;
+    | 'blockquoteName'
+    | 'contentAreaContainer'
+    | 'contentArea1Container'
+    | 'contentArea2Container']?: T;
 };
 
 export interface BlockquoteProps {

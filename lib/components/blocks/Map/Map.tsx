@@ -9,11 +9,11 @@ export type MapClasses<T> = {
     | 'root'
     | 'rootInner'
     | 'headingsContainer'
+    | 'mapContainer'
+    | 'map'
     | 'contentAreaContainer'
     | 'contentArea1Container'
-    | 'contentArea2Container'
-    | 'mapContainer'
-    | 'map']?: T;
+    | 'contentArea2Container']?: T;
 };
 
 export interface MapProps {

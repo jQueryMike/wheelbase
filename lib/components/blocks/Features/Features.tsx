@@ -11,8 +11,6 @@ export type FeaturesClasses<T> = {
     | 'root'
     | 'rootInner'
     | 'headingsContainer'
-    | 'headingContainer'
-    | 'subheadingContainer'
     | 'itemsContainer'
     | 'itemContainer'
     | 'contentAreaContainer'

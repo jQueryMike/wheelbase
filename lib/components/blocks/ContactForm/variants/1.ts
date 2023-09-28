@@ -26,10 +26,11 @@ classes = {
   formField: {
     default: tw`space-y-2`,
   },
+  formFieldErrorMessage: tw`inline-block pt-1 text-sm text-error`,
   label: tw`font-semibold text-heading`,
   inputContainer: tw`flex overflow-hidden rounded-lg border border-divider focus-within:border-primary`,
   input: tw`flex-grow px-4 py-2 text-[16px] outline-none`,
-  inputErrorMessage: tw`inline-block pt-1 text-sm text-error`,
+  textarea: tw`h-32 flex-grow px-4 py-2 text-[16px] outline-none`,
   thankYouContentAreaContainer: {
     default: tw`max-w-[700px] space-y-4 rounded-lg border border-divider p-4`,
     '@xl/contact-form': tw`@xl/contact-form:space-y-6 @xl/contact-form:p-5`,
