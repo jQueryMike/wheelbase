@@ -18,7 +18,7 @@ const Icon = ({ className }: IconProps) => {
   }
 
   return (
-    <span className="inline-block h-[1em] w-[1em] leading-none">
+    <span className="inline-flex h-[1em] items-center justify-center leading-none ">
       <span className="inline-block" aria-hidden="true">
         {iconElement}
       </span>
