@@ -14,6 +14,7 @@ classes = {
     default: tw`py-3 font-bold text-accent`,
     hover: tw`hover:text-primary`,
   },
+  linkSelected: tw`text-primary`,
 };
 
 const linkListVariant: LinkListVariant = {
