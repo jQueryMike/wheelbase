@@ -14,7 +14,7 @@ const buildTypography = (colors) => {
       },
       'primary-contrast': {
         css: {
-          color: colors.primary.contrast,
+          color: `rgb(--var-primary-contrast)`,
           opacity: 0.7,
         },
       },

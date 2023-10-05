@@ -44,7 +44,9 @@
     "next.config.js",
     "postcss.config.js",
     "tailwind.builder.js",
-    "tailwind/**/*.js"
+    "tailwind/**/*.js",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx"
   ],
   "exclude": ["node_modules", "_ARCHIVE", "**/*.exclude"]
 }

@@ -14,10 +14,14 @@ const config: StorybookConfig = {
     options: {},
   },
   docs: {
-    autodocs: true,
+    autodocs: false,
     defaultName: 'Documentation',
   },
   staticDirs: ['./public'],
+  env: (conf) => ({
+    ...conf,
+    NEXT_PUBLIC_IS_STORYBOOK: 'true',
+  }),
 };
 
 export default config;

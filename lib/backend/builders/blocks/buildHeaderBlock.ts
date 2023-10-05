@@ -44,7 +44,6 @@ const buildHeaderBlock = ({
         inheritedThemes: [headerLogoTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
         globalConfig,
-        dontApplyClasses: true,
       });
 
       if (content?.logoLink && content.logoLink[0] && (content.logoLink[0].url || content?.logoLink[0].route?.path)) {

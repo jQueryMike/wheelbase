@@ -16,10 +16,11 @@ classes = {
   rootScrolled: tw`shadow-xl`,
   spacer: tw`h-20`,
   spacerScrolled: tw``,
-  container: tw`container mx-auto flex h-20 items-center justify-between`,
+  container: tw`container mx-auto flex h-20 items-center`,
   containerScrolled: tw``,
-  drawerNavigationContainer: tw`mr-10`,
+  drawerNavigationContainer: tw`mr-6`,
   logoContainer: tw`relative h-12 w-72`,
+  logoImage: tw`object-contain object-left`,
   contentAreaContainer: tw`flex flex-grow items-center justify-end space-x-10`,
 };
 

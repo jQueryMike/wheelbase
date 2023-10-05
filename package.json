@@ -9,8 +9,8 @@
     "test": "jest",
     "lint": "npx eslint .",
     "lint-staged": "npx lint-staged",
-    "storybook": "export USE_STORYBOOK_TAILWIND_CONFIG=true || set USE_STORYBOOK_TAILWIND_CONFIG=true && storybook dev -p 6006",
-    "build-storybook": "export USE_STORYBOOK_TAILWIND_CONFIG=true || set USE_STORYBOOK_TAILWIND_CONFIG=true && storybook build"
+    "storybook": "NEXT_PUBLIC_IS_STORYBOOK=true storybook dev -p 6006",
+    "build-storybook": "NEXT_PUBLIC_IS_STORYBOOK=true && storybook build"
   },
   "pre-commit": [
     "lint-staged"
