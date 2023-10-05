@@ -40,5 +40,6 @@
         "no-param-reassign": "off"
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["!.storybook"]
 }

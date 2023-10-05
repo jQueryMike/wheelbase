@@ -16,6 +16,7 @@ const preview: Preview = {
         order: ['Getting Started'],
       },
     },
+    layout: 'fullscreen',
   },
 };
 

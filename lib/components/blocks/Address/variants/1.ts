@@ -18,7 +18,7 @@ classes = {
     '@xl/address': tw`@xl/address:space-y-6`,
   },
   addressContainer: {
-    default: tw`space-y-2 py-6`,
+    default: tw`space-y-2 py-2`,
   },
   address: {
     default: tw`text-[16px] font-semibold text-copy`,

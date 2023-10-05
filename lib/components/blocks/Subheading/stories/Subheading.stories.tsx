@@ -5,7 +5,7 @@ import subheadingVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof Subheading>;
 
-export const Subheading1: Story = {
+export const Variant1: Story = {
   args: {
     classes: subheadingVariant1.classes,
     text: 'This is a subheading',

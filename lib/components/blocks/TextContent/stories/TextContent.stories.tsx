@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import TextContent, { TextContentClasses } from '../TextContent';
+import textContentVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof TextContent>;
 
-export const PrimaryTextContent: Story = {
+export const Variant1: Story = {
   args: {
-    classes: {
-      textContent: 'prose max-w-full',
-    },
+    classes: textContentVariant1.classes,
     content: '<p>This is an example of <strong>TextContent</strong></p>',
   },
 };

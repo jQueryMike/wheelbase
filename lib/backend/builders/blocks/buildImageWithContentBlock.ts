@@ -47,7 +47,6 @@ const buildImageWithContentBlock = ({
         inheritedThemes: [imageTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
         globalConfig,
-        dontApplyClasses: true,
       });
     }
 

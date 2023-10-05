@@ -1,19 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import LinkList, { LinkListClasses } from '../LinkList';
+import linkListVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof LinkList>;
 
-export const PrimaryLinkList: Story = {
+export const Variant1: Story = {
   args: {
-    classes: {
-      list: 'flex flex-wrap gap-8',
-      link: 'font-semibold text-link hover:text-link-light',
-    },
+    classes: linkListVariant1.classes,
     items: [
       {
         id: 'dc312773-2aea-4aaa-b3ad-597ced8523cb',
         target: '_self',
+        href: '/home',
         text: 'Home',
       },
       {

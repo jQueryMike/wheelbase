@@ -60,7 +60,7 @@ export interface DrawerNavigationItem {
   id: string;
   href: string;
   text: string;
-  children: DrawerNavigationItem[];
+  children?: DrawerNavigationItem[];
 }
 
 export interface DrawerNavigationProps {
@@ -132,7 +132,7 @@ const DrawerNavigation = ({
                     <NextLink className={classes.l1_link} href={item.href} onClick={closeMenu}>
                       {item.text}
                     </NextLink>
-                    {item.children.length > 0 && (
+                    {item.children && item.children.length > 0 && (
                       <button
                         className={cn(
                           classes.l1_toggleButton,
@@ -144,7 +144,7 @@ const DrawerNavigation = ({
                       </button>
                     )}
                   </div>
-                  {item.children.length > 0 && (
+                  {item.children && item.children.length > 0 && (
                     <ul
                       className={cn(
                         classes.l2_list,
@@ -163,7 +163,7 @@ const DrawerNavigation = ({
                             <NextLink className={classes.l2_link} href={child.href} onClick={closeMenu}>
                               {child.text}
                             </NextLink>
-                            {child.children.length > 0 && (
+                            {child.children && child.children.length > 0 && (
                               <button
                                 className={cn(
                                   classes.l2_toggleButton,

@@ -1,63 +1,44 @@
 import { HeadingSize } from '@components/blocks/Heading';
+import headingVariant1 from '@components/blocks/Heading/variants/1';
+import headingsVariant1 from '@components/blocks/Headings/variants/1';
+import textContentVariant1 from '@components/blocks/TextContent/variants/1';
 import type { Meta, StoryObj } from '@storybook/react';
 
+import imageVariant1 from '../../Image/variants/1';
 import ImageWithContent, { ImageWithContentClasses } from '../ImageWithContent';
+import imageWithContentVariant1 from '../variants/1';
 
 type Story = StoryObj<typeof ImageWithContent>;
 
-export const PrimaryImageWithContent: Story = {
+export const Variant1: Story = {
   args: {
-    classes: {
-      root: 'flex flex-col items-center space-y-8 @container @xl:space-y-10 @3xl:space-y-12 @5xl:flex-row @5xl:space-x-16 @5xl:space-y-0',
-      contentContainer: 'space-y-4 @xl:space-y-6 @5xl:w-[60%]',
-      contentAreaContainer: 'space-y-4 @xl:space-y-6',
-      imageContainer: 'relative aspect-[4/3] w-full @5xl:w-[40%]',
-    },
+    classes: imageWithContentVariant1.classes,
     image: {
-      id: 'cf8dec67-e931-4b7c-9f76-67d4f98266ac',
-      src: 'http://localhost:30590/media/mhwi1tzr/cat-dog-_.jpg',
-      alt: 'Cat DOG',
+      id: 'c0001a0e-e242-46e9-a2cd-d046f08550e8',
+      classes: imageVariant1.classes,
+      src: 'http://localhost:30590/media/banabqcc/two-people-reaching-an-agreement-about-a-car-sale-royalty-free-image-1665671206.jpg',
+      alt: 'Two People Reaching An Agreement About A Car Sale Royalty Free Image 1665671206',
       fill: true,
       style: {
         objectFit: 'contain',
         objectPosition: 'right center',
       },
-      classes: {
-        image: 'rounded-lg',
-      },
     },
     headings: {
-      id: '69350c74-10d4-4d3e-ba6c-f6c6eb786dbd',
-      name: 'Headings',
-      classes: {
-        root: 'space-y-1',
-      },
+      classes: headingsVariant1.classes,
       heading: {
-        //@ts-ignore
-        id: '8bf3e144-33ef-46ae-9453-c1cad34718d5',
-        name: 'Heading',
-        text: 'Image with Content',
-        classes: {
-          heading: 'font-heading font-bold leading-tight text-heading',
-          headingExtraLarge: 'text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[48px]',
-          headingLarge: 'text-[22px] sm:text-[25px] md:text-[25px] lg:text-[28px] xl:text-[32px]',
-          headingMedium: 'text-[18px] sm:text-[20px] lg:text-[22px] xl:text-[24px]',
-          headingSmall: 'text-[16px] sm:text-[16px] md:text-[18px] lg:text-[20px]',
-          headingExtraSmall: 'text-[14px] sm:text-[16px] lg:text-[18px]',
-        },
+        text: "Get in gear with Click Motors - where every purchase comes with a 'click' of satisfaction!",
+        classes: headingVariant1.classes,
         size: HeadingSize.Medium,
       },
     },
     contentArea: [
       {
-        id: '65b4f71a-930a-46f3-afa5-6c31717c6a3f',
+        id: 'deef57b8-b6f7-4f42-a8f4-0a2e5cd22a49',
         name: 'TextContent',
-        //@ts-ignore
+        classes: textContentVariant1.classes,
         content:
-          '<p><span> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam posuere erat in ipsum facilisis elementum. Pellentesque vel consectetur neque, id consectetur ipsum. Quisque lacinia sapien lectus, vitae sagittis orci rhoncus nec. Sed varius iaculis velit ac pellentesque. Nullam in magna sodales, tempus felis in, finibus diam. Nunc id porta sapien.</span></p>',
-        classes: {
-          textContent: 'prose max-w-full',
-        },
+          '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget vestibulum sem. Suspendisse condimentum nibh diam, in blandit ipsum placerat et. Quisque fringilla nisl ac lacus pharetra sollicitudin. Suspendisse quis porta ex. Aliquam consequat urna et justo rhoncus semper. Curabitur posuere libero vitae pellentesque porttitor. Donec sit amet felis a ipsum placerat fermentum.</p>',
       },
     ],
   },

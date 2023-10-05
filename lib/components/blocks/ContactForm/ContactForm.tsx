@@ -78,6 +78,12 @@ const ContactForm = ({
     setFormError(false);
     setSubmitted(false);
 
+    if (process.env.NEXT_PUBLIC_IS_STORYBOOK === 'true') {
+      setSubmitting(false);
+      setSubmitted(true);
+      return;
+    }
+
     if (!recaptchaRef.current) {
       setFormError(true);
       setSubmitting(false);
@@ -165,7 +171,6 @@ const ContactForm = ({
                 </div>
                 {formState.errors.name && <span className={classes.formFieldErrorMessage}>Please enter your name</span>}
               </div>
-
               <div className={classes.formField}>
                 <div className={classes.labelContainer}>
                   <label className={classes.label} htmlFor="telephone">
@@ -213,7 +218,6 @@ const ContactForm = ({
                   <span className={classes.formFieldErrorMessage}>Please enter a valid email address</span>
                 )}
               </div>
-
               <div className={classes.formField}>
                 <div className={classes.labelContainer}>
                   <label className={classes.label} htmlFor="message">
@@ -237,25 +241,21 @@ const ContactForm = ({
                   <span className={classes.formFieldErrorMessage}>Please enter your message</span>
                 )}
               </div>
-
               {(Object.keys(formState.errors).length > 0 || formError) && (
                 <div className={classes.errorMessageContainer}>
                   <p className={classes.errorMessage}>There was an error submitting the form. Please try again.</p>
                 </div>
               )}
-
               <div className={classes.submitButtonContainer}>
                 <Button {...submitButton} loading={submitting} />
               </div>
             </form>
           )}
-
           {submitted && thankYouContentArea.length > 0 && (
             <div className={cn(classes.contentAreaContainer, classes.thankYouContentAreaContainer)}>
               <BlockList blocks={thankYouContentArea} />
             </div>
           )}
-
           {contentArea2?.length > 0 && (
             <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
               <BlockList blocks={contentArea2} />
@@ -263,11 +263,13 @@ const ContactForm = ({
           )}
         </div>
       </div>
-      <ReCAPTCHA
-        ref={recaptchaRef as LegacyRef<ReCAPTCHA>}
-        size="invisible"
-        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-      />
+      {process.env.NEXT_PUBLIC_IS_STORYBOOK !== 'true' && (
+        <ReCAPTCHA
+          ref={recaptchaRef as LegacyRef<ReCAPTCHA>}
+          size="invisible"
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+        />
+      )}
     </>
   );
 };

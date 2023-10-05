@@ -1,64 +1,96 @@
 {
   "content": ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./lib/**/*.{js,ts,jsx,tsx,mdx}"],
-
   "theme": {
     "extend": {
       "colors": {
         "primary": {
-          "DEFAULT": "#121643",
-          "light": "#121643",
-          "dark": "#121643",
-          "contrast": "#FFFFFF"
+          "DEFAULT": "rgb(var(--primary) / <alpha-value>)",
+          "light": "rgb(var(--primary-light) / <alpha-value>)",
+          "dark": "rgb(var(--primary-dark) / <alpha-value>)",
+          "contrast": "rgb(var(--primary-contrast) / <alpha-value>)"
         },
         "secondary": {
-          "DEFAULT": "#28AFB6",
-          "light": "#28AFB6",
-          "dark": "#28AFB6",
-          "contrast": "#FFFFFF"
+          "DEFAULT": "rgb(var(--secondary) / <alpha-value>)",
+          "light": "rgb(var(--secondary-light) / <alpha-value>)",
+          "dark": "rgb(var(--secondary-dark) / <alpha-value>)",
+          "contrast": "rgb(var(--secondary-contrast) / <alpha-value>)"
         },
         "accent": {
-          "DEFAULT": "#F47F1F",
-          "light": "#F47F1F",
-          "dark": "#F47F1F",
-          "contrast": "#FFFFFF"
+          "DEFAULT": "rgb(var(--accent) / <alpha-value>)",
+          "light": "rgb(var(--accent-light) / <alpha-value>)",
+          "dark": "rgb(var(--accent-dark) / <alpha-value>)",
+          "contrast": "rgb(var(--accent-contrast) / <alpha-value>)"
+        },
+        "success": {
+          "DEFAULT": "rgb(var(--success) / <alpha-value>)",
+          "contrast": "rgb(var(--success-contrast) / <alpha-value>)"
+        },
+        "error": {
+          "DEFAULT": "rgb(var(--error) / <alpha-value>)",
+          "contrast": "rgb(var(--error-contrast) / <alpha-value>)"
         },
         "heading": {
-          "DEFAULT": "#121643",
-          "light": "#121643",
-          "dark": "#121643"
+          "DEFAULT": "rgb(var(--heading) / <alpha-value>)",
+          "light": "rgb(var(--heading-light) / <alpha-value>)",
+          "dark": "rgb(var(--heading-dark) / <alpha-value>)"
         },
         "copy": {
-          "DEFAULT": "#555555",
-          "light": "#555555",
-          "dark": "#555555"
+          "DEFAULT": "rgb(var(--copy) / <alpha-value>)",
+          "light": "rgb(var(--copy-light) / <alpha-value>)",
+          "dark": "rgb(var(--copy-dark) / <alpha-value>)"
         },
         "link": {
-          "DEFAULT": "#28AFB6",
-          "light": "#28AFB6",
-          "dark": "#28AFB6"
+          "DEFAULT": "rgb(var(--link) / <alpha-value>)",
+          "light": "rgb(var(--link-light) / <alpha-value>)",
+          "dark": "rgb(var(--link-dark) / <alpha-value>)"
         },
         "body": {
-          "DEFAULT": "#FFFFFF",
-          "light": "#ECEDF0",
-          "dark": "#FFFFFF"
+          "DEFAULT": "rgb(var(--body) / <alpha-value>)",
+          "alt": "rgb(var(--body-alt) / <alpha-value>)"
         },
         "divider": {
-          "DEFAULT": "#ECEDF0"
+          "DEFAULT": "rgb(var(--divider) / <alpha-value>)"
         },
-        "custom1": {},
-        "custom2": {},
-        "custom3": {},
-        "custom4": {},
-        "custom5": {}
+        "custom1": {
+          "DEFAULT": "rgb(var(--custom1) / <alpha-value>)",
+          "contrast": "rgb(var(--custom1-contrast) / <alpha-value>)"
+        },
+        "custom2": {
+          "DEFAULT": "rgb(var(--custom2) / <alpha-value>)",
+          "contrast": "rgb(var(--custom2-contrast) / <alpha-value>)"
+        },
+        "custom3": {
+          "DEFAULT": "rgb(var(--custom3) / <alpha-value>)",
+          "contrast": "rgb(var(--custom3-contrast) / <alpha-value>)"
+        },
+        "custom4": {
+          "DEFAULT": "rgb(var(--custom4) / <alpha-value>)",
+          "contrast": "rgb(var(--custom4-contrast) / <alpha-value>)"
+        },
+        "custom5": {
+          "DEFAULT": "rgb(var(--custom5) / <alpha-value>)",
+          "contrast": "rgb(var(--custom5-contrast) / <alpha-value>)"
+        }
       },
       "typography": {
         "DEFAULT": {
           "css": {
-            "color": "#555555",
+            "color": "rgb(var(--copy))",
             "a": {
-              "color": "#28AFB6",
+              "color": "rgb(var(--link))",
               "&:hover": {
-                "color": "#28AFB6"
+                "color": "rgb(var(--link-light))"
+              }
+            }
+          }
+        },
+        "primary-contrast": {
+          "css": {
+            "color": "rgb(var(--primary-contrast) / 0.7)",
+            "a": {
+              "color": "rgb(var(--primary-conrast))",
+              "&:hover": {
+                "text-decoration": "underline"
               }
             }
           }
