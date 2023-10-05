@@ -8,6 +8,7 @@ import buildPageSectionAreas from './buildPageSectionAreas';
 const buildPageSections = async (
   items: UmbracoBlockGridItem[],
   globalTheme: any,
+  sharedContent: any,
   globalConfig?: any,
 ): Promise<PageSectionProps[]> => {
   if (!items || items.length < 1) return [];
@@ -40,7 +41,7 @@ const buildPageSections = async (
       classes,
     };
 
-    pageSection.areas = await buildPageSectionAreas(item.areas, globalTheme, globalConfig);
+    pageSection.areas = await buildPageSectionAreas(item.areas, globalTheme, globalConfig, sharedContent);
 
     pageSections.push(pageSection);
   });
