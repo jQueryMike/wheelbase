@@ -155,7 +155,10 @@ const buildFooterBlock = ({
           };
 
           if (itemContent.link[0].url || itemContent.link[0].route?.path)
-            legalNavigationItem.href = itemContent.link[0].url || itemContent.link[0].route.path;
+            legalNavigationItem.href =
+              itemContent.link[0].url || itemContent.link[0].route.path
+                ? (itemContent.link[0].url || itemContent.link[0].route.path).replace('/home', '')
+                : null;
           if (itemContent.link[0].title) legalNavigationItem.label = itemContent.link[0].title;
 
           return legalNavigationItem;
