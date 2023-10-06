@@ -8,7 +8,6 @@ const buildPageSectionAreas = async (
   areas: UmbracoBlockGridArea[],
   globalTheme: any,
   globalConfig?: any,
-  sharedContent?: any
 ): Promise<PageSectionArea[]> => {
   if (!areas) return [];
 

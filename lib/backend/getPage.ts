@@ -13,12 +13,13 @@ const getPage = async (params: { slug: string[] }) => {
   const url = `${CONTENT_API_URL}/item/${process.env.API_ROOT_NODE_PATH}`;
   const sharedContentUrl = `${CONTENT_API_URL}/item/shared-content`;
 
-  const [{ properties: globalTheme }, { properties: globalConfig }, { properties: sharedContent }, page] = await Promise.all([
-    fetch(`${url}/theme`, { next: { tags: themeTags } }).then((res) => res.json()),
-    fetch(`${url}/global-config`, { next: { tags: globalConfigTags } }).then((res) => res.json()),
-    fetch(`${sharedContentUrl}`, { next: { tags: sharedContentTags } }).then((res) => res.json()),
-    fetch(`${url}/home/${params.slug.join('/')}`, { next: { tags: pagesTags } }).then((res) => res.json()),
-  ]);
+  const [{ properties: globalTheme }, { properties: globalConfig }, { properties: sharedContent }, page] =
+    await Promise.all([
+      fetch(`${url}/theme`, { next: { tags: themeTags } }).then((res) => res.json()),
+      fetch(`${url}/global-config`, { next: { tags: globalConfigTags } }).then((res) => res.json()),
+      fetch(sharedContentUrl, { next: { tags: sharedContentTags } }).then((res) => res.json()),
+      fetch(`${url}/home/${params.slug.join('/')}`, { next: { tags: pagesTags } }).then((res) => res.json()),
+    ]);
   const sections = await buildPageSections(
     mergeVars(page, globalConfig, sharedContent).properties?.contentGrid?.items || [],
     globalTheme,
