@@ -1,6 +1,6 @@
-import { ButtonStyle } from '@components/blocks/Button/Button';
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { ButtonStyle } from '../../Button/Button';
 import buttonVariant1 from '../../Button/variants/1';
 import ButtonList from '../ButtonList';
 import buttonListVariant1 from '../variants/1';

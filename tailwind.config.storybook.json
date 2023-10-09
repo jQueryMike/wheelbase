@@ -2,6 +2,10 @@
   "content": ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./lib/**/*.{js,ts,jsx,tsx,mdx}"],
   "theme": {
     "extend": {
+      "screens": {
+        "2xs": "384px",
+        "xs": "480px"
+      },
       "colors": {
         "primary": {
           "DEFAULT": "rgb(var(--primary) / <alpha-value>)",
@@ -89,6 +93,28 @@
             "color": "rgb(var(--primary-contrast) / 0.7)",
             "a": {
               "color": "rgb(var(--primary-conrast))",
+              "&:hover": {
+                "text-decoration": "underline"
+              }
+            }
+          }
+        },
+        "secondary-contrast": {
+          "css": {
+            "color": "rgb(var(--secondary-contrast) / 0.7)",
+            "a": {
+              "color": "rgb(var(--secondary-conrast))",
+              "&:hover": {
+                "text-decoration": "underline"
+              }
+            }
+          }
+        },
+        "accemt-contrast": {
+          "css": {
+            "color": "rgb(var(--secondary-contrast) / 0.7)",
+            "a": {
+              "color": "rgb(var(--secondary-conrast))",
               "&:hover": {
                 "text-decoration": "underline"
               }

@@ -1,7 +1,7 @@
-import { HeadingSize } from '@components/blocks/Heading';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import buttonVariant1 from '../../Button/variants/1';
+import { HeadingSize } from '../../Heading';
 import headingVariant1 from '../../Heading/variants/1';
 import headingsVariant1 from '../../Headings/variants/1';
 import subheadingVariant1 from '../../Subheading/variants/1';

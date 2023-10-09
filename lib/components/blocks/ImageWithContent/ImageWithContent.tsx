@@ -1,7 +1,7 @@
-import { BlockList } from '@components/utility-components/BlockList';
 import Block from '@interfaces/Block';
 import NextImage from 'next/image';
 
+import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
 import { ImageProps } from '../Image';
 

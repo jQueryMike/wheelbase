@@ -31,7 +31,7 @@ const getInitialProps = async () => {
 
   const globalProps: any = {};
 
-const mergedGlobalConfig = mergeVars(globalConfig, globalConfig, sharedContent)
+  const mergedGlobalConfig = mergeVars(globalConfig, globalConfig, sharedContent);
 
   if (globalConfig.headerContentGrid?.items?.length > 0) {
     globalProps.headerSections = await buildPageSections(
@@ -61,7 +61,9 @@ const mergedGlobalConfig = mergeVars(globalConfig, globalConfig, sharedContent)
     });
   }
 
-  const drawerNavigation = mergedGlobalConfig?.drawerNavigation?.items ? mergedGlobalConfig?.drawerNavigation?.items[0] : null;
+  const drawerNavigation = mergedGlobalConfig?.drawerNavigation?.items
+    ? mergedGlobalConfig?.drawerNavigation?.items[0]
+    : null;
 
   if (drawerNavigation) {
     globalProps.drawerNavigationProps = buildDrawerNavigationBlock({
@@ -87,8 +89,8 @@ const mergedGlobalConfig = mergeVars(globalConfig, globalConfig, sharedContent)
   }
 
   const defaultSeo: DefaultSeoProps = {
-    defaultTitle: `Welcome to ${globalConfig.pageTitle}`,
-    titleTemplate: `%s | ${globalConfig.pageTitle}`,
+    defaultTitle: `Welcome to ${globalConfig.displayName}`,
+    titleTemplate: `%s | ${globalConfig.displayName}`,
     description: globalConfig.metaDescription,
     dangerouslySetAllPagesToNoIndex: !IS_PRODUCTION || globalConfig.robotsNoIndex === true,
     dangerouslySetAllPagesToNoFollow: !IS_PRODUCTION || globalConfig.robotsNoFollow === true,

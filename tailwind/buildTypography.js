@@ -14,8 +14,35 @@ const buildTypography = (colors) => {
       },
       'primary-contrast': {
         css: {
-          color: `rgb(var(--primary-contrast))`,
-          opacity: 0.7,
+          color: `rgb(var(--primary-contrast) / 0.7)`,
+          a: {
+            color: 'rgb(var(--primary-conrast))',
+            '&:hover': {
+              'text-decoration': 'underline',
+            },
+          },
+        },
+      },
+      'secondary-contrast': {
+        css: {
+          color: `rgb(var(--secondary-contrast) / 0.7)`,
+          a: {
+            color: 'rgb(var(--secondary-conrast))',
+            '&:hover': {
+              'text-decoration': 'underline',
+            },
+          },
+        },
+      },
+      'accent-contrast': {
+        css: {
+          color: `rgb(var(--accent-contrast) / 0.7)`,
+          a: {
+            color: 'rgb(var(--sccent-conrast))',
+            '&:hover': {
+              'text-decoration': 'underline',
+            },
+          },
         },
       },
     };

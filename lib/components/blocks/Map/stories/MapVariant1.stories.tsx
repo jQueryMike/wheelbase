@@ -5,17 +5,17 @@ import headingVariant1 from '../../Heading/variants/1';
 import headingsVariant1 from '../../Headings/variants/1';
 import subheadingVariant1 from '../../Subheading/variants/1';
 import textContentVariant1 from '../../TextContent/variants/1';
-import ImageWithContent from '../ImageWithContent';
-import imageWithContentVariant1 from '../variants/1';
+import Map from '../Map';
+import mapVariant1 from '../variants/1';
 
-type Story = StoryObj<typeof ImageWithContent>;
+type Story = StoryObj<typeof Map>;
 
 const args = {
-  classes: imageWithContentVariant1.classes,
+  classes: mapVariant1.classes,
   headings: {
     classes: headingsVariant1.classes,
     heading: {
-      text: 'This is an Image with Content block',
+      text: 'This is a Map block',
       classes: headingVariant1.classes,
     },
     subheading: {
@@ -23,7 +23,16 @@ const args = {
       classes: subheadingVariant1.classes,
     },
   },
-  contentArea: [
+  contentArea1: [
+    {
+      id: '1',
+      name: 'TextContent',
+      content:
+        '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non nisi at nisl ultricies molestie. Aenean pulvinar ac elit volutpat ullamcorper. Duis scelerisque, justo id interdum malesuada, urna purus tincidunt lectus, sit amet sodales erat elit in quam.</p>',
+      classes: textContentVariant1.classes,
+    },
+  ],
+  contentArea2: [
     {
       id: '1',
       name: 'TextContent',
@@ -39,18 +48,15 @@ const args = {
       classes: buttonVariant1.classes,
     },
   ],
-  image: {
-    src: 'audi-rs-q3.jpg',
-    alt: 'Audi RS Q3',
-    fill: true,
-  },
+  googleMapLink:
+    'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9602.137808042271!2d-2.1839248!3d53.0107548!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487a6836a6dbdc67%3A0x221ce2abd2bb1b75!2sClick%20Dealer%20Ltd!5e0!3m2!1sen!2suk!4v1694424769178!5m2!1sen!2suk',
 };
 
 export const Variant1: Story = { args };
 
-const meta: Meta<typeof ImageWithContent> = {
-  title: 'Blocks/Image With Content',
-  component: ImageWithContent,
+const meta: Meta<typeof Map> = {
+  title: 'Blocks/Map',
+  component: Map,
   tags: ['autodocs'],
 };
 

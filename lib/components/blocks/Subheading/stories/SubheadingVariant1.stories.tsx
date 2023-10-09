@@ -8,7 +8,7 @@ type Story = StoryObj<typeof Subheading>;
 export const Variant1: Story = {
   args: {
     classes: subheadingVariant1.classes,
-    text: 'This is a subheading',
+    text: 'This is a Subheading',
   },
 };
 

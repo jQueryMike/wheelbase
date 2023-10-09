@@ -19,8 +19,8 @@ classes = {
     lg: tw`lg:gap-10`,
   },
   drawerNavigationContainer: {
-    default: tw`order-1 flex flex-grow justify-end`,
-    '2xl': tw`2xl:hidden`,
+    default: tw`order-2 flex grow justify-end`,
+    md: tw`md:grow-0`,
   },
   logoContainer: {
     default: tw`order-0 relative h-8 w-[150px]`,
@@ -31,8 +31,8 @@ classes = {
   logoLink: tw`relative inline-block h-full w-full`,
   logoImage: tw`object-contain object-left`,
   contentAreaContainer: {
-    default: tw`hidden`,
-    xs: tw`xs:order-2 xs:flex xs:items-center xs:justify-end xs:gap-8`,
+    default: tw`order-1 hidden flex-grow justify-end`,
+    md: tw`md:flex md:items-center md:gap-8`,
     '2xl': tw`2xl:flex-1`,
   },
 };

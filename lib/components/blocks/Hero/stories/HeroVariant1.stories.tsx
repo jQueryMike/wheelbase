@@ -5,17 +5,17 @@ import headingVariant1 from '../../Heading/variants/1';
 import headingsVariant1 from '../../Headings/variants/1';
 import subheadingVariant1 from '../../Subheading/variants/1';
 import textContentVariant1 from '../../TextContent/variants/1';
-import ImageWithContent from '../ImageWithContent';
-import imageWithContentVariant1 from '../variants/1';
+import Hero from '../Hero';
+import heroVariant1 from '../variants/1';
 
-type Story = StoryObj<typeof ImageWithContent>;
+type Story = StoryObj<typeof Hero>;
 
 const args = {
-  classes: imageWithContentVariant1.classes,
+  classes: heroVariant1.classes,
   headings: {
     classes: headingsVariant1.classes,
     heading: {
-      text: 'This is an Image with Content block',
+      text: 'This is a Hero block',
       classes: headingVariant1.classes,
     },
     subheading: {
@@ -48,9 +48,9 @@ const args = {
 
 export const Variant1: Story = { args };
 
-const meta: Meta<typeof ImageWithContent> = {
-  title: 'Blocks/Image With Content',
-  component: ImageWithContent,
+const meta: Meta<typeof Hero> = {
+  title: 'Blocks/Heros',
+  component: Hero,
   tags: ['autodocs'],
 };
 
