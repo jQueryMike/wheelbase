@@ -22,8 +22,6 @@ classes = {
   },
   area: {
     default: tw`space-y-4`,
-    md: tw`md:space-y-6`,
-    lg: tw`lg:space-y-8`,
   },
 };
 

@@ -16,8 +16,8 @@ classes = {
   loadingIconContainer: tw`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform`,
   loadingIcon: tw`fa-duotone fa-spinner-third fa-spin`,
   primaryButton: {
-    default: tw`bg-primary text-primary-contrast`,
-    hover: tw`hover:bg-primary/80`,
+    default: tw`bg-accent text-accent-contrast`,
+    hover: tw`hover:bg-primary`,
     active: tw`active:scale-95`,
   },
   secondaryButton: {

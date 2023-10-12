@@ -3,16 +3,14 @@ import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 import { RegInputClasses } from '../RegInput';
 import RegInputVariant from './RegInputVariant';
 
-const location = 'RegInput/variants/2';
+const location = 'RegInput/variants/2-on-white';
 
 let classes: RegInputClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  rootInner: {
-    default: tw`space-y-2`,
-  },
-  formContainer: tw`w-full max-w-[500px] rounded-2xl bg-white p-4 @container/regInput`,
+  rootInner: tw`flex flex-col items-center`,
+  formContainer: tw`mt-8 w-full max-w-[460px] @container/regInput`,
   form: {
     default: tw`flex flex-col gap-4 @md:flex-row`,
   },
@@ -25,8 +23,8 @@ classes = {
   // },
   buttonContainer: tw``,
   manualLookupLink: {
-    default: tw`mt-4 block font-semibold text-white`,
-    hover: tw`hover:text-primary`,
+    default: tw`mt-2 block text-center font-semibold text-copy`,
+    hover: tw`hover:text-accent`,
   },
   errorMessageContainer: tw`pt-2`,
   errorMessage: tw`text-center text-sm text-error`,

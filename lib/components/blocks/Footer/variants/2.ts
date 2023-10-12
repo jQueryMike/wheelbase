@@ -17,44 +17,59 @@ let legalNavigationItemClasses: FooterLegalNavigationItemClasses<ClassesProperty
 
 classes = {
   root: {
-    default: tw`bg-primary p-6 py-[4rem]`,
-    md: tw`md:py-[6rem]`,
-    lg: tw`lg:py-[8rem]`,
+    default: tw`bg-primary p-6 py-[3rem]`,
+    md: tw`md:py-[4rem]`,
+    lg: tw`lg:py-[6rem]`,
   },
   container: {
-    default: tw`container mx-auto space-y-8`,
-    md: tw`md:space-y-12`,
-    lg: tw`lg:space-y-16`,
+    default: tw`container mx-auto space-y-6`,
   },
   topSectionContainer: { default: tw`space-y-4` },
+
   infoItemsContainer: {
-    default: tw`text-sm text-white`,
+    default: tw``,
   },
   infoItemsList: {
-    default: tw`flex flex-col items-start space-y-2`,
-    md: tw`md:flex-row md:items-center md:justify-center md:space-x-8 md:space-y-0`,
+    default: tw`flex flex-wrap justify-center gap-y-3 divide-x divide-white divide-opacity-20`,
   },
   infoItemsListItem: {
-    default: tw``,
+    default: tw`px-4 leading-none text-white text-white first-of-type:pl-0 last-of-type:pr-0`,
   },
   socialNavigationList: {
     default: tw`flex items-center justify-center space-x-3`,
     md: tw`md:justify-center`,
   },
-  bottomSectionContainer: tw`relative space-y-4 border-t border-primary-light pt-8`,
-  legalNavigationContainer: tw`text-sm`,
-  legalNavigationList: tw`flex space-x-8`,
-  logoContainer: {
-    default: tw`relative h-12 w-72`,
-    md: tw`md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2`,
+  bottomSectionContainer: tw`relative space-y-4 border-t border-primary-light pt-6`,
+
+  legalNavigationContainer: tw``,
+  legalNavigationList: {
+    default: tw`flex flex-wrap justify-center gap-y-3 divide-x divide-white divide-opacity-20`,
+    md: tw`md:justify-start`,
   },
-  logoLink: tw`inline-block`,
-  copyrightContainer: tw`text-sm text-white text-opacity-70`,
+  legalNavigationListItem: {
+    default: tw`px-4 font-medium leading-none text-white transition first-of-type:pl-0 last-of-type:pr-0 hover:text-opacity-60`,
+  },
+
+  copyrightContainer: {
+    default: tw`flex flex-wrap justify-center text-sm text-white text-opacity-70`,
+    md: tw`md:justify-start`,
+  },
+
+  logoLink: {
+    default: tw`flex justify-center`,
+    md: tw`md:absolute md:right-0 md:top-0 md:inline-flex`,
+  },
+  logoContainer: {
+    default: tw`flex justify-center`,
+    md: tw``,
+  },
+  logoImage: {
+    default: tw`inline-block h-10 w-auto`,
+  },
 };
 
 infoItemClasses = {
   infoItemRoot: tw`space-x-2`,
-  infoItemLabel: tw`after:content-[":"]`,
 };
 
 socialNavigationItemClasses = {
@@ -68,7 +83,7 @@ socialNavigationItemClasses = {
 
 legalNavigationItemClasses = {
   legalNavigationItemRoot: tw``,
-  legalNavigationItemLink: { default: tw`text-white`, hover: tw`hover:text-accent` },
+  legalNavigationItemLink: { default: tw`text-sm text-white transition`, hover: tw`hover:text-accent` },
 };
 
 const footerVariant: FooterVariant = {

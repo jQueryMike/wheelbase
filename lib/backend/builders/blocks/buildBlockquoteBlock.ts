@@ -1,7 +1,6 @@
-import { BlockquoteProps } from '@components/blocks/Blockquote';
-import Block from '@interfaces/Block';
-import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
-
+import { BlockquoteProps } from '../../../components/blocks/Blockquote/Blockquote';
+import Block from '../../../interfaces/Block';
+import BlockBuilderConfig from '../../../interfaces/BlockBuilderConfig';
 import buildAdditionalContent from '../buildAdditionalContent';
 import buildBlockClasses from '../buildBlockClasses';
 import extractInheritedTheme from '../extractInheritedTheme';
