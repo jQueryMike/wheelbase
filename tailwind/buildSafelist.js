@@ -29,6 +29,8 @@ const buildSafelist = (pages) => {
     });
 
     const queries = [
+      '2xs',
+      'xs',
       'sm',
       'md',
       'lg',
