@@ -35,8 +35,8 @@ const buildBlocks = async ({
 
   items.forEach((item) => {
     try {
-      const name = (item.content.contentType.charAt(0).toUpperCase() + item.content.contentType.slice(1)).replaceAll(
-        'Block',
+      const name = (item.content.contentType.charAt(0).toUpperCase() + item.content.contentType.slice(1)).replace(
+        /Block$/g,
         '',
       );
       const config = {
