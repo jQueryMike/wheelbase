@@ -1,9 +1,11 @@
 import type { Config } from 'tailwindcss';
 
 import generatedConfig from './tailwind.config.json';
-import storybookConfig from './tailwind.config.storybook.json';
 
-const config = process.env.USE_STORYBOOK_TAILWIND_CONFIG === 'true' ? storybookConfig : generatedConfig;
+let config: Config = generatedConfig as Config;
+
+if (process.env.ENVIRONMENT_NAME === 'local') config = require('./tailwind.config.local.json');
+if (process.env.NEXT_PUBLIC_IS_STORYBOOK === 'true') require('./tailwind.config.storybook.json');
 
 const tailwindConfig: Config = {
   ...config,

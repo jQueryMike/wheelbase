@@ -8,7 +8,7 @@ const CQHelper = () => {
   if (loading) return null;
 
   return (
-    <div className="fixed flex h-6 w-full justify-end gap-1 text-[10px] font-semibold">
+    <div className="fixed flex h-6 gap-1 text-[10px] font-semibold">
       <div className="flex h-6 w-10 items-center justify-center border border-gray-200 bg-white p-1">
         <div className="block sm:hidden">XS</div>
         <div className="hidden sm:block md:hidden">SM</div>

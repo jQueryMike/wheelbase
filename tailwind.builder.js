@@ -7,8 +7,11 @@ const fetchData = require('./tailwind/fetchData');
 const buildContent = require('./tailwind/buildContent');
 const buildSafelist = require('./tailwind/buildSafelist');
 
+const buildContainer = require('./tailwind/buildContainer');
+
 const buildColors = require('./tailwind/buildColors');
 const buildFontFamily = require('./tailwind/buildFontFamily');
+const buildScreens = require('./tailwind/buildScreens');
 const buildTypography = require('./tailwind/buildTypography');
 
 const generateTailwindConfig = async () => {
@@ -21,7 +24,9 @@ const generateTailwindConfig = async () => {
       content: buildContent(pages),
       safelist: buildSafelist(pages),
       theme: {
+        container: buildContainer(),
         extend: {
+          screens: buildScreens(),
           colors,
           fontFamily: buildFontFamily(theme),
           typography: buildTypography(colors),
@@ -29,7 +34,10 @@ const generateTailwindConfig = async () => {
       },
     };
 
-    await fs.writeFile('./tailwind.config.json', JSON.stringify(config, null, 2));
+    await fs.writeFile(
+      process.env.ENVIRONMENT_NAME === 'local' ? './tailwind.config.local.json' : './tailwind.config.json',
+      JSON.stringify(config, null, 2),
+    );
   } catch (error) {
     console.error('Something went wrong while trying to generate the tailwind config.');
     console.error(error);

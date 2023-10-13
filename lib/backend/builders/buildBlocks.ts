@@ -13,6 +13,7 @@ import buildFeaturesBlock from './blocks/buildFeaturesBlock';
 import buildHeadingBlock from './blocks/buildHeadingBlock';
 import buildHeadingsBlock from './blocks/buildHeadingsBlock';
 import buildHeroBlock from './blocks/buildHeroBlock';
+import buildImageBlock from './blocks/buildImageBlock';
 import buildImageWithContentBlock from './blocks/buildImageWithContentBlock';
 import buildLinkListBlock from './blocks/buildLinkListBlock';
 import buildMapBlock from './blocks/buildMapBlock';
@@ -34,7 +35,10 @@ const buildBlocks = async ({
 
   items.forEach((item) => {
     try {
-      const name = item.content.contentType.charAt(0).toUpperCase() + item.content.contentType.slice(1);
+      const name = (item.content.contentType.charAt(0).toUpperCase() + item.content.contentType.slice(1)).replace(
+        /Block$/g,
+        '',
+      );
       const config = {
         id: item.content?.id || uuidv4(),
         name,
@@ -96,6 +100,11 @@ const buildBlocks = async ({
 
       if (name === 'Hero') {
         const block = buildHeroBlock(config);
+        if (block) blocks.push(block);
+      }
+
+      if (name === 'Image') {
+        const block = buildImageBlock(config);
         if (block) blocks.push(block);
       }
 

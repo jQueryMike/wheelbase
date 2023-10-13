@@ -1,81 +1,73 @@
-const buildColors = (theme) => {
-  try {
-    return {
-      primary: {
-        DEFAULT: theme.primaryDefault || '#002E68',
-        light: theme.primaryLight || '#54739A',
-        dark: theme.primaryDark || '#011F45',
-        contrast: theme.primaryContrast || '#ffffff',
-      },
-      secondary: {
-        DEFAULT: theme.secondaryDefault || '#00B4FE',
-        light: theme.secondaryLight || '#51CCFF',
-        dark: theme.secondaryDark || '#0078A9',
-        contrast: theme.secondaryContrast || '#ffffff',
-      },
-      accent: {
-        DEFAULT: theme.accentDefault || '#F92D63',
-        light: theme.accentLight || '#FB7095',
-        dark: theme.accentDark || '#A61D43',
-        contrast: theme.accentContrast || '#ffffff',
-      },
-      success: {
-        DEFAULT: theme.secondaryDefault || '#18BC01',
-        contrast: theme.secondaryContrast || '#ffffff',
-      },
-      error: {
-        DEFAULT: theme.secondaryDefault || '#EA0000',
-        contrast: theme.secondaryContrast || '#ffffff',
-      },
-      heading: {
-        DEFAULT: theme.headingDefault || '#151515',
-        light: theme.headingLight || '#5F5F5F',
-        dark: theme.headingDark || '#0E0E0E',
-      },
-      copy: {
-        DEFAULT: theme.copyDefault || '#555555',
-        light: theme.copyLight || '#8B8B8B',
-        dark: theme.copyDark || '#393939',
-      },
-      link: {
-        DEFAULT: theme.linkDefault || '#F92D63',
-        light: theme.linkLight || '#FB7095',
-        dark: theme.linkDark || '#0078A9',
-        contrast: theme.linkContrast || '#ffffff',
-      },
-      body: {
-        DEFAULT: theme.bodyDefault || '#ffffff',
-        alt: theme.bodyAlt || '#E0E0E0',
-      },
-      divider: {
-        DEFAULT: theme.divider || '#BEBEBE',
-      },
-      custom1: {
-        DEFAULT: theme.custom1Default || '#4087D9',
-        contrast: theme.custom1Contrast || '#ffffff',
-      },
-      custom2: {
-        DEFAULT: theme.custom2Default || '#F84C51',
-        contrast: theme.custom2Contrast || '#ffffff',
-      },
-      custom3: {
-        DEFAULT: theme.custom3Default || '#FF8E0B',
-        contrast: theme.custom3Contrast || '#ffffff',
-      },
-      custom4: {
-        DEFAULT: theme.custom4Default || '#26D376',
-        contrast: theme.custom4Contrast || '#ffffff',
-      },
-      custom5: {
-        DEFAULT: theme.custom5Default || '#A145F0',
-        contrast: theme.custom5Contrast || '#ffffff',
-      },
-    };
-  } catch (error) {
-    console.error('Something went wrong while trying to build colors.');
-    console.error(error);
-    return {};
-  }
-};
+const buildColors = () => ({
+  primary: {
+    DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+    light: 'rgb(var(--primary-light) / <alpha-value>)',
+    dark: 'rgb(var(--primary-dark) / <alpha-value>)',
+    contrast: 'rgb(var(--primary-contrast) / <alpha-value>)',
+  },
+  secondary: {
+    DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+    light: 'rgb(var(--secondary-light) / <alpha-value>)',
+    dark: 'rgb(var(--secondary-dark) / <alpha-value>)',
+    contrast: 'rgb(var(--secondary-contrast) / <alpha-value>)',
+  },
+  accent: {
+    DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+    light: 'rgb(var(--accent-light) / <alpha-value>)',
+    dark: 'rgb(var(--accent-dark) / <alpha-value>)',
+    contrast: 'rgb(var(--accent-contrast) / <alpha-value>)',
+  },
+  success: {
+    DEFAULT: 'rgb(var(--success) / <alpha-value>)',
+    contrast: 'rgb(var(--success-contrast) / <alpha-value>)',
+  },
+  error: {
+    DEFAULT: 'rgb(var(--error) / <alpha-value>)',
+    contrast: 'rgb(var(--error-contrast) / <alpha-value>)',
+  },
+  heading: {
+    DEFAULT: 'rgb(var(--heading) / <alpha-value>)',
+    light: 'rgb(var(--heading-light) / <alpha-value>)',
+    dark: 'rgb(var(--heading-dark) / <alpha-value>)',
+  },
+  copy: {
+    DEFAULT: 'rgb(var(--copy) / <alpha-value>)',
+    light: 'rgb(var(--copy-light) / <alpha-value>)',
+    dark: 'rgb(var(--copy-dark) / <alpha-value>)',
+  },
+  link: {
+    DEFAULT: 'rgb(var(--link) / <alpha-value>)',
+    light: 'rgb(var(--link-light) / <alpha-value>)',
+    dark: 'rgb(var(--link-dark) / <alpha-value>)',
+    contrast: 'rgb(var(--link-contrast) / <alpha-value>)',
+  },
+  body: {
+    DEFAULT: 'rgb(var(--body) / <alpha-value>)',
+    alt: 'rgb(var(--body-alt) / <alpha-value>)',
+  },
+  divider: {
+    DEFAULT: 'rgb(var(--divider) / <alpha-value>)',
+  },
+  custom1: {
+    DEFAULT: 'rgb(var(--custom1) / <alpha-value>)',
+    contrast: 'rgb(var(--custom1-contrast) / <alpha-value>)',
+  },
+  custom2: {
+    DEFAULT: 'rgb(var(--custom2) / <alpha-value>)',
+    contrast: 'rgb(var(--custom2-contrast) / <alpha-value>)',
+  },
+  custom3: {
+    DEFAULT: 'rgb(var(--custom3) / <alpha-value>)',
+    contrast: 'rgb(var(--custom3-contrast) / <alpha-value>)',
+  },
+  custom4: {
+    DEFAULT: 'rgb(var(--custom4) / <alpha-value>)',
+    contrast: 'rgb(var(--custom4-contrast) / <alpha-value>)',
+  },
+  custom5: {
+    DEFAULT: 'rgb(var(--custom5) / <alpha-value>)',
+    contrast: 'rgb(var(--custom5-contrast) / <alpha-value>)',
+  },
+});
 
 module.exports = buildColors;

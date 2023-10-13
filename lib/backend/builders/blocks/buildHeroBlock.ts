@@ -59,14 +59,15 @@ const buildHeroBlock = ({
       });
     }
 
-    const heroImage = content?.image ? content?.image[0] : null;
-    if (heroImage) {
+    const heroImage = content?.image?.items.length ? content?.image.items[0] : null;
+
+    if (heroImage?.content?.properties?.img?.length > 0) {
       const heroImageTheme = globalBlockTheme?.heroImageTheme?.items[0]?.content?.properties;
 
       hero.image = buildImageBlock({
-        id: heroImage.id,
+        id: heroImage.content.id,
         name: 'Image',
-        content: { ...heroImage },
+        content: { ...heroImage.content.properties },
         inheritedThemes: [heroImageTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
         globalConfig,

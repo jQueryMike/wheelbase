@@ -17,11 +17,11 @@ export type ContactFormClasses<T> = {
     | 'formWithError'
     | 'formWhilstSubmitting'
     | 'formField'
+    | 'formFieldErrorMessage'
     | 'inputContainer'
-    | 'inputContainerSuccess'
     | 'inputContainerError'
     | 'input'
-    | 'inputErrorMessage'
+    | 'textarea'
     | 'labelContainer'
     | 'label'
     | 'labelRequiredMarker'
@@ -30,9 +30,9 @@ export type ContactFormClasses<T> = {
     | 'contentArea1Container'
     | 'contentArea2Container'
     | 'formContentAreaContainer'
+    | 'thankYouContentAreaContainer'
     | 'errorMessageContainer'
-    | 'errorMessage'
-    | 'thankYouContentAreaContainer']?: T;
+    | 'errorMessage']?: T;
 };
 
 export interface ContactFormProps {
@@ -77,6 +77,12 @@ const ContactForm = ({
     setSubmitting(true);
     setFormError(false);
     setSubmitted(false);
+
+    if (process.env.NEXT_PUBLIC_IS_STORYBOOK === 'true') {
+      setSubmitting(false);
+      setSubmitted(true);
+      return;
+    }
 
     if (!recaptchaRef.current) {
       setFormError(true);
@@ -135,8 +141,8 @@ const ContactForm = ({
               onSubmit={handleSubmit(onSubmit)}
               className={cn(
                 classes.form,
-                { [classes.formWithError!]: classes.formWithError && (formError || formState.errors) },
-                { [classes.formWhilstSubmitting!]: classes.formWhilstSubmitting && submitting },
+                { [classes.formWithError!]: !!classes.formWithError && (formError || formState.errors) },
+                { [classes.formWhilstSubmitting!]: !!classes.formWhilstSubmitting && submitting },
               )}
             >
               {formContentArea?.length > 0 && (
@@ -152,7 +158,7 @@ const ContactForm = ({
                 </div>
                 <div
                   className={cn(classes.inputContainer, {
-                    [classes.inputContainerError!]: classes.inputContainerError && !!formState.errors.name,
+                    [classes.inputContainerError!]: !!classes.inputContainerError && !!formState.errors.name,
                   })}
                 >
                   <input
@@ -163,9 +169,8 @@ const ContactForm = ({
                     className={classes.input}
                   />
                 </div>
-                {formState.errors.name && <span className={classes.inputErrorMessage}>Please enter your name</span>}
+                {formState.errors.name && <span className={classes.formFieldErrorMessage}>Please enter your name</span>}
               </div>
-
               <div className={classes.formField}>
                 <div className={classes.labelContainer}>
                   <label className={classes.label} htmlFor="telephone">
@@ -174,7 +179,7 @@ const ContactForm = ({
                 </div>
                 <div
                   className={cn(classes.inputContainer, {
-                    [classes.inputContainerError!]: classes.inputContainerError && !!formState.errors.telephone,
+                    [classes.inputContainerError!]: !!classes.inputContainerError && !!formState.errors.telephone,
                   })}
                 >
                   <input
@@ -186,7 +191,7 @@ const ContactForm = ({
                   />
                 </div>
                 {formState.errors.telephone && (
-                  <span className={classes.inputErrorMessage}>Please enter a valid phone number</span>
+                  <span className={classes.formFieldErrorMessage}>Please enter a valid phone number</span>
                 )}
               </div>
 
@@ -198,7 +203,7 @@ const ContactForm = ({
                 </div>
                 <div
                   className={cn(classes.inputContainer, {
-                    [classes.inputContainerError!]: classes.inputContainerError && !!formState.errors.email,
+                    [classes.inputContainerError!]: !!classes.inputContainerError && !!formState.errors.email,
                   })}
                 >
                   <input
@@ -210,10 +215,9 @@ const ContactForm = ({
                   />
                 </div>
                 {formState.errors.email && (
-                  <span className={classes.inputErrorMessage}>Please enter a valid email address</span>
+                  <span className={classes.formFieldErrorMessage}>Please enter a valid email address</span>
                 )}
               </div>
-
               <div className={classes.formField}>
                 <div className={classes.labelContainer}>
                   <label className={classes.label} htmlFor="message">
@@ -222,7 +226,7 @@ const ContactForm = ({
                 </div>
                 <div
                   className={cn(classes.inputContainer, {
-                    [classes.inputContainerError!]: classes.inputContainerError && !!formState.errors.email,
+                    [classes.inputContainerError!]: !!classes.inputContainerError && !!formState.errors.email,
                   })}
                 >
                   <textarea
@@ -230,32 +234,28 @@ const ContactForm = ({
                     placeholder="Your message"
                     rows={6}
                     {...register('message', { required: true })}
-                    className={classes.input}
+                    className={classes.textarea}
                   />
                 </div>
                 {formState.errors.message && (
-                  <span className={classes.inputErrorMessage}>Please enter your message</span>
+                  <span className={classes.formFieldErrorMessage}>Please enter your message</span>
                 )}
               </div>
-
               {(Object.keys(formState.errors).length > 0 || formError) && (
                 <div className={classes.errorMessageContainer}>
                   <p className={classes.errorMessage}>There was an error submitting the form. Please try again.</p>
                 </div>
               )}
-
               <div className={classes.submitButtonContainer}>
                 <Button {...submitButton} loading={submitting} />
               </div>
             </form>
           )}
-
           {submitted && thankYouContentArea.length > 0 && (
             <div className={cn(classes.contentAreaContainer, classes.thankYouContentAreaContainer)}>
               <BlockList blocks={thankYouContentArea} />
             </div>
           )}
-
           {contentArea2?.length > 0 && (
             <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
               <BlockList blocks={contentArea2} />
@@ -263,11 +263,13 @@ const ContactForm = ({
           )}
         </div>
       </div>
-      <ReCAPTCHA
-        ref={recaptchaRef as LegacyRef<ReCAPTCHA>}
-        size="invisible"
-        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-      />
+      {process.env.NEXT_PUBLIC_IS_STORYBOOK !== 'true' && (
+        <ReCAPTCHA
+          ref={recaptchaRef as LegacyRef<ReCAPTCHA>}
+          size="invisible"
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+        />
+      )}
     </>
   );
 };

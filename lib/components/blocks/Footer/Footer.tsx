@@ -1,15 +1,17 @@
 import Block from '@interfaces/Block';
 import cn from 'classnames';
+import NextImage from 'next/image';
 import NextLink from 'next/link';
 import { HTMLAttributeAnchorTarget } from 'react';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
-import { Image, ImageProps } from '../Image';
+import { ImageProps } from '../Image';
 
 export type FooterClasses<T> = {
   [key in
     | 'root'
+    | 'rootInner'
     | 'container'
     | 'topSectionContainer'
     | 'infoItemsContainer'
@@ -26,7 +28,8 @@ export type FooterClasses<T> = {
     | 'copyrightContainer'
     | 'copyrightText'
     | 'logoContainer'
-    | 'logoLink']?: T;
+    | 'logoLink'
+    | 'logoImage']?: T;
 };
 
 export type FooterInfoItemClasses<T> = {
@@ -93,7 +96,7 @@ const Footer = ({
   if (logo) {
     logoContainer = (
       <div className={classes.logoContainer}>
-        <Image {...logo} />
+        <NextImage className={classes.logoImage} {...logo} />
       </div>
     );
 
@@ -108,72 +111,74 @@ const Footer = ({
 
   return (
     <footer className={classes.root}>
-      <div className={classes.container}>
-        <div className={classes.topSectionContainer}>
-          {infoItems.length > 0 && (
-            <div className={classes.infoItemsContainer}>
-              <ul className={classes.infoItemsList}>
-                {infoItems.map((item: FooterInfoItem) => (
-                  <li key={item.id} className={classes.infoItemsListItem}>
-                    <span className={item?.classes?.infoItemRoot}>
-                      <span className={item?.classes?.infoItemLabel}>{item.label}</span>
-                      <span className={item?.classes?.infoItemValue}>{item.value}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {contentArea.length > 0 && (
-            <div className={classes.contentAreaContainer}>
-              <BlockList blocks={contentArea} />
-            </div>
-          )}
-          {socialNavigationItems.length > 0 && (
-            <div className={classes.socialNavigationContainer}>
-              <ul className={classes.socialNavigationList}>
-                {socialNavigationItems.map((item: FooterSocialNavigationItem) => (
-                  <li key={item.id} className={classes.socialNavigationListItem}>
-                    <span className={item?.classes?.socialNavigationItemRoot}>
-                      <a
-                        href={item.href}
-                        target={item.target || '_blank'}
-                        className={item?.classes?.socialNavigationItemLink}
-                      >
-                        {item.icon && <Icon className={cn(item.icon, item.classes?.socialNavigationItemIcon)} />}
-                        {item.label && <span className={item.classes?.socialNavigationItemLabel}>{item.label}</span>}
-                      </a>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-        <div className={classes.bottomSectionContainer}>
-          {legalNavigationItems.length > 0 && (
-            <div className={classes.legalNavigationContainer}>
-              <ul className={classes.legalNavigationList}>
-                {legalNavigationItems.map((item: FooterLegalNavigationItem) => (
-                  <li key={item.id} className={classes.legalNavigationListItem}>
-                    <span className={item?.classes?.legalNavigationItemRoot}>
-                      <NextLink
-                        href={item.href || '/'}
-                        target={item.target || '_self'}
-                        className={item?.classes?.legalNavigationItemLink}
-                      >
-                        {item.label}
-                      </NextLink>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          <div className={classes.copyrightContainer}>
-            <p className={classes.copyrightText}>&copy; {new Date().getFullYear()}</p>
+      <div className={classes.rootInner}>
+        <div className={classes.container}>
+          <div className={classes.topSectionContainer}>
+            {infoItems.length > 0 && (
+              <div className={classes.infoItemsContainer}>
+                <ul className={classes.infoItemsList}>
+                  {infoItems.map((item: FooterInfoItem) => (
+                    <li key={item.id} className={classes.infoItemsListItem}>
+                      <span className={item?.classes?.infoItemRoot}>
+                        <span className={item?.classes?.infoItemLabel}>{item.label}</span>
+                        <span className={item?.classes?.infoItemValue}>{item.value}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {contentArea.length > 0 && (
+              <div className={classes.contentAreaContainer}>
+                <BlockList blocks={contentArea} />
+              </div>
+            )}
+            {socialNavigationItems.length > 0 && (
+              <div className={classes.socialNavigationContainer}>
+                <ul className={classes.socialNavigationList}>
+                  {socialNavigationItems.map((item: FooterSocialNavigationItem) => (
+                    <li key={item.id} className={classes.socialNavigationListItem}>
+                      <span className={item?.classes?.socialNavigationItemRoot}>
+                        <a
+                          href={item.href}
+                          target={item.target || '_blank'}
+                          className={item?.classes?.socialNavigationItemLink}
+                        >
+                          {item.icon && <Icon className={cn(item.icon, item.classes?.socialNavigationItemIcon)} />}
+                          {item.label && <span className={item.classes?.socialNavigationItemLabel}>{item.label}</span>}
+                        </a>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
-          {logoContainer}
+          <div className={classes.bottomSectionContainer}>
+            {legalNavigationItems.length > 0 && (
+              <div className={classes.legalNavigationContainer}>
+                <ul className={classes.legalNavigationList}>
+                  {legalNavigationItems.map((item: FooterLegalNavigationItem) => (
+                    <li key={item.id} className={classes.legalNavigationListItem}>
+                      <span className={item?.classes?.legalNavigationItemRoot}>
+                        <NextLink
+                          href={item.href || '/'}
+                          target={item.target || '_self'}
+                          className={item?.classes?.legalNavigationItemLink}
+                        >
+                          {item.label}
+                        </NextLink>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className={classes.copyrightContainer}>
+              <p className={classes.copyrightText}>&copy; {new Date().getFullYear()}</p>
+            </div>
+            {logoContainer}
+          </div>
         </div>
       </div>
     </footer>

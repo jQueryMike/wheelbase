@@ -14,6 +14,10 @@ classes = {
     default: tw`font-semibold text-link`,
     hover: tw`hover:text-link-light`,
   },
+  linkSelected: {
+    default: tw`text-primary`,
+    hover: tw`hover:text-primary`,
+  },
 };
 
 const linkListVariant: LinkListVariant = {

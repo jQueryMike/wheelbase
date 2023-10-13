@@ -1,8 +1,9 @@
-import { BlockList } from '@components/utility-components/BlockList';
 import Block from '@interfaces/Block';
+import NextImage from 'next/image';
 
+import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
-import { Image, ImageProps } from '../Image';
+import { ImageProps } from '../Image';
 
 export type ImageWithContentClasses<T> = {
   [key in
@@ -11,7 +12,8 @@ export type ImageWithContentClasses<T> = {
     | 'contentContainer'
     | 'headingsContainer'
     | 'contentAreaContainer'
-    | 'imageContainer']?: T;
+    | 'imageContainer'
+    | 'image']?: T;
 };
 
 export interface ImageWithContentProps {
@@ -38,7 +40,7 @@ const ImageWithContent = ({ classes = {}, image, contentArea = [], headings }: I
       </div>
       {image && (
         <div className={classes?.imageContainer}>
-          <Image {...image} />
+          <NextImage className={classes.image} {...image} />
         </div>
       )}
     </div>

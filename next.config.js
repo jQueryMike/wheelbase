@@ -12,6 +12,10 @@ const nextConfig = {
 
     return config;
   },
+  env: {
+    NEXT_PUBLIC_IS_STORYBOOK: process.env.NEXT_PUBLIC_IS_STORYBOOK,
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+  },
 };
 
 module.exports = nextConfig;

@@ -25,6 +25,8 @@
       "@backend/*": ["lib/backend/*"],
       "@components": ["lib/components"],
       "@components/*": ["lib/components/*"],
+      "@constants": ["lib/constants"],
+      "@constants/*": ["lib/constants/*"],
       "@interfaces": ["lib/interfaces"],
       "@interfaces/*": ["lib/interfaces/*"],
       "@styles": ["lib/styles"],
@@ -42,7 +44,9 @@
     "next.config.js",
     "postcss.config.js",
     "tailwind.builder.js",
-    "tailwind/**/*.js"
+    "tailwind/**/*.js",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx"
   ],
   "exclude": ["node_modules", "_ARCHIVE", "**/*.exclude"]
 }

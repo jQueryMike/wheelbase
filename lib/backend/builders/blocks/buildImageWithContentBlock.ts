@@ -35,21 +35,18 @@ const buildImageWithContentBlock = ({
 
     // Add content
 
-    const image = content?.image ? content.image[0] : null;
+    const image = content?.image?.items.length ? content?.image.items[0] : null;
 
-    if (image) {
+    if (image?.content?.properties?.img?.length > 0) {
       const imageTheme = globalBlockTheme?.imageTheme?.items[0]?.content?.properties;
+
       imageWithContent.image = buildImageBlock({
-        id: image.id,
+        id: image.content.id,
         name: 'Image',
-        content: { ...image },
+        content: { ...image.content.properties },
         inheritedThemes: [imageTheme, ...extractInheritedTheme('image', inheritedThemes)],
         globalTheme,
         globalConfig,
-        defaultProps: {
-          fill: true,
-          style: { objectFit: 'contain', objectPosition: 'right center' },
-        },
       });
     }
 

@@ -1,7 +1,9 @@
+import cn from 'classnames';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 
 export type LinkListClasses<T> = {
-  [key in 'root' | 'list' | 'listItem' | 'link']?: T;
+  [key in 'root' | 'list' | 'listItem' | 'link' | 'linkSelected']?: T;
 };
 
 export interface LinkListProps {
@@ -10,18 +12,27 @@ export interface LinkListProps {
 }
 
 const LinkList = ({ classes = {}, items = [] }: LinkListProps) => {
-  if (items.length < 1) return null;
+  const router = useRouter();
+  const isSelected = (href: string) => `${router.asPath}/`.replaceAll('//', '/') === href;
+
   return (
     <div className={classes.root}>
       <ul className={classes.list}>
         {items.map((item) => {
           const link =
             item.target === '_blank' ? (
-              <a className={classes.link} href={item.href} target={item.target}>
+              <a
+                className={cn(classes.link, { [classes.linkSelected || '']: isSelected(item.href) })}
+                href={item.href}
+                target={item.target}
+              >
                 {item.text}
               </a>
             ) : (
-              <NextLink href={item.href} className={classes.link}>
+              <NextLink
+                className={cn(classes.link, { [classes.linkSelected || '']: isSelected(item.href) })}
+                href={item.href}
+              >
                 {item.text}
               </NextLink>
             );

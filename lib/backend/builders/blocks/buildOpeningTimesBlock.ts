@@ -61,8 +61,6 @@ const buildOpeningTimesBlock = ({
         if (itemContent.displayType === 'Opening Time - Closing Time')
           value = `${itemContent.openingTime} - ${itemContent.closingTime}`;
 
-        const icon = itemContent.icon || content.icon || undefined;
-
         // Build item classes
         const itemClasses = buildBlockClasses({
           name,
@@ -79,11 +77,13 @@ const buildOpeningTimesBlock = ({
           label: itemContent.label,
           value,
           closed: itemContent.displayType === 'Closed',
-          icon,
           classes: itemClasses,
         };
 
         if (itemContent.closed) openingTimesItem.closed = itemContent.closed;
+
+        const icon = itemContent.icon || content.icon || undefined;
+        if (icon) openingTimesItem.icon = icon;
 
         return openingTimesItem;
       });

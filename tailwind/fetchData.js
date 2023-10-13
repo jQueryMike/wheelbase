@@ -1,4 +1,4 @@
-const CONTENT_API_URL = `${process.env.API_URL}/umbraco/delivery/api/v1/content`;
+const CONTENT_API_URL = `${process.env.API_URL}/umbraco/delivery/api/v1/content?take=99999`;
 
 const fetchData = async () => {
   try {

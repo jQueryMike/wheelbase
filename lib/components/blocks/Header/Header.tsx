@@ -1,11 +1,13 @@
 import Block from '@interfaces/Block';
 import cn from 'classnames';
+import NextImage from 'next/image';
 import NextLink from 'next/link';
 import { useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { DrawerNavigation, DrawerNavigationProps } from '../DrawerNavigation';
-import { Image, ImageProps } from '../Image';
+import { ImageProps } from '../Image';
 
 export type HeaderClasses<T> = {
   [key in
@@ -17,6 +19,8 @@ export type HeaderClasses<T> = {
     | 'containerScrolled'
     | 'drawerNavigationContainer'
     | 'logoContainer'
+    | 'logoLink'
+    | 'logoImage'
     | 'contentAreaContainer']?: T;
 };
 
@@ -52,30 +56,30 @@ const Header = ({
 
   const addScrolledClasses = enableScrollTransition && scrollPosition >= scrollTransitionPosition;
 
-  let logoContainer = null;
+  let logoElement = null;
 
   if (logo) {
-    logoContainer = (
-      <div className={classes.logoContainer}>
-        <Image {...logo} />
-      </div>
-    );
+    logoElement = <NextImage className={classes.logoImage} {...logo} />;
 
     if (logoHref) {
-      logoContainer = <NextLink href={logoHref}>{logoContainer}</NextLink>;
+      logoElement = (
+        <NextLink className={classes.logoLink} href={logoHref}>
+          {logoElement}
+        </NextLink>
+      );
     }
   }
 
   return (
     <>
-      <header className={cn(classes.root, { [classes.rootScrolled || '']: addScrolledClasses })}>
-        <div className={cn(classes.container, { [classes.containerScrolled || '']: addScrolledClasses })}>
+      <header className={twMerge(cn(classes.root, { [classes.rootScrolled || '']: addScrolledClasses }))}>
+        <div className={twMerge(cn(classes.container, { [classes.containerScrolled || '']: addScrolledClasses }))}>
           {drawerNavigationProps && (
             <div className={classes.drawerNavigationContainer}>
               <DrawerNavigation {...drawerNavigationProps} />
             </div>
           )}
-          {logoContainer}
+          {logoElement && <div className={classes.logoContainer}>{logoElement}</div>}
           {contentArea?.length > 0 && (
             <div className={classes.contentAreaContainer}>
               <BlockList blocks={contentArea} />

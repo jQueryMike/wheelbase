@@ -81,16 +81,16 @@ const buildFeaturesBlock = ({
         if (itemContent.indicator) featuresItem.indicator = itemContent.indicator;
 
         // Add image
-        const itemImage = itemContent.image ? itemContent.image[0] : null;
-        if (itemImage) {
+        const itemImage = itemContent?.image?.items.length ? itemContent?.image.items[0] : null;
+        if (itemImage?.content?.properties?.img?.length > 0) {
           const itemImageTheme = globalBlockTheme?.itemImageTheme?.items[0]?.content?.properties;
 
           itemContent.alt = itemImage.name;
 
           featuresItem.image = buildImageBlock({
-            id: itemImage.id,
+            id: itemImage.content.id,
             name: 'Image',
-            content: { ...itemImage },
+            content: { ...itemImage.content.properties },
             inheritedThemes: [itemImageTheme],
             globalTheme,
             globalConfig,

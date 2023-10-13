@@ -9,7 +9,6 @@ let classes: BlockquoteClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`@container/blockquote`,
-
   rootInner: {
     default: tw`space-y-4`,
     '@xl/blockquote': tw`@xl/blockquote:space-y-6`,
@@ -18,11 +17,11 @@ classes = {
     default: tw`space-y-4`,
     '@xl/blockquote': tw`@xl/blockquote:space-y-6`,
   },
-  blockquoteContainer: tw`space-y-4 py-6`,
+  blockquoteContainer: tw`space-y-4 py-2`,
 
   blockquote: {
-    default: tw`bg-body-alt prose relative max-w-full rounded-lg p-4`,
-    after: tw`after:bg-body-alt after:absolute after:-bottom-2 after:left-12 after:h-4 after:w-4 after:-translate-x-1/2 after:rotate-45 after:transform`,
+    default: tw`prose relative max-w-full rounded-lg bg-body-alt p-4`,
+    after: tw`after:absolute after:-bottom-2 after:left-12 after:h-4 after:w-4 after:-translate-x-1/2 after:rotate-45 after:transform after:bg-body-alt`,
     '@xl/blockquote': tw`@xl/blockquote:p-5`,
     '@3xl/blockquote': tw`@3xl/blockquote:p-6`,
     '@5xl/blockquote': tw`@5xl/blockquote:p-8`,

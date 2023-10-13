@@ -18,14 +18,6 @@ const buildPageSections = async (
   const pageSections: (Block & PageSectionProps)[] = [];
 
   items.forEach(async (item) => {
-    // Get active variant from instance > global > default variant id
-    // const instanceVariantId = item.content?.properties?.themeVariant;
-    // const globalVariantId = globalPageSectionThemeProperties?.themeVariant;
-    // const blockVariantId = instanceVariantId || globalVariantId || '1';
-    // const activeVariant = require(`/lib/components/layout/PageSection/variants/${blockVariantId}`).default || undefined;
-
-    // Get global and instance overrides
-    // const globalOverrides = extractClassOverrides(globalPageSectionThemeProperties);
     const itemSettings = item.settings?.properties || {};
 
     if (item.areas.length > 1) {

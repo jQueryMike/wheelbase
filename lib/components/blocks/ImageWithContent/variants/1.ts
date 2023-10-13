@@ -28,6 +28,7 @@ classes = {
     default: tw`relative aspect-[4/3] w-full`,
     '@5xl/image-with-content': '@5xl/image-with-content:w-[40%]',
   },
+  image: tw`object-cover`,
 };
 
 const contentBlockVariant: ImageWithContentVariant = {

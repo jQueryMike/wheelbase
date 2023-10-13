@@ -6,4 +6,15 @@
   * {
     @apply antialiased;
   }
+
+  .docs-story {
+    container-type: inline-size;
+  }
+}
+
+#storybook-root {
+  border: 50px solid rgba(0, 0, 0, 0.025);
+  position: relative;
+  container-type: inline-size;
+  overflow: hidden;
 }

@@ -9,19 +9,32 @@ let classes: ContactDetailsClasses<ClassesProperty> = {};
 let itemClasses: ContactDetailsItemClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`tw-[100%] @container/contact-details`,
+  root: tw`@container/contact-details`,
+  rootInner: {
+    default: tw`space-y-4`,
+    '@xl/contact-details': tw`@xl/contact-details:space-y-6`,
+  },
+  contentAreaContainer: {
+    default: tw`space-y-4`,
+    '@xl/contact-details': tw`@xl/contact-details:space-y-6`,
+  },
+  itemsContainer: tw`flex flex-wrap gap-4 py-4`,
 };
 
 itemClasses = {
-  root: {
-    default: tw`inline-flex flex-row items-center gap-2 rounded-xl bg-slate-100 pb-2 pl-2 pr-4 pt-2 text-[var(--primary)]`,
-    hover: tw`hover:text-[var(--accent)]`,
+  itemRoot: {
+    default: tw` flex h-10 items-center rounded-lg bg-secondary px-3 text-[18px] font-semibold text-secondary-contrast`,
+    hover: tw`hover:bg-primary hover:text-primary-contrast`,
   },
-  icon: {
-    default: tw`fill-white text-white`,
+  itemLink: tw`flex items-center space-x-2`,
+  itemIcon: {
+    default: tw``,
   },
-  label: {
-    default: tw`text-lg font-bold not-italic`,
+  itemLabel: {
+    default: tw``,
+  },
+  itemLabelContainer: {
+    default: tw``,
   },
 };
 

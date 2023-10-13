@@ -28,39 +28,39 @@ export type DrawerNavigationClasses<T> = {
     | 'closeButton'
     | 'closeButtonIcon'
     | 'closeButtonText'
-    | 'list1'
-    | 'listItem1'
-    | 'linkContainer1'
-    | 'linkContainer1Selected'
-    | 'link1'
-    | 'toggleButton1'
-    | 'toggleButton1Expanded'
-    | 'toggleButton1Collapsed'
-    | 'toggleButtonIcon1'
-    | 'list2'
-    | 'list2Expanded'
-    | 'list2Collapsed'
-    | 'listItem2'
-    | 'linkContainer2'
-    | 'linkContainer2Selected'
-    | 'link2'
-    | 'toggleButton2'
-    | 'toggleButton2Expanded'
-    | 'toggleButton2Collapsed'
-    | 'toggleButtonIcon2'
-    | 'list3'
-    | 'list3Expanded'
-    | 'list3Collapsed'
-    | 'listItem3'
-    | 'link3'
-    | 'link3Selected']?: T;
+    | 'l1_list'
+    | 'l1_listItem'
+    | 'l1_linkContainer'
+    | 'l1_linkContainerSelected'
+    | 'l1_link'
+    | 'l1_toggleButton'
+    | 'l1_toggleButtonExpanded'
+    | 'l1_toggleButtonCollapsed'
+    | 'l1_toggleButtonIcon'
+    | 'l2_list'
+    | 'l2_listExpanded'
+    | 'l2_listCollapsed'
+    | 'l2_listItem'
+    | 'l2_linkContainer'
+    | 'l2_linkContainerSelected'
+    | 'l2_link'
+    | 'l2_toggleButton'
+    | 'l2_toggleButtonExpanded'
+    | 'l2_toggleButtonCollapsed'
+    | 'l2_toggleButtonIcon'
+    | 'l3_list'
+    | 'l3_listExpanded'
+    | 'l3_listCollapsed'
+    | 'l3_listItem'
+    | 'l3_link'
+    | 'l3_linkSelected']?: T;
 };
 
 export interface DrawerNavigationItem {
   id: string;
   href: string;
   text: string;
-  children: DrawerNavigationItem[];
+  children?: DrawerNavigationItem[];
 }
 
 export interface DrawerNavigationProps {
@@ -121,73 +121,75 @@ const DrawerNavigation = ({
                 </button>
               </div>
             )}
-            <ul className={classes.list1}>
+            <ul className={classes.l1_list}>
               {items.map((item: DrawerNavigationItem) => (
-                <li key={item.id} className={classes.listItem1}>
+                <li key={item.id} className={classes.l1_listItem}>
                   <div
                     className={twMerge(
-                      cn(classes.linkContainer1, { [classes.linkContainer1Selected || '']: isSelected(item.href) }),
+                      cn(classes.l1_linkContainer, { [classes.l1_linkContainerSelected || '']: isSelected(item.href) }),
                     )}
                   >
-                    <NextLink className={classes.link1} href={item.href} onClick={closeMenu}>
+                    <NextLink className={classes.l1_link} href={item.href} onClick={closeMenu}>
                       {item.text}
                     </NextLink>
-                    {item.children.length > 0 && (
+                    {item.children && item.children.length > 0 && (
                       <button
                         className={cn(
-                          classes.toggleButton1,
-                          isExpanded(item.id) ? classes.toggleButton1Expanded : classes.toggleButton1Collapsed,
+                          classes.l1_toggleButton,
+                          isExpanded(item.id) ? classes.l1_toggleButtonExpanded : classes.l1_toggleButtonCollapsed,
                         )}
                         onClick={() => toggleSubMenu(item.id)}
                       >
-                        <Icon className={cn(toggleButtonIcon, classes.toggleButtonIcon1)} />
+                        <Icon className={cn(toggleButtonIcon, classes.l1_toggleButtonIcon)} />
                       </button>
                     )}
                   </div>
-                  {item.children.length > 0 && (
+                  {item.children && item.children.length > 0 && (
                     <ul
                       className={cn(
-                        classes.list2,
-                        isExpanded(item.id) ? classes.list2Expanded : classes.list2Collapsed,
+                        classes.l2_list,
+                        isExpanded(item.id) ? classes.l2_listExpanded : classes.l2_listCollapsed,
                       )}
                     >
                       {item.children.map((child: DrawerNavigationItem) => (
-                        <li key={child.id} className={classes.listItem2}>
+                        <li key={child.id} className={classes.l2_listItem}>
                           <div
                             className={twMerge(
-                              cn(classes.linkContainer2, {
-                                [classes.linkContainer2Selected || '']: isSelected(child.href),
+                              cn(classes.l2_linkContainer, {
+                                [classes.l2_linkContainerSelected || '']: isSelected(child.href),
                               }),
                             )}
                           >
-                            <NextLink className={classes.link2} href={child.href} onClick={closeMenu}>
+                            <NextLink className={classes.l2_link} href={child.href} onClick={closeMenu}>
                               {child.text}
                             </NextLink>
-                            {child.children.length > 0 && (
+                            {child.children && child.children.length > 0 && (
                               <button
                                 className={cn(
-                                  classes.toggleButton2,
-                                  isExpanded(child.id) ? classes.toggleButton2Expanded : classes.toggleButton2Collapsed,
+                                  classes.l2_toggleButton,
+                                  isExpanded(child.id)
+                                    ? classes.l2_toggleButtonExpanded
+                                    : classes.l2_toggleButtonCollapsed,
                                 )}
                                 onClick={() => toggleSubMenu(child.id)}
                               >
-                                <Icon className={cn(toggleButtonIcon, classes.toggleButtonIcon2)} />
+                                <Icon className={cn(toggleButtonIcon, classes.l2_toggleButtonIcon)} />
                               </button>
                             )}
                           </div>
                           {child.children && child.children.length > 0 && (
                             <ul
                               className={cn(
-                                classes.list3,
-                                isExpanded(child.id) ? classes.list3Expanded : classes.list3Collapsed,
+                                classes.l3_list,
+                                isExpanded(child.id) ? classes.l3_listExpanded : classes.l3_listCollapsed,
                               )}
                             >
                               {child.children.map((grandchild: DrawerNavigationItem) => (
-                                <li key={grandchild.id} className={classes.listItem3}>
+                                <li key={grandchild.id} className={classes.l3_listItem}>
                                   <NextLink
                                     className={twMerge(
-                                      cn(classes.link3, {
-                                        [classes.link3Selected || '']: isSelected(grandchild.href),
+                                      cn(classes.l3_link, {
+                                        [classes.l3_linkSelected || '']: isSelected(grandchild.href),
                                       }),
                                     )}
                                     href={grandchild.href}

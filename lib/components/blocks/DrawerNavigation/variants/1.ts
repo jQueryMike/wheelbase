@@ -38,44 +38,44 @@ classes = {
   closeButtonText: tw`hidden`,
 
   // LIST LEVEL !
-  list1: tw`flex h-full flex-col items-stretch justify-center space-y-2 overflow-y-auto px-8 text-lg`,
-  linkContainer1: {
+  l1_list: tw`flex h-full flex-col items-stretch justify-center space-y-2 overflow-y-auto px-8 text-lg`,
+  l1_linkContainer: {
     default: tw`flex items-stretch justify-between space-x-2 rounded-lg text-primary-contrast`,
     hover: tw`hover:bg-accent hover:text-accent-contrast`,
   },
-  linkContainer1Selected: tw`bg-accent text-accent-contrast`,
-  link1: tw`inline-block flex-grow px-4 py-2 font-semibold`,
-  toggleButton1: {
+  l1_linkContainerSelected: tw`bg-accent text-accent-contrast`,
+  l1_link: tw`inline-block flex-grow px-4 py-2 font-semibold`,
+  l1_toggleButton: {
     default: tw`w-10 transform rounded-lg text-accent-contrast`,
     hover: tw`hover:bg-accent-contrast/20`,
   },
-  toggleButton1Expanded: tw`rotate-180`,
+  l1_toggleButtonExpanded: tw`rotate-180`,
 
   // LIST LEVEL 2
-  list2: tw`-mx-8 mt-2 space-y-2 bg-accent-contrast/10 px-8 py-4 text-base`,
-  list2Collapsed: tw`hidden`,
-  linkContainer2: {
+  l2_list: tw`-mx-8 mt-2 space-y-2 bg-accent-contrast/10 px-8 py-4 text-base`,
+  l2_listCollapsed: tw`hidden`,
+  l2_linkContainer: {
     default: tw`flex items-stretch justify-between space-x-2 rounded-lg text-primary-contrast`,
     hover: tw`[&:not(.selected)]:hover:bg-primary-contrast/10`,
   },
-  linkContainer2Selected: tw`selected bg-accent text-accent-contrast`,
-  link2: tw`inline-block flex-grow px-4 py-2 pl-8 font-semibold`,
-  toggleButton2: {
+  l2_linkContainerSelected: tw`selected bg-accent text-accent-contrast`,
+  l2_link: tw`inline-block flex-grow px-4 py-2 pl-8 font-semibold`,
+  l2_toggleButton: {
     default: tw`w-10 transform rounded-lg text-primary-contrast`,
     hover: tw`hover:bg-primary-contrast/10`,
   },
-  toggleButton2Expanded: tw`rotate-180`,
+  l2_toggleButtonExpanded: tw`rotate-180`,
 
   // LIST LEVEL 3
-  list3: tw`mt-2 space-y-2`,
-  list3Expanded: tw`block`,
-  list3Collapsed: tw`hidden`,
-  listItem3: tw``,
-  link3: {
-    default: tw`block rounded-lg px-3 py-2 pl-12 font-semibold text-primary-contrast/80`,
+  l3_list: tw`mt-2 space-y-2`,
+  l3_listExpanded: tw`block`,
+  l3_listCollapsed: tw`hidden`,
+  l3_listItem: tw``,
+  l3_link: {
+    default: tw`text-primary-contrast/80 block rounded-lg px-3 py-2 pl-12 font-semibold`,
     hover: tw`[&:not(.selected)]:hover:bg-primary-contrast/10 [&:not(.selected)]:hover:text-primary-contrast`,
   },
-  link3Selected: tw`selected bg-accent text-accent-contrast`,
+  l3_linkSelected: tw`selected bg-accent text-accent-contrast`,
 };
 
 const drawerNavigationVariant: DrawerNavigationVariant = {

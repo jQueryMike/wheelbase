@@ -44,8 +44,8 @@ const buildDrawerNavigationBlock = ({
 
     if (content?.menuButtonIcon) drawerNavigation.menuButtonIcon = content.menuButtonIcon;
     if (content?.menuButtonText) drawerNavigation.menuButtonText = content.menuButtonText;
-    if (content?.closeButtonIcon) drawerNavigation.closeButtonIcon = content.closeIcon;
-    if (content?.closeButtonText) drawerNavigation.closeButtonText = content.closeText;
+    if (content?.closeButtonIcon) drawerNavigation.closeButtonIcon = content.closeButtonIcon;
+    if (content?.closeButtonText) drawerNavigation.closeButtonText = content.closeButtonText;
     if (content?.toggleButtonIcon) drawerNavigation.toggleButtonIcon = content.toggleButtonIcon;
 
     if (items.length > 0) {

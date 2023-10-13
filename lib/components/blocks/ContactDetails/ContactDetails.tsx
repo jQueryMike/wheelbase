@@ -11,15 +11,15 @@ export type ContactDetailsClasses<T> = {
     | 'root'
     | 'rootInner'
     | 'headingsContainer'
+    | 'itemsContainer'
+    | 'itemContainer'
     | 'contentAreaContainer'
     | 'contentArea1Container'
-    | 'contentArea2Container'
-    | 'itemsContainer'
-    | 'itemContainer']?: T;
+    | 'contentArea2Container']?: T;
 };
 
 export type ContactDetailsItemClasses<T> = {
-  [key in 'root' | 'link' | 'iconContainer' | 'icon' | 'labelContainer' | 'label']?: T;
+  [key in 'itemRoot' | 'itemLink' | 'itemIconContainer' | 'itemIcon' | 'itemLabelContainer' | 'itemLabel']?: T;
 };
 
 export interface ContactDetailsProps {
@@ -57,22 +57,29 @@ const ContactDetails = ({
           <BlockList blocks={contentArea1} />
         </div>
       )}
-      {contactItems?.map((item) => (
-        <div key={item.id} className={item.classes?.root}>
-          <NextLink href={item.href} className={item.classes?.link}>
-            {item.icon && (
-              <span className={item.classes?.iconContainer}>
-                <Icon className={cn(item.icon, item.classes?.icon)} />
-              </span>
-            )}
-            {item.label && (
-              <span className={item.classes?.labelContainer}>
-                <em className={item.classes?.label}>{item.label}</em>
-              </span>
-            )}
-          </NextLink>
+      {contactItems && (
+        <div className={classes.itemsContainer}>
+          {contactItems?.map((item) => (
+            <div key={item.id} className={classes.itemContainer}>
+              <div className={item.classes?.itemRoot}>
+                <NextLink href={item.href} className={item.classes?.itemLink}>
+                  {item.icon && (
+                    <span className={item.classes?.itemIconContainer}>
+                      <Icon className={cn(item.icon, item.classes?.itemIcon)} />
+                    </span>
+                  )}
+                  {item.label && (
+                    <span className={item.classes?.itemLabelContainer}>
+                      <span className={item.classes?.itemLabel}>{item.label}</span>
+                    </span>
+                  )}
+                </NextLink>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
+
       {contentArea2?.length > 0 && (
         <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
           <BlockList blocks={contentArea2} />
