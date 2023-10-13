@@ -3,7 +3,7 @@ import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 import { PageSectionClasses } from '../PageSection';
 import PageSectionVariant from './PageSectionVariant';
 
-const location = 'PageSection/variants/1';
+const location = 'PageSection/variants/5';
 
 let classes: PageSectionClasses<ClassesProperty> = {};
 

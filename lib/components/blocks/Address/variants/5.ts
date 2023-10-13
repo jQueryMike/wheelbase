@@ -3,7 +3,7 @@ import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 import { AddressClasses } from '../Address';
 import AddressVariant from './AddressVariant';
 
-const location = 'Address/variants/2';
+const location = 'Address/variants/5';
 
 let classes: AddressClasses<ClassesProperty> = {};
 
@@ -18,10 +18,10 @@ classes = {
     '@xl/address': tw`@xl/address:space-y-6`,
   },
   addressContainer: {
-    default: tw`space-y-2 py-6`,
+    default: tw`space-y-2`,
   },
   address: {
-    default: tw`bg-red-900 p-5 text-[16px] font-semibold text-white`,
+    default: tw`text-[16px] not-italic text-copy`,
     '@xl/address': tw`@xl/address:text-[16px]`,
     '@3xl/address': tw`@3xl/address:text-[18px]`,
     '@5xl/address': tw`@5xl/address:text-[20px]`,
