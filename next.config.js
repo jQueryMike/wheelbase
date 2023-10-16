@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [process.env.MEDIA_URL, 'localhost'],
+    domains: [process.env.MEDIA_URL.replace('https://', '').replace('http://', ''), 'localhost'],
   },
   webpack: (config) => {
     config.module.rules.push({
