@@ -9,8 +9,8 @@
     "test": "jest",
     "lint": "npx eslint .",
     "lint-staged": "npx lint-staged",
-    "storybook": "NEXT_PUBLIC_IS_STORYBOOK=true storybook dev -p 6006",
-    "build-storybook": "NEXT_PUBLIC_IS_STORYBOOK=true && storybook build"
+    "storybook": "NEXT_PUBLIC_IS_STORYBOOK=true ENVIRONMENT_NAME=storybook storybook dev -p 6006",
+    "build-storybook": "NEXT_PUBLIC_IS_STORYBOOK=true ENVIRONMENT_NAME=storybook storybook build"
   },
   "pre-commit": [
     "lint-staged"

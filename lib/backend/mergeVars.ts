@@ -11,11 +11,11 @@ const replaceVars = (inputString: string, config: any, sharedContent: any) => {
   let outputString = inputString;
   try {
     MERGE_VARS.forEach(([placeholder, value]) => {
-      if (config[value]) {
+      if (config && config[value]) {
         outputString = outputString.replaceAll(placeholder, config[value].markup || config[value]);
         return;
       }
-      if (sharedContent[value]) {
+      if (sharedContent && sharedContent[value]) {
         outputString = outputString.replaceAll(placeholder, sharedContent[value].markup || sharedContent[value]);
       }
     });

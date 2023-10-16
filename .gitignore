@@ -36,7 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 # tailwind
-/tailwind.config.local.json
+tailwind.config.local.json
 
 # storybook
 storybook-static
