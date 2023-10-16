@@ -8,30 +8,30 @@ const location = 'Hero/variants/2';
 let classes: HeroClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`w-full bg-gradient-to-b from-secondary-light to-secondary-dark px-8 pt-8 @container/hero`,
+  root: tw`w-full bg-gradient-to-b from-secondary to-secondary-dark p-6 py-0`,
   rootInner: {
-    default: tw`relative flex h-full min-h-[400px] items-stretch`,
-    '@5xl/hero': tw`@5xl/hero:min-h-[800px]`,
+    default: tw``,
   },
   container: {
-    default: tw`container mx-auto grid items-stretch gap-8`,
-    '@3xl/hero': tw`@3xl/hero:grid-cols-2`,
+    default: tw`container mx-auto grid h-full gap-6`,
+    md: tw`md:grid-cols-2 md:gap-12`,
+    lg: tw`lg:gap-16`,
+    xl: tw`xl:gap-20`,
   },
   heroContentContainer: {
-    default: tw`z-10 flex w-full flex-col items-stretch justify-center space-y-8`,
-    '@xl/hero': tw`@xl/hero:space-y-12 @xl/hero:p-8`,
-    '@5xl/hero': tw`@5xl/hero:space-y-16 @5xl/hero:p-12`,
+    default: tw`my-8 flex flex-col justify-center space-y-8`,
+    md: tw`md:my-16 md:space-y-10`,
+    lg: tw`lg:my-20 lg:space-y-12`,
+    xl: tw`xl:my-14 xl:space-y-14`,
   },
-  contentAreaContainer: tw`space-y-4`,
+  headingsContainer: {
+    default: tw`space-y-2`,
+  },
+  contentAreaContainer: {
+    default: tw``,
+  },
   imageContainer: {
-    default: tw`flex max-h-[400px] items-end`,
-    '@md/hero': tw`@md/hero:max-h-[500px]`,
-    '@xl/hero': tw`@xl/hero:max-h-[600px]`,
-    '@3xl/hero': tw`@3xl/hero:max-h-none`,
-  },
-  image: {
-    default: tw`mx-auto h-full w-full object-contain object-bottom`,
-    '@3xl/hero': tw`@3xl/hero:w-[unset]`,
+    default: tw`relative`,
   },
 };
 

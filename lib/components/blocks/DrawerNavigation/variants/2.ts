@@ -18,12 +18,14 @@ classes = {
   menuButtonText: tw`hidden`,
 
   navContainer: tw`fixed top-0 z-50 h-screen w-screen transition-all duration-0`,
-  navBackdrop: tw`absolute inset-0 bg-white/60 transition-all duration-150`,
-  nav: tw`fixed bottom-0 top-0 z-50 w-full min-w-[320px] max-w-[400px] items-center justify-stretch bg-body py-20 transition-all duration-150`,
+
+  navBackdrop: tw`absolute inset-0 bg-black/60 transition-all duration-150`,
+
+  nav: tw`fixed bottom-0 top-0 z-50 w-full max-w-[360px] items-center justify-stretch bg-body py-20 transition-all duration-150`,
 
   navContainerClosed: tw`right-full shadow-none delay-150`,
   navBackdropClosed: tw` opacity-0`,
-  navClosed: tw`-right-[400px]`,
+  navClosed: tw`-right-[360px]`,
 
   navContainerOpen: tw`right-0 delay-0`,
   navBackdropOpen: tw`opacity-100 delay-0`,
@@ -31,21 +33,21 @@ classes = {
 
   closeButtonContainer: tw`absolute right-5 top-5`,
   closeButton: {
-    default: tw`flex h-8 w-8 items-center justify-center text-[32px] text-accent transition duration-150`,
-    hover: tw`hover:text-primary`,
+    default: tw`flex h-10 w-10 items-center justify-center rounded-full bg-accent bg-opacity-5 text-[32px] text-accent transition`,
+    hover: tw`hover:bg-accent hover:text-accent-contrast`,
   },
   closeButtonIcon: tw``,
   closeButtonText: tw`hidden`,
 
   // LIST LEVEL !
-  l1_list: tw`mx-8 flex flex-col items-stretch justify-center space-y-2 overflow-y-auto border-t border-divider py-2`,
-  l1_listItem: tw`border-b border-divider pb-2`,
+  l1_list: tw`mx-8 flex flex-col justify-start overflow-y-auto border-t border-gray-200`,
+  l1_listItem: tw`border-b border-gray-200`,
   l1_linkContainer: {
-    default: tw`flex items-stretch justify-between space-x-2 text-accent`,
-    hover: tw`hover:text-primary`,
+    default: tw`flex items-stretch justify-between space-x-2 text-primary`,
+    hover: tw`hover:text-accent`,
   },
-  l1_linkContainerSelected: tw`selected text-primary`,
-  l1_link: tw`inline-block flex-grow py-2 font-semibold`,
+  l1_linkContainerSelected: tw`selected text-accent`,
+  l1_link: tw`inline-block flex-grow py-3 font-semibold`,
   l1_toggleButton: {
     default: tw`w-10 transform text-accent`,
     hover: tw`hover:bg-accent-contrast/20`,

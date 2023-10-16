@@ -19,21 +19,18 @@ classes = {
     lg: tw`lg:gap-10`,
   },
   drawerNavigationContainer: {
-    default: tw`order-2 flex grow justify-end`,
-    md: tw`md:grow-0`,
+    default: tw`order-1 flex flex-grow justify-end`,
+    xl: tw`xl:hidden`,
   },
   logoContainer: {
-    default: tw`order-0 relative h-8 w-[150px]`,
-    md: tw`md:h-11 md:w-52`,
-    lg: tw`lg:h-11 lg:w-60`,
-    xl: tw`xl:h-12 xl:w-72`,
+    default: tw`order-0`,
   },
-  logoLink: tw`relative inline-block h-full w-full`,
-  logoImage: tw`object-contain object-left`,
+  logoLink: tw``,
+  logoImage: tw``,
   contentAreaContainer: {
-    default: tw`order-1 hidden flex-grow justify-end`,
-    md: tw`md:flex md:items-center md:gap-8`,
-    '2xl': tw`2xl:flex-1`,
+    default: tw`hidden`,
+    xs: tw`xs:order-2 xs:flex xs:items-center xs:justify-end xs:gap-8`,
+    xl: tw`xl:flex-1`,
   },
 };
 
