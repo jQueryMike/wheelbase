@@ -1,8 +1,13 @@
 /** @type {import('next').NextConfig} */
+
+const domains = ['localhost'];
+
+if (process.env.MEDIA_URL) domains.push(process.env.MEDIA_URL.replace('https://', '').replace('http://', ''));
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [process.env.MEDIA_URL.replace('https://', '').replace('http://', ''), 'localhost'],
+    domains,
   },
   webpack: (config) => {
     config.module.rules.push({
