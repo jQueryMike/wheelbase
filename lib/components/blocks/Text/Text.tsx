@@ -1,16 +1,16 @@
 /* eslint-disable react/no-danger */
 import * as DOMPurify from 'isomorphic-dompurify';
 
-export type TextContentClasses<T> = {
+export type TextClasses<T> = {
   [key in 'root' | 'textContent']?: T;
 };
 
-export interface TextContentProps {
-  classes?: TextContentClasses<string>;
+export interface TextProps {
+  classes?: TextClasses<string>;
   content?: string;
 }
 
-const TextContent = ({ classes = {}, content }: TextContentProps) => {
+const Text = ({ classes = {}, content }: TextProps) => {
   if (!content) return null;
 
   return (
@@ -20,4 +20,4 @@ const TextContent = ({ classes = {}, content }: TextContentProps) => {
   );
 };
 
-export default TextContent;
+export default Text;

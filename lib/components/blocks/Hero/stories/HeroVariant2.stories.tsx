@@ -6,7 +6,7 @@ import { HeadingSize } from '../../Heading';
 import headingVariant2 from '../../Heading/variants/2';
 import headingsVariant2 from '../../Headings/variants/2';
 import subheadingVariant2 from '../../Subheading/variants/2';
-import textContentVariant1 from '../../TextContent/variants/1';
+import textContentVariant1 from '../../Text/variants/1';
 import Hero from '../Hero';
 import heroVariant2 from '../variants/2';
 

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import buttonVariant1 from '../../Button/variants/1';
 import headingVariant1 from '../../Heading/variants/1';
 import subheadingVariant1 from '../../Subheading/variants/1';
-import textContentVariant1 from '../../TextContent/variants/1';
+import textContentVariant1 from '../../Text/variants/1';
 import Blockquote from '../Blockquote';
 import blockquoteVariant1 from '../variants/1';
 

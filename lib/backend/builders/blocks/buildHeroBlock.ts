@@ -18,13 +18,6 @@ const buildHeroBlock = ({
   globalConfig,
   inheritedThemes,
 }: BlockBuilderConfig): (Block & HeroProps) | undefined => {
-  console.log(id,
-    name,
-    content,
-    settings,
-    globalTheme,
-    globalConfig,
-    inheritedThemes);
   try {
     // Shortcut to block theme properties from globalTheme
     const globalBlockTheme = globalTheme?.heroTheme?.items[0]?.content?.properties;

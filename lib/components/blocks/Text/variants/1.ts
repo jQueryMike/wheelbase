@@ -1,18 +1,18 @@
 import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 
-import { TextContentClasses } from '../TextContent';
-import TextContentVariant from './TextContentVariant';
+import { TextClasses } from '../Text';
+import TextVariant from './TextVariant';
 
 const location = 'TextContent/variants/1';
 
-let classes: TextContentClasses<ClassesProperty> = {};
+let classes: TextClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
   textContent: tw`prose max-w-full`,
 };
 
-const textContentVariant: TextContentVariant = {
+const textContentVariant: TextVariant = {
   classes: new ClassesBuilder({ location, classes }).classes,
 };
 

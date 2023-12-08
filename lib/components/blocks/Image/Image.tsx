@@ -1,12 +1,6 @@
-import NextImage, { ImageProps as NextImageProps } from 'next/image';
+import NextImage from 'next/image';
 
-export type ImageClasses<T> = {
-  [key in 'root' | 'image']?: T;
-};
-
-export interface ImageProps extends NextImageProps {
-  classes?: ImageClasses<string>;
-}
+import { ImageProps } from './Image.types';
 
 const Image = ({ classes = {}, ...rest }: ImageProps) => (
   <div className={classes.root}>

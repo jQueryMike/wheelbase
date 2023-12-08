@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { twMerge } from 'tailwind-merge';
 
-import textContentVariant1 from '../../TextContent/variants/1';
+import textContentVariant1 from '../../Text/variants/1';
 import Footer from '../Footer';
 import footerVariant1 from '../variants/1';
 

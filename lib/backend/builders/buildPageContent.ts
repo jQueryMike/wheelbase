@@ -1,154 +1,14 @@
+import generateConfig from '@backend/generateConfig';
 import { HeadingsProps } from '@components/blocks/Headings';
-import { HeroProps } from '@components/blocks/Hero/Hero.types';
 import Block from '@interfaces/Block';
 import { UmbracoBlockGridItem } from '@interfaces/Umbraco';
-import { BaseComposition, HeadingComposition, SubheadingComposition } from 'lib/types';
+import { HeadingsComposition } from 'lib/types';
+import { v4 as uuidv4 } from 'uuid';
 
 import { capitalise } from '@utilities';
 
 import buildBlockClasses from './buildBlockClasses';
-
-const BuilderMap = new Map<string, (...args: any) => unknown>();
-
-type Property<T extends string> =
-  T extends `${infer X extends string}_${infer Y extends string}_${infer Z extends string}` ? [X, Y, Z] : never;
-
-type HeadingsComposition = {
-  heading: HeadingComposition;
-  subheading: SubheadingComposition;
-};
-
-/**
- * Get subkeys from long form key
- * @example getKeys('tabName_blockName_property') => ['tabName','blockName','property']
- * @param key Long form key
- * @returns A tuple of nested keys
- */
-function getKeys<T extends string>(key: T): Property<T> {
-  return key.split('_') as Property<T>;
-}
-
-/**
- * Generate configuration object for a content block from api response
- * @param data Raw api response json
- * @returns Standardised config object
- */
-function generateConfiguration(data: { [K: string]: any }) {
-  const output = Object.entries(data)
-    .map(([key, value]) => [getKeys(key), value])
-    .reduce((prev, [[tab, comp, prop], value]) => {
-      if (!prev[comp]) {
-        prev[comp] = {
-          [tab]: {
-            [prop]: value,
-          },
-        };
-      }
-      if (!prev[comp]?.[tab]) {
-        prev[comp][tab] = {
-          [prop]: value,
-        };
-      }
-      if (!prev[comp]?.[tab]?.[prop]) {
-        prev[comp][tab][prop] = value;
-      }
-      return prev;
-    }, {} as any);
-  return output;
-}
-
-function buildHeadings({ heading, subheading }: HeadingsComposition) {
-  const headings: Block & HeadingsProps = {
-    id: 'headings',
-    name: 'Headings',
-    classes: buildBlockClasses({
-      name: 'Headings',
-      location: 'blocks',
-      globalBlockTheme: null,
-      instanceVariant: '1',
-      instanceSettings: {},
-    }),
-    // TODO: Build classes with theme < variant < appearance < overrides
-    heading: {
-      ...heading.content,
-      // ...heading.appearance,
-      ...heading.settings,
-      // ...heading.overrides,
-    },
-    subheading: {
-      ...subheading.content,
-      // ...subheading.appearance,
-      // ...subheading.overrides,
-    },
-  };
-  // console.log(headings);
-  return headings;
-}
-
-BuilderMap.set('headings', buildHeadings);
-
-function buildImage(config: BaseImageComposition) {
-  // console.log('ImageBuilder', config);
-  return null;
-}
-
-BuilderMap.set('image', buildImage);
-
-function buildHero(config: BaseComposition, subComps?: [string, BaseComposition][]) {
-  // console.log('HeroBuilder', config, subComps);
-  const hero: Block & HeroProps = {
-    id: 'hero',
-    name: 'Hero',
-    // TODO: Build classes with theme < variant < appearance < overrides
-    classes: buildBlockClasses({
-      name: 'Hero',
-      location: 'blocks',
-      globalBlockTheme: null,
-      instanceVariant: '1',
-      instanceSettings: {},
-    }),
-  };
-  subComps?.forEach(([name, comp]) => {
-    if (BuilderMap.has(name)) {
-      hero[name] = BuilderMap.get(name)?.(comp);
-    }
-  });
-  console.log(hero);
-  return hero;
-}
-
-BuilderMap.set('hero', buildHero);
-
-function buildContentArea(config: BaseComposition) {
-  // console.log('ContentAreaBuilder', config);
-  return null;
-}
-
-BuilderMap.set('contentArea', buildContentArea);
-
-/**
- * Sanitise name of block
- * @param name Possibly incorrectly formatted name
- * @returns lowercase name without trailing numbers
- */
-function getName(name: string) {
-  return name.replace(/\d+$/, '').toLowerCase();
-}
-
-/**
- *
- * @param name
- * @param block
- * @param subComps
- * @returns
- */
-function builder(name: string, block: BaseComposition, subComps?: [string, any][]) {
-  const key = getName(name);
-  if (!BuilderMap.has(key)) {
-    return null;
-  }
-  return BuilderMap.get(key)?.(block, subComps);
-}
+import BuilderMap, { getName } from './builders';
 
 /**
  * Build content block from api data
@@ -159,43 +19,73 @@ function builder(name: string, block: BaseComposition, subComps?: [string, any][
  * @returns
  */
 async function buildContent(contentType: string, id: string, config: any, globalTheme: any, globalConfig: any) {
-  /**
-   * Get the global theme object for a given block type
-   * @param contentType Type of the content block
-   * @returns global theme object
-   */
-  function getGlobalBlockTheme() {
-    switch (contentType) {
-      case 'hero1':
-        return globalTheme.heroTheme;
-      case 'openingTimes':
-        return globalTheme.openingTimesTheme;
-      default:
-        return null;
-    }
-  }
-
-  // console.log('buildContent', contentType, JSON.stringify(config));
-  const classes = buildBlockClasses({
-    name: capitalise(getName(contentType)),
-    location: 'blocks',
-    globalBlockTheme: getGlobalBlockTheme(),
-    instanceVariant: '1',
-    instanceSettings: {},
-  });
+  // /**
+  //  * Get the global theme object for a given block type
+  //  * @param contentType Type of the content block
+  //  * @returns global theme object
+  //  */
+  // function getGlobalBlockTheme() {
+  //   switch (contentType) {
+  //     case 'hero1':
+  //       return globalTheme.heroTheme;
+  //     case 'openingTimes':
+  //       return globalTheme.openingTimesTheme;
+  //     default:
+  //       return null;
+  //   }
+  // }
 
   // console.log(JSON.stringify(Object.entries(config)));
-  const { block, heading, subheading, ...subComps } = config;
-  return builder(contentType, block, [['headings', { heading, subheading }], ...Object.entries(subComps)]);
+  const name = capitalise(getName(contentType));
+  const { block, heading, subheading, contentArea, ...subComps } = config;
+  
+  const root = {
+    id,
+    name,
+    classes: buildBlockClasses({
+      name,
+      location: 'blocks',
+      globalBlockTheme: null,
+      instanceVariant: '1',
+      instanceSettings: {},
+    }),
+    ...(block.content ?? {}),
+    ...(block.settings ?? {}),
+  };
 
-  return null;
+  const children = Object.entries(subComps);
+  if (heading || subheading) children.push(['headings', { heading, subheading }] as [string, HeadingsComposition]);
+  children.forEach(([n, comp]) => {
+    const key = getName(n);
+    const builder = BuilderMap.get(key);
+    if (!BuilderMap.has(key) || !builder) {
+      console.warn(`No builder for you: ${key}`);
+      return;
+    }
+    root[key] = builder(comp);
+  });
+
+  // console.log(root);
+  if (contentArea) {
+    // TODO: root.contentArea = await builsdContent();
+    const items = await Promise.all(
+      contentArea.content.content.items.map(({ content: { contentType: ct, id: cId, properties } }: any) => {
+        const { [ct]: b, ...rest } = generateConfig(properties);
+        return buildContent(ct, cId, { block: b, ...rest }, globalTheme, globalConfig);
+      }),
+    );
+    root.contentArea = items;
+  }
+
+  if (contentType === 'hero1') console.log('Built block', root);
+  return root;
 }
 
 const buildPageContent = async (items: UmbracoBlockGridItem[], globalTheme: any, globalConfig: any) => {
   if (!items || items.length < 1) return [];
 
   const pageContent: any[] = items.map(({ content: { contentType, id, properties } }) =>
-    buildContent(contentType, id, generateConfiguration(properties), globalTheme, globalConfig),
+    buildContent(contentType, id, generateConfig(properties), globalTheme, globalConfig),
   );
 
   const output = await Promise.all(pageContent);

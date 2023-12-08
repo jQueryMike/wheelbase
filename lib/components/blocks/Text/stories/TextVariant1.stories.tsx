@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import TextContent from '../TextContent';
-import textContentVariant1 from '../variants/1';
+import Text from '../Text';
+import textVariant1 from '../variants/1';
 
-type Story = StoryObj<typeof TextContent>;
+type Story = StoryObj<typeof Text>;
 
 export const Variant1: Story = {
   args: {
-    classes: textContentVariant1.classes,
+    classes: textVariant1.classes,
     content: `
     <p>Praesent nonummy mi in odio. Ut id nisl <a>quis enim dignissim</a> sagittis. Nulla porta dolor. In hac habitasse 
     platea dictumst.</p>
@@ -23,9 +23,9 @@ export const Variant1: Story = {
   },
 };
 
-const meta: Meta<typeof TextContent> = {
-  title: 'Blocks/Text Content',
-  component: TextContent,
+const meta: Meta<typeof Text> = {
+  title: 'Blocks/Text',
+  component: Text,
   tags: ['autodocs'],
 };
 

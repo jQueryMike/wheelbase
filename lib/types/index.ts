@@ -1,10 +1,10 @@
 import { HeadingSize, HeadingTag } from '@components/blocks/Heading';
 
 export type BaseComposition = {
-  content?: Record<string, unknown>;
-  appearance?: Record<string, unknown>;
-  settings?: Record<string, unknown>;
-  overrides?: Record<string, unknown>;
+  content?: Record<string, any>;
+  appearance?: Record<string, any>;
+  settings?: Record<string, any>;
+  overrides?: Record<string, any>;
 };
 
 /**
@@ -148,6 +148,11 @@ export type SubheadingComposition = Composition<
   ]
 >;
 
+export type HeadingsComposition = {
+  heading: HeadingComposition;
+  subheading: SubheadingComposition;
+};
+
 // Umbraco Image Content Type
 // TODO: Needs some work
 export type ImageContent = {
@@ -159,6 +164,7 @@ export type ImageContent = {
   width: number;
   height: number;
   bytes: number;
+  alternativeText: string;
   // TODO: Properly type these remaining properties
   properties: {};
   focalPoint: null;
