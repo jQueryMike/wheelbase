@@ -29,10 +29,12 @@ export interface HeadingProps {
   text?: string;
   tag?: HeadingTag;
   size?: HeadingSize;
+  color?: any;
 }
 
-const Heading = ({ classes = {}, text, tag = HeadingTag.H2, size = HeadingSize.Large }: HeadingProps) => {
+const Heading = ({ classes = {}, text, tag = HeadingTag.H2, size = HeadingSize.Large, color }: HeadingProps) => {
   const HeadingElement = tag;
+  console.log(color);
 
   return (
     <div className={classes.root}>

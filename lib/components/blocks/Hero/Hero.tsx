@@ -1,28 +1,8 @@
-import Block from '@interfaces/Block';
 import NextImage from 'next/image';
 
 import { BlockList } from '../../utility-components/BlockList';
-import { Headings, HeadingsProps } from '../Headings';
-import { ImageProps } from '../Image';
-
-export type HeroClasses<T> = {
-  [key in
-    | 'root'
-    | 'rootInner'
-    | 'container'
-    | 'heroContentContainer'
-    | 'headingsContainer'
-    | 'contentAreaContainer'
-    | 'imageContainer'
-    | 'image']?: T;
-};
-
-export interface HeroProps {
-  classes?: HeroClasses<string>;
-  headings?: HeadingsProps;
-  contentArea?: Block[];
-  image?: ImageProps;
-}
+import { Headings } from '../Headings';
+import { HeroProps } from './Hero.types';
 
 const Hero = ({ classes = {}, headings, image, contentArea = [] }: HeroProps) => (
   <div className={classes.root}>

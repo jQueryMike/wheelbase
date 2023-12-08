@@ -47,6 +47,7 @@ const buildBlocks = async ({
         globalTheme,
         globalConfig,
       };
+      // console.log(config);
 
       if (name === 'Address') {
         const block = buildAddressBlock(config);

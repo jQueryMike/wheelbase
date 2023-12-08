@@ -7,6 +7,7 @@ export interface BlockListProps {
 }
 
 const BlockList = ({ blocks = [] }: BlockListProps) => {
+  console.log(blocks);
   const blockList = blocks.map((block) => {
     // if (block.name === 'ContactForm') return <ContactForm {...block} key={block.id} />;
     const DynamicBlock = require(`../../blocks/${block.name}/${block.name}`).default;

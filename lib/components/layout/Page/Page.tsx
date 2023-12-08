@@ -1,3 +1,4 @@
+import { BlockList } from '@components/utility-components/BlockList';
 import { NextSeo, NextSeoProps } from 'next-seo';
 import Head from 'next/head';
 
@@ -6,11 +7,12 @@ import { PageSectionProps } from '../PageSection/PageSection';
 
 export interface PageProps {
   sections: PageSectionProps[];
+  content: any;
   globalTheme: any;
   seo?: NextSeoProps;
 }
 
-const Page = ({ globalTheme, sections, seo }: PageProps) => {
+const Page = ({ globalTheme, sections, content, seo }: PageProps) => {
   if (!globalTheme) return null;
 
   return (
@@ -29,6 +31,7 @@ const Page = ({ globalTheme, sections, seo }: PageProps) => {
         {sections?.map((section: any) => (
           <PageSection key={section.id} {...section} />
         ))}
+        <BlockList blocks={content} />
       </main>
     </>
   );
