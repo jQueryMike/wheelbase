@@ -28,7 +28,7 @@ const buildTextContentBlock = ({
     });
 
     // Build initial block
-    const textContent: Block & TextProps = { id, name, classes, content: content.content.markup };
+    const textContent: Block & TextProps = { id, name, classes, text: content.content.markup };
 
     return textContent;
   } catch (error) {

@@ -7,15 +7,15 @@ export type TextClasses<T> = {
 
 export interface TextProps {
   classes?: TextClasses<string>;
-  content?: string;
+  text?: string;
 }
 
-const Text = ({ classes = {}, content }: TextProps) => {
-  if (!content) return null;
+const Text = ({ classes = {}, text }: TextProps) => {
+  if (!text) return null;
 
   return (
     <div className={classes.root}>
-      <div className={classes.textContent} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} />
+      <div className={classes.textContent} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }} />
     </div>
   );
 };

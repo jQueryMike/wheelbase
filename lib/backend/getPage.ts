@@ -26,7 +26,7 @@ const getPage = async (params: { slug: string[] }) => {
     globalTheme,
     globalConfig,
   );
-  console.log('getPage - content', content);
+  console.log('getPage - content', JSON.stringify(content));
   const sections = await buildPageSections(
     mergeVars(page, globalConfig, sharedContent).properties?.organismGrid?.items || [],
     globalTheme,

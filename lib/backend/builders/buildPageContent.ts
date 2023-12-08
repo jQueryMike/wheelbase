@@ -1,9 +1,6 @@
 import generateConfig from '@backend/generateConfig';
-import { HeadingsProps } from '@components/blocks/Headings';
-import Block from '@interfaces/Block';
 import { UmbracoBlockGridItem } from '@interfaces/Umbraco';
 import { HeadingsComposition } from 'lib/types';
-import { v4 as uuidv4 } from 'uuid';
 
 import { capitalise } from '@utilities';
 
@@ -19,31 +16,15 @@ import BuilderMap, { getName } from './builders';
  * @returns
  */
 async function buildContent(contentType: string, id: string, config: any, globalTheme: any, globalConfig: any) {
-  // /**
-  //  * Get the global theme object for a given block type
-  //  * @param contentType Type of the content block
-  //  * @returns global theme object
-  //  */
-  // function getGlobalBlockTheme() {
-  //   switch (contentType) {
-  //     case 'hero1':
-  //       return globalTheme.heroTheme;
-  //     case 'openingTimes':
-  //       return globalTheme.openingTimesTheme;
-  //     default:
-  //       return null;
-  //   }
-  // }
-
-  // console.log(JSON.stringify(Object.entries(config)));
-  const name = capitalise(getName(contentType));
+  const name = getName(contentType);
+  const key = capitalise(name);
   const { block, heading, subheading, contentArea, ...subComps } = config;
-  
-  const root = {
+
+  const root = BuilderMap.get(name)?.(block, globalTheme[`${name}Theme`]) ?? {
     id,
-    name,
+    name: key,
     classes: buildBlockClasses({
-      name,
+      name: key,
       location: 'blocks',
       globalBlockTheme: null,
       instanceVariant: '1',
@@ -56,13 +37,13 @@ async function buildContent(contentType: string, id: string, config: any, global
   const children = Object.entries(subComps);
   if (heading || subheading) children.push(['headings', { heading, subheading }] as [string, HeadingsComposition]);
   children.forEach(([n, comp]) => {
-    const key = getName(n);
-    const builder = BuilderMap.get(key);
-    if (!BuilderMap.has(key) || !builder) {
-      console.warn(`No builder for you: ${key}`);
+    const k = getName(n);
+    const builder = BuilderMap.get(k);
+    if (!BuilderMap.has(k) || !builder) {
+      console.warn(`No builder for you: ${k}`);
       return;
     }
-    root[key] = builder(comp);
+    root[k] = builder(comp, globalTheme[`${k}Theme`], globalConfig);
   });
 
   // console.log(root);

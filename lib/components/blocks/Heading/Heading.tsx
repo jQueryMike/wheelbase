@@ -31,8 +31,8 @@ export interface HeadingProps {
   size?: HeadingSize;
 }
 
-const Heading = ({ classes = {}, text, tag = HeadingTag.H2, size = HeadingSize.Large }: HeadingProps) => {
-  const HeadingElement = tag;
+const Heading = ({ classes = {}, text, tag, size = HeadingSize.Large }: HeadingProps) => {
+  const HeadingElement = tag || HeadingTag.H2;
 
   return (
     <div className={classes.root}>

@@ -8,7 +8,7 @@ type Story = StoryObj<typeof Text>;
 export const Variant1: Story = {
   args: {
     classes: textVariant1.classes,
-    content: `
+    text: `
     <p>Praesent nonummy mi in odio. Ut id nisl <a>quis enim dignissim</a> sagittis. Nulla porta dolor. In hac habitasse 
     platea dictumst.</p>
     <p>Donec vitae sapien ut <strong>libero venenatis</strong> faucibus. Praesent adipiscing. Nulla consequat massa 
