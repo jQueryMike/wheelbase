@@ -9,18 +9,21 @@ let classes: HeaderClasses<ClassesProperty> = {};
 
 classes = {
   root: {
-    default: tw`fixed left-0 right-0 top-0 z-50 bg-body px-8 transition duration-150`,
-    md: tw`md:px-12`,
-    lg: tw`lg:px-16`,
+    default: tw`sticky top-0 w-full p-4 bg-white z-50`,
+    md: tw`md:p-6`,
   },
-  rootScrolled: tw`shadow-xl`,
-  spacer: tw`h-20`,
-  spacerScrolled: tw``,
-  container: tw`container mx-auto flex h-20 items-center`,
+  container: tw`container mx-auto flex items-center`,
   containerScrolled: tw``,
-  drawerNavigationContainer: tw`mr-6`,
-  logoContainer: tw`relative h-12 w-72`,
-  logoImage: tw`object-contain object-left`,
+  drawerNavigationContainer: {
+    default: tw`mr-4`,
+    md: tw`md:mr-6`,
+  },
+  logoContainer: tw``,
+  logoImage: {
+    default: tw`h-6 w-auto`,
+    md: tw`md:h-10`,
+    lg: tw`md:h-10`,
+  },
   contentAreaContainer: tw`flex flex-grow items-center justify-end space-x-10`,
 };
 
