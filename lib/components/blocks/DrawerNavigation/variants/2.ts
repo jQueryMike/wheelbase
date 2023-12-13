@@ -11,8 +11,9 @@ classes = {
   root: tw``,
   menuButtonContainer: tw``,
   menuButton: {
-    default: tw`text-[32px] text-accent transition duration-150`,
+    default: tw`text-[24px] leading-none text-accent transition duration-150`,
     hover: tw`hover:text-primary`,
+    md: tw`md:text-[32px]`,
   },
   menuButtonIcon: tw``,
   menuButtonText: tw`hidden`,
