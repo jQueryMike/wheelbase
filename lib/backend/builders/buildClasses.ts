@@ -118,12 +118,11 @@ function buildClasses(
   // );
   try {
     const variants = [
-      globalBlockTheme?.items[0],
+      globalBlockTheme?.items?.[0],
       ...inheritedThemes.map((inheritedTheme) => inheritedTheme.themeVariant),
       variant,
     ].filter((v) => !!v);
 
-    
     // const appearance = extractBlockAppearance(blockAppearance);
     // console.log(appearance);
 

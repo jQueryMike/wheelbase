@@ -30,11 +30,11 @@ const BuilderMap = new Map<string, (...args: any) => unknown>();
  * @returns Headings block
  */
 function buildHeadings({ heading, subheading }: HeadingsComposition, id: string, headingTheme: any, globalConfig: any) {
-  const headingClasses = buildClasses('Heading', 'blocks', '1', heading.appearance, heading.overrides, headingTheme);
+  const headingClasses = buildClasses('Heading', 'blocks', '2', heading.appearance, heading.overrides, headingTheme);
   const subheadingClasses = buildClasses(
     'Subheading',
     'blocks',
-    '1',
+    '2',
     subheading.appearance,
     subheading.overrides,
     headingTheme,
@@ -49,7 +49,7 @@ function buildHeadings({ heading, subheading }: HeadingsComposition, id: string,
       name: 'Headings',
       location: 'blocks',
       globalBlockTheme: headingTheme,
-      instanceVariant: '1',
+      instanceVariant: '2',
       instanceSettings: {},
     }),
     // TODO: Build classes with theme < variant < appearance < overrides
@@ -58,11 +58,13 @@ function buildHeadings({ heading, subheading }: HeadingsComposition, id: string,
       // ...heading.appearance,
       ...heading.settings,
       // ...heading.overrides,
+      classes: headingClasses,
     },
     subheading: {
       ...subheading.content,
       // ...subheading.appearance,
       // ...subheading.overrides,
+      classes: subheadingClasses,
     },
   };
   return headings;

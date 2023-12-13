@@ -19,7 +19,25 @@ import BuilderMap, { getName } from './builders';
 async function buildContent(contentType: string, id: string, config: any, globalTheme: any, globalConfig: any) {
   const name = getName(contentType);
   const key = capitalise(name);
-  const { block, heading, subheading, contentArea, ...subComps } = config;
+  const { block: baseBlock, [name]: b, heading, subheading, contentArea, ...subComps } = config;
+  const block = {
+    content: {
+      ...baseBlock?.content,
+      ...b?.content,
+    },
+    appearance: {
+      ...baseBlock?.appearance,
+      ...b?.appearance,
+    },
+    settings: {
+      ...baseBlock?.settings,
+      ...b?.settings,
+    },
+    overrides: {
+      ...baseBlock?.overrides,
+      ...b?.overrides,
+    },
+  };
 
   const root = BuilderMap.get(name)?.(block, id, globalTheme[`${name}Theme`]) ?? {
     id,
@@ -45,8 +63,8 @@ async function buildContent(contentType: string, id: string, config: any, global
     // TODO: root.contentArea = await builsdContent();
     const items = await Promise.all(
       contentArea.content.content.items.map(({ content: { contentType: ct, id: cId, properties } }: any) => {
-        const { [ct]: b, ...rest } = generateConfig(properties);
-        return buildContent(ct, cId, { block: b, ...rest }, globalTheme, globalConfig);
+        const { [ct]: bb, ...rest } = generateConfig(properties);
+        return buildContent(ct, cId, { block: bb, ...rest }, globalTheme, globalConfig);
       }),
     );
     root.contentArea = items;
@@ -54,7 +72,15 @@ async function buildContent(contentType: string, id: string, config: any, global
   return root;
 }
 
+/**
+ *
+ * @param items
+ * @param globalTheme
+ * @param globalConfig
+ * @returns
+ */
 const buildPageContent = async (items: UmbracoBlockGridItem[], globalTheme: any, globalConfig: any) => {
+  // console.log('buildPageContent', { items });
   if (!items || items.length < 1) return [];
 
   const pageContent: any[] = items.map(({ content: { contentType, id, properties } }) =>
