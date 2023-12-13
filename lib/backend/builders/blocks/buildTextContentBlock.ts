@@ -1,4 +1,4 @@
-import { TextContentProps } from '@components/blocks/TextContent/TextContent';
+import { TextProps } from '@components/blocks/Text/Text';
 import Block from '@interfaces/Block';
 import BlockBuilderConfig from '@interfaces/BlockBuilderConfig';
 
@@ -11,7 +11,7 @@ const buildTextContentBlock = ({
   settings,
   globalTheme,
   inheritedThemes,
-}: BlockBuilderConfig): (Block & TextContentProps) | undefined => {
+}: BlockBuilderConfig): (Block & TextProps) | undefined => {
   try {
     if (!content?.content.markup) return undefined;
 
@@ -28,7 +28,7 @@ const buildTextContentBlock = ({
     });
 
     // Build initial block
-    const textContent: Block & TextContentProps = { id, name, classes, content: content.content.markup };
+    const textContent: Block & TextProps = { id, name, classes, text: content.content.markup };
 
     return textContent;
   } catch (error) {

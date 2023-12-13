@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root * {
+  @apply antialiased;
+}
+:root .docs-story {
+  container-type: inline-size;
+}
+
+#storybook-root {
+  border: 50px solid rgba(0, 0, 0, 0.025);
+  position: relative;
+  container-type: inline-size;
+  overflow: hidden;
+}/*# sourceMappingURL=globals.css.map */

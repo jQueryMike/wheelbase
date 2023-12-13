@@ -1,5 +1,6 @@
 import { NextSeoProps } from 'next-seo';
 
+import buildPageContent from './builders/buildPageContent';
 import buildPageSections from './builders/buildPageSections';
 import mergeVars from './mergeVars';
 
@@ -20,8 +21,13 @@ const getPage = async (params: { slug: string[] }) => {
       fetch(sharedContentUrl, { next: { tags: sharedContentTags } }).then((res) => res.json()),
       fetch(`${url}/home/${params.slug.join('/')}`, { next: { tags: pagesTags } }).then((res) => res.json()),
     ]);
+  const content = await buildPageContent(
+    mergeVars(page, globalConfig, sharedContent).properties?.organismGrid?.items || [],
+    globalTheme,
+    globalConfig,
+  );
   const sections = await buildPageSections(
-    mergeVars(page, globalConfig, sharedContent).properties?.contentGrid?.items || [],
+    mergeVars(page, globalConfig, sharedContent).properties?.organismGrid?.items || [],
     globalTheme,
     globalConfig,
   );
@@ -58,7 +64,7 @@ const getPage = async (params: { slug: string[] }) => {
     seo.additionalMetaTags = [{ name: 'keywords', content: page.properties.metaKeywords }];
   }
 
-  return { sections, globalConfig, globalTheme, seo };
+  return { sections, content, globalConfig, globalTheme, seo };
 };
 
 export default getPage;

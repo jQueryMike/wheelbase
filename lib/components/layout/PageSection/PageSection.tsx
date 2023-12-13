@@ -17,18 +17,19 @@ export interface PageSectionProps {
   areas?: PageSectionArea[];
 }
 
-const PageSection = ({ classes = {}, areas = [] }: PageSectionProps) => (
-  <section className={classes.root}>
-    <div className={classes.container}>
-      <div className={classes.areasContainer}>
-        {areas.map((area: PageSectionArea) => (
-          <div key={area.id} className={classes.area}>
-            <BlockList blocks={area.blocks} />
-          </div>
-        ))}
+const PageSection = ({ classes = {}, areas = [] }: PageSectionProps) =>
+  areas.length > 0 ? (
+    <section className={classes.root}>
+      <div className={classes.container}>
+        <div className={classes.areasContainer}>
+          {areas.map((area: PageSectionArea) => (
+            <div key={area.id} className={classes.area}>
+              <BlockList blocks={area.blocks} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  ) : undefined;
 
 export default PageSection;
