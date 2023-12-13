@@ -30,13 +30,20 @@ const BuilderMap = new Map<string, (...args: any) => unknown>();
  * @returns Headings block
  */
 function buildHeadings({ heading, subheading }: HeadingsComposition, id: string, headingTheme: any, globalConfig: any) {
-  const headingClasses = buildClasses('Heading', 'blocks', '2', heading.appearance, heading.overrides, headingTheme);
+  const headingClasses = buildClasses(
+    'Heading',
+    'blocks',
+    '2',
+    heading?.appearance ?? {},
+    heading?.overrides ?? {},
+    headingTheme,
+  );
   const subheadingClasses = buildClasses(
     'Subheading',
     'blocks',
     '2',
-    subheading.appearance,
-    subheading.overrides,
+    subheading?.appearance ?? {},
+    subheading?.overrides ?? {},
     headingTheme,
   );
 
