@@ -1,10 +1,11 @@
 import generateConfig from '@backend/generateConfig';
 import { UmbracoBlockGridItem } from '@interfaces/Umbraco';
 import { HeadingsComposition } from 'lib/types';
+import { v4 as uuidv4 } from 'uuid';
 
 import { capitalise } from '@utilities';
 
-import buildBlockClasses from './buildBlockClasses';
+import buildClasses from './buildClasses';
 import BuilderMap, { getName } from './builders';
 
 /**
@@ -20,16 +21,10 @@ async function buildContent(contentType: string, id: string, config: any, global
   const key = capitalise(name);
   const { block, heading, subheading, contentArea, ...subComps } = config;
 
-  const root = BuilderMap.get(name)?.(block, globalTheme[`${name}Theme`]) ?? {
+  const root = BuilderMap.get(name)?.(block, id, globalTheme[`${name}Theme`]) ?? {
     id,
     name: key,
-    classes: buildBlockClasses({
-      name: key,
-      location: 'blocks',
-      globalBlockTheme: null,
-      instanceVariant: '1',
-      instanceSettings: {},
-    }),
+    classes: buildClasses(key, 'blocks', '1', block.appearance, block.overrides, globalTheme[`${name}Theme`]),
     ...(block.content ?? {}),
     ...(block.settings ?? {}),
   };
@@ -43,10 +38,9 @@ async function buildContent(contentType: string, id: string, config: any, global
       console.warn(`No builder for you: ${k}`);
       return;
     }
-    root[k] = builder(comp, globalTheme[`${k}Theme`], globalConfig);
+    root[k] = builder(comp, uuidv4(), globalTheme[`${k}Theme`], globalConfig);
   });
 
-  // console.log(root);
   if (contentArea) {
     // TODO: root.contentArea = await builsdContent();
     const items = await Promise.all(
@@ -57,8 +51,6 @@ async function buildContent(contentType: string, id: string, config: any, global
     );
     root.contentArea = items;
   }
-
-  if (contentType === 'hero1') console.log('Built block', root);
   return root;
 }
 

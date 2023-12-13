@@ -6,6 +6,7 @@ import Block from '@interfaces/Block';
 import { BaseComposition, HeadingsComposition, ImageComposition } from 'lib/types';
 
 import buildBlockClasses from './buildBlockClasses';
+import buildClasses from './buildClasses';
 
 /**
  * Sanitise name of block
@@ -28,9 +29,21 @@ const BuilderMap = new Map<string, (...args: any) => unknown>();
  * @param globalConfig Global config object (unused)
  * @returns Headings block
  */
-function buildHeadings({ heading, subheading }: HeadingsComposition, headingTheme: any, globalConfig: any) {
+function buildHeadings({ heading, subheading }: HeadingsComposition, id: string, headingTheme: any, globalConfig: any) {
+  const headingClasses = buildClasses('Heading', 'blocks', '1', heading.appearance, heading.overrides, headingTheme);
+  const subheadingClasses = buildClasses(
+    'Subheading',
+    'blocks',
+    '1',
+    subheading.appearance,
+    subheading.overrides,
+    headingTheme,
+  );
+
+  // console.log('heading', headingClasses);
+  // console.log('subheading', subheadingClasses);
   const headings: Block & HeadingsProps = {
-    id: 'headings',
+    id,
     name: 'Headings',
     classes: buildBlockClasses({
       name: 'Headings',
@@ -64,7 +77,7 @@ BuilderMap.set('headings', buildHeadings);
  * @param globalConfig Global config object (unused)
  * @returns Image block
  */
-function buildImage(config: ImageComposition, imageTheme: any, globalConfig: any) {
+function buildImage(config: ImageComposition, _: string, imageTheme: any, globalConfig: any) {
   const {
     content: { image: imageData, altText },
     settings,
@@ -98,16 +111,19 @@ BuilderMap.set('image', buildImage);
  * @param globalConfig Global config object (unused)
  * @returns Hero block
  */
-function buildHero(config: BaseComposition, heroTheme: any, globalConfig: any) {
+function buildHero(config: BaseComposition, id: string, heroTheme: any, globalConfig: any) {
+  // console.log(JSON.stringify({ config, heroTheme }, null, 2));
+  const classes = buildClasses('Hero', 'blocks', '1', config.appearance, config.overrides, heroTheme);
+  // console.log(JSON.stringify({ classes }, null, 2));
   const hero: Block & HeroProps = {
-    id: 'hero',
+    id,
     name: 'Hero',
     // TODO: Build classes with theme < variant < appearance < overrides
     classes: buildBlockClasses({
       name: 'Hero',
       location: 'blocks',
       globalBlockTheme: heroTheme,
-      instanceVariant: '1',
+      instanceVariant: '2',
       instanceSettings: {},
     }),
     ...(config.content ?? {}),
@@ -125,9 +141,9 @@ BuilderMap.set('hero', buildHero);
  * @param globalConfig Global config object (unused)
  * @returns Text block
  */
-function buildText(config: BaseComposition, textTheme: any, globalConfig: any) {
+function buildText(config: BaseComposition, id: string, textTheme: any, globalConfig: any) {
   const text: Block & TextProps = {
-    id: 'text',
+    id,
     name: 'Text',
     classes: buildBlockClasses({
       name: 'Text',
