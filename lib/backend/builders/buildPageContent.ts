@@ -62,7 +62,7 @@ async function buildContent(contentType: string, id: string, config: any, global
   if (contentArea) {
     // TODO: root.contentArea = await builsdContent();
     const items = await Promise.all(
-      contentArea.content.content.items.map(({ content: { contentType: ct, id: cId, properties } }: any) => {
+      contentArea.content?.content?.items?.map(({ content: { contentType: ct, id: cId, properties } }: any) => {
         const { [ct]: bb, ...rest } = generateConfig(properties);
         return buildContent(ct, cId, { block: bb, ...rest }, globalTheme, globalConfig);
       }) ?? [],
