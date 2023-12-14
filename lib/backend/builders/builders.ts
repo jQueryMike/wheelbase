@@ -231,7 +231,7 @@ BuilderMap.set('hero', buildHero);
  */
 function buildTextWithImage(config: BaseComposition, id: string, heroTheme: any, globalConfig: any) {
   // console.log(JSON.stringify({ config, heroTheme }, null, 2));
-  const classes = buildClasses('Hero', 'blocks', '1', config.appearance, config.overrides, heroTheme);
+  // const classes = buildClasses('Hero', 'blocks', '1', config.appearance, config.overrides, heroTheme);
   // console.log(JSON.stringify({ classes }, null, 2));
   const hero: Block & HeroProps = {
     id,

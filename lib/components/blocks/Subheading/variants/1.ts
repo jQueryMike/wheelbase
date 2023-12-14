@@ -10,7 +10,7 @@ let classes: SubheadingClasses<ClassesProperty> = {};
 classes = {
   root: tw`@container`,
   subheading: {
-    default: tw`text-[18px] font-semibold`,
+    default: tw`hacky-subheading text-[18px] font-semibold`,
     lg: tw`lg:text-[20px]`,
   },
 };

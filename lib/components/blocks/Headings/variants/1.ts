@@ -8,7 +8,7 @@ const location = 'Headings/variants/1';
 let classes: HeadingsClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`space-y-1 @container/headings`,
+  root: tw`hacky-headings space-y-1 @container/headings`,
 };
 
 const headingsVariant: HeadingsVariant = {

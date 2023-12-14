@@ -9,7 +9,7 @@ let classes: TextClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  textContent: tw`prose max-w-full`,
+  textContent: tw`hacky-text prose max-w-full`,
 };
 
 const textContentVariant: TextVariant = {
