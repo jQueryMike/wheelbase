@@ -8,7 +8,7 @@ const location = 'Hero/variants/2';
 let classes: HeroClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`from-secondary to-secondary-dark w-full bg-gradient-to-b p-6 py-0`,
+  root: tw`w-full bg-gradient-to-b from-secondary to-secondary-dark p-6 py-0`,
   rootInner: {
     default: tw``,
   },
@@ -24,6 +24,12 @@ classes = {
     lg: tw`lg:my-20 lg:space-y-12`,
     xl: tw`xl:my-14 xl:space-y-14`,
   },
+  heroContentContainerReverse: {
+    default: tw`order-2 my-8 flex flex-col justify-center space-y-8`,
+    md: tw`md:my-16 md:space-y-10`,
+    lg: tw`lg:my-20 lg:space-y-12`,
+    xl: tw`xl:my-14 xl:space-y-14`,
+  },
   headingsContainer: {
     default: tw`space-y-2`,
   },
@@ -32,6 +38,9 @@ classes = {
   },
   imageContainer: {
     default: tw`relative`,
+  },
+  imageContainerReverse: {
+    default: tw`relative order-1`,
   },
 };
 

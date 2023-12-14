@@ -1,14 +1,17 @@
+import cn from 'classnames';
 import NextImage from 'next/image';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Headings } from '../Headings';
 import { HeroProps } from './Hero.types';
 
-const Hero = ({ classes = {}, headings, image, contentArea = [] }: HeroProps) => (
+const Hero = ({ classes = {}, headings, image, contentArea = [], imagePlacement }: HeroProps) => (
   <div className={classes.root}>
     <div className={classes.rootInner}>
       <div className={classes.container}>
-        <div className={classes.heroContentContainer}>
+        <div
+          className={cn(imagePlacement === 'left' ? classes.heroContentContainerReverse : classes.heroContentContainer)}
+        >
           {headings && (
             <div className={classes.headingsContainer}>
               <Headings {...headings} />
@@ -21,7 +24,7 @@ const Hero = ({ classes = {}, headings, image, contentArea = [] }: HeroProps) =>
           )}
         </div>
         {image && (
-          <div className={classes?.imageContainer}>
+          <div className={cn(imagePlacement === 'left' ? classes.imageContainerReverse : classes.imageContainer)}>
             <NextImage className={classes.image} {...image} />
           </div>
         )}
