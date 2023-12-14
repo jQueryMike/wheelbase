@@ -1,3 +1,4 @@
+import { ButtonProps, ButtonSize, ButtonStyle } from '@components/blocks/Button';
 import { HeadingsProps } from '@components/blocks/Headings';
 import { HeroProps } from '@components/blocks/Hero/Hero.types';
 import { ImageProps } from '@components/blocks/Image/Image.types';
@@ -14,13 +15,75 @@ import buildClasses from './buildClasses';
  * @returns lowercase name without trailing numbers
  */
 export function getName(name: string) {
-  return name.replace(/\d+$/, '').toLowerCase();
+  return name.replace(/(\d+|Atom)$/, '').toLowerCase();
 }
 
 /**
  * Map of builders for each block type
  */
 const BuilderMap = new Map<string, (...args: any) => unknown>();
+
+/**
+ *
+ * @param param0 Button composition
+ * @param id
+ * @param buttonTheme
+ * @param globalConfig
+ */
+function buildButton(config: BaseComposition, id: string, buttonTheme: any, globalConfig: any) {
+  const getSizeKey = (size?: string) => {
+    switch (size) {
+      case 'Large':
+        return ButtonSize.Large;
+      case 'Medium':
+        return ButtonSize.Medium;
+      case 'Small':
+        return ButtonSize.Small;
+      default:
+        return undefined;
+    }
+  };
+
+  const getStyleKey = (style?: string) => {
+    switch (style) {
+      case 'Primary':
+        return ButtonStyle.Primary;
+      case 'Secondary':
+        return ButtonStyle.Secondary;
+      case 'Accent':
+        return ButtonStyle.Accent;
+      case 'Plain':
+        return ButtonStyle.Plain;
+      default:
+        return undefined;
+    }
+  };
+
+  const buttonClasses = buildClasses('Button', 'blocks', '1', config.appearance, config.overrides, buttonTheme);
+  const link = config.content?.url?.[0];
+  let href = null;
+  if (link?.url) {
+    if (link?.route?.path) {
+      href = link.route.path.replace('/home', '');
+    } else {
+      href = link.url.replace('/home', '');
+    }
+  }
+  const button: Block & ButtonProps = {
+    id,
+    name: 'Button',
+    classes: buttonClasses,
+    text: link.title ?? null,
+    href,
+    leftIcon: config.content?.leftIcon ?? null,
+    rightIcon: config.content?.rightIcon ?? null,
+    size: getSizeKey(config.appearance?.size),
+    style: getStyleKey(config.appearance?.style),
+  };
+  return button;
+}
+
+BuilderMap.set('button', buildButton);
 
 /**
  * Headings builder
