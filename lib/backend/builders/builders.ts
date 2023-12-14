@@ -220,7 +220,32 @@ function buildHero(config: BaseComposition, id: string, heroTheme: any, globalCo
   };
   return hero;
 }
-BuilderMap.set('hero', buildHero);
+BuilderMap.set('Hero', buildHero);
+
+function buildReviews(config: BaseComposition, id: string, reviewsTheme: any, globalConfig: any) {
+  const reviews: Block & HeroProps = {
+    id,
+    name: 'Reviews',
+    classes: buildClasses('Reviews', 'blocks', '1', config.appearance, config.overrides, reviewsTheme),
+    ...(config.content ?? {}),
+    ...(config.settings ?? {}),
+  };
+  return reviews;
+}
+
+BuilderMap.set('Reviews', buildReviews);
+
+function buildReviewItem(config: BaseComposition, id: string, reviewItemTheme: any, globalConfig: any) {
+  const reviewItem: Block & HeroProps = {
+    id,
+    name: 'ReviewItem',
+    ...(config.content ?? {}),
+    ...(config.settings ?? {}),
+  };
+  return reviewItem;
+}
+
+BuilderMap.set('ReviewItem', buildReviewItem);
 
 /**
  * Hero builder
@@ -250,7 +275,7 @@ function buildTextWithImage(config: BaseComposition, id: string, heroTheme: any,
   return hero;
 }
 
-BuilderMap.set('textwithimage', buildTextWithImage);
+BuilderMap.set('TextWithImage', buildTextWithImage);
 
 /**
  * Text builder
