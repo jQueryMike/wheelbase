@@ -1,1 +1,2 @@
-export { type ImageClasses, type ImageProps, default as Image } from './Image';
+export { default as Image } from './Image';
+export type { ImageClasses, ImageProps} from './Image.types';
