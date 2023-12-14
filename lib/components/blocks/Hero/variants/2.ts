@@ -8,7 +8,7 @@ const location = 'Hero/variants/2';
 let classes: HeroClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`w-full bg-gradient-to-b from-secondary to-secondary-dark p-6 py-0`,
+  root: tw`from-secondary to-secondary-dark w-full bg-gradient-to-b p-6 py-0`,
   rootInner: {
     default: tw``,
   },
@@ -34,7 +34,8 @@ classes = {
     default: tw`space-y-2`,
   },
   contentAreaContainer: {
-    default: tw``,
+    default: tw`space-y-4`,
+    '@xl/hero': tw`@xl/hero:space-y-6`,
   },
   imageContainer: {
     default: tw`relative`,
