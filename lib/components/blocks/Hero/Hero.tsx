@@ -6,7 +6,7 @@ import { BlockList } from '../../utility-components/BlockList';
 import { Headings } from '../Headings';
 import { HeroProps } from './Hero.types';
 
-const Hero = ({ classes = {}, headings, image, contentArea = [], imagePlacement }: HeroProps & Block) => (
+const Hero = ({ classes = {}, headings, image1: image, contentArea = [], imagePlacement }: HeroProps & Block) => (
   <div className={classes.root}>
     <div className={classes.rootInner}>
       <div className="p-4 py-10 md:p-6 md:py-16 lg:py-20 xl:py-24">

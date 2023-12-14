@@ -64,7 +64,7 @@ const buildHeroBlock = ({
     if (heroImage?.content?.properties?.img?.length > 0) {
       const heroImageTheme = globalBlockTheme?.heroImageTheme?.items[0]?.content?.properties;
 
-      hero.image = buildImageBlock({
+      hero.image1 = buildImageBlock({
         id: heroImage.content.id,
         name: 'Image',
         content: { ...heroImage.content.properties },

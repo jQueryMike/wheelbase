@@ -83,7 +83,7 @@ async function buildContent(contentType: string, id: string, config: any, global
   };
 
   const children = Object.entries(subComps);
-  if (heading || subheading) children.push(['Headings', { heading, subheading }] as [string, HeadingsComposition]);
+  if (heading || subheading) children.push(['headings', { heading, subheading }] as [string, HeadingsComposition]);
   children.forEach(([n, comp]) => {
     const k = getName(n);
     const mapKey = capitalise(k);
@@ -124,6 +124,7 @@ const buildPageContent = async (items: UmbracoBlockGridItem[], globalTheme: any,
   );
 
   const output = await Promise.all(pageContent);
+  console.log('buildPageContent', JSON.stringify(output));
   return output;
 };
 
