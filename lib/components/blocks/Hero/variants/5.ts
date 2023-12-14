@@ -1,6 +1,6 @@
 import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 
-import { HeroClasses } from '../Hero';
+import { HeroClasses } from '../Hero.types';
 import HeroVariant from './HeroVariant';
 
 const location = 'Hero/variants/5';

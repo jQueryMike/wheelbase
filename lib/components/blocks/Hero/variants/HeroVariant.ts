@@ -1,4 +1,4 @@
-import { HeroClasses } from "../Hero";
+import { HeroClasses } from '../Hero.types';
 
 interface HeroVariant {
   classes?: HeroClasses<string>;

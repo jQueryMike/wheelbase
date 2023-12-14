@@ -1,6 +1,6 @@
 import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 
-import { HeroClasses } from '../Hero';
+import { HeroClasses } from '../Hero.types';
 import HeroVariant from './HeroVariant';
 
 const location = 'Hero/variants/1';
@@ -8,7 +8,7 @@ const location = 'Hero/variants/1';
 let classes: HeroClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`w-full bg-body-alt @container/hero`,
+  root: tw`bg-body-alt w-full @container/hero`,
   rootInner: {
     default: tw`relative flex min-h-[400px] items-stretch`,
     '@5xl/hero': tw`@5xl/hero:min-h-[500px]`,
