@@ -21,7 +21,7 @@ classes = {
   logoContainer: {
     default: tw`relative h-6 w-[300px]`,
     md: tw`md:h-10`,
-    lg: tw`md:h-10`,
+    lg: tw`lg:h-10`,
   },
   logoImage: {
     default: tw`h-6 w-auto object-contain object-left`,
