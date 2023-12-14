@@ -8,10 +8,13 @@ export type HeroClasses<T> = {
     | 'root'
     | 'rootInner'
     | 'container'
+    | 'container'
     | 'heroContentContainer'
+    | 'heroContentContainerReverse'
     | 'headingsContainer'
     | 'contentAreaContainer'
     | 'imageContainer'
+    | 'imageContainerReverse'
     | 'image']?: T;
 };
 
@@ -20,4 +23,5 @@ export interface HeroProps {
   headings?: HeadingsProps;
   contentArea?: Block[];
   image?: ImageProps;
+  imagePlacement?: 'left' | 'right';
 }
