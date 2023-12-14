@@ -1,5 +1,6 @@
 import Block from '@interfaces/Block';
 import cn from 'classnames';
+import * as DOMPurify from 'isomorphic-dompurify';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
@@ -49,7 +50,9 @@ export interface ReviewsItem {
   reviewerName?: string;
   reviewDate?: string;
   heading?: string;
-  text?: string;
+  text?: {
+    markup?: string;
+  };
   image2?: ImageProps;
   reviewNumber?: string;
 }
@@ -87,18 +90,20 @@ const Reviews = ({ classes = {}, headings, items = [], contentArea1 = [], conten
                     </div>
                   )}
                   <div className={item.classes?.citeContainer}>
-                    {item.reviewerName && (
-                      <cite className={item.classes?.cite}>{item.reviewerName}</cite>
-                    )}
-                    {item.reviewDate && (
-                      <div className={item.classes?.date}>{item.reviewDate}</div>
-                    )}
+                    {item.reviewerName && <cite className={item.classes?.cite}>{item.reviewerName}</cite>}
+                    {item.reviewDate && <div className={item.classes?.date}>{item.reviewDate}</div>}
                   </div>
                 </figcaption>
                 {item.heading && (
                   <blockquote className={item.classes?.blockquoteContainer}>
                     <div className={item.classes?.reviewHeading}>{item.heading}</div>
-                    <div className={item.classes?.reviewContent}>{item.text}</div>
+                    {item.text && (
+                      <div
+                        className={item.classes?.reviewContent}
+                        // eslint-disable-next-line react/no-danger
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.text?.markup ?? '') }}
+                      />
+                    )}
                   </blockquote>
                 )}
                 <div className={item.classes?.bottomContainer}>
@@ -110,13 +115,13 @@ const Reviews = ({ classes = {}, headings, items = [], contentArea1 = [], conten
                   {item.reviewNumber && (
                     <div className={item.classes?.ratingContainer}>
                       {/* could leave stars out for now. fontawesome class in classes 'fas fa-star' which i know is not right */}
-                      <div className={item.classes?.ratingStars}>
-                        <i className={item.classes?.star} />
-                        <i className={item.classes?.star} />
-                        <i className={item.classes?.star} />
-                        <i className={item.classes?.star} />
-                        <i className={item.classes?.starDisabled} />
-                      </div>
+                      {/* <div className={item.classes?.ratingStars}>
+                        <i className={item.classes?.star} aria-hidden="true" />
+                        <i className={item.classes?.star} aria-hidden="true" />
+                        <i className={item.classes?.star} aria-hidden="true" />
+                        <i className={item.classes?.star} aria-hidden="true" />
+                        <i className={item.classes?.starDisabled} aria-hidden="true" />
+                      </div> */}
                       <span className={item.classes?.ratingFigure}>{item.reviewNumber}</span>
                     </div>
                   )}

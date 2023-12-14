@@ -10,15 +10,6 @@ import BuilderMap, { getName } from './builders';
 
 async function buildItems(items: any[], globalTheme: any, globalConfig: any): Promise<any[] | null> {
   if (!items || items.length < 1) return null;
-  console.log(
-    JSON.stringify(
-      items.map(({ content: { contentType, id, properties } }: any) => ({
-        contentType,
-        id,
-        config: generateConfig(properties),
-      })),
-    ),
-  );
   return [];
 }
 
@@ -41,15 +32,22 @@ async function buildContent(contentType: string, id: string, config: any, global
     overrides: {},
   };
 
-  const items = content?.items;
-  if (items) {
+  let items;
+  if (content?.items?.items && content?.items?.items.length > 0) {
+    items =
+      (await Promise.all(
+        content?.items?.items?.map(({ content: { contentType: iCT, id: iId, properties } }: any) =>
+          buildContent(iCT, iId, generateConfig(properties), globalTheme, globalConfig),
+        ),
+      )) ?? [];
     delete content.items;
   }
   const block = {
+    id,
+    name: key,
     content: {
       ...baseBlock?.content,
       ...content,
-      items: items ? await buildItems(items?.items, globalTheme, globalConfig) : null,
     },
     appearance: {
       ...baseBlock?.appearance,
@@ -64,12 +62,22 @@ async function buildContent(contentType: string, id: string, config: any, global
       ...overrides,
     },
   };
-  console.log('block', JSON.stringify(block, null, 2));
+  if (items && items?.length > 0) block.content.items = items;
 
-  const root = BuilderMap.get(name)?.(block, id, globalTheme[`${name}Theme`]) ?? {
+  const root = BuilderMap.get(key)?.(block, id, globalTheme[`${name}Theme`]) ?? {
     id,
     name: key,
-    classes: buildClasses(key, 'blocks', '1', block.appearance, block.overrides, globalTheme[`${name}Theme`]),
+    classes: buildClasses(
+      key,
+      'blocks',
+      '1',
+      block.appearance,
+      block.overrides,
+      globalTheme[`${name}Theme`],
+      [],
+      'classes',
+      ['ReviewItem', 'FeatureItem'].includes(name) ? true : undefined,
+    ),
     ...(block.content ?? {}),
     ...(block.settings ?? {}),
   };
@@ -78,12 +86,13 @@ async function buildContent(contentType: string, id: string, config: any, global
   if (heading || subheading) children.push(['headings', { heading, subheading }] as [string, HeadingsComposition]);
   children.forEach(([n, comp]) => {
     const k = getName(n);
-    const builder = BuilderMap.get(k);
-    if (!BuilderMap.has(k) || !builder) {
+    const mapKey = capitalise(k);
+    const builder = BuilderMap.get(mapKey);
+    if (!BuilderMap.has(mapKey) || !builder) {
       console.warn(`No builder for you: ${k}`);
       return;
     }
-    root[k] = builder(comp, uuidv4(), globalTheme[`${k}Theme`], globalConfig);
+    root[n] = builder(comp, uuidv4(), globalTheme[`${k}Theme`], globalConfig);
   });
 
   if (contentArea) {
@@ -115,6 +124,7 @@ const buildPageContent = async (items: UmbracoBlockGridItem[], globalTheme: any,
   );
 
   const output = await Promise.all(pageContent);
+  // console.log('buildPageContent', JSON.stringify(output));
   return output;
 };
 

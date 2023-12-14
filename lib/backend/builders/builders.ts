@@ -16,7 +16,7 @@ import buildClasses from './buildClasses';
  * @returns lowercase name without trailing numbers
  */
 export function getName(name: string) {
-  return name.replace(/(\d+|Atom)$/, '').toLowerCase();
+  return name.replace(/(\d+|Atom)$/, '');
 }
 
 /**
@@ -98,7 +98,7 @@ function buildButton(config: BaseComposition, id: string, buttonTheme: any, glob
   return button;
 }
 
-BuilderMap.set('button', buildButton);
+BuilderMap.set('Button', buildButton);
 
 /**
  * Headings builder
@@ -155,7 +155,7 @@ function buildHeadings({ heading, subheading }: HeadingsComposition, id: string,
   return headings;
 }
 
-BuilderMap.set('headings', buildHeadings);
+BuilderMap.set('Headings', buildHeadings);
 
 /**
  * Image builder
@@ -191,7 +191,7 @@ function buildImage(config: ImageComposition, _: string, imageTheme: any, global
   return image;
 }
 
-BuilderMap.set('image', buildImage);
+BuilderMap.set('Image', buildImage);
 
 /**
  * Hero builder
@@ -220,7 +220,59 @@ function buildHero(config: BaseComposition, id: string, heroTheme: any, globalCo
   };
   return hero;
 }
-BuilderMap.set('hero', buildHero);
+BuilderMap.set('Hero', buildHero);
+
+/**
+ * Build reviews block
+ * @param config Reviews composition
+ * @param id Block id
+ * @param reviewsTheme reviews theme from the global theme
+ * @param globalConfig (optional) global config object (unused)
+ * @returns reviews block
+ */
+// function buildReviews(config: BaseComposition, id: string, reviewsTheme: any, globalConfig: any) {
+//   const reviews: Block & HeroProps = {
+//     id,
+//     name: 'Reviews',
+//     classes: buildClasses('Reviews', 'blocks', '1', config.appearance, config.overrides, reviewsTheme),
+//     ...(config.content ?? {}),
+//     ...(config.settings ?? {}),
+//   };
+//   return reviews;
+// }
+
+// BuilderMap.set('Reviews', buildReviews);
+
+/**
+ * Build review item block
+ * @param config Review item composition
+ * @param id Block id
+ * @param reviewItemTheme Review item theme from the global theme
+ * @param globalConfig (optional) global config object (unused)
+ * @returns review item block
+ */
+function buildReviewItem(config: BaseComposition, id: string, reviewItemTheme: any, globalConfig: any) {
+  const reviewItem: Block & HeroProps = {
+    id,
+    name: 'ReviewItem',
+    classes: buildClasses(
+      'Reviews',
+      'blocks',
+      '1',
+      config.appearance,
+      config.overrides,
+      reviewItemTheme,
+      [],
+      'itemClasses',
+    ),
+    ...(config.content ?? {}),
+    ...(config.settings ?? {}),
+  };
+  // console.log(JSON.stringify({ classes: reviewItem.classes }, null, 2));
+  return reviewItem;
+}
+
+BuilderMap.set('ReviewItem', buildReviewItem);
 
 /**
  * Hero builder
@@ -250,7 +302,7 @@ function buildTextWithImage(config: BaseComposition, id: string, heroTheme: any,
   return hero;
 }
 
-BuilderMap.set('textwithimage', buildTextWithImage);
+BuilderMap.set('TextWithImage', buildTextWithImage);
 
 /**
  * Text builder
@@ -276,6 +328,6 @@ function buildText(config: BaseComposition, id: string, textTheme: any, globalCo
   return text;
 }
 
-BuilderMap.set('text', buildText);
+BuilderMap.set('Text', buildText);
 
 export default BuilderMap;

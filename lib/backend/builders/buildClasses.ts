@@ -98,6 +98,7 @@ function buildClasses(
   globalBlockTheme: any = {},
   inheritedThemes: any[] = [],
   classesIdentifier = 'classes',
+  parentTheme?: any,
 ) {
   // console.log(
   //   `buildClasses ${name}`,
@@ -134,9 +135,15 @@ function buildClasses(
       ) ?? {},
     ];
 
-    const activeVariant = require(`/lib/components/${location}/${name}/variants/${variants.slice(-1)[0]}`).default;
+    let activeVariant: any = {};
+    try {
+      activeVariant = require(`/lib/components/${location}/${name}/variants/${variants.slice(-1)[0]}`).default;
+      // console.log(`activeVariant: ${name}`, JSON.stringify(activeVariant));
+    } catch (e) {
+      console.warn('No variant found for', name, variants.slice(-1)[0]);
+    }
 
-    const outputClasses = { ...activeVariant[classesIdentifier] };
+    const outputClasses = { ...(activeVariant?.[classesIdentifier] ?? {}) };
 
     overrides.forEach((overridesItem) => {
       Object.keys(overridesItem).forEach((key) => {
@@ -148,6 +155,8 @@ function buildClasses(
         }
       });
     });
+
+    if (name === 'Reviews') console.log(`buildClasses: ${name}`, JSON.stringify(outputClasses, null, 2));
 
     return outputClasses;
   } catch (error) {

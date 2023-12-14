@@ -1,2 +1,1 @@
-export { default as Reviews } from './Reviews';
-export type { ReviewsClasses, ReviewsProps } from './Reviews.types';
+export { type ReviewsClasses, type ReviewsProps, default as Reviews } from './Reviews';

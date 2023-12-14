@@ -22,6 +22,6 @@ export interface HeroProps {
   classes?: HeroClasses<string>;
   headings?: HeadingsProps;
   contentArea?: Block[];
-  image?: ImageProps;
+  image1?: ImageProps;
   imagePlacement?: 'left' | 'right';
 }
