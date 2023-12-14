@@ -9,36 +9,31 @@ let classes: HeadingClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  heading: tw`hacky-heading font-heading text-heading font-bold leading-tight`,
+  heading: tw`hacky-heading text-balance font-heading font-bold leading-[1.1] tracking-tighter text-heading`,
   headingExtraLarge: {
-    default: tw`text-[26px] text-white`,
-    sm: tw`sm:text-[32px]`,
-    md: tw`md:text-[36px]`,
-    lg: tw`lg:text-[40px]`,
-    xl: tw`xl:text-[48px]`,
+    default: tw`text-[40px]`,
+    lg: tw`lg:text-[46px]`,
+    xl: tw`xl:text-[56px]`,
   },
   headingLarge: {
-    default: tw`text-[22px]`,
-    sm: tw`sm:text-[25px]`,
-    md: tw`md:text-[25px]`,
-    lg: tw`lg:text-[28px]`,
-    xl: tw`xl:text-[32px]`,
+    default: tw`relative text-[36px]`,
+    // before: tw`before:absolute before:-top-4 before:left-1/2 before:h-[6px] before:w-[3.5rem] before:-translate-x-1/2 before:transform before:rounded-sm before:bg-accent before:content-[""]`,
+    lg: tw`lg:text-[40px]`,
+    xl: tw`xl:text-[44px]`,
   },
   headingMedium: {
-    default: tw`text-[18px]`,
-    sm: tw`sm:text-[20px]`,
+    default: tw`relative text-[30px]`,
+    // before: tw`before:absolute before:-top-4 before:left-0 before:h-[6px] before:w-[3.5rem] before:rounded-sm before:bg-accent before:content-[""]`,
+    lg: tw`lg:text-[34px]`,
+    xl: tw`xl:text-[36px]`,
+  },
+  headingSmall: {
+    default: tw`text-[20px]`,
     lg: tw`lg:text-[22px]`,
     xl: tw`xl:text-[24px]`,
   },
-  headingSmall: {
-    default: tw`text-[16px]`,
-    sm: tw`sm:text-[16px]`,
-    md: tw`md:text-[18px]`,
-    lg: tw`lg:text-[20px]`,
-  },
   headingExtraSmall: {
-    default: tw`text-[14px]`,
-    sm: tw`sm:text-[16px]`,
+    default: tw`text-[16px]`,
     lg: tw`lg:text-[18px]`,
   },
 };

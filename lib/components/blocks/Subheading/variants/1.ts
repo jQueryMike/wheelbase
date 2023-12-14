@@ -8,9 +8,11 @@ const location = 'Subheading/variants/1';
 let classes: SubheadingClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`@container`,
+  root: {
+    default: tw``,
+  },
   subheading: {
-    default: tw`hacky-subheading text-[18px] font-semibold`,
+    default: tw`hacky-subheading text-balance text-[18px] font-medium leading-relaxed text-heading`,
     lg: tw`lg:text-[20px]`,
   },
 };
