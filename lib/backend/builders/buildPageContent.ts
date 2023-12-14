@@ -34,18 +34,22 @@ async function buildContent(contentType: string, id: string, config: any, global
   const name = getName(contentType);
   const key = capitalise(name);
   const { block: baseBlock, [name]: b, heading, subheading, contentArea, ...subComps } = config;
-  const {
-    content: { items, ...content },
-    appearance,
-    settings,
-    overrides,
-  } = b ?? { content: {}, appearance: {}, settings: {}, overrides: {} };
+  const { content, appearance, settings, overrides } = b ?? {
+    content: {},
+    appearance: {},
+    settings: {},
+    overrides: {},
+  };
 
+  const items = content?.items;
+  if (items) {
+    delete content.items;
+  }
   const block = {
     content: {
       ...baseBlock?.content,
       ...content,
-      items: await buildItems(items?.items, globalTheme, globalConfig),
+      items: items ? await buildItems(items?.items, globalTheme, globalConfig) : null,
     },
     appearance: {
       ...baseBlock?.appearance,
