@@ -1,4 +1,4 @@
-import { ImageClasses } from '../Image';
+import { ImageClasses } from '../Image.types';
 
 interface ImageVariant {
   classes?: ImageClasses<string>;

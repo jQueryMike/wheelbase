@@ -1,6 +1,6 @@
 import ClassesBuilder, { ClassesProperty, tw } from '@utilities/ClassesBuilder';
 
-import { ImageClasses } from '../Image';
+import { ImageClasses } from '../Image.types';
 import ImageVariant from './ImageVariant';
 
 const location = 'Image/variants/1';
