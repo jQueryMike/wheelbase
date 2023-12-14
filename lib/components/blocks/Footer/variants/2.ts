@@ -56,15 +56,16 @@ classes = {
   },
 
   logoLink: {
-    default: tw`flex justify-center`,
-    md: tw`md:absolute md:right-0 md:top-0 md:inline-flex`,
+    default: tw``,
   },
   logoContainer: {
-    default: tw`flex justify-center`,
-    md: tw``,
+    default: tw`mt-4 relative h-10 w-full`,
+    md: tw`md:mt-0 md:absolute md:right-0 md:top-4 md:w-[200px]`,
+    lg: tw`lg:h-12`,
   },
   logoImage: {
-    default: tw`inline-block h-10 w-auto`,
+    default: tw``,
+    lg: tw``,
   },
 };
 
