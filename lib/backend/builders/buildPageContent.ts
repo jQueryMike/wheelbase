@@ -8,6 +8,20 @@ import { capitalise } from '@utilities';
 import buildClasses from './buildClasses';
 import BuilderMap, { getName } from './builders';
 
+async function buildItems(items: any[], globalTheme: any, globalConfig: any): Promise<any[] | null> {
+  if (!items || items.length < 1) return null;
+  console.log(
+    JSON.stringify(
+      items.map(({ content: { contentType, id, properties } }: any) => ({
+        contentType,
+        id,
+        config: generateConfig(properties),
+      })),
+    ),
+  );
+  return [];
+}
+
 /**
  * Build content block from api data
  * @param contentType Type of content block
@@ -20,24 +34,33 @@ async function buildContent(contentType: string, id: string, config: any, global
   const name = getName(contentType);
   const key = capitalise(name);
   const { block: baseBlock, [name]: b, heading, subheading, contentArea, ...subComps } = config;
+  const {
+    content: { items, ...content },
+    appearance,
+    settings,
+    overrides,
+  } = b ?? { content: {}, appearance: {}, settings: {}, overrides: {} };
+
   const block = {
     content: {
       ...baseBlock?.content,
-      ...b?.content,
+      ...content,
+      items: await buildItems(items?.items, globalTheme, globalConfig),
     },
     appearance: {
       ...baseBlock?.appearance,
-      ...b?.appearance,
+      ...appearance,
     },
     settings: {
       ...baseBlock?.settings,
-      ...b?.settings,
+      ...settings,
     },
     overrides: {
       ...baseBlock?.overrides,
-      ...b?.overrides,
+      ...overrides,
     },
   };
+  console.log('block', JSON.stringify(block, null, 2));
 
   const root = BuilderMap.get(name)?.(block, id, globalTheme[`${name}Theme`]) ?? {
     id,
@@ -61,13 +84,13 @@ async function buildContent(contentType: string, id: string, config: any, global
 
   if (contentArea) {
     // TODO: root.contentArea = await builsdContent();
-    const items = await Promise.all(
-      contentArea.content.content?.items?.map(({ content: { contentType: ct, id: cId, properties } }: any) => {
+    const contentItems = await Promise.all(
+      contentArea.content?.content?.items?.map(({ content: { contentType: ct, id: cId, properties } }: any) => {
         const { [ct]: bb, ...rest } = generateConfig(properties);
         return buildContent(ct, cId, { block: bb, ...rest }, globalTheme, globalConfig);
       }) || [],
     );
-    root.contentArea = items;
+    root.contentArea = contentItems;
   }
   return root;
 }
