@@ -16,7 +16,7 @@ import buildClasses from './buildClasses';
  * @returns lowercase name without trailing numbers
  */
 export function getName(name: string) {
-  return name.replace(/(\d+|Atom)$/, '').toLowerCase();
+  return name.replace(/(\d+|Atom)$/, '');
 }
 
 /**
@@ -98,7 +98,7 @@ function buildButton(config: BaseComposition, id: string, buttonTheme: any, glob
   return button;
 }
 
-BuilderMap.set('button', buildButton);
+BuilderMap.set('Button', buildButton);
 
 /**
  * Headings builder
@@ -155,7 +155,7 @@ function buildHeadings({ heading, subheading }: HeadingsComposition, id: string,
   return headings;
 }
 
-BuilderMap.set('headings', buildHeadings);
+BuilderMap.set('Headings', buildHeadings);
 
 /**
  * Image builder
@@ -191,7 +191,7 @@ function buildImage(config: ImageComposition, _: string, imageTheme: any, global
   return image;
 }
 
-BuilderMap.set('image', buildImage);
+BuilderMap.set('Image', buildImage);
 
 /**
  * Hero builder
@@ -276,6 +276,6 @@ function buildText(config: BaseComposition, id: string, textTheme: any, globalCo
   return text;
 }
 
-BuilderMap.set('text', buildText);
+BuilderMap.set('Text', buildText);
 
 export default BuilderMap;

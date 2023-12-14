@@ -87,12 +87,8 @@ const Reviews = ({ classes = {}, headings, items = [], contentArea1 = [], conten
                     </div>
                   )}
                   <div className={item.classes?.citeContainer}>
-                    {item.reviewerName && (
-                      <cite className={item.classes?.cite}>{item.reviewerName}</cite>
-                    )}
-                    {item.reviewDate && (
-                      <div className={item.classes?.date}>{item.reviewDate}</div>
-                    )}
+                    {item.reviewerName && <cite className={item.classes?.cite}>{item.reviewerName}</cite>}
+                    {item.reviewDate && <div className={item.classes?.date}>{item.reviewDate}</div>}
                   </div>
                 </figcaption>
                 {item.heading && (
