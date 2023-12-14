@@ -1,5 +1,6 @@
 import Block from '@interfaces/Block';
 import cn from 'classnames';
+import * as DOMPurify from 'isomorphic-dompurify';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
@@ -49,7 +50,9 @@ export interface ReviewsItem {
   reviewerName?: string;
   reviewDate?: string;
   heading?: string;
-  text?: string;
+  text?: {
+    markup?: string;
+  };
   image2?: ImageProps;
   reviewNumber?: string;
 }
@@ -77,49 +80,58 @@ const Reviews = ({ classes = {}, headings, items = [], contentArea1 = [], conten
       )}
       {items?.length > 0 && (
         <div className={classes.itemsContainer}>
-          {items.map((item) => (
-            <div key={item.id} className={classes?.itemContainer}>
-              <figure className={item.classes?.itemRoot}>
-                <figcaption className={item.classes?.captionContainer}>
-                  {item.image1 && (
-                    <div className={item.classes?.avatarContainer}>
-                      <Image {...item.image1} className={item.classes?.avatarImage} />
-                    </div>
-                  )}
-                  <div className={item.classes?.citeContainer}>
-                    {item.reviewerName && <cite className={item.classes?.cite}>{item.reviewerName}</cite>}
-                    {item.reviewDate && <div className={item.classes?.date}>{item.reviewDate}</div>}
-                  </div>
-                </figcaption>
-                {item.heading && (
-                  <blockquote className={item.classes?.blockquoteContainer}>
-                    <div className={item.classes?.reviewHeading}>{item.heading}</div>
-                    <div className={item.classes?.reviewContent}>{item.text}</div>
-                  </blockquote>
-                )}
-                <div className={item.classes?.bottomContainer}>
-                  {item.image2 && (
-                    <div className={item.classes?.logoContainer}>
-                      <Image {...item.image2} className={item.classes?.logo} />
-                    </div>
-                  )}
-                  {item.reviewNumber && (
-                    <div className={item.classes?.ratingContainer}>
-                      {/* could leave stars out for now. fontawesome class in classes 'fas fa-star' which i know is not right */}
-                      <div className={item.classes?.ratingStars}>
-                        <i className={item.classes?.star} />
-                        <i className={item.classes?.star} />
-                        <i className={item.classes?.star} />
-                        <i className={item.classes?.star} />
-                        <i className={item.classes?.starDisabled} />
+          {items.map((item) => {
+            console.log(JSON.stringify(item));
+            return (
+              <div key={item.id} className={classes?.itemContainer}>
+                <figure className={item.classes?.itemRoot}>
+                  <figcaption className={item.classes?.captionContainer}>
+                    {item.image1 && (
+                      <div className={item.classes?.avatarContainer}>
+                        <Image {...item.image1} className={item.classes?.avatarImage} />
                       </div>
-                      <span className={item.classes?.ratingFigure}>{item.reviewNumber}</span>
+                    )}
+                    <div className={item.classes?.citeContainer}>
+                      {item.reviewerName && <cite className={item.classes?.cite}>{item.reviewerName}</cite>}
+                      {item.reviewDate && <div className={item.classes?.date}>{item.reviewDate}</div>}
                     </div>
+                  </figcaption>
+                  {item.heading && (
+                    <blockquote className={item.classes?.blockquoteContainer}>
+                      <div className={item.classes?.reviewHeading}>{item.heading}</div>
+                      {item.text && (
+                        <div
+                          className={item.classes?.reviewContent}
+                          // eslint-disable-next-line react/no-danger
+                          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.text?.markup ?? '') }}
+                        />
+                      )}
+                    </blockquote>
                   )}
-                </div>
-              </figure>
-            </div>
-          ))}
+                  <div className={item.classes?.bottomContainer}>
+                    {item.image2 && (
+                      <div className={item.classes?.logoContainer}>
+                        <Image {...item.image2} className={item.classes?.logo} />
+                      </div>
+                    )}
+                    {item.reviewNumber && (
+                      <div className={item.classes?.ratingContainer}>
+                        {/* could leave stars out for now. fontawesome class in classes 'fas fa-star' which i know is not right */}
+                        <div className={item.classes?.ratingStars}>
+                          <i className={item.classes?.star} />
+                          <i className={item.classes?.star} />
+                          <i className={item.classes?.star} />
+                          <i className={item.classes?.star} />
+                          <i className={item.classes?.starDisabled} />
+                        </div>
+                        <span className={item.classes?.ratingFigure}>{item.reviewNumber}</span>
+                      </div>
+                    )}
+                  </div>
+                </figure>
+              </div>
+            );
+          })}
         </div>
       )}
       {contentArea2?.length > 0 && (

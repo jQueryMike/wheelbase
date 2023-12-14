@@ -86,12 +86,13 @@ async function buildContent(contentType: string, id: string, config: any, global
   if (heading || subheading) children.push(['Headings', { heading, subheading }] as [string, HeadingsComposition]);
   children.forEach(([n, comp]) => {
     const k = getName(n);
-    const builder = BuilderMap.get(k);
-    if (!BuilderMap.has(capitalise(k)) || !builder) {
+    const mapKey = capitalise(k);
+    const builder = BuilderMap.get(mapKey);
+    if (!BuilderMap.has(mapKey) || !builder) {
       console.warn(`No builder for you: ${k}`);
       return;
     }
-    root[k] = builder(comp, uuidv4(), globalTheme[`${k}Theme`], globalConfig);
+    root[n] = builder(comp, uuidv4(), globalTheme[`${k}Theme`], globalConfig);
   });
 
   if (contentArea) {
