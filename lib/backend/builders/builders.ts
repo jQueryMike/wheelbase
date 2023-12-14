@@ -7,7 +7,6 @@ import Block from '@interfaces/Block';
 import { BaseComposition, HeadingsComposition, ImageComposition } from 'lib/types';
 import { v4 as uuidv4 } from 'uuid';
 
-
 import buildBlockClasses from './buildBlockClasses';
 import buildClasses from './buildClasses';
 
@@ -30,14 +29,14 @@ const BuilderMap = new Map<string, (...args: any) => unknown>();
  */
 const DefaultImage: Block & ImageProps = {
   id: uuidv4(),
-  name: "Image",
-  url: "/media/vprlmnok/placeholder_view_vector.svg", // remote url, can't get public folder in build
-  src: "/media/vprlmnok/placeholder_view_vector.svg", // remote url, can't get public folder in build
-  alt: "Placholder Image",
-  alternativeText: "Placholder Image",
-  width: "300",
-  height: "200",
-}
+  name: 'Image',
+  url: '/media/vprlmnok/placeholder_view_vector.svg', // remote url, can't get public folder in build
+  src: '/media/vprlmnok/placeholder_view_vector.svg', // remote url, can't get public folder in build
+  alt: 'Placholder Image',
+  alternativeText: 'Placholder Image',
+  width: '300',
+  height: '200',
+};
 
 /*
  *
@@ -56,7 +55,7 @@ function buildButton(config: BaseComposition, id: string, buttonTheme: any, glob
       case 'Small':
         return ButtonSize.Small;
       default:
-        return undefined;
+        return ButtonSize.Medium;
     }
   };
 
@@ -71,7 +70,7 @@ function buildButton(config: BaseComposition, id: string, buttonTheme: any, glob
       case 'Plain':
         return ButtonStyle.Plain;
       default:
-        return undefined;
+        return ButtonStyle.Primary;
     }
   };
 
@@ -89,7 +88,7 @@ function buildButton(config: BaseComposition, id: string, buttonTheme: any, glob
     id,
     name: 'Button',
     classes: buttonClasses,
-    text: link.title ?? null,
+    text: link?.title ?? null,
     href,
     leftIcon: config.content?.leftIcon ?? null,
     rightIcon: config.content?.rightIcon ?? null,
@@ -140,14 +139,14 @@ function buildHeadings({ heading, subheading }: HeadingsComposition, id: string,
     }),
     // TODO: Build classes with theme < variant < appearance < overrides
     heading: {
-      ...heading.content,
+      ...heading?.content,
       // ...heading.appearance,
-      ...heading.settings,
+      ...heading?.settings,
       // ...heading.overrides,
       classes: headingClasses,
     },
     subheading: {
-      ...subheading.content,
+      ...subheading?.content,
       // ...subheading.appearance,
       // ...subheading.overrides,
       classes: subheadingClasses,
@@ -181,7 +180,7 @@ function buildImage(config: ImageComposition, _: string, imageTheme: any, global
       instanceVariant: '1',
       instanceSettings: {},
     }),
-    ...(settings.loading ? settings : { ...settings, loading: "lazy"}),
+    ...(settings.loading ? settings : { ...settings, loading: 'lazy' }),
     src: `${process.env.MEDIA_URL}${url}`,
     alt: altText || alternativeText || name,
     width,
