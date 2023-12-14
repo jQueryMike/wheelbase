@@ -4,6 +4,8 @@ import { ImageProps } from '@components/blocks/Image/Image.types';
 import { TextProps } from '@components/blocks/Text/Text';
 import Block from '@interfaces/Block';
 import { BaseComposition, HeadingsComposition, ImageComposition } from 'lib/types';
+import { v4 as uuidv4 } from 'uuid';
+
 
 import buildBlockClasses from './buildBlockClasses';
 import buildClasses from './buildClasses';
@@ -21,6 +23,20 @@ export function getName(name: string) {
  * Map of builders for each block type
  */
 const BuilderMap = new Map<string, (...args: any) => unknown>();
+
+/**
+ * Fallback image props
+ */
+const DefaultImage: Block & ImageProps = {
+  id: uuidv4(),
+  name: "Image",
+  url: "/media/vprlmnok/placeholder_view_vector.svg", // remote url, can't get public folder in build
+  src: "/media/vprlmnok/placeholder_view_vector.svg", // remote url, can't get public folder in build
+  alt: "Placholder Image",
+  alternativeText: "Placholder Image",
+  width: "300",
+  height: "200",
+}
 
 /**
  * Headings builder
@@ -91,7 +107,7 @@ function buildImage(config: ImageComposition, _: string, imageTheme: any, global
     content: { image: imageData, altText },
     settings,
   } = config;
-  const { id, name, url, alternativeText, width, height } = imageData[0];
+  const { id, name, url, alternativeText, width, height } = imageData?.[0] || DefaultImage;
   const image: Block & ImageProps = {
     id,
     name: 'Image',
@@ -102,7 +118,7 @@ function buildImage(config: ImageComposition, _: string, imageTheme: any, global
       instanceVariant: '1',
       instanceSettings: {},
     }),
-    ...settings,
+    ...(settings.loading ? settings : { ...settings, loading: "lazy"}),
     src: `${process.env.MEDIA_URL}${url}`,
     alt: altText || alternativeText || name,
     width,
@@ -142,6 +158,7 @@ function buildHero(config: BaseComposition, id: string, heroTheme: any, globalCo
 }
 
 BuilderMap.set('hero', buildHero);
+BuilderMap.set('textwithimage', buildHero);
 
 /**
  * Text builder
