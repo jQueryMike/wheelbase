@@ -222,26 +222,53 @@ function buildHero(config: BaseComposition, id: string, heroTheme: any, globalCo
 }
 BuilderMap.set('Hero', buildHero);
 
-function buildReviews(config: BaseComposition, id: string, reviewsTheme: any, globalConfig: any) {
-  const reviews: Block & HeroProps = {
-    id,
-    name: 'Reviews',
-    classes: buildClasses('Reviews', 'blocks', '1', config.appearance, config.overrides, reviewsTheme),
-    ...(config.content ?? {}),
-    ...(config.settings ?? {}),
-  };
-  return reviews;
-}
+/**
+ * Build reviews block
+ * @param config Reviews composition
+ * @param id Block id
+ * @param reviewsTheme reviews theme from the global theme
+ * @param globalConfig (optional) global config object (unused)
+ * @returns reviews block
+ */
+// function buildReviews(config: BaseComposition, id: string, reviewsTheme: any, globalConfig: any) {
+//   const reviews: Block & HeroProps = {
+//     id,
+//     name: 'Reviews',
+//     classes: buildClasses('Reviews', 'blocks', '1', config.appearance, config.overrides, reviewsTheme),
+//     ...(config.content ?? {}),
+//     ...(config.settings ?? {}),
+//   };
+//   return reviews;
+// }
 
-BuilderMap.set('Reviews', buildReviews);
+// BuilderMap.set('Reviews', buildReviews);
 
+/**
+ * Build review item block
+ * @param config Review item composition
+ * @param id Block id
+ * @param reviewItemTheme Review item theme from the global theme
+ * @param globalConfig (optional) global config object (unused)
+ * @returns review item block
+ */
 function buildReviewItem(config: BaseComposition, id: string, reviewItemTheme: any, globalConfig: any) {
   const reviewItem: Block & HeroProps = {
     id,
     name: 'ReviewItem',
+    classes: buildClasses(
+      'Reviews',
+      'blocks',
+      '1',
+      config.appearance,
+      config.overrides,
+      reviewItemTheme,
+      [],
+      'itemClasses',
+    ),
     ...(config.content ?? {}),
     ...(config.settings ?? {}),
   };
+  // console.log(JSON.stringify({ classes: reviewItem.classes }, null, 2));
   return reviewItem;
 }
 

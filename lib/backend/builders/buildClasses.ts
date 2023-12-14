@@ -138,6 +138,7 @@ function buildClasses(
     let activeVariant: any = {};
     try {
       activeVariant = require(`/lib/components/${location}/${name}/variants/${variants.slice(-1)[0]}`).default;
+      // console.log(`activeVariant: ${name}`, JSON.stringify(activeVariant));
     } catch (e) {
       console.warn('No variant found for', name, variants.slice(-1)[0]);
     }
@@ -154,6 +155,8 @@ function buildClasses(
         }
       });
     });
+
+    if (name === 'Reviews') console.log(`buildClasses: ${name}`, JSON.stringify(outputClasses, null, 2));
 
     return outputClasses;
   } catch (error) {

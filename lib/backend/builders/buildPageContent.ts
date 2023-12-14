@@ -124,7 +124,7 @@ const buildPageContent = async (items: UmbracoBlockGridItem[], globalTheme: any,
   );
 
   const output = await Promise.all(pageContent);
-  console.log('buildPageContent', JSON.stringify(output));
+  // console.log('buildPageContent', JSON.stringify(output));
   return output;
 };
 

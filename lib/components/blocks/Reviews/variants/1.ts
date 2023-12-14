@@ -9,8 +9,9 @@ let classes: ReviewsClasses<ClassesProperty> = {};
 let itemClasses: ReviewsItemClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw``,
-  rootInner: tw``,
+  root: tw`px-6 py-12`,
+  rootInner: tw`flex flex-col gap-4`,
+  headingsContainer: tw`text-center`,
   // review items grid
   itemsContainer: {
     default: tw`grid gap-4`,
@@ -21,17 +22,17 @@ classes = {
 
 itemClasses = {
   // review item style
-  itemRoot: tw`@container @[200px]:p-16 bg-accent bg-opacity-5 p-6 flex flex-col gap-6`,
+  itemRoot: tw`bg-accent flex h-full flex-col gap-6 bg-opacity-5 p-6 @container @[200px]:p-16`,
   // review caption
-  captionContainer: tw`flex gap-3 items-center`,
-  avatarContainer: tw`h-14 w-14 rounded-full border-4 border-accent`,
-  avatarImage: tw`h-14 w-14 rounded-full border-4 border-accent`,
+  captionContainer: tw`flex items-center gap-3`,
+  avatarContainer: tw`border-accent h-14 w-14 rounded-full border-4`,
+  // avatarImage: tw`border-accent h-14 w-14 rounded-full border-4`,
   citeContainer: tw``,
-  cite: tw`font-bold text-heading not-italic leading-[1.1]`,
-  date: tw`not-italic text-copy`,
+  cite: tw`text-heading font-bold not-italic leading-[1.1]`,
+  date: tw`text-copy not-italic`,
   // blockquote
   blockquoteContainer: tw`flex-1 space-y-1`,
-  reviewHeading: tw`font-semibold text-heading`,
+  reviewHeading: tw`text-heading font-semibold`,
   reviewContent: tw`text-copy text-sm leading-normal`,
   // bottom
   bottomContainer: tw`flex items-center justify-between`,
@@ -41,12 +42,13 @@ itemClasses = {
   // star rating
   ratingStars: tw`flex items-center gap-2`,
   star: tw`fas fa-star text-accent text-lg`,
-  starDisabled: tw`text-black text-opacity-25 text-lg`,
-  ratingFigure: tw`rounded-full bg-black p-1 px-2 text-white font-bold text-[12px]`,
+  starDisabled: tw`text-lg text-black text-opacity-25`,
+  ratingFigure: tw`rounded-full bg-black p-1 px-2 text-[12px] font-bold text-white`,
 };
 
 const reviewsVariant: ReviewsVariant = {
   classes: new ClassesBuilder({ location, classes }).classes,
+  itemClasses: new ClassesBuilder({ location, classes: itemClasses }).classes,
 };
 
 export default reviewsVariant;
