@@ -25,8 +25,8 @@ itemClasses = {
   itemRoot: tw`bg-accent flex h-full flex-col gap-6 bg-opacity-5 p-6 @container @[200px]:p-16`,
   // review caption
   captionContainer: tw`flex items-center gap-3`,
-  avatarContainer: tw`border-accent h-14 w-14 rounded-full border-4`,
-  // avatarImage: tw`border-accent h-14 w-14 rounded-full border-4`,
+  avatarContainer: tw`border-accent relative h-14 w-14 overflow-hidden rounded-full border-4`,
+  avatarImage: tw`absolute h-full w-full object-cover object-center`,
   citeContainer: tw``,
   cite: tw`text-heading font-bold not-italic leading-[1.1]`,
   date: tw`text-copy not-italic`,
