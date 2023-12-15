@@ -9,7 +9,7 @@ let classes: ReviewsClasses<ClassesProperty> = {};
 let itemClasses: ReviewsItemClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`px-6 py-12`,
+  root: tw``,
   rootInner: tw`flex flex-col gap-4`,
   headingsContainer: tw`text-center`,
   // review items grid
