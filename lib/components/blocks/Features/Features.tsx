@@ -26,6 +26,7 @@ export type FeaturesItemClasses<T> = {
     | 'itemIconContainer'
     | 'itemIcon'
     | 'itemImageContainer'
+    | 'itemImage'
     | 'itemContentAreaContainer']?: T;
 };
 
@@ -78,7 +79,7 @@ const Features = ({ classes = {}, headings, items = [], contentArea1 = [], conte
                     )}
                     {item.image && (
                       <div className={item.classes?.itemImageContainer}>
-                        <Image {...item.image} />
+                        <Image {...item.image} className={item.classes?.itemImage} />
                       </div>
                     )}
                     {item.contentArea && item.contentArea.length > 0 && (
