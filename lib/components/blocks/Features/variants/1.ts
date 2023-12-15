@@ -30,7 +30,7 @@ classes = {
 
 itemClasses = {
   itemRoot: {
-    default: tw`relative space-y-2 text-center`,
+    default: tw`space-y-2 text-center`,
     xs: tw`xs:text-left`,
   },
   itemIconContainer: {
