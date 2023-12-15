@@ -21,6 +21,7 @@ import buildOpeningTimesBlock from './blocks/buildOpeningTimesBlock';
 import buildRegInputBlock from './blocks/buildRegInputBlock';
 import buildSubheadingBlock from './blocks/buildSubheadingBlock';
 import buildTextContentBlock from './blocks/buildTextContentBlock';
+import buildBodyTextBlock from './blocks/buildBodyTextBlock';
 
 const buildBlocks = async ({
   items,
@@ -103,6 +104,11 @@ const buildBlocks = async ({
         if (block) blocks.push(block);
       }
 
+      if (name === 'BodyText') {
+        const block = buildBodyTextBlock(config);
+      if (block) blocks.push(block);
+        }
+      
       if (name === 'Image') {
         const block = buildImageBlock(config);
         if (block) blocks.push(block);
