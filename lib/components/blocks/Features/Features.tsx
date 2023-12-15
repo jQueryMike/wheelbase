@@ -26,6 +26,7 @@ export type FeaturesItemClasses<T> = {
     | 'itemIconContainer'
     | 'itemIcon'
     | 'itemImageContainer'
+    | 'itemImageContainerInner'
     | 'itemImage'
     | 'itemContentAreaContainer']?: T;
 };
@@ -65,7 +66,7 @@ const Features = ({ classes = {}, headings, items = [], contentArea1 = [], conte
           {items?.length > 0 && (
             <div className={classes.itemsContainer}>
               {items.map((item) => (
-                <div key={item.id} className={classes.itemContainer}>
+                <div key={item.id} className={classes?.itemContainer}>
                   <div className={item.classes?.itemRoot}>
                     {item.indicator && (
                       <div className={item.classes?.itemIndicatorContainer}>
@@ -79,7 +80,9 @@ const Features = ({ classes = {}, headings, items = [], contentArea1 = [], conte
                     )}
                     {item.image && (
                       <div className={item.classes?.itemImageContainer}>
-                        <Image {...item.image} className={item.classes?.itemImage} />
+                        <div className={item.classes?.itemImageContainerInner}>
+                          <Image {...item.image} className={item.classes?.itemImage} />
+                        </div>
                       </div>
                     )}
                     {item.contentArea && item.contentArea.length > 0 && (

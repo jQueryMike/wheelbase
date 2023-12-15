@@ -14,7 +14,7 @@ classes = {
     default: tw``,
   },
   headingsContainer: {
-    default: tw``,
+    default: tw`text-center`,
   },
   contentAreaContainer: {
     default: tw``,
@@ -30,7 +30,7 @@ classes = {
 
 itemClasses = {
   itemRoot: {
-    default: tw`space-y-2 text-center`,
+    default: tw`space-y-10 text-center`,
     xs: tw`xs:text-left`,
   },
   itemIconContainer: {
@@ -42,13 +42,12 @@ itemClasses = {
     md: tw``,
   },
   itemImageContainer: {
-    default: tw`relative inline-flex h-20 w-20 items-center justify-center rounded-lg bg-accent bg-opacity-5`,
-    md: tw`md:h-24 md:w-24`,
+    default: tw`relative inline-flex h-24 w-24 items-center justify-center rounded-lg bg-accent bg-opacity-5 p-4`,
+    md: tw`md:h-32 md:w-32`,
   },
-  itemImage: {
-    default: tw`h-12 w-12`,
-    md: tw`md:h-16 md:w-16`,
-  },
+  itemImageContainerInner: tw`relative h-full w-full`,
+  itemImage: tw`relative h-full w-full`,
+
   itemContentAreaContainer: tw`space-y-2`,
 };
 
@@ -58,4 +57,3 @@ const featuresVariant: FeaturesVariant = {
 };
 
 export default featuresVariant;
-

@@ -274,6 +274,28 @@ function buildReviewItem(config: BaseComposition, id: string, reviewItemTheme: a
 
 BuilderMap.set('ReviewItem', buildReviewItem);
 
+function buildFeaturesItem(config: BaseComposition, id: string, featuresItemTheme: any, globalConfig: any) {
+  const featuresItem: Block = {
+    id,
+    name: 'FeaturesItemWithImage',
+    classes: buildClasses(
+      'Features',
+      'blocks',
+      '1',
+      config.appearance,
+      config.overrides,
+      featuresItemTheme,
+      [],
+      'itemClasses',
+    ),
+    ...(config.content ?? {}),
+    ...(config.settings ?? {}),
+  };
+  return featuresItem;
+}
+
+BuilderMap.set('FeaturesItemWithImage', buildFeaturesItem);
+
 /**
  * Hero builder
  * @param config Hero composition

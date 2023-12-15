@@ -76,7 +76,7 @@ async function buildContent(contentType: string, id: string, config: any, global
       globalTheme[`${name}Theme`],
       [],
       'classes',
-      ['ReviewItem', 'FeatureItem'].includes(name) ? true : undefined,
+      ['ReviewItem', 'FeaturesItemWithImage'].includes(name) ? true : undefined,
     ),
     ...(block.content ?? {}),
     ...(block.settings ?? {}),
