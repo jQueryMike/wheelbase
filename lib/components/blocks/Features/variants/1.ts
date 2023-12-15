@@ -9,35 +9,47 @@ let classes: FeaturesClasses<ClassesProperty> = {};
 let itemClasses: FeaturesItemClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`@container/features`,
+  root: tw``,
   rootInner: {
-    default: tw`space-y-4`,
-    '@xl/features': tw`@xl/features:space-y-6`,
+    default: tw``,
+  },
+  headingsContainer: {
+    default: tw``,
   },
   contentAreaContainer: {
-    default: tw`space-y-4`,
-    '@xl/features': tw`@xl/features:space-y-6`,
+    default: tw``,
   },
   itemsContainer: {
-    default: tw`grid gap-8 py-6 @container/features-item`,
-    '@xl/features': tw`@xl/features:gap-10`,
-    '@3xl/features': tw`@3xl/features:grid-cols-2 @3xl/features:gap-12`,
-    '@5xl/features': tw`@5xl/features:grid-cols-3 @5xl/features:gap-16`,
+    default: tw`relative mt-10 grid gap-8`,
+    xs: tw`xs:grid-cols-2`,
+    sm: tw`sm:gap-10`,
+    lg: tw`lg:mt-14`,
+    xl: tw`xl:grid-cols-4 xl:gap-14`,
   },
 };
 
 itemClasses = {
   itemRoot: {
-    default: tw`relative flex flex-col space-y-4`,
-    '@xl/features-item': tw`@xl/features-item:space-y-5`,
-    '@3xl/features-item': tw`@3xl/features-item:space-y-6`,
+    default: tw`relative space-y-2 text-center`,
+    xs: tw`xs:text-left`,
   },
-  itemIndicatorContainer: tw`flex h-10 w-10 items-center justify-center rounded-full bg-primary`,
-  itemIndicator: tw`text-[20px] font-semibold leading-[20px] text-primary-contrast`,
-  itemIconContainer: tw``,
-  itemIcon: tw`text-[40px] text-accent`,
-  itemImageContainer: tw`relative aspect-[4/3] w-full`,
-  itemContentAreaContainer: tw`space-y-4`,
+  itemIconContainer: {
+    default: tw`relative inline-flex h-20 w-20 items-center justify-center rounded-lg bg-accent bg-opacity-5 text-[48px]`,
+    md: tw`md:h-24 md:w-24 md:text-[64px]`,
+  },
+  itemIcon: {
+    default: tw`text-accent`,
+    md: tw``,
+  },
+  itemImageContainer: {
+    default: tw`relative inline-flex h-20 w-20 items-center justify-center rounded-lg bg-accent bg-opacity-5`,
+    md: tw`md:h-24 md:w-24`,
+  },
+  itemImage: {
+    default: tw`h-12 w-12`,
+    md: tw`md:h-16 md:w-16`,
+  },
+  itemContentAreaContainer: tw`space-y-2`,
 };
 
 const featuresVariant: FeaturesVariant = {
@@ -46,3 +58,4 @@ const featuresVariant: FeaturesVariant = {
 };
 
 export default featuresVariant;
+
