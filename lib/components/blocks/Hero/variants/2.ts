@@ -8,7 +8,7 @@ const location = 'Hero/variants/2';
 let classes: HeroClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`hacky-hero from-secondary to-secondary-dark w-full bg-gradient-to-b p-6 py-0`,
+  root: tw`from-secondary to-secondary-dark w-full bg-gradient-to-b p-6 py-0`,
   rootInner: {
     default: tw``,
   },

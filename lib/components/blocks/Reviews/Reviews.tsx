@@ -66,80 +66,76 @@ export interface ReviewsProps {
 }
 
 const Reviews = ({ classes = {}, headings, items = [], contentArea1 = [], contentArea2 = [] }: ReviewsProps) => (
-  <div className="p-4 py-10 md:p-6 md:py-8 lg:py-10 xl:py-12">
-    <div className="container mx-auto">
-      <div className={classes.root}>
-        <div className={classes.rootInner}>
-          {headings && (
-            <div className={classes.headingsContainer}>
-              <Headings {...headings} />
-            </div>
-          )}
-          {contentArea1?.length > 0 && (
-            <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
-              <BlockList blocks={contentArea1} />
-            </div>
-          )}
-          {items?.length > 0 && (
-            <div className={classes.itemsContainer}>
-              {items.map((item) => (
-                <div key={item.id} className={classes?.itemContainer}>
-                  <figure className={item.classes?.itemRoot}>
-                    <figcaption className={item.classes?.captionContainer}>
-                      {item.image1 && (
-                        <div className={item.classes?.avatarContainer}>
-                          <Image {...item.image1} className={item.classes?.avatarImage} />
-                        </div>
-                      )}
-                      <div className={item.classes?.citeContainer}>
-                        {item.reviewerName && <cite className={item.classes?.cite}>{item.reviewerName}</cite>}
-                        {item.reviewDate && <div className={item.classes?.date}>{item.reviewDate}</div>}
-                      </div>
-                    </figcaption>
-                    {item.heading && (
-                      <blockquote className={item.classes?.blockquoteContainer}>
-                        <div className={item.classes?.reviewHeading}>{item.heading}</div>
-                        {item.text && (
-                          <div
-                            className={item.classes?.reviewContent}
-                            // eslint-disable-next-line react/no-danger
-                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.text?.markup ?? '') }}
-                          />
-                        )}
-                      </blockquote>
+  <div className={classes.root}>
+    <div className={classes.rootInner}>
+      {headings && (
+        <div className={classes.headingsContainer}>
+          <Headings {...headings} />
+        </div>
+      )}
+      {contentArea1?.length > 0 && (
+        <div className={cn(classes.contentAreaContainer, classes.contentArea1Container)}>
+          <BlockList blocks={contentArea1} />
+        </div>
+      )}
+      {items?.length > 0 && (
+        <div className={classes.itemsContainer}>
+          {items.map((item) => (
+            <div key={item.id} className={classes?.itemContainer}>
+              <figure className={item.classes?.itemRoot}>
+                <figcaption className={item.classes?.captionContainer}>
+                  {item.image1 && (
+                    <div className={item.classes?.avatarContainer}>
+                      <Image {...item.image1} className={item.classes?.avatarImage} />
+                    </div>
+                  )}
+                  <div className={item.classes?.citeContainer}>
+                    {item.reviewerName && <cite className={item.classes?.cite}>{item.reviewerName}</cite>}
+                    {item.reviewDate && <div className={item.classes?.date}>{item.reviewDate}</div>}
+                  </div>
+                </figcaption>
+                {item.heading && (
+                  <blockquote className={item.classes?.blockquoteContainer}>
+                    <div className={item.classes?.reviewHeading}>{item.heading}</div>
+                    {item.text && (
+                      <div
+                        className={item.classes?.reviewContent}
+                        // eslint-disable-next-line react/no-danger
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.text?.markup ?? '') }}
+                      />
                     )}
-                    <div className={item.classes?.bottomContainer}>
-                      {item.image2 && (
-                        <div className={item.classes?.logoContainer}>
-                          <Image {...item.image2} className={item.classes?.logo} />
-                        </div>
-                      )}
-                      {item.reviewNumber && (
-                        <div className={item.classes?.ratingContainer}>
-                          {/* could leave stars out for now. fontawesome class in classes 'fas fa-star' which i know is not right */}
-                          {/* <div className={item.classes?.ratingStars}>
+                  </blockquote>
+                )}
+                <div className={item.classes?.bottomContainer}>
+                  {item.image2 && (
+                    <div className={item.classes?.logoContainer}>
+                      <Image {...item.image2} className={item.classes?.logo} />
+                    </div>
+                  )}
+                  {item.reviewNumber && (
+                    <div className={item.classes?.ratingContainer}>
+                      {/* could leave stars out for now. fontawesome class in classes 'fas fa-star' which i know is not right */}
+                      {/* <div className={item.classes?.ratingStars}>
                         <i className={item.classes?.star} aria-hidden="true" />
                         <i className={item.classes?.star} aria-hidden="true" />
                         <i className={item.classes?.star} aria-hidden="true" />
                         <i className={item.classes?.star} aria-hidden="true" />
                         <i className={item.classes?.starDisabled} aria-hidden="true" />
                       </div> */}
-                          <span className={item.classes?.ratingFigure}>{item.reviewNumber}</span>
-                        </div>
-                      )}
+                      <span className={item.classes?.ratingFigure}>{item.reviewNumber}</span>
                     </div>
-                  </figure>
+                  )}
                 </div>
-              ))}
+              </figure>
             </div>
-          )}
-          {contentArea2?.length > 0 && (
-            <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
-              <BlockList blocks={contentArea2} />
-            </div>
-          )}
+          ))}
         </div>
-      </div>
+      )}
+      {contentArea2?.length > 0 && (
+        <div className={cn(classes.contentAreaContainer, classes.contentArea2Container)}>
+          <BlockList blocks={contentArea2} />
+        </div>
+      )}
     </div>
   </div>
 );
