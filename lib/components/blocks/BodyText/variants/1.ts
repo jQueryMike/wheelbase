@@ -20,7 +20,7 @@ classes = {
     '@xl/image-with-content': tw`@xl/image-with-content:space-y-6`,
     '@5xl/image-with-content': tw`@5xl/image-with-content:w-[100%]`,
   },
-  textContent: tw`hacky-text prose max-w-full`,
+  textContent: tw`prose max-w-full`,
 };
 
 const contentBlockVariant: BodyTextVariant = {

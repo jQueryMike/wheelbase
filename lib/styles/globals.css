@@ -10,21 +10,4 @@
 
 .text-balance {
   text-wrap: balance;
-}
-
-[class*=contentAreaContainer] .hacky-heading {
-  @apply text-[18px] sm:text-[20px] lg:text-[22px] xl:text-[24px];
-}
-
-.hacky-hero .hacky-headings .hacky-heading {
-  @apply text-[26px] text-white sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[48px];
-}
-.hacky-hero .hacky-headings .hacky-subheading {
-  @apply text-white opacity-80;
-}
-.hacky-hero .hacky-text {
-  @apply prose-secondary-contrast;
-}
-.hacky-hero [class*=contentAreaContainer] .hacky-heading {
-  @apply text-white;
 }/*# sourceMappingURL=globals.css.map */

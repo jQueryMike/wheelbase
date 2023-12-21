@@ -12,7 +12,7 @@ classes = {
     default: tw``,
   },
   subheading: {
-    default: tw`hacky-subheading text-balance text-[18px] font-medium leading-relaxed text-heading`,
+    default: tw`text-balance text-heading text-[18px] font-medium leading-relaxed`,
     lg: tw`lg:text-[20px]`,
   },
 };
