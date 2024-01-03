@@ -1,31 +1,31 @@
-import type { Config } from '@jest/types';
+import { JestConfigWithTsJest, pathsToModuleNameMapper } from 'ts-jest';
 
-const generateModuleNames = () => {
-  const { paths } = require('./tsconfig.json').compilerOptions;
+import { compilerOptions } from './tsconfig.json';
 
-  return Object.keys(paths).reduce((acc, item) => {
-    const key = item.replace('/*', '/(.*)');
-    const path = paths[item][0].replace('/*', '/$1');
-    return { ...acc, [key]: `<rootDir>/${path}` };
-  }, {});
-};
-
-export default async (): Promise<Config.InitialOptions> => ({
+export default async (): Promise<JestConfigWithTsJest> => ({
   collectCoverage: true,
   collectCoverageFrom: ['lib/**/*.{js,jsx}'],
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
   preset: 'ts-jest',
   clearMocks: true,
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/.jest/jest.setup.ts'],
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
-  testMatch: ['**/components/**/*.test.[jt]s?(x)', '**/utilities/**/*.test.[jt]s'],
-  roots: ['<rootDir>/lib'],
+  testMatch: [
+    '**/components/**/*.test.[jt]s?(x)',
+    '**/utilities/**/*.test.[jt]s',
+    '<rootDir>/app/_components/**/*.test.[jt]s?(x)',
+    '<rootDir>/app/_hooks/**/*.test.[jt]s?(x)',
+    '<rootDir>/app/_utils/**/*.test.[jt]s?(x)',
+  ],
+  roots: ['<rootDir>'],
   transform: {
     '^.+\\.tsx?$': ['ts-jest', { tsconfig: './tsconfig.test.json' }],
   },
   moduleNameMapper: {
-    ...generateModuleNames(),
-    '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
+    '\\.(css|less|scss|sass)$': '<rootDir>/.jest/__mocks__/styleMock.js',
+    ...pathsToModuleNameMapper(compilerOptions.paths, {
+      prefix: '<rootDir>/',
+    }),
   },
 });

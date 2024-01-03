@@ -1,0 +1,65 @@
+.box {
+  display: var(--display, flex);
+  flex-direction: var(--flex-direction, row);
+  gap: var(--gap, 0);
+  flex-wrap: var(--flex-wrap, wrap);
+  justify-content: var(--justify-content, flex-start);
+  align-items: var(--align-items, flex-start);
+  align-content: var(--align-content, flex-start);
+}
+
+.flex {
+  --display: flex;
+}
+
+.inline-flex {
+  --display: inline-flex;
+}
+
+.row {
+  --flex-direction: row;
+}
+
+.row-reverse {
+  --flex-direction: row-reverse;
+}
+
+.column {
+  --flex-direction: column;
+}
+
+.column-reverse {
+  --flex-direction: column-reverse;
+}
+
+.gap-sm {
+  --gap: 0.25rem;
+}
+
+.gap-md {
+  --gap: 0.5rem;
+}
+
+.gap-lg {
+  --gap: 1rem;
+}
+
+.gap-xl {
+  --gap: 2rem;
+}
+
+.gap-none {
+  --gap: 0;
+}
+
+.wrap {
+  --flex-wrap: wrap;
+}
+
+.wrap-reverse {
+  --flex-wrap: wrap-reverse;
+}
+
+.no-wrap {
+  --flex-wrap: nowrap;
+}
