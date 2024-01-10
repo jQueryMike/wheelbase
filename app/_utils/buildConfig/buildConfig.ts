@@ -1,42 +1,16 @@
-import { capitalise, getKeys, getName } from "@utils";
+import { BlockConfig } from '@types';
+import { capitalise } from '@utils/capitalise';
+import { getKeys } from '@utils/getKeys';
+import { getName } from '@utils/getName';
 
-function normaliseConfig(config: any, id: string, key: string) {
-  const { block: baseBlock, [key]: b, ...rest } = config;
-  let items;
-  if (b?.content?.items?.items) {
-    items = b?.content?.items?.items.map(
-      ({ content: { contentType, id: iId, properties } }: any) =>
-        normaliseConfig(buildConfig(properties), iId, getName(contentType))
-    );
-    delete b?.content?.items;
-  }
-  const block = {
-    id,
-    name: capitalise(key),
-    content: {
-      ...baseBlock?.content,
-      ...b?.content,
-    },
-    appearance: {
-      ...baseBlock?.appearance,
-      ...b?.appearance,
-    },
-    settings: {
-      ...baseBlock?.settings,
-      ...b?.settings,
-    },
-    overrides: {
-      ...baseBlock?.overrides,
-      ...b?.overrides,
-    },
-  };
-  block.content.items = items;
-  return { [key]: block, ...rest };
-}
-
+/**
+ *
+ * @param data
+ * @returns
+ */
 function buildProperties(data?: { [key: string]: any }) {
   if (!data || Object.keys(data).length < 1) return null;
-  Object.entries(data)
+  const properties = Object.entries(data)
     .map(([key, value]) => [getKeys(key), value])
     .reduce((prev, [[tab, comp, prop], value]) => {
       if (!prev[comp]) {
@@ -56,10 +30,44 @@ function buildProperties(data?: { [key: string]: any }) {
       }
       return prev;
     }, {} as any);
+  return properties;
 }
 
-function buildConfig(data?: { [key: string]: any }) {
-  const properties = buildProperties(data);
+function buildConfig({ contentType, id, properties }: any) {
+  const props = buildProperties(properties);
+  const name = getName(contentType);
+  const key = capitalise(name);
+  const { block, [name]: b, heading, subheading, contentArea, ...subComps } = props ?? {};
+  let items;
+  if (b?.content?.items?.items) {
+    items = b?.content?.items?.items.map((item: any) => buildConfig(item.content));
+    delete b?.content?.items;
+  }
+  const output: BlockConfig = {
+    id,
+    name: capitalise(key),
+    content: {
+      ...block?.content,
+      ...b?.content,
+    },
+    appearance: {
+      ...block?.appearance,
+      ...b?.appearance,
+    },
+    settings: {
+      ...block?.settings,
+      ...b?.settings,
+    },
+    overrides: {
+      ...block?.overrides,
+      ...b?.overrides,
+    },
+  };
+  output.content.items = items;
+  if (contentArea) {
+    output.contentArea = contentArea.content?.content?.items?.map(({ content }: any) => buildConfig(content)) || [];
+  }
+  return { [key]: output, ...subComps };
 }
 
 export default buildConfig;

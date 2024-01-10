@@ -1,4 +1,4 @@
-import { replaceVars } from "@utils";
+import { replaceVars } from '@utils/replaceVars';
 
 const mergeVars = (input: any, config: any, sharedContent: any) => {
   try {
@@ -7,9 +7,9 @@ const mergeVars = (input: any, config: any, sharedContent: any) => {
     output = replaceVars(output, config, sharedContent);
     output = replaceVars(output, config, sharedContent); // Second pass to replace nested vars
 
-    return JSON.parse(output.replaceAll("\n", "\\n"));
+    return JSON.parse(output.replaceAll('\n', '\\n'));
   } catch (error) {
-    console.error("An error occurred whilst merging variables");
+    console.error('An error occurred whilst merging variables');
     console.error(error);
 
     return input;
