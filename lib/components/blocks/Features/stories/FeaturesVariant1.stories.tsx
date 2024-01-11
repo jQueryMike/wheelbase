@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import buttonVariant1 from '../../Button/variants/1';
-import { HeadingSize } from '../../Heading';
-import headingVariant1 from '../../Heading/variants/1';
+import { HeadingSize } from '../../../../../app/_components/atoms/Heading';
+import headingVariant1 from '../../../../../app/_components/atoms/Heading/variants/1';
 import headingsVariant1 from '../../Headings/variants/1';
-import subheadingVariant1 from '../../Subheading/variants/1';
-import textContentVariant1 from '../../Text/variants/1';
+import subheadingVariant1 from '../../../../../app/_components/atoms/Subheading/variants/1';
+import textContentVariant1 from '../../../../../app/_components/atoms/Text/variants/1';
 import Features from '../Features';
 import featuresVariant1 from '../variants/1';
 

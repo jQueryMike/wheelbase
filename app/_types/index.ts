@@ -37,6 +37,8 @@ export type BlockConfig = {
   settings?: any;
   /** Block overrides */
   overrides?: any;
+  /** Block Headings */
+  headings?: any;
   /** Block Content Area */
   contentArea?: BlockConfig[];
 };

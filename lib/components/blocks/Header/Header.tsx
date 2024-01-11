@@ -7,7 +7,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { DrawerNavigation, DrawerNavigationProps } from '../DrawerNavigation';
-import { ImageProps } from '../Image';
+import { ImageProps } from '../../../../app/_components/atoms/Image';
 
 export type HeaderClasses<T> = {
   [key in

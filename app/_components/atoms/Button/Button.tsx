@@ -1,28 +1,57 @@
-import { ButtonProps } from "./Button.types";
-import cx from "classnames";
+import cn from 'classnames';
+import NextLink from 'next/link';
 
-import styles from "./Button.module.css";
+// TODO Implement the icon component
+//import { Icon } from '../../utility-components/Icon';
+import { ButtonProps, ButtonSize, ButtonStyle } from './Button.types';
 
 const Button = ({
-  children,
-  variant = "primary",
-  size = "md",
-  border = "rounded",
-  ...props
+  classes = {},
+  text,
+  href,
+  target = '_self',
+  leftIcon,
+  rightIcon,
+  type,
+  onClick,
+  size = ButtonSize.Medium,
+  style = ButtonStyle.Primary,
+  loading = false,
 }: ButtonProps) => {
-  return (
+  let button = (
     <button
-      className={cx(
-        styles.button,
-        styles[variant],
-        styles[size],
-        styles[border]
-      )}
-      {...props}
+      className={cn(classes.button, classes[`${size}Button`], classes[`${style}Button`], {
+        [classes.buttonLoading || '']: loading,
+      })}
+      type={type === 'button' ? 'button' : 'submit'}
+      onClick={onClick}
     >
-      {children}
+      {loading && (
+        <span className={classes.loadingIconContainer}>{/* <Icon className={classes.loadingIcon} /> */}</span>
+      )}
+      <span
+        className={cn(classes.buttonContent, classes[`${size}ButtonContent`], {
+          [classes.buttonContentLoading || '']: loading,
+        })}
+      >
+        {/* {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} />} */}
+        {text && <span className={classes.textContainer}>{text}</span>}
+        {/* {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} />} */}
+      </span>
     </button>
   );
+
+  if (href && target === '_self') {
+    button = <NextLink href={href}>{button}</NextLink>;
+  } else if (href && target !== '_self') {
+    button = (
+      <a href={href} target={target}>
+        {button}
+      </a>
+    );
+  }
+
+  return <div className={classes.root}>{button}</div>;
 };
 
 export default Button;

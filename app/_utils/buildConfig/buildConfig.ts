@@ -2,6 +2,10 @@ import { BlockConfig } from '@types';
 import { capitalise } from '@utils/capitalise';
 import { getKeys } from '@utils/getKeys';
 import { getName } from '@utils/getName';
+import Block from 'lib/interfaces/Block';
+import { v4 as uuidv4 } from 'uuid';
+
+import { DefaultImage, ImageProps } from '@components';
 
 /**
  *
@@ -33,7 +37,63 @@ function buildProperties(data?: { [key: string]: any }) {
   return properties;
 }
 
+/**
+ * Headings builder
+ * @param param0 Headings composition as a union of heading and subheading compositions
+ * @param headingTheme Heading theme from the global theme
+ * @returns Headings block
+ */
+function buildHeadings({ heading, subheading }: any, id: string) {
+  const headings: Block = {
+    id,
+    name: 'Headings',
+    heading: {
+      ...heading?.content,
+      ...heading?.appearance,
+      ...heading?.settings,
+    },
+    subheading: {
+      ...subheading?.content,
+      ...subheading?.appearance,
+    },
+  };
+  return headings;
+}
+
+/**
+ * Image builder
+ * @param config Image composition
+ * @param imageTheme Image theme from the global theme
+ * @param globalConfig Global config object (unused)
+ * @returns Image block
+ */
+function buildImage(config: any) {
+  const {
+    content: { image: imageData, altText },
+    appearance,
+    settings,
+  } = config;
+  const { id, name, url, alternativeText, width, height } = imageData?.[0] || DefaultImage;
+  const image: Block & ImageProps = {
+    id,
+    name: 'Image',
+    ...(settings.loading ? settings : { ...settings, loading: 'lazy' }),
+    src: `${process.env.MEDIA_URL}${url}`,
+    alt: altText || alternativeText || name,
+    width,
+    height,
+    fill: appearance.fill || !width || !height,
+  };
+  return image;
+}
+
+/**
+ * Build configuration object
+ * @param param0 Block properties
+ * @returns Block config
+ */
 function buildConfig({ contentType, id, properties }: any) {
+  console.log(contentType);
   const props = buildProperties(properties);
   const name = getName(contentType);
   const key = capitalise(name);
@@ -63,11 +123,18 @@ function buildConfig({ contentType, id, properties }: any) {
       ...b?.overrides,
     },
   };
+  if (heading || subheading) {
+    output.headings = buildHeadings({ heading, subheading }, uuidv4());
+  }
+
   output.content.items = items;
   if (contentArea) {
     output.contentArea = contentArea.content?.content?.items?.map(({ content }: any) => buildConfig(content)) || [];
   }
-  return { [key]: output, ...subComps };
+  return {
+    ...output,
+    ...subComps,
+  };
 }
 
 export default buildConfig;

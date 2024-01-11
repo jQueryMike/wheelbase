@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
-import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../Heading';
+import { Heading, HeadingProps, HeadingSize, HeadingTag } from '../../../../app/_components/atoms/Heading';
 import { Headings, HeadingsProps } from '../Headings';
 
 export type AccordionClasses<T> = {

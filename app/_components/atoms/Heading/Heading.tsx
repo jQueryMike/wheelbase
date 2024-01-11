@@ -1,12 +1,17 @@
-import { HeadingProps } from "./Heading.types";
+import cn from 'classnames';
 
-import cx from "classnames";
+import { HeadingProps, HeadingSize, HeadingTag } from './Heading.types';
 
-import styles from "./Heading.module.css";
+const Heading = ({ classes = {}, text, tag, size = HeadingSize.Large }: HeadingProps) => {
+  const HeadingElement = tag || HeadingTag.H2;
 
-const Heading = ({ as, text }: HeadingProps) => {
-  const Component = as || "h1";
-  return <Component className={cx(styles.heading)}>{text}</Component>;
+  return (
+    <div className={classes.root}>
+      <HeadingElement className={cn(classes.heading, classes[`heading${size}`])} data-testid="heading">
+        {text}
+      </HeadingElement>
+    </div>
+  );
 };
 
 export default Heading;

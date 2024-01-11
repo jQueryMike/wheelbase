@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
 import { Headings, HeadingsProps } from '../Headings';
-import { Image, ImageProps } from '../Image';
+import { Image, ImageProps } from '../../../../app/_components/atoms/Image';
 
 export type FeaturesClasses<T> = {
   [key in

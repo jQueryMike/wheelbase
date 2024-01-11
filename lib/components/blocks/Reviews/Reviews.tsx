@@ -4,7 +4,7 @@ import * as DOMPurify from 'isomorphic-dompurify';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
-import { Image, ImageProps } from '../Image';
+import { Image, ImageProps } from '../../../../app/_components/atoms/Image';
 
 export type ReviewsClasses<T> = {
   [key in
