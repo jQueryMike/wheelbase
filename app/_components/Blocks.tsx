@@ -34,7 +34,8 @@ const BLOCKS: {
  * Render a block
  */
 export async function RenderBlocks({ name, id, ...props }: Block) {
-  const Component = BLOCKS[name] ?? (() => <pre>{JSON.stringify({ name }, null, 2)}</pre>);
+  const Component = BLOCKS[name] ?? (() => <pre>{JSON.stringify({ name, id, props }, null, 2)}</pre>);
+  // console.log('RenderBlocks', { name, id, props });
   return (
     <Suspense fallback={<div>Loading...</div>} key={id}>
       <Component {...props} />

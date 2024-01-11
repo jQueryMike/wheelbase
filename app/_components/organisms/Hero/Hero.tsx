@@ -7,26 +7,35 @@ import NextImage from 'next/image';
 
 import { Headings } from '../../molecules';
 import { HeroProps } from './Hero.types';
+import fallBackVariant from './variants/1';
 
-const Hero = ({ classes = {}, headings, image1: image, contentArea = [], imagePlacement }: HeroProps & Block) => (
-  <div className={classes.root}>
-    <div className={classes.rootInner}>
-      <div className={classes.container}>
+const Hero = ({
+  classes = fallBackVariant.classes,
+  headings,
+  image1: image,
+  contentArea = [],
+  imagePlacement,
+}: HeroProps & Block) => (
+  <div className={classes?.root}>
+    <div className={classes?.rootInner}>
+      <div className={classes?.container}>
         <div
-          className={cn(imagePlacement === 'left' ? classes.heroContentContainerReverse : classes.heroContentContainer)}
+          className={cn(
+            imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer,
+          )}
         >
           {headings && (
-            <div className={classes.headingsContainer}>
+            <div className={classes?.headingsContainer}>
               <Headings {...headings} />
             </div>
           )}
           {contentArea?.length > 0 && (
-            <div className={classes.contentAreaContainer}>{contentArea.map(RenderBlocks)}</div>
+            <div className={classes?.contentAreaContainer}>{contentArea.map(RenderBlocks)}</div>
           )}
         </div>
         {image && (
-          <div className={cn(imagePlacement === 'left' ? classes.imageContainerReverse : classes.imageContainer)}>
-            <NextImage className={classes.image} {...image} />
+          <div className={cn(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}>
+            <NextImage className={classes?.image} {...image} />
           </div>
         )}
       </div>

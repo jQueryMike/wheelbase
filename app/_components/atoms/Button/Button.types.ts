@@ -1,17 +1,5 @@
+import { ButtonSize, ButtonStyle } from '@utils/constants';
 import { HTMLAttributeAnchorTarget } from 'react';
-
-export enum ButtonStyle {
-  Primary = 'primary',
-  Secondary = 'secondary',
-  Accent = 'accent',
-  Plain = 'plain',
-}
-
-export enum ButtonSize {
-  Large = 'large',
-  Medium = 'medium',
-  Small = 'small',
-}
 
 export type ButtonClasses<T> = {
   [key in

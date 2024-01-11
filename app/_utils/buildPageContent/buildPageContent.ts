@@ -12,6 +12,5 @@ export default async function buildPageContent(slug: string[]) {
   const content = (mergeVars(pageData.properties.organismGrid.items, globalConfig, sharedContent) ?? []).map(
     (item: any) => buildConfig(item.content),
   );
-
   return { content, globalConfig, seo: buildSEO(pageData) };
 }

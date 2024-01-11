@@ -1,11 +1,11 @@
-import { BlockConfig } from '@types';
+/* eslint-disable no-nested-ternary */
 import { capitalise } from '@utils/capitalise';
 import { getKeys } from '@utils/getKeys';
 import { getName } from '@utils/getName';
 import Block from 'lib/interfaces/Block';
 import { v4 as uuidv4 } from 'uuid';
 
-import { DefaultImage, ImageProps } from '@components';
+import { BuilderMap, builder } from './builders';
 
 /**
  *
@@ -61,39 +61,11 @@ function buildHeadings({ heading, subheading }: any, id: string) {
 }
 
 /**
- * Image builder
- * @param config Image composition
- * @param imageTheme Image theme from the global theme
- * @param globalConfig Global config object (unused)
- * @returns Image block
- */
-function buildImage(config: any) {
-  const {
-    content: { image: imageData, altText },
-    appearance,
-    settings,
-  } = config;
-  const { id, name, url, alternativeText, width, height } = imageData?.[0] || DefaultImage;
-  const image: Block & ImageProps = {
-    id,
-    name: 'Image',
-    ...(settings.loading ? settings : { ...settings, loading: 'lazy' }),
-    src: `${process.env.MEDIA_URL}${url}`,
-    alt: altText || alternativeText || name,
-    width,
-    height,
-    fill: appearance.fill || !width || !height,
-  };
-  return image;
-}
-
-/**
  * Build configuration object
  * @param param0 Block properties
  * @returns Block config
  */
 function buildConfig({ contentType, id, properties }: any) {
-  console.log(contentType);
   const props = buildProperties(properties);
   const name = getName(contentType);
   const key = capitalise(name);
@@ -103,9 +75,9 @@ function buildConfig({ contentType, id, properties }: any) {
     items = b?.content?.items?.items.map((item: any) => buildConfig(item.content));
     delete b?.content?.items;
   }
-  const output: BlockConfig = {
+  const config: any = {
     id,
-    name: capitalise(key),
+    name: key,
     content: {
       ...block?.content,
       ...b?.content,
@@ -114,26 +86,34 @@ function buildConfig({ contentType, id, properties }: any) {
       ...block?.appearance,
       ...b?.appearance,
     },
-    settings: {
-      ...block?.settings,
-      ...b?.settings,
-    },
+    settings: { ...block?.settings, ...b?.settings },
     overrides: {
       ...block?.overrides,
       ...b?.overrides,
     },
   };
+  const output: any = BuilderMap.has(name) ? BuilderMap.get(name)?.(config) : builder(config);
   if (heading || subheading) {
     output.headings = buildHeadings({ heading, subheading }, uuidv4());
   }
 
-  output.content.items = items;
+  output.items = items;
   if (contentArea) {
     output.contentArea = contentArea.content?.content?.items?.map(({ content }: any) => buildConfig(content)) || [];
   }
+
+  const scs = subComps
+    ? Object.fromEntries(
+        Object.entries(subComps).map(([k, value]) => [
+          k,
+          BuilderMap.has(getName(k)) ? BuilderMap.get(getName(k))?.(value) : builder(value),
+        ]),
+      )
+    : {};
+
   return {
     ...output,
-    ...subComps,
+    ...scs,
   };
 }
 

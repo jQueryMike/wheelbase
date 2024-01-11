@@ -1,4 +1,4 @@
-import { SubheadingClasses } from '../Subheading';
+import { SubheadingClasses } from '../Subheading.types';
 
 interface SubheadingVariant {
   classes?: SubheadingClasses<string>;

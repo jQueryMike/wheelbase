@@ -33,3 +33,19 @@ export const MERGE_VARS = [
   ['{COOKIE_POLICY}', 'cookiePolicy'],
   ['{FOOTER_DISCLAIMER}', 'footerDisclaimer'],
 ];
+
+/**
+ * Enums
+ */
+export enum ButtonStyle {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Accent = 'accent',
+  Plain = 'plain',
+}
+
+export enum ButtonSize {
+  Large = 'large',
+  Medium = 'medium',
+  Small = 'small',
+}

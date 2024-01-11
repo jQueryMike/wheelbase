@@ -1,12 +1,14 @@
+import { ButtonSize, ButtonStyle } from '@utils/constants';
 import cn from 'classnames';
 import NextLink from 'next/link';
 
 // TODO Implement the icon component
 //import { Icon } from '../../utility-components/Icon';
-import { ButtonProps, ButtonSize, ButtonStyle } from './Button.types';
+import { ButtonProps } from './Button.types';
+import fallbackStyle from './variants/1';
 
 const Button = ({
-  classes = {},
+  classes = fallbackStyle.classes,
   text,
   href,
   target = '_self',
