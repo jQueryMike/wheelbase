@@ -1,7 +1,6 @@
-import Block from '@interfaces/Block';
-
-import { HeadingsProps } from '../Headings';
-import { ImageProps } from '../Image/Image.types';
+import { ImageProps } from '@components/atoms';
+import { HeadingsProps } from '@components/molecules';
+import { Block } from '@types';
 
 export type HeroClasses<T> = {
   [key in
@@ -24,4 +23,5 @@ export interface HeroProps {
   contentArea?: Block[];
   image1?: ImageProps;
   imagePlacement?: 'left' | 'right';
+  backgroundColor?: any;
 }

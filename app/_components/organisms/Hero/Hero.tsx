@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import { RenderBlocks } from '@components/Blocks';
 import { Block } from '@types';
-import cn from 'classnames';
+import cx from 'classnames';
 import dynamic from 'next/dynamic';
 import NextImage from 'next/image';
 
@@ -9,18 +9,35 @@ import { Headings } from '../../molecules';
 import { HeroProps } from './Hero.types';
 import fallBackVariant from './variants/1';
 
+function hexToRgb(hex: string) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : { r: 0, g: 0, b: 0 };
+}
+
+function rgbString({ r, g, b }: { r: number; g: number; b: number }) {
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
 const Hero = ({
   classes = fallBackVariant.classes,
   headings,
   image1: image,
   contentArea = [],
   imagePlacement,
+  backgroundColor,
 }: HeroProps & Block) => (
-  <div className={classes?.root}>
+  <div className={cx(classes?.root)} style={{ background: rgbString(hexToRgb(backgroundColor.hex)) }}>
     <div className={classes?.rootInner}>
       <div className={classes?.container}>
         <div
-          className={cn(
+          className={cx(
             imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer,
           )}
         >
@@ -34,7 +51,7 @@ const Hero = ({
           )}
         </div>
         {image && (
-          <div className={cn(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}>
+          <div className={cx(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}>
             <NextImage className={classes?.image} {...image} />
           </div>
         )}

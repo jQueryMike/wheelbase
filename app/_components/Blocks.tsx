@@ -13,6 +13,7 @@ const atoms = {
 
 const molecules = {
   Headings: dynamic(() => import('./molecules/Headings/Headings'), {}),
+  Features: dynamic(() => import('./molecules/Features/Features'), {}),
 };
 
 const organisms = {

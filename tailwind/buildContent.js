@@ -17,6 +17,7 @@ const buildContentArray = (pages) => {
     content.add(`./lib/components/utility-components/**/*.${EXTENSION}`);
 
     if (process.env.ENVIRONMENT_NAME === 'local') {
+      content.add(`./app/_components/**/*.${EXTENSION}`);
       content.add(`./lib/components/**/*.${EXTENSION}`);
     }
 

@@ -1,18 +1,18 @@
 const buildColors = () => ({
   primary: {
-    DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+    DEFAULT: 'rgb(var(--primary-default) / <alpha-value>)',
     light: 'rgb(var(--primary-light) / <alpha-value>)',
     dark: 'rgb(var(--primary-dark) / <alpha-value>)',
     contrast: 'rgb(var(--primary-contrast) / <alpha-value>)',
   },
   secondary: {
-    DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+    DEFAULT: 'rgb(var(--secondary-default) / <alpha-value>)',
     light: 'rgb(var(--secondary-light) / <alpha-value>)',
     dark: 'rgb(var(--secondary-dark) / <alpha-value>)',
     contrast: 'rgb(var(--secondary-contrast) / <alpha-value>)',
   },
   accent: {
-    DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+    DEFAULT: 'rgb(var(--accent-default) / <alpha-value>)',
     light: 'rgb(var(--accent-light) / <alpha-value>)',
     dark: 'rgb(var(--accent-dark) / <alpha-value>)',
     contrast: 'rgb(var(--accent-contrast) / <alpha-value>)',

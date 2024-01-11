@@ -6,15 +6,13 @@ import { Suspense } from 'react';
 
 import { GlobalStyles } from '@components';
 
-import { PageProps } from '.next/types/app/page';
-
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: any) {
   const { content, seo } = await buildPageContent(params.slug);
   return (
     <>
       <Suspense fallback={<div>Loading...</div>} key="head">
+        <GlobalStyles />
         <Head>
-          <GlobalStyles />
           <NextSeo {...seo} />
         </Head>
       </Suspense>
