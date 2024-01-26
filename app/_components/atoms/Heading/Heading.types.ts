@@ -18,13 +18,16 @@ export enum HeadingSize {
   ExtraSmall = 'ExtraSmall',
 }
 
-export type HeadingClasses<T> = {
+export type HeadingClasses<T = string> = {
   [key in 'root' | 'heading' | `heading${'ExtraLarge' | 'Large' | 'Medium' | 'Small' | 'ExtraSmall'}`]?: T;
 };
 
 export interface HeadingProps {
-  classes?: HeadingClasses<string>;
+  variant?: '1' | '2-hero' | '2' | string;
   text?: string;
   tag?: HeadingTag;
   size?: HeadingSize;
+  overrides?: {
+    [key in keyof HeadingClasses]?: string;
+  };
 }

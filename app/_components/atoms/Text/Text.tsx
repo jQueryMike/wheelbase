@@ -1,11 +1,16 @@
 /* eslint-disable react/no-danger */
+import { buildClasses } from '@utils/buildClasses';
 import * as DOMPurify from 'isomorphic-dompurify';
 
 import { TextProps } from './Text.types';
-import fallbackStyle from './variants/1';
 
-const Text = ({ classes = fallbackStyle.classes, text }: TextProps) => {
+const Text = async ({ variant = '1', text, overrides }: TextProps) => {
   if (!text) return null;
+
+  const {
+    default: { classes: variantClasses },
+  } = await import(`./variants/${variant}`);
+  const classes = buildClasses(variantClasses, overrides);
 
   return (
     <div className={classes?.root}>

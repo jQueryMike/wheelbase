@@ -1,8 +1,7 @@
-import { ImageProps } from '@components/atoms';
-import { HeadingsProps } from '@components/molecules';
+import { HeadingProps, ImageProps } from '@components/atoms';
 import { Block } from '@types';
 
-export type HeroClasses<T> = {
+export type HeroClasses<T = string> = {
   [key in
     | 'root'
     | 'rootInner'
@@ -18,10 +17,14 @@ export type HeroClasses<T> = {
 };
 
 export interface HeroProps {
-  classes?: HeroClasses<string>;
-  headings?: HeadingsProps;
+  variant?: '1' | '2' | '5' | '6' | string;
+  heading?: HeadingProps;
+  subheading?: HeadingProps;
   contentArea?: Block[];
   image1?: ImageProps;
   imagePlacement?: 'left' | 'right';
   backgroundColor?: any;
+  overrides?: {
+    [key in keyof HeroClasses]?: string;
+  };
 }

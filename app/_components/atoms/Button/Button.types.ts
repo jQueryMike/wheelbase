@@ -1,7 +1,7 @@
 import { ButtonSize, ButtonStyle } from '@utils/constants';
 import { HTMLAttributeAnchorTarget } from 'react';
 
-export type ButtonClasses<T> = {
+export type ButtonClasses<T = string> = {
   [key in
     | 'root'
     | 'button'
@@ -26,6 +26,7 @@ export type ButtonClasses<T> = {
 };
 
 export interface ButtonProps {
+  variant?: '1' | '2' | '5' | string;
   classes?: ButtonClasses<string>;
   text?: string;
   href?: string;
@@ -37,4 +38,7 @@ export interface ButtonProps {
   size?: ButtonSize;
   onClick?: () => void;
   loading?: boolean;
+  overrides?: {
+    [key in keyof ButtonClasses]?: string;
+  };
 }

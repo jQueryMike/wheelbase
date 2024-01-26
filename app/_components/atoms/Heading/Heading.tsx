@@ -1,10 +1,14 @@
+import { buildClasses } from '@utils/buildClasses';
 import cn from 'classnames';
 
 import { HeadingProps, HeadingSize, HeadingTag } from './Heading.types';
-import fallbackStyle from './variants/1';
 
-const Heading = ({ classes = fallbackStyle.classes, text, tag, size = HeadingSize.Large }: HeadingProps) => {
+const Heading = async ({ variant = '1', text, tag, size = HeadingSize.Large, overrides }: HeadingProps) => {
   const HeadingElement = tag || HeadingTag.H2;
+  const {
+    default: { classes: variantClasses },
+  } = await import(`./variants/${variant}`);
+  const classes = buildClasses(variantClasses, overrides);
 
   return (
     <div className={classes?.root}>

@@ -2,15 +2,13 @@
 import { capitalise } from '@utils/capitalise';
 import { getKeys } from '@utils/getKeys';
 import { getName } from '@utils/getName';
-import Block from 'lib/interfaces/Block';
-import { v4 as uuidv4 } from 'uuid';
 
 import { BuilderMap, builder } from './builders';
 
 /**
- *
- * @param data
- * @returns
+ * @description Build properties object
+ * @param data Page data
+ * @returns Properties object
  */
 function buildProperties(data?: { [key: string]: any }) {
   if (!data || Object.keys(data).length < 1) return null;
@@ -38,30 +36,7 @@ function buildProperties(data?: { [key: string]: any }) {
 }
 
 /**
- * Headings builder
- * @param param0 Headings composition as a union of heading and subheading compositions
- * @param headingTheme Heading theme from the global theme
- * @returns Headings block
- */
-function buildHeadings({ heading, subheading }: any, id: string) {
-  const headings: Block = {
-    id,
-    name: 'Headings',
-    heading: {
-      ...heading?.content,
-      ...heading?.appearance,
-      ...heading?.settings,
-    },
-    subheading: {
-      ...subheading?.content,
-      ...subheading?.appearance,
-    },
-  };
-  return headings;
-}
-
-/**
- * Build configuration object
+ * @description Build configuration object
  * @param param0 Block properties
  * @returns Block config
  */
@@ -69,7 +44,7 @@ function buildConfig({ contentType, id, properties }: any) {
   const props = buildProperties(properties);
   const name = getName(contentType);
   const key = capitalise(name);
-  const { block, [name]: b, heading, subheading, contentArea, ...subComps } = props ?? {};
+  const { block, [name]: b, contentArea, ...subComps } = props ?? {};
   let items;
   if (b?.content?.items?.items) {
     items = b?.content?.items?.items.map((item: any) => buildConfig(item.content));
@@ -87,21 +62,26 @@ function buildConfig({ contentType, id, properties }: any) {
       ...b?.appearance,
     },
     settings: { ...block?.settings, ...b?.settings },
-    overrides: {
-      ...block?.overrides,
-      ...b?.overrides,
-    },
   };
   const output: any = BuilderMap.has(name) ? BuilderMap.get(name)?.(config) : builder(config);
-  if (heading || subheading) {
-    output.headings = buildHeadings({ heading, subheading }, uuidv4());
-  }
+  /**
+   * TODO: This will probably need to be refactored to support separate headings
+   */
+  // if (heading || heading1) {
+  //   output.headings = buildHeadings({ heading, subheading: heading1 }, uuidv4());
+  // }
 
   output.items = items;
+  /**
+   * If the content area exists, build all of the content area items
+   */
   if (contentArea) {
     output.contentArea = contentArea.content?.content?.items?.map(({ content }: any) => buildConfig(content)) || [];
   }
 
+  /**
+   * Run subcomponents through the builder
+   */
   const scs = subComps
     ? Object.fromEntries(
         Object.entries(subComps).map(([k, value]) => [

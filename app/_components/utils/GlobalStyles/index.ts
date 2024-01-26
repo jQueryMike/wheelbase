@@ -1,1 +1,2 @@
-export { default as GlobalStyles } from "./GlobalStyles";
+// eslint-disable-next-line import/prefer-default-export
+export { default as GlobalStyles } from './GlobalStyles';
