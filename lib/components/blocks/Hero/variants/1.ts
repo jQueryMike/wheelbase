@@ -45,6 +45,7 @@ classes = {
   },
 };
 
+
 const heroVariant: HeroVariant = {
   classes: new ClassesBuilder({ location, classes }).classes,
 };

@@ -1,7 +1,7 @@
 import Block from '@interfaces/Block';
 
 import { HeadingsProps } from '../Headings';
-import { ImageProps } from '../Image/Image.types';
+import { ImageProps } from '../../../../app/_components/atoms/Image/Image.types';
 
 export type HeroClasses<T> = {
   [key in

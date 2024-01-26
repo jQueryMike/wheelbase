@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { twMerge } from 'tailwind-merge';
 
 import buttonVariant2 from '../../Button/variants/2';
-import { HeadingSize } from '../../Heading';
-import headingVariant2 from '../../Heading/variants/2';
+import { HeadingSize } from '../../../../../app/_components/atoms/Heading';
+import headingVariant2 from '../../../../../app/_components/atoms/Heading/variants/2';
 import headingsVariant2 from '../../Headings/variants/2';
-import subheadingVariant2 from '../../Subheading/variants/2';
-import textContentVariant1 from '../../Text/variants/1';
+import subheadingVariant2 from '../../../../../app/_components/atoms/Subheading/variants/2';
+import textContentVariant1 from '../../../../../app/_components/atoms/Text/variants/1';
 import Hero from '../Hero';
 import heroVariant2 from '../variants/2';
 

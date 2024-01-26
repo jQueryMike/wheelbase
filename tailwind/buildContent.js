@@ -13,10 +13,11 @@ const getContentPath = (blockName, variant) => {
 const buildContentArray = (pages) => {
   try {
     const content = new Set();
-    content.add(`./pages/**/*.${EXTENSION}`);
+    content.add(`./app/**/*.${EXTENSION}`);
     content.add(`./lib/components/utility-components/**/*.${EXTENSION}`);
 
     if (process.env.ENVIRONMENT_NAME === 'local') {
+      content.add(`./app/_components/**/*.${EXTENSION}`);
       content.add(`./lib/components/**/*.${EXTENSION}`);
     }
 

@@ -6,7 +6,7 @@ import { HTMLAttributeAnchorTarget } from 'react';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Icon } from '../../utility-components/Icon';
-import { ImageProps } from '../Image';
+import { ImageProps } from '../../../../app/_components/atoms/Image';
 
 export type FooterClasses<T> = {
   [key in

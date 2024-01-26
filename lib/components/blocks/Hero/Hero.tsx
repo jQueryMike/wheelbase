@@ -1,4 +1,4 @@
-import Block from '@interfaces/Block';
+import { Block } from '@types';
 import cn from 'classnames';
 import NextImage from 'next/image';
 

@@ -3,7 +3,7 @@ import NextImage from 'next/image';
 
 import { BlockList } from '../../utility-components/BlockList';
 import { Headings, HeadingsProps } from '../Headings';
-import { ImageProps } from '../Image';
+import { ImageProps } from '../../../../app/_components/atoms/Image';
 
 export type ImageWithContentClasses<T> = {
   [key in

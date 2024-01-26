@@ -21,19 +21,14 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@backend": ["lib/backend"],
-      "@backend/*": ["lib/backend/*"],
-      "@components": ["lib/components"],
-      "@components/*": ["lib/components/*"],
-      "@constants": ["lib/constants"],
-      "@constants/*": ["lib/constants/*"],
-      "@interfaces": ["lib/interfaces"],
-      "@interfaces/*": ["lib/interfaces/*"],
-      "@styles": ["lib/styles"],
-      "@styles/*": ["lib/styles/*"],
-      "@utilities": ["lib/utilities"],
-      "@utilities/*": ["lib/utilities/*"]
-    }
+      "@components": ["app/_components"],
+      "@components/*": ["app/_components/*"],
+      "@utils": ["app/_utils"],
+      "@utils/*": ["app/_utils/*"],
+      "@types": ["app/_types"],
+      "@types/*": ["app/_types/*"]
+    },
+    "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "include": [
     "next-env.d.ts",
