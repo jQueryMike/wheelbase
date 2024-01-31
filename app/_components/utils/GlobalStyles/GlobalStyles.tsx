@@ -1,4 +1,4 @@
-import getGlobalTheme from '@utils/getGlobalTheme/getGlobalTheme';
+import { getGlobalTheme } from '@utils';
 
 function buildVarName(key: string) {
   return `--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;

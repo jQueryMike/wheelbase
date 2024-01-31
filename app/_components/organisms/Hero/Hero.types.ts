@@ -1,5 +1,5 @@
 import { HeadingProps, ImageProps } from '@components/atoms';
-import { Block } from '@types';
+import { Block, Color } from '@types';
 
 export type HeroClasses<T = string> = {
   [key in
@@ -14,12 +14,6 @@ export type HeroClasses<T = string> = {
     | 'imageContainer'
     | 'imageContainerReverse'
     | 'image']?: T;
-};
-
-type Color = {
-  id: string;
-  hex: string;
-  opacity: number;
 };
 
 export interface HeroProps {

@@ -1,3 +1,5 @@
+import { Color } from '@types';
+
 export enum HeadingTag {
   H1 = 'h1',
   H2 = 'h2',
@@ -23,6 +25,7 @@ export interface HeadingProps {
   text?: string;
   tag?: HeadingTag;
   size?: HeadingSize;
+  color?: Color;
   overrides?: {
     [key in keyof HeadingClasses]?: string;
   };

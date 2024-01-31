@@ -18,6 +18,18 @@ export type Block = {
   [propName: string]: any;
 };
 
+/**
+ * Color type
+ */
+export type Color = {
+  /** Color Id, should match a theme value or be custom */
+  id: string;
+  /** Color hex value */
+  hex: string;
+  /** Color opacity */
+  opacity: number;
+};
+
 // ? Look into dynamic keys for multiple content areas
 // type ContentAreaKey<T extends number> = `contentArea${T}`;
 
