@@ -9,10 +9,12 @@ const Heading = async ({ variant = '1', text, tag, size = HeadingSize.Large, ove
     default: { classes: variantClasses },
   } = await import(`./variants/${variant}`);
   const classes = buildClasses(variantClasses, overrides);
-
   return (
     <div className={classes?.root}>
-      <HeadingElement className={cn(classes?.heading, classes?.[`heading${size}`])} data-testid="heading">
+      <HeadingElement
+        className={cn(classes?.heading, classes?.[`heading${size.replaceAll(' ', '')}`])}
+        data-testid="heading"
+      >
         {text}
       </HeadingElement>
     </div>

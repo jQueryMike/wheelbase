@@ -4,10 +4,6 @@ export enum HeadingTag {
   H3 = 'h3',
   H4 = 'h4',
   H5 = 'h5',
-  H6 = 'h6',
-  DIV = 'div',
-  SPAN = 'span',
-  P = 'p',
 }
 
 export enum HeadingSize {

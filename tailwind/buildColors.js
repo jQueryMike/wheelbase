@@ -26,7 +26,7 @@ const buildColors = () => ({
     contrast: 'rgb(var(--error-contrast) / <alpha-value>)',
   },
   heading: {
-    DEFAULT: 'rgb(var(--heading) / <alpha-value>)',
+    DEFAULT: 'rgb(var(--heading-default) / <alpha-value>)',
     light: 'rgb(var(--heading-light) / <alpha-value>)',
     dark: 'rgb(var(--heading-dark) / <alpha-value>)',
   },

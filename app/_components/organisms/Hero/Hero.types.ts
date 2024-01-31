@@ -16,14 +16,23 @@ export type HeroClasses<T = string> = {
     | 'image']?: T;
 };
 
+type Color = {
+  id: string;
+  hex: string;
+  opacity: number;
+};
+
 export interface HeroProps {
   variant?: '1' | '2' | '5' | '6' | string;
   heading?: HeadingProps;
   subheading?: HeadingProps;
   contentArea?: Block[];
   image1?: ImageProps;
-  imagePlacement?: 'left' | 'right';
-  backgroundColor?: any;
+  image2?: ImageProps;
+  reverse?: boolean;
+  backgroundColor?: Color;
+  backgroundGradientColor?: Color;
+  gradientDirection?: 'Left to Right' | 'Right to Left';
   overrides?: {
     [key in keyof HeroClasses]?: string;
   };

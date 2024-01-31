@@ -9,7 +9,9 @@ const atoms = {
   Text: dynamic(() => import('./atoms/Text/Text'), {}),
 };
 
-const molecules = {};
+const molecules = {
+  ButtonList: dynamic(() => import('./molecules/ButtonList/ButtonList'), {}),
+};
 
 const organisms = {
   Hero: dynamic(() => import('./organisms/Hero/Hero'), {}),

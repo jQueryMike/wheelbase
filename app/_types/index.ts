@@ -42,3 +42,7 @@ export type BlockConfig = {
   /** Block Content Area */
   contentArea?: BlockConfig[];
 };
+
+/**
+ * Utility type
+ */

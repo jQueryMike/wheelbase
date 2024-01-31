@@ -22,6 +22,7 @@ export default async function Page({ params }: any) {
           </Suspense>
         ))}
       </main>
+      {/* <pre>{JSON.stringify(content, null, 2)}</pre> */}
     </>
   );
 }

@@ -16,6 +16,7 @@
     "lint-staged"
   ],
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@mailchimp/mailchimp_transactional": "^1.0.50",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.9",

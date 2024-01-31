@@ -1,5 +1,0 @@
-Contact Form {{environment}}
-
-{{#fields}}
-{{label}}: {{value}}
-{{/fields}}

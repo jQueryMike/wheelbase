@@ -62,6 +62,10 @@ function buildConfig({ contentType, id, properties }: any) {
       ...b?.appearance,
     },
     settings: { ...block?.settings, ...b?.settings },
+    variants: {
+      ...block?.variants,
+      ...b?.variants,
+    },
   };
   const output: any = BuilderMap.has(name) ? BuilderMap.get(name)?.(config) : builder(config);
   /**
