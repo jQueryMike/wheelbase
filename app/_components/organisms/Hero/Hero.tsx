@@ -5,7 +5,7 @@ import { Block } from '@types';
 import { buildClasses } from '@utils/buildClasses';
 import cn from 'classnames';
 import NextImage from 'next/image';
-import { Suspense } from 'react';
+import { CSSProperties, Suspense } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { HeroProps } from './Hero.types';
@@ -35,21 +35,21 @@ const Hero = async ({
   return (
     <>
       {/* TODO - This is some serious s**t housery */}
-      <style>
-        {`.hero {
-          --tw-gradient-from: ${backgroundColor?.hex};
-          --tw-gradient-to: ${backgroundGradientColor?.hex};
-          --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, --tw-gradient-from);
-        }`}
-      </style>
       <div
-        className={cn('hero', classes?.root, {
+        className={cn(classes?.root, {
           [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
           'bg-gradient-to-br': gradientDirection === GradientDirection.LTR,
           'bg-gradient-to-bl': gradientDirection === GradientDirection.RTL,
           [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
           [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
         })}
+        style={
+          {
+            '--tw-gradient-from': backgroundColor?.hex,
+            '--tw-gradient-to': backgroundGradientColor?.hex,
+            '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to, --tw-gradient-from)',
+          } as CSSProperties
+        }
       >
         <div className={classes?.rootInner}>
           <div className={classes?.container}>
