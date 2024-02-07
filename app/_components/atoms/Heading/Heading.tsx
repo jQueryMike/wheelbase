@@ -22,7 +22,7 @@ const Heading = async ({ variant = '1', text, tag, size = HeadingSize.Large, col
       }
     >
       <HeadingElement
-        className={cn(classes?.heading, classes?.[`heading${size.replaceAll(' ', '')}`])}
+        className={cn(classes?.heading, classes?.[`heading${size?.replaceAll(' ', '')}`])}
         data-testid="heading"
       >
         {text}
