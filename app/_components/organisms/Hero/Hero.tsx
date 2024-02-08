@@ -33,59 +33,56 @@ const Hero = async ({
   const classes = buildClasses(variantClasses, overrides);
   const components = contentArea.map(({ name, id, ...props }: any) => [name, BLOCKS[name], id, props]);
   return (
-    <>
-      {/* TODO - This is some serious s**t housery */}
-      <div
-        className={cn(classes?.root, {
-          [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
-          'bg-gradient-to-br': gradientDirection === GradientDirection.LTR,
-          'bg-gradient-to-bl': gradientDirection === GradientDirection.RTL,
-          [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
-          [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
-        })}
-        style={
-          {
-            '--tw-gradient-from': backgroundColor?.hex,
-            '--tw-gradient-to': backgroundGradientColor?.hex,
-            '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to, --tw-gradient-from)',
-          } as CSSProperties
-        }
-      >
-        <div className={classes?.rootInner}>
-          <div className={classes?.container}>
-            <div
-              className={cn(
-                imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer,
-              )}
-            >
-              {(heading || subheading) && (
-                <div className={classes?.headingsContainer} data-testid="headings-container">
-                  {heading && <Heading {...heading} data-testid="heading" />}
-                  {subheading && <Heading {...subheading} data-testid="subheading" />}
-                </div>
-              )}
-              {components?.length > 0 && (
-                <div className={classes?.contentAreaContainer} data-testid="content-area">
-                  {components.map(([name, Component, id, props]: any) => (
-                    <Suspense fallback={<div>Loading {name}...</div>} key={id}>
-                      <Component {...props} />
-                    </Suspense>
-                  ))}
-                </div>
-              )}
-            </div>
-            {image && (
-              <div
-                className={cn(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}
-                data-testid="image-container"
-              >
-                <NextImage className={classes?.image} {...image} data-testid="image" />
+    <div
+      className={cn(classes?.root, {
+        [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
+        'bg-gradient-to-br': gradientDirection === GradientDirection.LTR,
+        'bg-gradient-to-bl': gradientDirection === GradientDirection.RTL,
+        [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
+        [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
+      })}
+      style={
+        {
+          '--tw-gradient-from': backgroundColor?.hex,
+          '--tw-gradient-to': backgroundGradientColor?.hex,
+          '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to, --tw-gradient-from)',
+        } as CSSProperties
+      }
+    >
+      <div className={classes?.rootInner}>
+        <div className={classes?.container}>
+          <div
+            className={cn(
+              imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer,
+            )}
+          >
+            {(heading || subheading) && (
+              <div className={classes?.headingsContainer} data-testid="headings-container">
+                {heading && <Heading {...heading} data-testid="heading" />}
+                {subheading && <Heading {...subheading} data-testid="subheading" />}
+              </div>
+            )}
+            {components?.length > 0 && (
+              <div className={classes?.contentAreaContainer} data-testid="content-area">
+                {components.map(([name, Component, id, props]: any) => (
+                  <Suspense fallback={<div>Loading {name}...</div>} key={id}>
+                    <Component {...props} />
+                  </Suspense>
+                ))}
               </div>
             )}
           </div>
+          {image && (
+            <div
+              className={cn(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}
+              data-testid="image-container"
+            >
+              <NextImage className={classes?.image} {...image} data-testid="image" />
+            </div>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

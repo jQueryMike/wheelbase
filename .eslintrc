@@ -23,21 +23,9 @@
   },
   "overrides": [
     {
-      "files": ["lib/store/**/*.ts"],
-      "rules": {
-        "no-param-reassign": "off"
-      }
-    },
-    {
-      "files": ["lib/**/index.ts"],
+      "files": ["app/**/index.ts", "app/**/*.ts", "app/**/*.tsx"],
       "rules": {
         "import/prefer-default-export": "off"
-      }
-    },
-    {
-      "files": ["lib/**/*.slice.ts"],
-      "rules": {
-        "no-param-reassign": "off"
       }
     }
   ],
