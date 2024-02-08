@@ -93,6 +93,7 @@ export const BuilderMap = new Map([
         name: 'Text',
         text: config.content?.text.markup,
         ...config.settings,
+        ...config.appearance,
       };
       return text;
     },
