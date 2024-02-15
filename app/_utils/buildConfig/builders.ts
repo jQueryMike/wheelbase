@@ -20,15 +20,16 @@ export const BuilderMap = new Map([
         width: '300',
         height: '200',
       };
+      const isFill = settings.fill === 'true';
+      const w = appearance.width ?? width;
+      const h = appearance.height ?? height;
       const image = {
         id,
         name: 'Image',
-        ...(settings.loading ? settings : { ...settings, loading: 'lazy' }),
         src: `${process.env.MEDIA_URL}${url}`,
         alt: altText || alternativeText || name,
-        width,
-        height,
-        fill: appearance.fill || !width || !height,
+        ...(settings.loading ? { ...settings, fill: isFill } : { ...settings, fill: isFill, loading: 'lazy' }),
+        ...(isFill ? { sizes: `${appearance.width ?? w}px`, objectFit: 'contain' } : { width: w, height: h }),
       };
       return image;
     },
