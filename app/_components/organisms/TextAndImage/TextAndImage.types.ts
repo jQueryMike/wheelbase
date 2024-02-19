@@ -5,6 +5,7 @@ export type TextAndImageClasses<T = string> = {
   [key in
     | 'root'
     | 'rootInner'
+    | 'container'
     | 'contentContainer'
     | 'headingsContainer'
     | 'contentAreaContainer'

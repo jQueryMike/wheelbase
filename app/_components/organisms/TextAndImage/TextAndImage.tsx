@@ -33,7 +33,7 @@ const TextAndImage = async ({
   const classes = buildClasses(variantClasses, overrides);
   const components = contentArea.map(({ name, id, ...props }: any) => [name, BLOCKS[name], id, props]);
   return (
-    <div
+    <section
       className={cn(classes?.root, {
         [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
         'bg-gradient-to-br': gradientDirection === GradientDirection.LTR,
@@ -84,7 +84,7 @@ const TextAndImage = async ({
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -15,6 +15,12 @@ classes = {
     '@3xl/image-with-text': tw`@3xl/image-with-text:space-y-12`,
     '@5xl/image-with-text': tw`@5xl/image-with-text:flex-row @5xl/image-with-text:space-x-16 @5xl/image-with-text:space-y-0`,
   },
+  container: {
+    default: tw`container mx-auto grid h-full gap-6`,
+    md: tw`md:grid-cols-2 md:gap-12`,
+    lg: tw`lg:gap-16`,
+    xl: tw`xl:gap-20`,
+  },
   contentAreaContainer: {
     default: tw`space-y-4`,
     '@xl/image-with-text': tw`@xl/image-with-text:space-y-6`,
