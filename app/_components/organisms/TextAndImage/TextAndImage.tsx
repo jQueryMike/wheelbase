@@ -21,7 +21,7 @@ const TextAndImage = async ({
   subheading,
   image1: image,
   contentArea = [],
-  imagePlacement,
+  reverse,
   backgroundColor,
   backgroundGradientColor,
   gradientDirection,
@@ -50,13 +50,9 @@ const TextAndImage = async ({
       }
     >
       <div className={classes?.rootInner}>
-        <div className={classes?.container}>
+        <div className={cn(classes?.container, { 'grid-flow-dense': reverse })}>
           <div
-            className={cn(
-              imagePlacement === 'left'
-                ? classes?.textAndImageContentContainerReverse
-                : classes?.textAndImageContentContainer,
-            )}
+            className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}
           >
             {(heading || subheading) && (
               <div className={classes?.headingsContainer} data-testid="headings-container">
@@ -76,7 +72,7 @@ const TextAndImage = async ({
           </div>
           {image && (
             <div
-              className={cn(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}
+              className={cn(reverse ? classes?.imageContainerReverse : classes?.imageContainer)}
               data-testid="image-container"
             >
               <NextImage className={classes?.image} {...image} data-testid="image" />

@@ -9,6 +9,9 @@ export type TextAndImageClasses<T = string> = {
     | 'contentContainer'
     | 'headingsContainer'
     | 'contentAreaContainer'
+    | 'textAndImageContentContainerReverse'
+    | 'textAndImageContentContainer'
+    | 'imageContainerReverse'
     | 'imageContainer'
     | 'image']?: T;
 };

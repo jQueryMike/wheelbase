@@ -30,7 +30,22 @@ classes = {
     default: tw`relative aspect-[4/3] w-full`,
     '@5xl/image-with-text': '@5xl/image-with-text:w-[40%]',
   },
+  imageContainerReverse: {
+    default: tw`relative order-1`,
+  },
   image: tw`object-cover`,
+  textAndImageContentContainer: {
+    default: tw`my-8 flex flex-col justify-center space-y-8`,
+    md: tw`md:my-16 md:space-y-10`,
+    lg: tw`lg:my-20 lg:space-y-12`,
+    xl: tw`xl:my-14 xl:space-y-14`,
+  },
+  textAndImageContentContainerReverse: {
+    default: tw`order-2 my-8 flex flex-col justify-center space-y-8`,
+    md: tw`md:my-16 md:space-y-10`,
+    lg: tw`lg:my-20 lg:space-y-12`,
+    xl: tw`xl:my-14 xl:space-y-14`,
+  },
 };
 
 const textBlockVariant: TextAndImageVariant = {

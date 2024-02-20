@@ -1,28 +1,31 @@
 /* eslint-disable import/no-cycle */
 import dynamic from 'next/dynamic';
-import { ComponentType } from 'react';
 
-const atoms = {
+import * as Atoms from './atoms';
+import * as Molecules from './molecules';
+import * as Organisms from './organisms';
+import { Comps } from './types';
+
+const atoms: Comps<typeof Atoms, 'HeadingSize' | 'HeadingTag' | 'Icon'> = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
   Heading: dynamic(() => import('./atoms/Heading/Heading'), {}),
   Image: dynamic(() => import('./atoms/Image/Image'), {}),
   Text: dynamic(() => import('./atoms/Text/Text'), {}),
 };
 
-const molecules = {
+const molecules: Comps<typeof Molecules> = {
   ButtonList: dynamic(() => import('./molecules/ButtonList/ButtonList'), {}),
 };
 
-const organisms = {
+const organisms: Comps<typeof Organisms> = {
   Hero: dynamic(() => import('./organisms/Hero/Hero'), {}),
+  TextAndImage: dynamic(() => import('./organisms/TextAndImage/TextAndImage'), {}),
 };
 
 /**
  * Map of all blocks
  */
-const BLOCKS: {
-  [key: string]: ComponentType<any>;
-} = {
+const BLOCKS = {
   ...atoms,
   ...molecules,
   ...organisms,
