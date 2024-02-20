@@ -29,4 +29,5 @@ export interface HeadingProps {
   overrides?: {
     [key in keyof HeadingClasses]?: string;
   };
+  'data-testid'?: string;
 }

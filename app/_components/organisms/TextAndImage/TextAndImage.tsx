@@ -31,7 +31,14 @@ const TextAndImage = async ({
     default: { classes: variantClasses },
   } = await import(`./variants/${variant}`);
   const classes = buildClasses(variantClasses, overrides);
-  const components = contentArea.map(({ name, id, ...props }: any) => [name, BLOCKS[name], id, props]);
+  const components = contentArea.map(({ name, id, ...props }: any) => [
+    name,
+    BLOCKS[name as keyof typeof BLOCKS],
+    id,
+    props,
+  ]);
+  const resolvedHeading = heading ? await Heading(heading) : undefined;
+  const resolvedSubheading = subheading ? await Heading(subheading) : undefined;
   return (
     <section
       className={cn(classes?.root, {
@@ -56,8 +63,8 @@ const TextAndImage = async ({
           >
             {(heading || subheading) && (
               <div className={classes?.headingsContainer} data-testid="headings-container">
-                {heading && <Heading {...heading} data-testid="heading" />}
-                {subheading && <Heading {...subheading} data-testid="subheading" />}
+                {resolvedHeading}
+                {resolvedSubheading}
               </div>
             )}
             {components?.length > 0 && (

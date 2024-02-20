@@ -5,7 +5,15 @@ import { CSSProperties } from 'react';
 
 import { HeadingProps, HeadingSize, HeadingTag } from './Heading.types';
 
-const Heading = async ({ variant = '1', text, tag, size, color, overrides }: HeadingProps) => {
+const Heading = async ({
+  variant = '1',
+  text,
+  tag,
+  size,
+  color,
+  overrides,
+  'data-testid': dataTestId = 'heading',
+}: HeadingProps) => {
   const HeadingElement = tag || HeadingTag.H2;
   const {
     default: { classes: variantClasses },
@@ -23,7 +31,7 @@ const Heading = async ({ variant = '1', text, tag, size, color, overrides }: Hea
     >
       <HeadingElement
         className={cn(classes?.heading, classes?.[`heading${size?.replaceAll(' ', '') || HeadingSize.Medium}`])}
-        data-testid="heading"
+        data-testid={dataTestId}
       >
         {text}
       </HeadingElement>

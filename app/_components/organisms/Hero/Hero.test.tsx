@@ -1,3 +1,4 @@
+import { HeadingSize, HeadingTag } from '@components/atoms';
 import { render, screen } from '@testing-library/react';
 import { Block } from '@types';
 import { axe } from 'jest-axe';
@@ -8,18 +9,35 @@ import { HeroProps } from './Hero.types';
 const cases: [string, HeroProps & Block, () => void][] = [
   [
     'render heading if provided',
-    { id: 'one', name: 'Hero', classes: {}, heading: { classes: {}, text: 'example' } },
-    () => {
-      expect(screen.getByTestId('headings-container')).toBeTruthy();
-      expect(screen.getByTestId('heading')).toBeTruthy();
+    {
+      id: 'one',
+      name: 'Hero',
+      variant: '1',
+      heading: { variant: '1', text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
+      contentArea: [],
+    },
+    async () => {
+      expect(await screen.findByTestId('headings-container')).toBeTruthy();
+      expect(await screen.findByTestId('heading')).toBeTruthy();
     },
   ],
   [
     'render subheading if provided',
-    { id: 'one', name: 'Hero', classes: {}, subheading: { classes: {}, text: 'example' } },
-    () => {
-      expect(screen.getByTestId('headings-container')).toBeTruthy();
-      expect(screen.getByTestId('subheading')).toBeTruthy();
+    {
+      id: 'one',
+      name: 'Hero',
+      variant: '1',
+      subheading: {
+        variant: '1',
+        text: 'example',
+        tag: HeadingTag.H2,
+        size: HeadingSize.Medium,
+      },
+      contentArea: [],
+    },
+    async () => {
+      expect(await screen.findByTestId('headings-container')).toBeTruthy();
+      expect(await screen.findByTestId('subheading')).toBeTruthy();
     },
   ],
   [
@@ -27,7 +45,7 @@ const cases: [string, HeroProps & Block, () => void][] = [
     {
       id: 'one',
       name: 'Hero',
-      classes: {},
+      variant: '1',
       image1: {
         alt: 'example',
         src: 'https://via.placeholder.com/150',
@@ -35,9 +53,9 @@ const cases: [string, HeroProps & Block, () => void][] = [
         height: 150,
       },
     },
-    () => {
-      expect(screen.getByTestId('image-container')).toBeTruthy();
-      expect(screen.getByTestId('image')).toBeTruthy();
+    async () => {
+      expect(await screen.findByTestId('image-container')).toBeTruthy();
+      expect(await screen.findByTestId('image')).toBeTruthy();
     },
   ],
   [
@@ -45,26 +63,32 @@ const cases: [string, HeroProps & Block, () => void][] = [
     {
       id: 'one',
       name: 'Hero',
-      classes: {},
+      variant: '1',
       contentArea: [
         {
           id: 'two',
           name: 'Text',
-          classes: {},
+          variant: '1',
           text: 'Dis parturient montes nascetur ridiculus mus mauris vitae.',
-          'data-testid': 'text-component',
         },
       ],
     },
-    () => {
-      expect(screen.getByTestId('content-area')).toBeTruthy();
-      //   expect(screen.getByTestId('text-component')).toBeTruthy();
-      //   expect(screen.getByText('Dis parturient montes nascetur ridiculus mus mauris vitae.')).toBeTruthy();
+    async () => {
+      expect(await screen.findByTestId('content-area')).toBeTruthy();
+      expect(await screen.findByTestId('text-component')).toBeTruthy();
     },
   ],
 ];
 
 describe('Hero Organism test suite', () => {
+  beforeAll(() => {
+    // Mock components within the content area
+    jest.mock('../../atoms/Text/Text', () => ({
+      __esModule: true,
+      default: () => <div data-testid="text-component" />,
+    }));
+  });
+
   test.each(cases)('should %s', async (_, props, assertions) => {
     const ResolvedComponent = await Hero(props);
     render(ResolvedComponent);
@@ -75,8 +99,28 @@ describe('Hero Organism test suite', () => {
     const ResolvedComponent = await Hero({
       id: 'one',
       name: 'Hero',
-      classes: {},
-      heading: { classes: {}, text: 'example' },
+      variant: '1',
+      heading: { variant: '1', text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
+      subheading: {
+        variant: '1',
+        text: 'example',
+        tag: HeadingTag.H2,
+        size: HeadingSize.Medium,
+      },
+      image1: {
+        alt: 'example',
+        src: 'https://via.placeholder.com/150',
+        width: 150,
+        height: 150,
+      },
+      contentArea: [
+        {
+          id: 'two',
+          name: 'Text',
+          variant: '1',
+          text: 'Dis parturient montes nascetur ridiculus mus mauris vitae.',
+        },
+      ],
     });
     const { container } = render(ResolvedComponent);
     const results = await axe(container);
