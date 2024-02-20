@@ -8,25 +8,25 @@ import NextImage from 'next/image';
 import { CSSProperties, Suspense } from 'react';
 
 // eslint-disable-next-line import/no-cycle
-import { HeroProps } from './Hero.types';
+import { TextAndImageProps } from './TextAndImage.types';
 
 enum GradientDirection {
   RTL = 'Right to Left',
   LTR = 'Left to Right',
 }
 
-const Hero = async ({
+const TextAndImage = async ({
   variant = '1',
   heading,
   subheading,
   image1: image,
   contentArea = [],
-  imagePlacement,
+  reverse,
   backgroundColor,
   backgroundGradientColor,
   gradientDirection,
   overrides,
-}: HeroProps & Block) => {
+}: TextAndImageProps & Block) => {
   const {
     default: { classes: variantClasses },
   } = await import(`./variants/${variant}`);
@@ -38,7 +38,7 @@ const Hero = async ({
     props,
   ]);
   const resolvedHeading = heading ? await Heading(heading) : undefined;
-  const resolvedSubheading = subheading ? await Heading({ ...subheading, 'data-testid': 'subheading' }) : undefined;
+  const resolvedSubheading = subheading ? await Heading(subheading) : undefined;
   return (
     <section
       className={cn(classes?.root, {
@@ -57,11 +57,9 @@ const Hero = async ({
       }
     >
       <div className={classes?.rootInner}>
-        <div className={classes?.container}>
+        <div className={cn(classes?.container, { 'grid-flow-dense': reverse })}>
           <div
-            className={cn(
-              imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer,
-            )}
+            className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}
           >
             {(heading || subheading) && (
               <div className={classes?.headingsContainer} data-testid="headings-container">
@@ -81,7 +79,7 @@ const Hero = async ({
           </div>
           {image && (
             <div
-              className={cn(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}
+              className={cn(reverse ? classes?.imageContainerReverse : classes?.imageContainer)}
               data-testid="image-container"
             >
               <NextImage className={classes?.image} {...image} data-testid="image" />
@@ -93,4 +91,4 @@ const Hero = async ({
   );
 };
 
-export default Hero;
+export default TextAndImage;

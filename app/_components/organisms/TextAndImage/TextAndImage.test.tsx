@@ -3,19 +3,13 @@ import { render, screen } from '@testing-library/react';
 import { Block } from '@types';
 import { axe } from 'jest-axe';
 
-import Hero from './Hero';
-import { HeroProps } from './Hero.types';
+import TextAndImage from './TextAndImage';
+import { TextAndImageProps } from './TextAndImage.types';
 
-const cases: [string, HeroProps & Block, () => void][] = [
+const cases: [string, TextAndImageProps & Block, () => void][] = [
   [
     'render heading if provided',
-    {
-      id: 'one',
-      name: 'Hero',
-      variant: '1',
-      heading: { variant: '1', text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
-      contentArea: [],
-    },
+    { id: 'one', name: 'Text and Image', classes: {}, heading: { variant: '1', text: 'example' } },
     async () => {
       expect(await screen.findByTestId('headings-container')).toBeTruthy();
       expect(await screen.findByTestId('heading')).toBeTruthy();
@@ -23,18 +17,7 @@ const cases: [string, HeroProps & Block, () => void][] = [
   ],
   [
     'render subheading if provided',
-    {
-      id: 'one',
-      name: 'Hero',
-      variant: '1',
-      subheading: {
-        variant: '1',
-        text: 'example',
-        tag: HeadingTag.H2,
-        size: HeadingSize.Medium,
-      },
-      contentArea: [],
-    },
+    { id: 'one', name: 'Text and Image', classes: {}, subheading: { variant: '1', text: 'example' } },
     async () => {
       expect(await screen.findByTestId('headings-container')).toBeTruthy();
       expect(await screen.findByTestId('subheading')).toBeTruthy();
@@ -44,8 +27,8 @@ const cases: [string, HeroProps & Block, () => void][] = [
     'render image if provided',
     {
       id: 'one',
-      name: 'Hero',
-      variant: '1',
+      name: 'Text and Image',
+      classes: {},
       image1: {
         alt: 'example',
         src: 'https://via.placeholder.com/150',
@@ -62,13 +45,13 @@ const cases: [string, HeroProps & Block, () => void][] = [
     'render content area',
     {
       id: 'one',
-      name: 'Hero',
-      variant: '1',
+      name: 'Text and Image',
+      classes: {},
       contentArea: [
         {
           id: 'two',
           name: 'Text',
-          variant: '1',
+          classes: {},
           text: 'Dis parturient montes nascetur ridiculus mus mauris vitae.',
         },
       ],
@@ -80,9 +63,8 @@ const cases: [string, HeroProps & Block, () => void][] = [
   ],
 ];
 
-describe('Hero Organism test suite', () => {
+describe('Text and Image Organism test suite', () => {
   beforeAll(() => {
-    // Mock components within the content area
     jest.mock('../../atoms/Text/Text', () => ({
       __esModule: true,
       default: () => <div data-testid="text-component" />,
@@ -90,16 +72,16 @@ describe('Hero Organism test suite', () => {
   });
 
   test.each(cases)('should %s', async (_, props, assertions) => {
-    const ResolvedComponent = await Hero(props);
+    const ResolvedComponent = await TextAndImage(props);
     render(ResolvedComponent);
     assertions();
   });
 
   it('should have no accessibility violations', async () => {
-    const ResolvedComponent = await Hero({
+    const ResolvedComponent = await TextAndImage({
       id: 'one',
-      name: 'Hero',
-      variant: '1',
+      name: 'Text and Image',
+      classes: {},
       heading: { variant: '1', text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
       subheading: {
         variant: '1',
@@ -117,7 +99,7 @@ describe('Hero Organism test suite', () => {
         {
           id: 'two',
           name: 'Text',
-          variant: '1',
+          classes: {},
           text: 'Dis parturient montes nascetur ridiculus mus mauris vitae.',
         },
       ],
