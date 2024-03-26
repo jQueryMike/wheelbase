@@ -2,6 +2,7 @@
 import BLOCKS from '@components/Blocks';
 import { Heading } from '@components/atoms';
 import { Block } from '@types';
+import { hexToRgb, rgbString } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
 import cn from 'classnames';
 import NextImage from 'next/image';
@@ -61,6 +62,7 @@ const Hero = async ({
           '--tw-gradient-from': backgroundColor?.hex,
           '--tw-gradient-to': backgroundGradientColor?.hex,
           '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to, --tw-gradient-from)',
+          '--body-alt': backgroundColor?.hex ? rgbString(hexToRgb(backgroundColor?.hex as `#${string}`)) : undefined,
         } as CSSProperties
       }
     >
