@@ -10,10 +10,16 @@ import { CSSProperties, Suspense } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { HeroProps } from './Hero.types';
 
-enum GradientDirection {
-  RTL = 'Right to Left',
-  LTR = 'Left to Right',
-}
+const GradientDirectionMap = {
+  'Left to Right': 'to-l',
+  'Right to Left': 'to-r',
+  'Top to Bottom': 'to-b',
+  'Bottom to Top': 'to-t',
+  'Top Left to Bottom Right': 'to-br',
+  'Top Right to Bottom Left': 'to-bl',
+  'Bottom Left to Top Right': 'to-tr',
+  'Bottom Right to Top Left': 'to-tl',
+};
 
 const Hero = async ({
   variant = '1',
@@ -41,13 +47,15 @@ const Hero = async ({
   const resolvedSubheading = subheading ? await Heading({ ...subheading, 'data-testid': 'subheading' }) : undefined;
   return (
     <section
-      className={cn(classes?.root, {
-        [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
-        'bg-gradient-to-br': gradientDirection === GradientDirection.LTR,
-        'bg-gradient-to-bl': gradientDirection === GradientDirection.RTL,
-        [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
-        [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
-      })}
+      className={cn(
+        classes?.root,
+        [`bg-gradient-${gradientDirection ? GradientDirectionMap[gradientDirection] : 'none'}`],
+        {
+          [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
+          [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
+          [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
+        },
+      )}
       style={
         {
           '--tw-gradient-from': backgroundColor?.hex,
