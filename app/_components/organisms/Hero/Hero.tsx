@@ -2,6 +2,7 @@
 import BLOCKS from '@components/Blocks';
 import { Heading } from '@components/atoms';
 import { Block } from '@types';
+import { hexToRgb, rgbString } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
 import cn from 'classnames';
 import NextImage from 'next/image';
@@ -10,10 +11,16 @@ import { CSSProperties, Suspense } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { HeroProps } from './Hero.types';
 
-enum GradientDirection {
-  RTL = 'Right to Left',
-  LTR = 'Left to Right',
-}
+const GradientDirectionMap = {
+  'Left to Right': 'to-l',
+  'Right to Left': 'to-r',
+  'Top to Bottom': 'to-b',
+  'Bottom to Top': 'to-t',
+  'Top Left to Bottom Right': 'to-br',
+  'Top Right to Bottom Left': 'to-bl',
+  'Bottom Left to Top Right': 'to-tr',
+  'Bottom Right to Top Left': 'to-tl',
+};
 
 const Hero = async ({
   variant = '1',
@@ -41,18 +48,21 @@ const Hero = async ({
   const resolvedSubheading = subheading ? await Heading({ ...subheading, 'data-testid': 'subheading' }) : undefined;
   return (
     <section
-      className={cn(classes?.root, {
-        [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
-        'bg-gradient-to-br': gradientDirection === GradientDirection.LTR,
-        'bg-gradient-to-bl': gradientDirection === GradientDirection.RTL,
-        [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
-        [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
-      })}
+      className={cn(
+        classes?.root,
+        [`bg-gradient-${gradientDirection ? GradientDirectionMap[gradientDirection] : 'none'}`],
+        {
+          [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
+          [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
+          [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
+        },
+      )}
       style={
         {
           '--tw-gradient-from': backgroundColor?.hex,
           '--tw-gradient-to': backgroundGradientColor?.hex,
           '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to, --tw-gradient-from)',
+          '--body-alt': backgroundColor?.hex ? rgbString(hexToRgb(backgroundColor?.hex as `#${string}`)) : undefined,
         } as CSSProperties
       }
     >
