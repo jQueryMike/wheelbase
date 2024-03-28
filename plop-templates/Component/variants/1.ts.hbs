@@ -1,0 +1,14 @@
+import { {{pascalCase name}}Classes } from '../{{pascalCase name}}.types';
+import {{pascalCase name}}Variant from './{{pascalCase name}}Variant';
+
+const location = '{{pascalCase name}}/variants/1';
+
+let classes: {{pascalCase name}}Classes<ClassesProperty> = {};
+
+classes = {
+  root: tw``,
+};
+
+const buttonVariant: {{pascalCase name}}Variant = { classes: new ClassesBuilder({ location, classes }).classes };
+
+export default buttonVariant;

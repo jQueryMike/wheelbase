@@ -1,0 +1,14 @@
+describe('{{pascalCase name}} test suite', () => {
+  it('should work', () => {
+    expect(true).toBe(true)
+  })
+
+  it('should have no accessibility violations', {{#if asynchronous}}async{{/if}} () => {
+    const ResolvedComponent = {{#if asynchronous}}await{{/if}} {{pascalCase name}}({
+      title: '{{pascalCase name}}',
+    });
+    const { container } = render(ResolvedComponent);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+});

@@ -1,0 +1,8 @@
+export type {{pascalCase name}}Classes<T = string> = {
+  [key in 'root']?: T;
+}
+
+export type {{pascalCase name}}Props = {
+  title: string;
+  classes?: {{pascalCase name}}Classes<string>;
+};
