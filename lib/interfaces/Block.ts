@@ -1,5 +1,5 @@
 interface Block {
-  id: string;
+  id?: string;
   name?: string;
   [propName: string]: any;
 }

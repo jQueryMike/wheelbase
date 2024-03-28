@@ -1,3 +1,4 @@
+import { BaseProps } from '@components/types';
 import { ButtonSize, ButtonStyle } from '@utils/constants';
 import { HTMLAttributeAnchorTarget } from 'react';
 
@@ -25,7 +26,7 @@ export type ButtonClasses<T = string> = {
     | 'largeButtonContent']?: T;
 };
 
-export interface ButtonProps {
+export type ButtonProps = BaseProps<{
   variant?: '1' | '2' | '5' | string;
   classes?: ButtonClasses<string>;
   text?: string;
@@ -41,4 +42,4 @@ export interface ButtonProps {
   overrides?: {
     [key in keyof ButtonClasses]?: string;
   };
-}
+}>

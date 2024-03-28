@@ -58,3 +58,53 @@ export type BlockConfig = {
 /**
  * Utility type
  */
+
+/**
+ * Atomic types
+ */
+export type AtomicType = 'atom' | 'molecule' | 'organism';
+
+/**
+ * Spacing types
+ */
+export type SpacingType = 'padding' | 'margin';
+
+/**
+ * Size types to map to values
+ */
+export type SizeType = 'none' | 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge';
+
+/**
+ * Spacing map
+ */
+export type SpacingMap = {
+  /** Map atomic types */
+  [key1 in AtomicType]: {
+    /** Map spacing types */
+    [key2 in SpacingType]?: {
+      /** Map size types */
+      [key3 in Partial<SizeType>]?: string;
+    }
+  }
+}
+
+/**
+ * Positions within a size
+ */
+export type Positions = 'top' | 'bottom' | 'left' | 'right';
+
+/**
+ * Sizes within a spacing type
+ */
+export type Sizes = {
+  /** Map over positions top, bottom, left, right */
+  [key in Positions]: SizeType
+}
+
+/**
+ * Spacing type for padding and margin
+ */
+export type Spacing = {
+  /** Map over Spacing types */
+  [key in SpacingType]: Sizes;
+}

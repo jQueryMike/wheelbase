@@ -1,9 +1,13 @@
 import { HEX, hexToRgb, rgbString } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
+import { buildStyling } from '@utils/buildStyling';
 import cn from 'classnames';
 import { CSSProperties } from 'react';
+import { AtomicType } from '@types';
 
 import { HeadingProps, HeadingSize, HeadingTag } from './Heading.types';
+
+const BLOCK_TYPE: AtomicType = "atom";
 
 const Heading = async ({
   variant = '1',
@@ -12,6 +16,7 @@ const Heading = async ({
   size,
   color,
   overrides,
+  spacing,
   'data-testid': dataTestId = 'heading',
 }: HeadingProps) => {
   const HeadingElement = tag || HeadingTag.H2;
@@ -21,7 +26,7 @@ const Heading = async ({
   const classes = buildClasses(variantClasses, overrides);
   return (
     <div
-      className={classes?.root}
+      className={cn(classes?.root, buildStyling({spacing}, BLOCK_TYPE))}
       style={
         {
           '--heading-default': rgbString(hexToRgb(color?.hex as HEX)),
