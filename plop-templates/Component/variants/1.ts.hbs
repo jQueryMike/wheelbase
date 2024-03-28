@@ -1,3 +1,5 @@
+import { ClassesBuilder, ClassesProperty, tw } from '@utils';
+
 import { {{pascalCase name}}Classes } from '../{{pascalCase name}}.types';
 import {{pascalCase name}}Variant from './{{pascalCase name}}Variant';
 
@@ -9,6 +11,6 @@ classes = {
   root: tw``,
 };
 
-const buttonVariant: {{pascalCase name}}Variant = { classes: new ClassesBuilder({ location, classes }).classes };
+const {{camelCase name}}Variant: {{pascalCase name}}Variant = { classes: new ClassesBuilder({ location, classes }).classes };
 
-export default buttonVariant;
+export default {{camelCase name}}Variant;

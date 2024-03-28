@@ -5,7 +5,7 @@ const {{pascalCase name}} = {{#if asynchronous}}async {{/if}}({title}: {{pascalC
   {{#if asynchronous}}
   const {
     default: { classes: variantClasses },
-  } = await import(`./variants/1`);
+  } = await import(`./variants/${1}`);
   const classes = buildClasses(variantClasses);
   return (
     <div className={classes?.root}>

@@ -1,8 +1,10 @@
+import { BaseProps } from '@components/types';
+
 export type {{pascalCase name}}Classes<T = string> = {
   [key in 'root']?: T;
 }
 
-export type {{pascalCase name}}Props = {
+export type {{pascalCase name}}Props = BaseProps<{
   title: string;
   classes?: {{pascalCase name}}Classes<string>;
-};
+}>;
