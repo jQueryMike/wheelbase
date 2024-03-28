@@ -1,8 +1,9 @@
 // eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
 import { Heading } from '@components/atoms';
-import { Block } from '@types';
+import { AtomicType } from '@types';
 import { buildClasses } from '@utils/buildClasses';
+import { buildStyling } from '@utils/buildStyling';
 import cn from 'classnames';
 import NextImage from 'next/image';
 import { CSSProperties, Suspense } from 'react';
@@ -15,6 +16,8 @@ enum GradientDirection {
   LTR = 'Left to Right',
 }
 
+const BLOCK_TYPE: AtomicType = "organism";
+
 const TextAndImage = async ({
   variant = '1',
   heading,
@@ -26,7 +29,8 @@ const TextAndImage = async ({
   backgroundGradientColor,
   gradientDirection,
   overrides,
-}: TextAndImageProps & Block) => {
+  spacing
+}: TextAndImageProps) => {
   const {
     default: { classes: variantClasses },
   } = await import(`./variants/${variant}`);
@@ -47,7 +51,7 @@ const TextAndImage = async ({
         'bg-gradient-to-bl': gradientDirection === GradientDirection.RTL,
         [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
         [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
-      })}
+      }, buildStyling({spacing}, BLOCK_TYPE))}
       style={
         {
           '--tw-gradient-from': backgroundColor?.hex,
