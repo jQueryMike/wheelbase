@@ -1,4 +1,5 @@
 import { HeadingProps, ImageProps } from '@components/atoms';
+import { BaseProps } from '@components/types';
 import { Block, Color } from '@types';
 
 export type HeroClasses<T = string> = {
@@ -16,7 +17,7 @@ export type HeroClasses<T = string> = {
     | 'image']?: T;
 };
 
-export interface HeroProps {
+export type HeroProps = BaseProps<{
   variant?: '1' | '2' | '5' | '6' | string;
   heading?: HeadingProps;
   subheading?: HeadingProps;
@@ -30,4 +31,4 @@ export interface HeroProps {
   overrides?: {
     [key in keyof HeroClasses]?: string;
   };
-}
+}>;

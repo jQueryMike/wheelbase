@@ -1,9 +1,10 @@
 // eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
 import { Heading } from '@components/atoms';
-import { Block } from '@types';
+import { Block, AtomicType } from '@types';
 import { hexToRgb, rgbString } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
+import { buildStyling } from '@utils/buildStyling';
 import cn from 'classnames';
 import NextImage from 'next/image';
 import { CSSProperties, Suspense } from 'react';
@@ -22,6 +23,8 @@ const GradientDirectionMap = {
   'Bottom Right to Top Left': 'to-tl',
 };
 
+const BLOCK_TYPE: AtomicType = "organism";
+
 const Hero = async ({
   variant = '1',
   heading,
@@ -33,6 +36,7 @@ const Hero = async ({
   backgroundGradientColor,
   gradientDirection,
   overrides,
+  spacing
 }: HeroProps & Block) => {
   const {
     default: { classes: variantClasses },
@@ -56,6 +60,7 @@ const Hero = async ({
           [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
           [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
         },
+        buildStyling({spacing}, BLOCK_TYPE)
       )}
       style={
         {

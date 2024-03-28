@@ -1,12 +1,17 @@
 /* eslint-disable react/no-danger */
 import { HEX, hexToRgb, rgbString } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
+import { buildStyling } from '@utils/buildStyling';
 import * as DOMPurify from 'isomorphic-dompurify';
 import { CSSProperties } from 'react';
+import { AtomicType } from '@types';
+import cn from 'classnames';
 
 import { TextProps } from './Text.types';
 
-const Text = async ({ variant = '1', text, color, overrides }: TextProps) => {
+const BLOCK_TYPE: AtomicType = "atom";
+
+const Text = async ({ variant = '1', text, color, overrides, spacing }: TextProps) => {
   if (!text) return null;
 
   const {
@@ -16,7 +21,7 @@ const Text = async ({ variant = '1', text, color, overrides }: TextProps) => {
 
   return (
     <div
-      className={classes?.root}
+      className={cn(classes?.root, buildStyling({spacing}, BLOCK_TYPE))}
       style={
         {
           '--tw-text-opacity': color?.opacity,

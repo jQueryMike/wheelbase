@@ -1,3 +1,4 @@
+import { BaseProps } from '@components/types';
 import { Color } from '@types';
 
 export enum HeadingTag {
@@ -20,7 +21,7 @@ export type HeadingClasses<T = string> = {
   [key in 'root' | 'heading' | `heading${'ExtraLarge' | 'Large' | 'Medium' | 'Small' | 'ExtraSmall'}`]?: T;
 };
 
-export interface HeadingProps {
+export type HeadingProps = BaseProps<{
   variant?: '1' | '2-hero' | '2' | string;
   text?: string;
   tag?: HeadingTag;
@@ -30,4 +31,4 @@ export interface HeadingProps {
     [key in keyof HeadingClasses]?: string;
   };
   'data-testid'?: string;
-}
+}>

@@ -1,10 +1,15 @@
 import { buildClasses } from '@utils/buildClasses';
+import { buildStyling } from '@utils/buildStyling';
 import { ButtonSize, ButtonStyle } from '@utils/constants';
 import cn from 'classnames';
 import NextLink from 'next/link';
 
+import { AtomicType } from '@types';
 import { Icon } from '../Icon';
 import { ButtonProps } from './Button.types';
+
+const BLOCK_TYPE: AtomicType = "atom";
+
 
 const Button = async ({
   variant = '1',
@@ -19,6 +24,7 @@ const Button = async ({
   style = ButtonStyle.Primary,
   loading = false,
   overrides,
+  spacing
 }: ButtonProps) => {
   const {
     default: { classes: variantClasses },
@@ -28,7 +34,7 @@ const Button = async ({
     <button
       className={cn(classes?.button, classes?.[`${size}Button`], classes?.[`${style}Button`], {
         [classes?.buttonLoading || '']: loading,
-      })}
+      }, buildStyling({spacing}, BLOCK_TYPE))}
       type={type === 'button' ? 'button' : 'submit'}
       onClick={onClick}
     >
