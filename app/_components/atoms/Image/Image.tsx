@@ -1,13 +1,12 @@
+import { AtomicType, Block } from '@types';
 import { buildClasses } from '@utils/buildClasses';
 import { buildStyling } from '@utils/buildStyling';
-import NextImage from 'next/image';
 import cn from 'classnames';
-import Block from 'lib/interfaces/Block';
-import { AtomicType } from '@types';
+import NextImage from 'next/image';
 
 import { ImageProps } from './Image.types';
 
-const BLOCK_TYPE: AtomicType = "atom";
+const BLOCK_TYPE: AtomicType = 'atom';
 
 const Image = async ({ variant = '1', overrides, spacing, ...rest }: ImageProps & Block) => {
   const {
@@ -15,7 +14,7 @@ const Image = async ({ variant = '1', overrides, spacing, ...rest }: ImageProps 
   } = await import(`./variants/${variant}`);
   const classes = buildClasses(variantClasses, overrides);
   return (
-    <div className={cn(classes?.root, buildStyling({spacing}, BLOCK_TYPE))}>
+    <div className={cn(classes?.root, buildStyling({ spacing }, BLOCK_TYPE))}>
       <NextImage className={classes?.image} {...rest} />
     </div>
   );
