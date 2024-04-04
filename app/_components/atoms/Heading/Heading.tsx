@@ -5,9 +5,9 @@ import cn from 'classnames';
 import { CSSProperties } from 'react';
 import { AtomicType } from '@types';
 
-import { HeadingProps, HeadingSize, HeadingTag } from './Heading.types';
+import { HeadingProps, HeadingTag } from './Heading.types';
 
-const BLOCK_TYPE: AtomicType = "atom";
+const BLOCK_TYPE: AtomicType = 'atom';
 
 const Heading = async ({
   variant = '1',
@@ -15,6 +15,7 @@ const Heading = async ({
   tag,
   size,
   color,
+  textType = 'heading',
   overrides,
   spacing,
   'data-testid': dataTestId = 'heading',
@@ -26,7 +27,7 @@ const Heading = async ({
   const classes = buildClasses(variantClasses, overrides);
   return (
     <div
-      className={cn(classes?.root, buildStyling({spacing}, BLOCK_TYPE))}
+      className={cn(classes?.root, buildStyling({ spacing, fontSize: size, textType }, BLOCK_TYPE))}
       style={
         {
           '--heading-default': rgbString(hexToRgb(color?.hex as HEX)),
@@ -34,10 +35,7 @@ const Heading = async ({
         } as CSSProperties
       }
     >
-      <HeadingElement
-        className={cn(classes?.heading, classes?.[`heading${size?.replaceAll(' ', '') || HeadingSize.Medium}`])}
-        data-testid={dataTestId}
-      >
+      <HeadingElement className={cn(classes?.heading)} data-testid={dataTestId}>
         {text}
       </HeadingElement>
     </div>

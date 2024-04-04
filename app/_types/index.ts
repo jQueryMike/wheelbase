@@ -2,8 +2,10 @@
  * Property type
  * This is used to determine the nested keys of a long form key
  */
-export type Property<T extends string> =
-  T extends `${infer X extends string}_${infer Y extends string}_${infer Z extends string}` ? [X, Y, Z] : never;
+export type Property<T extends string> = T extends `${infer X extends string}_${infer Y extends
+  string}_${infer Z extends string}`
+  ? [X, Y, Z]
+  : never;
 
 /**
  * Block type
@@ -84,9 +86,9 @@ export type SpacingMap = {
     [key2 in SpacingType]?: {
       /** Map size types */
       [key3 in Partial<SizeType>]?: string;
-    }
-  }
-}
+    };
+  };
+};
 
 /**
  * Positions within a size
@@ -98,8 +100,8 @@ export type Positions = 'top' | 'bottom' | 'left' | 'right';
  */
 export type Sizes = {
   /** Map over positions top, bottom, left, right */
-  [key in Positions]: SizeType
-}
+  [key in Positions]: SizeType;
+};
 
 /**
  * Spacing type for padding and margin
@@ -107,4 +109,37 @@ export type Sizes = {
 export type Spacing = {
   /** Map over Spacing types */
   [key in SpacingType]: Sizes;
-}
+};
+
+/**
+ * Font sizing for text size
+ */
+export type FontSize = string;
+
+/**
+ * Text types
+ */
+export type TextType = 'heading' | 'subheading' | 'text';
+
+/**
+ * Text types
+ */
+export type FontSizeOptions = 'Extra Small' | 'Small' | 'Medium' | 'Large' | 'Extra Large';
+
+/**
+ * Positions within a size
+ */
+export type ScreenSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+/**
+ * Spacing map
+ */
+export type FontSizeMap = {
+  /** Map atomic types */
+  [key1 in TextType]: {
+    /** Map spacing types */
+    [key2 in FontSizeOptions]: {
+      [key3 in ScreenSizes]?: string;
+    };
+  };
+};

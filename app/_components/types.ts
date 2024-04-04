@@ -17,8 +17,9 @@ export type Spacing = {
   marginBottom: string;
   marginLeft: string;
   marginRight: string;
-}
+};
 
 export type BaseProps<T = {}> = T & {
   spacing: Spacing;
-}
+  fontSize: string;
+};
