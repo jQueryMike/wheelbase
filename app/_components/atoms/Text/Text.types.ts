@@ -12,4 +12,4 @@ export type TextProps = BaseProps<{
   overrides?: {
     [key in keyof TextClasses]?: string;
   };
-}>
+}>;

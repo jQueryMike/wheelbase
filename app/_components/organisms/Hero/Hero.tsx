@@ -49,7 +49,7 @@ const Hero = async ({
     props,
   ]);
   const resolvedHeading = heading ? await Heading(heading) : undefined;
-  const resolvedSubheading = subheading ? await Heading({ ...subheading, 'data-testid': 'subheading' }) : undefined;
+  const resolvedSubheading = subheading ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: "subheading" }) : undefined;
   return (
     <section
       className={cn(

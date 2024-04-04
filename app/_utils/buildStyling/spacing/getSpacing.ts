@@ -1,5 +1,4 @@
-import { AtomicType, Sizes, Spacing, SpacingMap, SpacingType } from "@types";
-
+import { AtomicType, Sizes, Spacing, SpacingMap, SpacingType } from '@types';
 
 /**
  * Example spacing map
@@ -21,7 +20,7 @@ const SpacingMappings: SpacingMap = {
       medium: '3',
       large: '4',
       xlarge: '5',
-    }
+    },
   },
   molecule: {
     padding: {
@@ -39,7 +38,7 @@ const SpacingMappings: SpacingMap = {
       medium: '4',
       large: '5',
       xlarge: '6',
-    }
+    },
   },
   organism: {
     padding: {
@@ -57,9 +56,9 @@ const SpacingMappings: SpacingMap = {
       medium: '5',
       large: '6',
       xlarge: '7',
-    }
-  }
-}
+    },
+  },
+};
 
 /**
  * @description Mapping function to map data to tailwind classes
@@ -67,7 +66,7 @@ const SpacingMappings: SpacingMap = {
  * @param spacingType {SpacingType} type of spacing
  * @param size {Sizes} Size values
  * @returns Tailwind classes
- * 
+ *
  * @example
  * ```
  * MappingFunction('atom', 'padding', { top: 'sm', bottom: 'md', left: 'lg', right: 'lg' })
@@ -89,7 +88,7 @@ const MappingFunction = (atomicType: AtomicType, spacingType: SpacingType, { top
     output += `${t}l-${SpacingMappings[atomicType].margin?.[left]} ${t}r-${SpacingMappings[atomicType].margin?.[right]} `;
   }
   return output.trim();
-}
+};
 
 /**
  * @description Get spacing for an specified type
@@ -103,10 +102,14 @@ const MappingFunction = (atomicType: AtomicType, spacingType: SpacingType, { top
  */
 export function getSpacing(spacing: Spacing, atomicType: AtomicType): string {
   let output = '';
-  output = spacing && Object.keys(spacing).reduce((prev, curr) => {
-    const key = curr as SpacingType;
-    prev.push(MappingFunction(atomicType, key, spacing[key]));
-    return prev;
-  }, [] as string[]).join(' ');
+  output =
+    spacing &&
+    Object.keys(spacing)
+      .reduce((prev, curr) => {
+        const key = curr as SpacingType;
+        prev.push(MappingFunction(atomicType, key, spacing[key]));
+        return prev;
+      }, [] as string[])
+      .join(' ');
   return output;
 }
