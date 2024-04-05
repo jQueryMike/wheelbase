@@ -31,4 +31,4 @@ export type TextAndImageProps = BaseProps<{
   overrides?: {
     [key in keyof TextAndImageClasses]?: string;
   };
-}>
+}>;

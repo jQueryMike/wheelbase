@@ -50,15 +50,15 @@ const buildSafelist = (pages) => {
     ];
     const colCounts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-    const paddingPrefixes = ["p", "px", "py", "pt", "pr", "pb", "pl"];
-    const marginPrefixes = ["m", "mx", "my", "mt", "mr", "mb", "ml"];
+    const paddingPrefixes = ['p', 'px', 'py', 'pt', 'pr', 'pb', 'pl'];
+    const marginPrefixes = ['m', 'mx', 'my', 'mt', 'mr', 'mb', 'ml'];
 
     const paddingClasses = [];
     const marginClasses = [];
     for (let v = 0; v < 8; v++) {
       const value = v;
-      paddingPrefixes.map(prefix => paddingClasses.push(`${prefix}-${value}`))
-      marginPrefixes.map(prefix => marginClasses.push(`${prefix}-${value}`))
+      paddingPrefixes.map((prefix) => paddingClasses.push(`${prefix}-${value}`));
+      marginPrefixes.map((prefix) => marginClasses.push(`${prefix}-${value}`));
     }
 
     return [

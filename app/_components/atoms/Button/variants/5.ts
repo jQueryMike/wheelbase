@@ -9,15 +9,15 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  button: tw`relative inline-flex items-center justify-center font-button font-bold transition-all`,
+  button: tw`font-button relative inline-flex items-center justify-center font-bold transition-all`,
   buttonLoading: tw`pointer-events-none`,
   buttonContent: tw`inline-flex items-center justify-center`,
   buttonContentLoading: tw`opacity-0`,
   loadingIconContainer: tw`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform`,
   loadingIcon: tw`fa-duotone fa-spinner-third fa-spin`,
   primaryButton: {
-    default: tw`bg-gradient-to-r from-accent to-accent-light text-accent-contrast`,
-    hover: tw`hover:bg-gradient-to-r hover:from-primary hover:to-primary-dark hover:text-primary-contrast`,
+    default: tw`from-accent to-accent-light text-accent-contrast bg-gradient-to-r`,
+    hover: tw`hover:from-primary hover:to-primary-dark hover:text-primary-contrast hover:bg-gradient-to-r`,
   },
   secondaryButton: {
     default: tw`bg-secondary text-secondary-contrast`,
@@ -28,7 +28,7 @@ classes = {
     hover: tw`hover:bg-accent/80`,
   },
   plainButton: {
-    default: tw`border border-divider text-primary`,
+    default: tw`border-divider text-primary border`,
     hover: tw`hover:border-primary/50`,
   },
   smallButton: tw`h-8 text-[14px]`,

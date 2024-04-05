@@ -42,4 +42,4 @@ export type ButtonProps = BaseProps<{
   overrides?: {
     [key in keyof ButtonClasses]?: string;
   };
-}>
+}>;

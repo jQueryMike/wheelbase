@@ -9,7 +9,7 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  button: tw`flex items-center justify-center whitespace-nowrap rounded-lg font-button font-semibold transition`,
+  button: tw`font-button flex items-center justify-center whitespace-nowrap rounded-lg font-semibold transition`,
   buttonLoading: tw`pointer-events-none`,
   buttonContent: tw`inline-flex items-center justify-center`,
   buttonContentLoading: tw`opacity-0`,
@@ -31,7 +31,7 @@ classes = {
     active: tw`active:scale-95`,
   },
   plainButton: {
-    default: tw`border border-divider text-primary`,
+    default: tw`border-divider text-primary border`,
     hover: tw`hover:border-primary/50`,
     active: tw`active:scale-95`,
   },

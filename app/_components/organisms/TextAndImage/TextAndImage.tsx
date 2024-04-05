@@ -16,7 +16,7 @@ enum GradientDirection {
   LTR = 'Left to Right',
 }
 
-const BLOCK_TYPE: AtomicType = "organism";
+const BLOCK_TYPE: AtomicType = 'organism';
 
 const TextAndImage = async ({
   variant = '1',
@@ -29,7 +29,7 @@ const TextAndImage = async ({
   backgroundGradientColor,
   gradientDirection,
   overrides,
-  spacing
+  spacing,
 }: TextAndImageProps) => {
   const {
     default: { classes: variantClasses },
@@ -45,13 +45,17 @@ const TextAndImage = async ({
   const resolvedSubheading = subheading ? await Heading(subheading) : undefined;
   return (
     <section
-      className={cn(classes?.root, {
-        [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
-        'bg-gradient-to-br': gradientDirection === GradientDirection.LTR,
-        'bg-gradient-to-bl': gradientDirection === GradientDirection.RTL,
-        [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
-        [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
-      }, buildStyling({spacing}, BLOCK_TYPE))}
+      className={cn(
+        classes?.root,
+        {
+          [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
+          'bg-gradient-to-br': gradientDirection === GradientDirection.LTR,
+          'bg-gradient-to-bl': gradientDirection === GradientDirection.RTL,
+          [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
+          [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
+        },
+        buildStyling({ spacing }, BLOCK_TYPE),
+      )}
       style={
         {
           '--tw-gradient-from': backgroundColor?.hex,

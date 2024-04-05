@@ -1,1 +1,1 @@
-export { default as mergeVars } from "./mergeVars";
+export { default as mergeVars } from './mergeVars';

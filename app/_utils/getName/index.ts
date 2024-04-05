@@ -1,1 +1,1 @@
-export { default as getName } from "./getName";
+export { default as getName } from './getName';

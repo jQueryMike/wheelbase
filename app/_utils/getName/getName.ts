@@ -4,7 +4,7 @@
  * @returns lowercase name without trailing numbers
  */
 function getName(name: string) {
-  return name.replace(/(\d+|Atom|Molecule)$/, "");
+  return name.replace(/(\d+|Atom|Molecule)$/, '');
 }
 
 export default getName;
