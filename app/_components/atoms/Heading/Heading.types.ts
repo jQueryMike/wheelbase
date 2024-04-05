@@ -1,5 +1,5 @@
 import { BaseProps } from '@components/types';
-import { Color, TextType } from '@types';
+import { Color, FontWeightType, TextType } from '@types';
 
 export enum HeadingTag {
   H1 = 'h1',
@@ -28,6 +28,7 @@ export type HeadingProps = BaseProps<{
   size?: HeadingSize;
   color?: Color;
   textType?: TextType;
+  fontWeight?: FontWeightType;
   overrides?: {
     [key in keyof HeadingClasses]?: string;
   };

@@ -1,11 +1,11 @@
-import { getGlobalContent } from "./getGlobalContent";
+import { getGlobalContent } from './getGlobalContent';
 
-describe("getGlobalContent", () => {
+describe('getGlobalContent', () => {
   beforeEach(() => {
     jest.resetModules();
   });
 
-  it("should fetch global content from Umbraco", async () => {
+  it('should fetch global content from Umbraco', async () => {
     // Mock the response from the Umbraco API
     const mockResponse = {
       // Add your mock response data here
@@ -21,16 +21,16 @@ describe("getGlobalContent", () => {
 
     // Assert that the fetch function was called with the correct URL
     expect(global.fetch).toHaveBeenCalledWith(
-      "http://localhost:30590/umbraco/delivery/api/v1/content/item/shared-content",
-      { next: { tags: [] } }
+      'http://localhost:30590/umbraco/delivery/api/v1/content/item/shared-content',
+      { next: { tags: [] } },
     );
 
     // Assert that the result matches the expected mock response
     expect(result).toEqual(mockResponse);
   });
 
-  it("should handle errors when fetching global content", async () => {
-    const mockError = new Error("Fetch error");
+  it('should handle errors when fetching global content', async () => {
+    const mockError = new Error('Fetch error');
     // Mock the fetch function to throw an error
     global.fetch = jest.fn().mockRejectedValue(mockError);
 
@@ -39,13 +39,13 @@ describe("getGlobalContent", () => {
 
     // Assert that the fetch function was called with the correct URL
     expect(global.fetch).toHaveBeenCalledWith(
-      "http://localhost:30590/umbraco/delivery/api/v1/content/item/shared-content",
-      { next: { tags: [] } }
+      'http://localhost:30590/umbraco/delivery/api/v1/content/item/shared-content',
+      { next: { tags: [] } },
     );
   });
 
-  it("should provide tag when not in local environment", async () => {
-    process.env.ENVIRONMENT_NAME = "test";
+  it('should provide tag when not in local environment', async () => {
+    process.env.ENVIRONMENT_NAME = 'test';
     // Mock the response from the Umbraco API
     const mockResponse = {
       // Add your mock response data here
@@ -61,8 +61,8 @@ describe("getGlobalContent", () => {
 
     // Assert that the fetch function was called with the correct URL
     expect(global.fetch).toHaveBeenCalledWith(
-      "http://localhost:30590/umbraco/delivery/api/v1/content/item/shared-content",
-      { next: { tags: ["shared-content"] } }
+      'http://localhost:30590/umbraco/delivery/api/v1/content/item/shared-content',
+      { next: { tags: ['shared-content'] } },
     );
 
     // Assert that the result matches the expected mock response

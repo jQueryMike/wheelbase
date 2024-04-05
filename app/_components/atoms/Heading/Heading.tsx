@@ -16,8 +16,9 @@ const Heading = async ({
   size,
   color,
   textType = 'heading',
-  overrides,
+  fontWeight,
   spacing,
+  overrides,
   'data-testid': dataTestId = 'heading',
 }: HeadingProps) => {
   const HeadingElement = tag || HeadingTag.H2;
@@ -25,9 +26,15 @@ const Heading = async ({
     default: { classes: variantClasses },
   } = await import(`./variants/${variant}`);
   const classes = buildClasses(variantClasses, overrides);
+  const styling = {
+    spacing,
+    fontSize: size,
+    textType,
+    fontWeight: fontWeight || (textType === 'heading' ? 'Bold' : 'Medium'),
+  };
   return (
     <div
-      className={cn(classes?.root, buildStyling({ spacing, fontSize: size, textType }, BLOCK_TYPE))}
+      className={cn(classes?.root, buildStyling(styling, BLOCK_TYPE))}
       style={
         {
           '--heading-default': rgbString(hexToRgb(color?.hex as HEX)),

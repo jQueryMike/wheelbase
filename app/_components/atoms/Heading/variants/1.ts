@@ -1,4 +1,3 @@
-
 import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 import { HeadingClasses } from '../Heading.types';
 import HeadingVariant from './HeadingVariant';
@@ -9,7 +8,7 @@ let classes: HeadingClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  heading: tw`text-balance font-heading text-heading font-bold leading-[1.1] tracking-tighter`,
+  heading: tw`font-heading text-heading text-balance leading-[1.1] tracking-tighter`,
   headingExtraLarge: {
     default: tw`text-[40px]`,
     lg: tw`lg:text-[46px]`,

@@ -1,1 +1,1 @@
-export { default as getPage } from "./getPage";
+export { default as getPage } from './getPage';

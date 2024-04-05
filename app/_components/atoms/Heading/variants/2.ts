@@ -10,7 +10,7 @@ classes = {
   root: {
     default: tw``,
   },
-  heading: tw`text-balance font-heading font-bold leading-[1.1] tracking-tighter text-heading`,
+  heading: tw`font-heading text-heading text-balance font-bold leading-[1.1] tracking-tighter`,
   headingExtraLarge: {
     default: tw`text-[40px]`,
     lg: tw`lg:text-[46px]`,
@@ -18,13 +18,13 @@ classes = {
   },
   headingLarge: {
     default: tw`relative text-[36px]`,
-    before: tw`before:absolute before:-top-4 before:left-1/2 before:h-[6px] before:w-[3.5rem] before:-translate-x-1/2 before:transform before:rounded-sm before:bg-accent before:content-[""]`,
+    before: tw`before:bg-accent before:absolute before:-top-4 before:left-1/2 before:h-[6px] before:w-[3.5rem] before:-translate-x-1/2 before:transform before:rounded-sm before:content-[""]`,
     lg: tw`lg:text-[40px]`,
     xl: tw`xl:text-[44px]`,
   },
   headingMedium: {
     default: tw`relative text-[30px]`,
-    before: tw`before:absolute before:-top-4 before:left-0 before:h-[6px] before:w-[3.5rem] before:rounded-sm before:bg-accent before:content-[""]`,
+    before: tw`before:bg-accent before:absolute before:-top-4 before:left-0 before:h-[6px] before:w-[3.5rem] before:rounded-sm before:content-[""]`,
     lg: tw`lg:text-[34px]`,
     xl: tw`xl:text-[36px]`,
   },

@@ -9,7 +9,7 @@ import cn from 'classnames';
 
 import { TextProps } from './Text.types';
 
-const BLOCK_TYPE: AtomicType = "atom";
+const BLOCK_TYPE: AtomicType = 'atom';
 
 const Text = async ({ variant = '1', text, color, overrides, spacing }: TextProps) => {
   if (!text) return null;
@@ -21,7 +21,7 @@ const Text = async ({ variant = '1', text, color, overrides, spacing }: TextProp
 
   return (
     <div
-      className={cn(classes?.root, buildStyling({spacing}, BLOCK_TYPE))}
+      className={cn(classes?.root, buildStyling({ spacing }, BLOCK_TYPE))}
       style={
         {
           '--tw-text-opacity': color?.opacity,

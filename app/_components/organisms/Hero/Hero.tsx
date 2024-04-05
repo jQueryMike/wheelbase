@@ -23,7 +23,7 @@ const GradientDirectionMap = {
   'Bottom Right to Top Left': 'to-tl',
 };
 
-const BLOCK_TYPE: AtomicType = "organism";
+const BLOCK_TYPE: AtomicType = 'organism';
 
 const Hero = async ({
   variant = '1',
@@ -36,7 +36,7 @@ const Hero = async ({
   backgroundGradientColor,
   gradientDirection,
   overrides,
-  spacing
+  spacing,
 }: HeroProps & Block) => {
   const {
     default: { classes: variantClasses },
@@ -49,7 +49,9 @@ const Hero = async ({
     props,
   ]);
   const resolvedHeading = heading ? await Heading(heading) : undefined;
-  const resolvedSubheading = subheading ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: "subheading" }) : undefined;
+  const resolvedSubheading = subheading
+    ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
+    : undefined;
   return (
     <section
       className={cn(
@@ -60,7 +62,7 @@ const Hero = async ({
           [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
           [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
         },
-        buildStyling({spacing}, BLOCK_TYPE)
+        buildStyling({ spacing }, BLOCK_TYPE),
       )}
       style={
         {

@@ -1,1 +1,1 @@
-export * from "./getGlobalTheme";
+export * from './getGlobalTheme';

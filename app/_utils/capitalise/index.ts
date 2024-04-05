@@ -1,1 +1,1 @@
-export { default as capitalise } from "./capitalise";
+export { default as capitalise } from './capitalise';

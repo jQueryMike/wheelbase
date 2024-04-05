@@ -1,1 +1,1 @@
-export { default as replaceVars } from "./replaceVars";
+export { default as replaceVars } from './replaceVars';

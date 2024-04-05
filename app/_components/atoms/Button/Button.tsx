@@ -8,8 +8,7 @@ import { AtomicType } from '@types';
 import { Icon } from '../Icon';
 import { ButtonProps } from './Button.types';
 
-const BLOCK_TYPE: AtomicType = "atom";
-
+const BLOCK_TYPE: AtomicType = 'atom';
 
 const Button = async ({
   variant = '1',
@@ -24,7 +23,7 @@ const Button = async ({
   style = ButtonStyle.Primary,
   loading = false,
   overrides,
-  spacing
+  spacing,
 }: ButtonProps) => {
   const {
     default: { classes: variantClasses },
@@ -32,9 +31,15 @@ const Button = async ({
   const classes = buildClasses(variantClasses, overrides);
   let button = (
     <button
-      className={cn(classes?.button, classes?.[`${size}Button`], classes?.[`${style}Button`], {
-        [classes?.buttonLoading || '']: loading,
-      }, buildStyling({spacing}, BLOCK_TYPE))}
+      className={cn(
+        classes?.button,
+        classes?.[`${size}Button`],
+        classes?.[`${style}Button`],
+        {
+          [classes?.buttonLoading || '']: loading,
+        },
+        buildStyling({ spacing }, BLOCK_TYPE),
+      )}
       type={type === 'button' ? 'button' : 'submit'}
       onClick={onClick}
     >

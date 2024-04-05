@@ -1,1 +1,1 @@
-export * from "./getNavUrl";
+export * from './getNavUrl';

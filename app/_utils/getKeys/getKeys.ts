@@ -1,4 +1,4 @@
-import { Property } from "@types";
+import { Property } from '@types';
 
 /**
  * Get subkeys from long form key
@@ -7,7 +7,7 @@ import { Property } from "@types";
  * @returns A tuple of nested keys
  */
 function getKeys<T extends string>(key: T): Property<T> {
-  return key.split("_").filter((x) => x) as Property<T>;
+  return key.split('_').filter((x) => x) as Property<T>;
 }
 
 export default getKeys;
