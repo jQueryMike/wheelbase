@@ -143,3 +143,16 @@ export type FontSizeMap = {
     };
   };
 };
+
+/**
+ * Font weight types
+ */
+export type FontWeightType = 'Thin' | 'Extralight' | 'Light' | 'Normal' | 'Medium' | 'Semibold' | 'Bold' | 'Extrabold';
+
+/**
+ * Spacing map
+ */
+export type FontWeightMap = {
+  /** Map atomic types */
+  [key1 in FontWeightType]?: string;
+};

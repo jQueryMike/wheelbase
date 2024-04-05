@@ -8,7 +8,7 @@ let classes: HeadingClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  heading: tw`font-heading text-heading text-balance font-bold leading-[1.1] tracking-tighter`,
+  heading: tw`font-heading text-heading text-balance leading-[1.1] tracking-tighter`,
   headingExtraLarge: {
     default: tw`text-[40px]`,
     lg: tw`lg:text-[46px]`,

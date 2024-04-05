@@ -90,7 +90,7 @@ const fontSizeMappings: FontSizeMap = {
  * @param textType {TextType} type of text component
  * @returns Tailwind classes for all text types
  * ```
- * @example getSpacing("Extra Large", 'header')
+ * @example getFontSize("Extra Large", 'header')
  * // "md:text-[40px] lg:text-[46px] xl:text-[56px]"
  * ```
  */
