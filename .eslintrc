@@ -23,7 +23,7 @@
   },
   "overrides": [
     {
-      "files": ["app/**/index.ts", "app/**/*.ts", "app/**/*.tsx"],
+      "files": ["app/**/index.ts", "app/**/*.ts", "app/**/*.tsx", "plopfile.mjs"],
       "rules": {
         "import/prefer-default-export": "off"
       }

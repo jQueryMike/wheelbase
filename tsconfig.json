@@ -41,7 +41,8 @@
     "tailwind.builder.js",
     "tailwind/**/*.js",
     ".storybook/**/*.ts",
-    ".storybook/**/*.tsx"
+    ".storybook/**/*.tsx",
+    "plopfile.mjs"
   ],
   "exclude": ["node_modules", "_ARCHIVE", "**/*.exclude"]
 }
