@@ -1,22 +1,14 @@
 // eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
 import { Heading } from '@components/atoms';
-import { AtomicType } from '@types';
 import { buildClasses } from '@utils/buildClasses';
-import { buildStyling } from '@utils/buildStyling';
 import cn from 'classnames';
 import NextImage from 'next/image';
-import { CSSProperties, Suspense } from 'react';
+import { Suspense } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { TextAndImageProps } from './TextAndImage.types';
-
-enum GradientDirection {
-  RTL = 'Right to Left',
-  LTR = 'Left to Right',
-}
-
-const BLOCK_TYPE: AtomicType = 'organism';
+import { BaseOrganism } from '../BaseOrganism';
 
 const TextAndImage = async ({
   variant = '1',
@@ -25,11 +17,8 @@ const TextAndImage = async ({
   image1: image,
   contentArea = [],
   reverse,
-  backgroundColor,
-  backgroundGradientColor,
-  gradientDirection,
   overrides,
-  spacing,
+  ...rest
 }: TextAndImageProps) => {
   const {
     default: { classes: variantClasses },
@@ -46,58 +35,35 @@ const TextAndImage = async ({
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <section
-      className={cn(
-        classes?.root,
-        {
-          [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
-          'bg-gradient-to-br': gradientDirection === GradientDirection.LTR,
-          'bg-gradient-to-bl': gradientDirection === GradientDirection.RTL,
-          [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
-          [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
-        },
-        buildStyling({ spacing }, BLOCK_TYPE),
-      )}
-      style={
-        {
-          '--tw-gradient-from': backgroundColor?.hex,
-          '--tw-gradient-to': backgroundGradientColor?.hex,
-          '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to, --tw-gradient-from)',
-        } as CSSProperties
-      }
-    >
-      <div className={classes?.rootInner}>
-        <div className={cn(classes?.container, { 'grid-flow-dense': reverse })}>
-          <div
-            className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}
-          >
-            {(heading || subheading) && (
-              <div className={classes?.headingsContainer} data-testid="headings-container">
-                {resolvedHeading}
-                {resolvedSubheading}
-              </div>
-            )}
-            {components?.length > 0 && (
-              <div className={classes?.contentAreaContainer} data-testid="content-area">
-                {components.map(([name, Component, id, props]: any) => (
-                  <Suspense fallback={<div>Loading {name}...</div>} key={id}>
-                    <Component {...props} />
-                  </Suspense>
-                ))}
-              </div>
-            )}
+    <BaseOrganism containerClasses={{ 'grid-flow-dense': reverse }} {...rest}>
+      <div
+        className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}
+      >
+        {(heading || subheading) && (
+          <div className={classes?.headingsContainer} data-testid="headings-container">
+            {resolvedHeading}
+            {resolvedSubheading}
           </div>
-          {image && (
-            <div
-              className={cn(reverse ? classes?.imageContainerReverse : classes?.imageContainer)}
-              data-testid="image-container"
-            >
-              <NextImage className={classes?.image} {...image} data-testid="image" />
-            </div>
-          )}
-        </div>
+        )}
+        {components?.length > 0 && (
+          <div className={classes?.contentAreaContainer} data-testid="content-area">
+            {components.map(([name, Component, id, props]: any) => (
+              <Suspense fallback={<div>Loading {name}...</div>} key={id}>
+                <Component {...props} />
+              </Suspense>
+            ))}
+          </div>
+        )}
       </div>
-    </section>
+      {image && (
+        <div
+          className={cn(reverse ? classes?.imageContainerReverse : classes?.imageContainer)}
+          data-testid="image-container"
+        >
+          <NextImage className={classes?.image} {...image} data-testid="image" />
+        </div>
+      )}
+    </BaseOrganism>
   );
 };
 
