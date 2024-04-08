@@ -20,6 +20,6 @@ export type Spacing = {
 };
 
 export type BaseProps<T = {}> = T & {
-  spacing: Spacing;
-  fontSize: string;
+  spacing?: Spacing;
+  fontSize?: string;
 };

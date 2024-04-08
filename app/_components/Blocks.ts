@@ -18,8 +18,11 @@ const molecules: Comps<typeof Molecules> = {
 };
 
 const organisms: Comps<typeof Organisms> = {
+  BaseOrganism: dynamic(() => import('./organisms/BaseOrganism/BaseOrganism')),
   Hero: dynamic(() => import('./organisms/Hero/Hero'), {}),
   TextAndImage: dynamic(() => import('./organisms/TextAndImage/TextAndImage'), {}),
+  Features: dynamic(() => import('./organisms/Features/Features')),
+  Reviews: dynamic(() => import('./organisms/Reviews/Reviews')),
 };
 
 /**

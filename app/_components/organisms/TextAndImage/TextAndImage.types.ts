@@ -1,6 +1,6 @@
 import { HeadingProps, ImageProps } from '@components/atoms';
 import { BaseProps } from '@components/types';
-import { Block, Color } from '@types';
+import { Block, Color, Spacing } from '@types';
 
 export type TextAndImageClasses<T = string> = {
   [key in
@@ -28,6 +28,7 @@ export type TextAndImageProps = BaseProps<{
   backgroundColor?: Color;
   backgroundGradientColor?: Color;
   gradientDirection?: 'Left to Right' | 'Right to Left';
+  spacing: Spacing;
   overrides?: {
     [key in keyof TextAndImageClasses]?: string;
   };

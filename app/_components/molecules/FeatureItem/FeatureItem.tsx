@@ -1,12 +1,10 @@
 
 import { FeatureItemProps } from './FeatureItem.types';
 
-const FeatureItem = ({title}: FeatureItemProps) => {
-  return (
+const FeatureItem = ({title}: FeatureItemProps) => (
     <div>
       {title}
     </div>
-  )
-};
+  );
 
 export default FeatureItem;
