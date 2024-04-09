@@ -1,10 +1,10 @@
-import { CSSProperties } from 'react';
-import cn from 'classnames';
+import { AtomicType } from '@types';
+import { hexToRgb, rgbString } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
 import { buildStyling } from '@utils/buildStyling';
-import { hexToRgb, rgbString } from '@utils';
+import cn from 'classnames';
+import { CSSProperties } from 'react';
 
-import { AtomicType } from '@types';
 import { BaseOrganismProps } from './BaseOrganism.types';
 
 export const GradientDirectionMap = {
@@ -28,7 +28,7 @@ const BaseOrganism = async ({
   overrides,
   spacing,
   containerClasses = {},
-  children
+  children,
 }: BaseOrganismProps) => {
   const {
     default: { classes: variantClasses },
@@ -53,13 +53,12 @@ const BaseOrganism = async ({
           '--tw-gradient-to': backgroundGradientColor?.hex,
           '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to, --tw-gradient-from)',
           '--body-alt': backgroundColor?.hex ? rgbString(hexToRgb(backgroundColor?.hex as `#${string}`)) : undefined,
+          '--tw-bg-opacity': (backgroundColor?.opacity ?? 100) / 100,
         } as CSSProperties
       }
     >
       <div className={classes?.rootInner}>
-        <div className={cn(classes?.container, containerClasses)}>
-          {children}
-        </div>
+        <div className={cn(classes?.container, containerClasses)}>{children}</div>
       </div>
     </section>
   );
