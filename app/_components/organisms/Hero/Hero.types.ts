@@ -1,6 +1,6 @@
 import { HeadingProps, ImageProps } from '@components/atoms';
 import { BaseProps } from '@components/types';
-import { Block, Color, Spacing } from '@types';
+import { Block, Color } from '@types';
 
 export type HeroClasses<T = string> = {
   [key in
@@ -28,7 +28,6 @@ export type HeroProps = BaseProps<{
   backgroundColor?: Color;
   backgroundGradientColor?: Color;
   gradientDirection?: 'Left to Right' | 'Right to Left';
-  spacing: Spacing;
   overrides?: {
     [key in keyof HeroClasses]?: string;
   };

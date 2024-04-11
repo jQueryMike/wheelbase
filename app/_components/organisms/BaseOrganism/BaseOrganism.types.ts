@@ -18,4 +18,6 @@ export type BaseOrganismProps = BaseProps<{
   classes?: BaseOrganismClasses<string>;
   containerClasses?: object;
   children?: ReactNode | Array<ReactNode>
-}>;
+}> & {
+  as?: 'section' | 'header' | 'footer' | 'div';
+};

@@ -21,6 +21,7 @@ export const GradientDirectionMap = {
 const BLOCK_TYPE: AtomicType = 'organism';
 
 const BaseOrganism = async ({
+  as = 'section',
   variant = '1',
   backgroundColor,
   backgroundGradientColor,
@@ -30,13 +31,14 @@ const BaseOrganism = async ({
   containerClasses = {},
   children,
 }: BaseOrganismProps) => {
+  const Component = as;
   const {
     default: { classes: variantClasses },
   } = await import(`./variants/${variant}`);
   const classes = buildClasses(variantClasses, overrides);
 
   return (
-    <section
+    <Component
       className={cn(
         classes?.root,
         [`bg-gradient-${gradientDirection ? GradientDirectionMap[gradientDirection] : 'none'}`],
@@ -60,7 +62,7 @@ const BaseOrganism = async ({
       <div className={classes?.rootInner}>
         <div className={cn(classes?.container, containerClasses)}>{children}</div>
       </div>
-    </section>
+    </Component>
   );
 };
 
