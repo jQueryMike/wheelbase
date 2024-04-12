@@ -36,7 +36,7 @@ const Hero = async ({
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <BaseComponent {...rest}>
+    <BaseComponent classes={classes} {...rest}>
       <div
         className={cn(imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer)}
       >

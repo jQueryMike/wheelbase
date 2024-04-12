@@ -1,12 +1,10 @@
 import { AtomicType } from '@types';
 import { hexToRgb, rgbString } from '@utils';
-import { buildClasses } from '@utils/buildClasses';
 import { buildStyling } from '@utils/buildStyling';
 import cn from 'classnames';
 import { CSSProperties } from 'react';
 
 import { BaseComponentProps } from './BaseComponent.types';
-import baseComponentClasses from './BaseComponent.classes';
 
 export const GradientDirectionMap = {
   'Left to Right': 'to-l',
@@ -23,16 +21,15 @@ const BLOCK_TYPE: AtomicType = 'organism';
 
 const BaseComponent = async ({
   as = 'section',
+  classes,
   backgroundColor,
   backgroundGradientColor,
   gradientDirection,
-  overrides,
   spacing,
   containerClasses = {},
   children,
 }: BaseComponentProps) => {
   const Component = as;
-  const classes = buildClasses(baseComponentClasses, overrides);
 
   return (
     <Component
