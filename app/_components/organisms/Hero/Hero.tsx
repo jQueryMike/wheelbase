@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
 import { Heading } from '@components/atoms';
+import { BaseComponent } from '@components/utils/BaseComponent';
 import { Block } from '@types';
 import { buildClasses } from '@utils/buildClasses';
 import cn from 'classnames';
@@ -9,7 +10,6 @@ import { Suspense } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { HeroProps } from './Hero.types';
-import { BaseOrganism } from '../BaseOrganism';
 
 const Hero = async ({
   variant = '1',
@@ -36,11 +36,9 @@ const Hero = async ({
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <BaseOrganism {...rest}>
+    <BaseComponent {...rest}>
       <div
-        className={cn(
-          imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer,
-        )}
+        className={cn(imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer)}
       >
         {(heading || subheading) && (
           <div className={classes?.headingsContainer} data-testid="headings-container">
@@ -66,7 +64,7 @@ const Hero = async ({
           <NextImage className={classes?.image} {...image} data-testid="image" />
         </div>
       )}
-    </BaseOrganism>
+    </BaseComponent>
   );
 };
 

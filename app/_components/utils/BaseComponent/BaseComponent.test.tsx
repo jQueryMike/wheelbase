@@ -1,16 +1,15 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
-import BaseOrganism from "./BaseOrganism";
+import BaseComponent from "./BaseComponent";
 
-describe('BaseOrganism test suite', () => {
+describe('BaseComponent test suite', () => {
   it('should work', () => {
     expect(true).toBe(true)
   })
 
   it('should have no accessibility violations', async () => {
-    const ResolvedComponent = await BaseOrganism({
-      title: 'BaseOrganism',
+    const ResolvedComponent = await BaseComponent({
       spacing: {
         marginBottom: '0',
         marginTop: '0',

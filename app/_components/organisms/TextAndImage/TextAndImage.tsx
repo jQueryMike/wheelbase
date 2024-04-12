@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
 import { Heading } from '@components/atoms';
+import { BaseComponent } from '@components/utils/BaseComponent';
 import { buildClasses } from '@utils/buildClasses';
 import cn from 'classnames';
 import NextImage from 'next/image';
@@ -8,7 +9,6 @@ import { Suspense } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { TextAndImageProps } from './TextAndImage.types';
-import { BaseOrganism } from '../BaseOrganism';
 
 const TextAndImage = async ({
   variant = '1',
@@ -35,10 +35,8 @@ const TextAndImage = async ({
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <BaseOrganism containerClasses={{ 'grid-flow-dense': reverse }} {...rest}>
-      <div
-        className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}
-      >
+    <BaseComponent containerClasses={{ 'grid-flow-dense': reverse }} {...rest}>
+      <div className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}>
         {(heading || subheading) && (
           <div className={classes?.headingsContainer} data-testid="headings-container">
             {resolvedHeading}
@@ -63,7 +61,7 @@ const TextAndImage = async ({
           <NextImage className={classes?.image} {...image} data-testid="image" />
         </div>
       )}
-    </BaseOrganism>
+    </BaseComponent>
   );
 };
 

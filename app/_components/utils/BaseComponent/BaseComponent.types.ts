@@ -1,21 +1,19 @@
 import { BaseProps } from '@components/types';
-import { Color, Spacing } from '@types';
+import { Color } from '@types';
 import { ReactNode } from 'react';
 
-export type BaseOrganismClasses<T = string> = {
+export type BaseComponentClasses<T = string> = {
   [key in 'root' | 'rootInner' | 'container' ]?: T;
 }
 
-export type BaseOrganismProps = BaseProps<{
-  variant?: '1' | string;
+export type BaseComponentProps = BaseProps<{
   backgroundColor?: Color;
   backgroundGradientColor?: Color;
   gradientDirection?: 'Left to Right' | 'Right to Left';
-  spacing: Spacing;
   overrides?: {
-    [key in keyof BaseOrganismClasses]?: string;
+    [key in keyof BaseComponentClasses]?: string;
   };
-  classes?: BaseOrganismClasses<string>;
+  classes?: BaseComponentClasses<string>;
   containerClasses?: object;
   children?: ReactNode | Array<ReactNode>
 }> & {

@@ -17,8 +17,7 @@ const molecules: Comps<typeof Molecules> = {
   ButtonList: dynamic(() => import('./molecules/ButtonList/ButtonList'), {}),
 };
 
-const organisms: Comps<typeof Organisms> = {
-  BaseOrganism: dynamic(() => import('./organisms/BaseOrganism/BaseOrganism')),
+const organisms: Comps<Omit<typeof Organisms, 'Header' | 'Footer'>> = {
   Hero: dynamic(() => import('./organisms/Hero/Hero'), {}),
   TextAndImage: dynamic(() => import('./organisms/TextAndImage/TextAndImage'), {}),
   Features: dynamic(() => import('./organisms/Features/Features')),

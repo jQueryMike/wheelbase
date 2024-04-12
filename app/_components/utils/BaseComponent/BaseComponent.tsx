@@ -5,7 +5,8 @@ import { buildStyling } from '@utils/buildStyling';
 import cn from 'classnames';
 import { CSSProperties } from 'react';
 
-import { BaseOrganismProps } from './BaseOrganism.types';
+import { BaseComponentProps } from './BaseComponent.types';
+import baseComponentClasses from './BaseComponent.classes';
 
 export const GradientDirectionMap = {
   'Left to Right': 'to-l',
@@ -20,9 +21,8 @@ export const GradientDirectionMap = {
 
 const BLOCK_TYPE: AtomicType = 'organism';
 
-const BaseOrganism = async ({
+const BaseComponent = async ({
   as = 'section',
-  variant = '1',
   backgroundColor,
   backgroundGradientColor,
   gradientDirection,
@@ -30,12 +30,9 @@ const BaseOrganism = async ({
   spacing,
   containerClasses = {},
   children,
-}: BaseOrganismProps) => {
+}: BaseComponentProps) => {
   const Component = as;
-  const {
-    default: { classes: variantClasses },
-  } = await import(`./variants/${variant}`);
-  const classes = buildClasses(variantClasses, overrides);
+  const classes = buildClasses(baseComponentClasses, overrides);
 
   return (
     <Component
@@ -66,4 +63,4 @@ const BaseOrganism = async ({
   );
 };
 
-export default BaseOrganism;
+export default BaseComponent;
