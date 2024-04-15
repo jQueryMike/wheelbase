@@ -18,7 +18,6 @@ export type HeroClasses<T = string> = {
 };
 
 export type HeroProps = BaseProps<{
-  variant?: '1' | '2' | '5' | '6' | string;
   heading?: HeadingProps;
   subheading?: HeadingProps;
   contentArea?: Block[];

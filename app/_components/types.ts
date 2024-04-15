@@ -4,10 +4,6 @@ export type Comps<T, U = undefined> = {
   [key in keyof (U extends keyof T ? Omit<T, U> : T)]: ComponentType<any>;
 };
 
-export type VARIES<T, U = undefined> = {
-  [key in keyof (U extends keyof T ? Omit<T, U> : T)]: (variant: string) => Promise<any>;
-};
-
 export type Spacing = {
   paddingTop: string;
   paddingBottom: string;
@@ -23,3 +19,13 @@ export type BaseProps<T = {}> = T & {
   spacing?: Spacing;
   fontSize?: string;
 };
+
+export type GradientDirections =
+  | 'Left to Right'
+  | 'Right to Left'
+  | 'Top to Bottom'
+  | 'Bottom to Top'
+  | 'Top Left to Bottom Right'
+  | 'Top Right to Bottom Left'
+  | 'Bottom Left to Top Right'
+  | 'Bottom Right to Top Left';

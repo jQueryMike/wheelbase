@@ -7,11 +7,11 @@ import cn from 'classnames';
 import NextImage from 'next/image';
 import { Suspense } from 'react';
 
+import textAndImageClasses from './TextAndImage.classes';
 // eslint-disable-next-line import/no-cycle
 import { TextAndImageProps } from './TextAndImage.types';
 
 const TextAndImage = async ({
-  variant = '1',
   heading,
   subheading,
   image1: image,
@@ -20,10 +20,7 @@ const TextAndImage = async ({
   overrides,
   ...rest
 }: TextAndImageProps) => {
-  const {
-    default: { classes: variantClasses },
-  } = await import(`./variants/${variant}`);
-  const classes = buildClasses(variantClasses, overrides);
+  const classes = buildClasses(textAndImageClasses, overrides);
   const components = contentArea.map(({ name, id, ...props }: any) => [
     name,
     BLOCKS[name as keyof typeof BLOCKS],
@@ -35,7 +32,7 @@ const TextAndImage = async ({
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <BaseComponent containerClasses={{ 'grid-flow-dense': reverse }} {...rest}>
+    <BaseComponent classes={classes} containerClasses={{ 'grid-flow-dense': reverse }} {...rest}>
       <div className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}>
         {(heading || subheading) && (
           <div className={classes?.headingsContainer} data-testid="headings-container">

@@ -1,14 +1,13 @@
 import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
-import { HeroClasses } from '../Hero.types';
-import HeroVariant from './HeroVariant';
+import { HeroClasses } from './Hero.types';
 
 const location = 'Hero/variants/2';
 
 let classes: HeroClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`from-secondary to-secondary-dark w-full bg-gradient-to-b`,
+  root: tw`bg-body-alt`,
   rootInner: {
     default: tw``,
   },
@@ -45,8 +44,6 @@ classes = {
   },
 };
 
-const heroVariant: HeroVariant = {
-  classes: new ClassesBuilder({ location, classes }).classes,
-};
+const heroClasses = new ClassesBuilder({ location, classes }).classes;
 
-export default heroVariant;
+export default heroClasses;

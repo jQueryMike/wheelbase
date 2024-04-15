@@ -1,14 +1,13 @@
 import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
-import { HeroClasses } from '../Hero.types';
-import HeroVariant from './HeroVariant';
+import { TextAndImageClasses } from './TextAndImage.types';
 
-const location = 'Hero/variants/2';
+const location = 'TextAndImage/variants/1';
 
-let classes: HeroClasses<ClassesProperty> = {};
+let classes: TextAndImageClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`bg-body-alt`,
+  root: tw`@container/image-with-text bg-body-alt`,
   rootInner: {
     default: tw``,
   },
@@ -18,13 +17,13 @@ classes = {
     lg: tw`lg:gap-16`,
     xl: tw`xl:gap-20`,
   },
-  heroContentContainer: {
+  textAndImageContentContainer: {
     default: tw`my-8 flex flex-col justify-center space-y-8`,
     md: tw`md:my-16 md:space-y-10`,
     lg: tw`lg:my-20 lg:space-y-12`,
     xl: tw`xl:my-14 xl:space-y-14`,
   },
-  heroContentContainerReverse: {
+  textAndImageContentContainerReverse: {
     default: tw`order-2 my-8 flex flex-col justify-center space-y-8`,
     md: tw`md:my-16 md:space-y-10`,
     lg: tw`lg:my-20 lg:space-y-12`,
@@ -35,7 +34,7 @@ classes = {
   },
   contentAreaContainer: {
     default: tw`space-y-4`,
-    '@xl/hero': tw`@xl/hero:space-y-6`,
+    '@xl/image-with-text': tw`@xl/image-with-text:space-y-6`,
   },
   imageContainer: {
     default: tw`relative`,
@@ -43,10 +42,9 @@ classes = {
   imageContainerReverse: {
     default: tw`relative order-1`,
   },
+  image: tw`object-cover`,
 };
 
-const heroVariant: HeroVariant = {
-  classes: new ClassesBuilder({ location, classes }).classes,
-};
+const textAndImageClasses = new ClassesBuilder({ location, classes }).classes;
 
-export default heroVariant;
+export default textAndImageClasses;

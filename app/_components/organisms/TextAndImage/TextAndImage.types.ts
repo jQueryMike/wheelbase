@@ -18,7 +18,6 @@ export type TextAndImageClasses<T = string> = {
 };
 
 export type TextAndImageProps = BaseProps<{
-  variant?: '1' | '2' | '5' | '6' | string;
   heading?: HeadingProps;
   subheading?: HeadingProps;
   contentArea?: Block[];

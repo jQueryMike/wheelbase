@@ -8,11 +8,11 @@ import cn from 'classnames';
 import NextImage from 'next/image';
 import { Suspense } from 'react';
 
+import heroClasses from './Hero.classes';
 // eslint-disable-next-line import/no-cycle
 import { HeroProps } from './Hero.types';
 
 const Hero = async ({
-  variant = '1',
   heading,
   subheading,
   image1: image,
@@ -21,10 +21,7 @@ const Hero = async ({
   overrides,
   ...rest
 }: HeroProps & Block) => {
-  const {
-    default: { classes: variantClasses },
-  } = await import(`./variants/${variant}`);
-  const classes = buildClasses(variantClasses, overrides);
+  const classes = buildClasses(heroClasses, overrides);
   const components = contentArea.map(({ name, id, ...props }: any) => [
     name,
     BLOCKS[name as keyof typeof BLOCKS],
