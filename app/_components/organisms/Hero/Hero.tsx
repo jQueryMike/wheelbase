@@ -33,34 +33,40 @@ const Hero = async ({
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <BaseComponent classes={classes} {...rest}>
-      <div
-        className={cn(imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer)}
-      >
-        {(heading || subheading) && (
-          <div className={classes?.headingsContainer} data-testid="headings-container">
-            {resolvedHeading}
-            {resolvedSubheading}
+    <BaseComponent className={classes.root} {...rest}>
+      <div className={classes.rootInner}>
+        <div className={classes.container}>
+          <div
+            className={cn(
+              imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer,
+            )}
+          >
+            {(heading || subheading) && (
+              <div className={classes?.headingsContainer} data-testid="headings-container">
+                {resolvedHeading}
+                {resolvedSubheading}
+              </div>
+            )}
+            {components?.length > 0 && (
+              <div className={classes?.contentAreaContainer} data-testid="content-area">
+                {components.map(([name, Component, id, props]: any) => (
+                  <Suspense fallback={<div>Loading {name}...</div>} key={id}>
+                    <Component {...props} />
+                  </Suspense>
+                ))}
+              </div>
+            )}
           </div>
-        )}
-        {components?.length > 0 && (
-          <div className={classes?.contentAreaContainer} data-testid="content-area">
-            {components.map(([name, Component, id, props]: any) => (
-              <Suspense fallback={<div>Loading {name}...</div>} key={id}>
-                <Component {...props} />
-              </Suspense>
-            ))}
-          </div>
-        )}
-      </div>
-      {image && (
-        <div
-          className={cn(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}
-          data-testid="image-container"
-        >
-          <NextImage className={classes?.image} {...image} data-testid="image" />
+          {image && (
+            <div
+              className={cn(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}
+              data-testid="image-container"
+            >
+              <NextImage className={classes?.image} {...image} data-testid="image" />
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </BaseComponent>
   );
 };

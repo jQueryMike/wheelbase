@@ -1,6 +1,6 @@
 import { ClassesBuilder, ClassesProperty, tw } from '@utils';
-import { HeadingClasses } from '../Heading.types';
-import HeadingVariant from './HeadingVariant';
+
+import { HeadingClasses } from './Heading.types';
 
 const location = 'Heading/variants/1';
 
@@ -37,6 +37,6 @@ classes = {
   },
 };
 
-const headingVariant: HeadingVariant = { classes: new ClassesBuilder({ location, classes }).classes };
+const headingClasses = new ClassesBuilder({ location, classes }).classes;
 
-export default headingVariant;
+export default headingClasses;

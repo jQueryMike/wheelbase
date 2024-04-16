@@ -2,10 +2,8 @@
  * Property type
  * This is used to determine the nested keys of a long form key
  */
-export type Property<T extends string> = T extends `${infer X extends string}_${infer Y extends
-  string}_${infer Z extends string}`
-  ? [X, Y, Z]
-  : never;
+export type Property<T extends string> =
+  T extends `${infer X extends string}_${infer Y extends string}_${infer Z extends string}` ? [X, Y, Z] : never;
 
 /**
  * Block type
@@ -72,6 +70,11 @@ export type AtomicType = 'atom' | 'molecule' | 'organism';
 export type SpacingType = 'padding' | 'margin';
 
 /**
+ * Spacing Positions
+ */
+export type SpacingPositon = 'top' | 'bottom' | 'left' | 'right';
+
+/**
  * Size types to map to values
  */
 export type SizeType = 'none' | 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge';
@@ -98,9 +101,21 @@ export type Positions = 'top' | 'bottom' | 'left' | 'right';
 /**
  * Sizes within a spacing type
  */
-export type Sizes = {
+export type Size = {
   /** Map over positions top, bottom, left, right */
   [key in Positions]: SizeType;
+};
+
+/**
+ * Keys for spacing values
+ */
+export type SpacingKey = `${SpacingType}${Capitalize<SpacingPositon>}`;
+
+/**
+ * Spacing config type
+ */
+export type SpacingConfig = {
+  [key in SpacingType]: Size;
 };
 
 /**
@@ -108,7 +123,7 @@ export type Sizes = {
  */
 export type Spacing = {
   /** Map over Spacing types */
-  [key in SpacingType]: Sizes;
+  [key in SpacingKey]: Size;
 };
 
 /**

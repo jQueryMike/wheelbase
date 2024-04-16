@@ -1,23 +1,40 @@
+import { Color, FontSizeOptions, FontWeightType, SpacingConfig } from '@types';
 import { ComponentType } from 'react';
 
 export type Comps<T, U = undefined> = {
   [key in keyof (U extends keyof T ? Omit<T, U> : T)]: ComponentType<any>;
 };
 
-export type Spacing = {
-  paddingTop: string;
-  paddingBottom: string;
-  paddingLeft: string;
-  paddingRight: string;
-  marginTop: string;
-  marginBottom: string;
-  marginLeft: string;
-  marginRight: string;
+export type Typography = {
+  fontColor?: Color;
+  fontSize?: FontSizeOptions;
+  fontWeight?: FontWeightType;
+  lineHeight?: string;
+  letterSpacing?: string;
+};
+
+export type Background = {
+  backgroundColor?: string;
+  backgroundGradientColor?: string;
+  gradientDirection?: GradientDirections;
+};
+
+export type Border = {
+  borderColor?: string;
+  borderRadius?: string;
+  borderWidth?: string;
+  borderStyle?: string;
+};
+
+export type Styling = {
+  spacing?: SpacingConfig;
+  typography?: Typography;
+  background?: Background;
+  border?: Border;
 };
 
 export type BaseProps<T = {}> = T & {
-  spacing?: Spacing;
-  fontSize?: string;
+  styling: Styling;
 };
 
 export type GradientDirections =

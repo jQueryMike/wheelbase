@@ -1,4 +1,4 @@
-import { AtomicType, Sizes, Spacing, SpacingMap, SpacingType } from '@types';
+import { AtomicType, Size, SpacingConfig, SpacingMap, SpacingType } from '@types';
 
 /**
  * Example spacing map
@@ -64,7 +64,7 @@ const SpacingMappings: SpacingMap = {
  * @description Mapping function to map data to tailwind classes
  * @param atomicType {AtomicType} type of component
  * @param spacingType {SpacingType} type of spacing
- * @param size {Sizes} Size values
+ * @param size {Size} Size values
  * @returns Tailwind classes
  *
  * @example
@@ -73,7 +73,7 @@ const SpacingMappings: SpacingMap = {
  * // "pt-2 pb-3 px-4"
  * ```
  */
-const MappingFunction = (atomicType: AtomicType, spacingType: SpacingType, { top, bottom, left, right }: Sizes) => {
+const MappingFunction = (atomicType: AtomicType, spacingType: SpacingType, { top, bottom, left, right }: Size) => {
   const t = spacingType[0];
   if (new Set([top, bottom, left, right]).size === 1) return `${t}-${SpacingMappings[atomicType].margin?.[top]}`;
   let output = ' ';
@@ -100,7 +100,8 @@ const MappingFunction = (atomicType: AtomicType, spacingType: SpacingType, { top
  * // "mt-2 mb-3 mx-4 pt-2 pb-3 px-4"
  * ```
  */
-export function getSpacing(spacing: Spacing, atomicType: AtomicType): string {
+export function getSpacing(spacing?: SpacingConfig, atomicType?: AtomicType): string {
+  if (!spacing || !atomicType) return '';
   let output = '';
   output =
     spacing &&

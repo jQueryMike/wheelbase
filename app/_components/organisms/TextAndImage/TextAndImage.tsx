@@ -32,7 +32,7 @@ const TextAndImage = async ({
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <BaseComponent classes={classes} containerClasses={{ 'grid-flow-dense': reverse }} {...rest}>
+    <BaseComponent className={classes} containerClasses={{ 'grid-flow-dense': reverse }} {...rest}>
       <div className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}>
         {(heading || subheading) && (
           <div className={classes?.headingsContainer} data-testid="headings-container">

@@ -1,21 +1,9 @@
 import { BaseProps } from '@components/types';
-import { Color } from '@types';
-import { ReactNode } from 'react';
 
-export type BaseComponentClasses<T = string> = {
-  [key in 'root' | 'rootInner' | 'container' ]?: T;
-}
-
-export type BaseComponentProps = BaseProps<{
-  backgroundColor?: Color;
-  backgroundGradientColor?: Color;
-  gradientDirection?: 'Left to Right' | 'Right to Left';
-  overrides?: {
-    [key in keyof BaseComponentClasses]?: string;
-  };
-  classes?: BaseComponentClasses<string>;
-  containerClasses?: object;
-  children?: ReactNode | Array<ReactNode>
+export type BaseComponentProps<T extends keyof HTMLElementTagNameMap> = BaseProps<{
+  overrides?: any; // TODO: Define method for overrides
+  className?: string;
 }> & {
-  as?: 'section' | 'header' | 'footer' | 'div';
-};
+  as?: T;
+  stylingOptions?: any;
+} & React.HTMLProps<HTMLElementTagNameMap[T]>;
