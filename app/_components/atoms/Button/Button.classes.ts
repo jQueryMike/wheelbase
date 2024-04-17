@@ -2,7 +2,7 @@ import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
 import { ButtonClasses } from './Button.types';
 
-const location = 'Button/variants/1';
+const location = 'Button/Button.classes';
 
 let classes: ButtonClasses<ClassesProperty> = {};
 

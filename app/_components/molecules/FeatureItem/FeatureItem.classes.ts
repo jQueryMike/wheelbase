@@ -2,7 +2,7 @@ import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
 import { FeatureItemClasses } from './FeatureItem.types';
 
-const location = 'FeatureItem/variants/1';
+const location = 'FeatureItem/FeatureItem.classes';
 
 let classes: FeatureItemClasses<ClassesProperty> = {};
 

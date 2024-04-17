@@ -2,12 +2,12 @@ import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
 import { TextAndImageClasses } from './TextAndImage.types';
 
-const location = 'TextAndImage/variants/1';
+const location = 'TextAndImage/TextAndImage.classes';
 
 let classes: TextAndImageClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`@container/image-with-text bg-body-alt`,
+  root: tw`bg-body-alt @container/image-with-text`,
   rootInner: {
     default: tw``,
   },

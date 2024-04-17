@@ -2,7 +2,7 @@ import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
 import { HeroClasses } from './Hero.types';
 
-const location = 'Hero/variants/2';
+const location = 'Hero/Hero.classes';
 
 let classes: HeroClasses<ClassesProperty> = {};
 

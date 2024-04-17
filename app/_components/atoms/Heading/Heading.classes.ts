@@ -2,7 +2,7 @@ import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
 import { HeadingClasses } from './Heading.types';
 
-const location = 'Heading/variants/1';
+const location = 'Heading/Heading.classes';
 
 let classes: HeadingClasses<ClassesProperty> = {};
 

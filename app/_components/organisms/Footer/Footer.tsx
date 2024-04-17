@@ -2,18 +2,17 @@
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { buildClasses } from '@utils/buildClasses';
+import cn from 'classnames';
 import NextImage from 'next/image';
 
+import footerClasses from './Footer.classes';
 import { FooterProps } from './Footer.types';
 
 // eslint-disable-next-line no-empty-pattern
 const Footer = async ({}: FooterProps) => {
-  const {
-    default: { classes: variantClasses },
-  } = await import(`./variants/${1}`);
-  const classes = buildClasses(variantClasses);
+  const classes = buildClasses(footerClasses);
   return (
-    <footer className="{root} bg-primary blockPadding p-8" aria-labelledby="footer-heading">
+    <footer className={cn('{root} bg-primary blockPadding p-8', classes.root)} aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>

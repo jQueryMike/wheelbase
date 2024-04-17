@@ -1,2 +1,2 @@
 export { default as BaseComponent } from './BaseComponent';
-export type { BaseComponentClasses, BaseComponentProps } from './BaseComponent.types';
+export type { BaseComponentProps } from './BaseComponent.types';

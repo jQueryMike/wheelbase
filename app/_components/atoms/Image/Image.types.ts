@@ -5,7 +5,6 @@ export type ImageClasses<T = string> = {
 };
 
 export interface ImageProps extends NextImageProps {
-  variant?: '1' | '2' | string;
   overrides?: {
     [key in keyof ImageClasses]?: string;
   };

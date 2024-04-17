@@ -11,6 +11,6 @@ classes = {
   list: tw`flex flex-wrap gap-8`,
 };
 
-const linkListClasses = new ClassesBuilder({ location, classes }).classes;
+const buttonListClasses = new ClassesBuilder({ location, classes }).classes;
 
-export default linkListClasses;
+export default buttonListClasses;

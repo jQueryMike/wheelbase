@@ -1,14 +1,12 @@
 import { BaseComponent } from '@components/utils/BaseComponent';
 import { buildClasses } from '@utils/buildClasses';
 
+import headerClasses from './Header.classes';
 // import NextImage from 'next/image';
 import { HeaderProps } from './Header.types';
 
 const Header = async ({ ...rest }: HeaderProps) => {
-  const {
-    default: { classes: variantClasses },
-  } = await import(`./variants/${1}`);
-  const classes = buildClasses(variantClasses);
+  const classes = buildClasses(headerClasses);
   return (
     <BaseComponent className={classes.root} as="header" {...rest}>
       Header

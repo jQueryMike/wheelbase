@@ -12,8 +12,7 @@ const cases: [string, HeroProps & Block, () => void][] = [
     {
       id: 'one',
       name: 'Hero',
-      variant: '1',
-      heading: { variant: '1', text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
+      heading: { text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
       contentArea: [],
     },
     async () => {
@@ -26,9 +25,7 @@ const cases: [string, HeroProps & Block, () => void][] = [
     {
       id: 'one',
       name: 'Hero',
-      variant: '1',
       subheading: {
-        variant: '1',
         text: 'example',
         tag: HeadingTag.H2,
         size: HeadingSize.Medium,
@@ -45,7 +42,6 @@ const cases: [string, HeroProps & Block, () => void][] = [
     {
       id: 'one',
       name: 'Hero',
-      variant: '1',
       image1: {
         alt: 'example',
         src: 'https://via.placeholder.com/150',
@@ -63,12 +59,10 @@ const cases: [string, HeroProps & Block, () => void][] = [
     {
       id: 'one',
       name: 'Hero',
-      variant: '1',
       contentArea: [
         {
           id: 'two',
           name: 'Text',
-          variant: '1',
           text: 'Dis parturient montes nascetur ridiculus mus mauris vitae.',
         },
       ],
@@ -99,10 +93,8 @@ describe('Hero Organism test suite', () => {
     const ResolvedComponent = await Hero({
       id: 'one',
       name: 'Hero',
-      variant: '1',
-      heading: { variant: '1', text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
+      heading: { text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
       subheading: {
-        variant: '1',
         text: 'example',
         tag: HeadingTag.H2,
         size: HeadingSize.Medium,
@@ -117,7 +109,6 @@ describe('Hero Organism test suite', () => {
         {
           id: 'two',
           name: 'Text',
-          variant: '1',
           text: 'Dis parturient montes nascetur ridiculus mus mauris vitae.',
         },
       ],

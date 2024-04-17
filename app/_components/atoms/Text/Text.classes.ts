@@ -2,7 +2,7 @@ import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
 import { TextClasses } from './Text.types';
 
-const location = 'TextContent/variants/1';
+const location = 'TextContent/TextContent.classes';
 
 let classes: TextClasses<ClassesProperty> = {};
 

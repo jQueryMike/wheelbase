@@ -9,7 +9,7 @@ import { TextAndImageProps } from './TextAndImage.types';
 const cases: [string, TextAndImageProps & Block, () => void][] = [
   [
     'render heading if provided',
-    { id: 'one', name: 'Text and Image', classes: {}, heading: { variant: '1', text: 'example' } },
+    { id: 'one', name: 'Text and Image', classes: {}, heading: { text: 'example' } },
     async () => {
       expect(await screen.findByTestId('headings-container')).toBeTruthy();
       expect(await screen.findByTestId('heading')).toBeTruthy();
@@ -17,7 +17,7 @@ const cases: [string, TextAndImageProps & Block, () => void][] = [
   ],
   [
     'render subheading if provided',
-    { id: 'one', name: 'Text and Image', classes: {}, subheading: { variant: '1', text: 'example' } },
+    { id: 'one', name: 'Text and Image', classes: {}, subheading: { text: 'example' } },
     async () => {
       expect(await screen.findByTestId('headings-container')).toBeTruthy();
       expect(await screen.findByTestId('subheading')).toBeTruthy();
@@ -82,9 +82,8 @@ describe('Text and Image Organism test suite', () => {
       id: 'one',
       name: 'Text and Image',
       classes: {},
-      heading: { variant: '1', text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
+      heading: { text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
       subheading: {
-        variant: '1',
         text: 'example',
         tag: HeadingTag.H2,
         size: HeadingSize.Medium,
