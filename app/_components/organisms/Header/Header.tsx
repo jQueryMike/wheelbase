@@ -10,7 +10,7 @@ const Header = async ({ ...rest }: HeaderProps) => {
   } = await import(`./variants/${1}`);
   const classes = buildClasses(variantClasses);
   return (
-    <BaseComponent className={classes} as="header" {...rest}>
+    <BaseComponent className={classes.root} as="header" {...rest}>
       Header
     </BaseComponent>
     // <header className="{root} sticky top-0 z-50 h-16 w-full bg-white p-4 md:h-24 md:p-6">
