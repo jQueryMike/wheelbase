@@ -4,6 +4,8 @@ import { CSSProperties } from 'react';
 import { getSpacing } from './spacing/getSpacing';
 import { getFontSize } from './typography/getFontSize';
 import { getFontWeight } from './typography/getFontWeight';
+import { getGridColumns } from './layout/getGridColumns';
+import { getGridGap } from './layout/getGridGap';
 
 const GradientDirectionMap = {
   'Left to Right': 'to-l',
@@ -53,12 +55,16 @@ function getBorder(border?: Border): [string, CSSProperties] {
  * @returns Component classes
  */
 export default function buildStyling(
-  { spacing, typography, border, background }: Styling = {},
+  { spacing, typography, border, background, layout }: Styling = {},
   { atomicType, ...options }: any = {},
 ): [string, CSSProperties] {
   const [backgroundClasses, backgroundVars] = getBackground(background);
   const [borderClasses, borderVars] = getBorder(border);
   const classes: Array<string> = [backgroundClasses, borderClasses];
+  if(layout) {
+    classes.push(getGridGap(layout?.columnGap || 4));
+    classes.push(getGridColumns(layout?.columns || 4));
+  }  
   if(spacing) {
     classes.push(getSpacing(spacing, atomicType));
   }
@@ -66,6 +72,7 @@ export default function buildStyling(
     classes.push(getFontWeight(typography?.fontWeight || 'Medium'));
     classes.push(getFontSize(typography?.fontSize || 'Medium', options?.textType));
   }
+
   return [
     classes.join(' '),
     {

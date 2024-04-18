@@ -1,3 +1,4 @@
+// file deepcode ignore DuplicateCaseBody: switch statements will never fallthrough because cases are return statements.
 import { ButtonSize, ButtonStyle } from '@utils/constants';
 import { v4 as uuidv4 } from 'uuid';
 

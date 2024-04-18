@@ -61,7 +61,15 @@ const buildSafelist = (pages) => {
       marginPrefixes.map((prefix) => marginClasses.push(`${prefix}-${value}`));
     }
 
+    const layoutClasses = ['w-1/2', 'col-start-2', 'col-span-2'];
+    for (let v = 0; v < 6; v++) {
+      const value = v;
+      queries.map((query) => layoutClasses.push(`${query}:gap-${value}`));
+      queries.map((query) => layoutClasses.push(`${query}:grid-cols-${value}`));
+    }
+
     return [
+      ...layoutClasses,
       ...paddingClasses,
       ...marginClasses,
       ...safelist,

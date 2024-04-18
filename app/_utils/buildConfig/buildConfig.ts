@@ -74,6 +74,10 @@ function buildConfig({ contentType, id, properties }: any) {
       borderWidth: b?.appearance?.borderWidth,
       borderStyle: b?.appearance?.borderStyle,
     },
+    layout: {
+      columns: b?.appearance?.columns,
+      columnGap: b?.appearance?.columnGap,
+    }
   };
   const config: any = {
     id,
@@ -128,6 +132,10 @@ function buildConfig({ contentType, id, properties }: any) {
               borderWidth: value?.appearance?.borderWidth,
               borderStyle: value?.appearance?.borderStyle,
             },
+            layout: {
+              columns: value?.appearance?.columns,
+              columnGap: value?.appearance?.columnGap,
+            }
           };
           value.styling = s;
           return [k, BuilderMap.has(getName(k)) ? BuilderMap.get(getName(k))?.(value) : builder(value)];

@@ -171,3 +171,31 @@ export type FontWeightMap = {
   /** Map atomic types */
   [key1 in FontWeightType]?: string;
 };
+
+/**
+ * Grid Column options
+ */
+export type GridColumnOptions = 1 | 2 | 3 | 4 | 5 | 6;
+
+/**
+* Grid Gap options
+*/
+export type GridGapOptions = 1 | 2 | 3 | 4 | 5 | 6;
+
+/**
+ * Grid Cols Map
+ */
+export type GridColumnMap = {
+  [key1 in GridColumnOptions]?: {
+    [key2 in ScreenSizes]?: string;
+  }
+}
+
+/**
+ * Grid Cols Map
+ */
+export type GridGapMap = {
+  [key1 in GridGapOptions]?: {
+    [key2 in ScreenSizes]?: string;
+  }
+}

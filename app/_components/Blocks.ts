@@ -1,10 +1,15 @@
 /* eslint-disable import/no-cycle */
 import dynamic from 'next/dynamic';
 
+import * as Layouts from './_layouts';
 import * as Atoms from './atoms';
 import * as Molecules from './molecules';
 import * as Organisms from './organisms';
 import { Comps } from './types';
+
+const layouts: Comps<typeof Layouts> = {
+  Grid: dynamic(() => import('./_layouts/Grid/Grid'))
+}
 
 const atoms: Comps<typeof Atoms, 'HeadingSize' | 'HeadingTag' | 'Icon'> = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
@@ -28,6 +33,7 @@ const organisms: Comps<Omit<typeof Organisms, 'Header' | 'Footer'>> = {
  * Map of all blocks
  */
 const BLOCKS = {
+  ...layouts, 
   ...atoms,
   ...molecules,
   ...organisms,

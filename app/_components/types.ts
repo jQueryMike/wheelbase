@@ -1,4 +1,4 @@
-import { Color, FontSizeOptions, FontWeightType, SpacingConfig } from '@types';
+import { Color, FontSizeOptions, FontWeightType, GridColumnOptions, GridGapOptions, SpacingConfig } from '@types';
 import { ComponentType } from 'react';
 
 export type Comps<T, U = undefined> = {
@@ -26,11 +26,17 @@ export type Border = {
   borderStyle?: string;
 };
 
+export type Layout = {
+  columns?: GridColumnOptions;
+  columnGap?: GridGapOptions;
+}
+
 export type Styling = {
   spacing?: SpacingConfig;
   typography?: Typography;
   background?: Background;
   border?: Border;
+  layout?: Layout;
 };
 
 export type BaseProps<T = {}> = T & {

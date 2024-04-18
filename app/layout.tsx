@@ -22,7 +22,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       .map((item: any) => buildConfig(item.content))
       .pop(),
   );
-  console.log(header, footer);
+  // console.log(header, footer);
   return (
     <html lang="en">
       {/* {header ?? <Header {...header} />} */}
