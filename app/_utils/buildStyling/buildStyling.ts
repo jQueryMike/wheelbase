@@ -1,36 +1,12 @@
-import { Background, Border, Styling } from '@components/types';
+import { Border, Styling } from '@components/types';
 import { CSSProperties } from 'react';
 
+import { getBackground } from './background/getBackground';
 import { getSpacing } from './spacing/getSpacing';
 import { getFontSize } from './typography/getFontSize';
 import { getFontWeight } from './typography/getFontWeight';
 import { getGridColumns } from './layout/getGridColumns';
 import { getGridGap } from './layout/getGridGap';
-
-const GradientDirectionMap = {
-  'Left to Right': 'to-l',
-  'Right to Left': 'to-r',
-  'Top to Bottom': 'to-b',
-  'Bottom to Top': 'to-t',
-  'Top Left to Bottom Right': 'to-br',
-  'Top Right to Bottom Left': 'to-bl',
-  'Bottom Left to Top Right': 'to-tr',
-  'Bottom Right to Top Left': 'to-tl',
-};
-
-function getBackground(background?: Background): [string, CSSProperties] {
-  if (!background) return ['', {}];
-  const { backgroundColor, backgroundGradientColor, gradientDirection } = background;
-  const classes: Array<string> = [gradientDirection ? `bg-gradient-${GradientDirectionMap[gradientDirection]}` : ''];
-  return [
-    classes.join(' '),
-    {
-      [`bg-[${backgroundColor}]`]: backgroundColor,
-      [`from-[${backgroundColor}]`]: backgroundColor && backgroundGradientColor,
-      [`to-[${backgroundGradientColor}]`]: backgroundGradientColor,
-    } as CSSProperties,
-  ];
-}
 
 function getBorder(border?: Border): [string, CSSProperties] {
   if (!border) return ['', {}];
@@ -68,7 +44,7 @@ export default function buildStyling(
   if(spacing) {
     classes.push(getSpacing(spacing, atomicType));
   }
-  if(typography) {
+  if (typography) {
     classes.push(getFontWeight(typography?.fontWeight || 'Medium'));
     classes.push(getFontSize(typography?.fontSize || 'Medium', options?.textType));
   }

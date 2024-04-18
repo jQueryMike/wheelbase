@@ -67,6 +67,29 @@ const buildSafelist = (pages) => {
       queries.map((query) => layoutClasses.push(`${query}:gap-${value}`));
       queries.map((query) => layoutClasses.push(`${query}:grid-cols-${value}`));
     }
+    /**
+     * Build up all of the available gradient classes.
+     */
+    const gradientClasses = [
+      'none',
+      ...['t', 'b']
+        .reduce(
+          (prev, curr) => [...prev, ...['l', 'r'].reduce((p, c) => [...p, `${curr}${c}`], [])],
+          ['t', 'b', 'l', 'r'],
+        )
+        .map((x) => `gradient-to-${x}`),
+    ].map((x) => `bg-${x}`);
+
+    /**
+     * Retrieve site from umbraco and build up the custom colour classes
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const colorClasses = fetch(
+      `${process.env.API_URL}/umbraco/delivery/api/v2/content?fetch=children:${process.env.API_ROOT_NODE_GUID}&filter=contentType:!theme&filter=contentType:!globalConfig`,
+    )
+      .then((response) => response.json())
+      // eslint-disable-next-line no-console
+      .then((data) => console.log(data.properties));
 
     return [
       ...layoutClasses,
@@ -75,6 +98,8 @@ const buildSafelist = (pages) => {
       ...safelist,
       ...colCounts.map((colCount) => `grid-cols-${colCount}`),
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
+      ...['bg-[#121643]/[0.05]', 'bg-[#4087D9]/[1]'], // TODO Dynamically build this up
+      ...gradientClasses,
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');

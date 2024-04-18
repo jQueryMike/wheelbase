@@ -7,7 +7,7 @@ const location = 'TextAndImage/TextAndImage.classes';
 let classes: TextAndImageClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`bg-body-alt @container/image-with-text`,
+  root: tw`@container/image-with-text`,
   rootInner: {
     default: tw``,
   },

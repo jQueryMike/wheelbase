@@ -7,7 +7,7 @@ const location = 'Hero/Hero.classes';
 let classes: HeroClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`bg-body-alt`,
+  root: tw``,
   rootInner: {
     default: tw``,
   },

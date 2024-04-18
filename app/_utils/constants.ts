@@ -57,3 +57,14 @@ export enum Sizes {
   Small = 'Small',
   ExtraSmall = 'Extra Small',
 }
+
+export enum GradientDirection {
+  'Left to Right' = 'to-l',
+  'Right to Left' = 'to-r',
+  'Top to Bottom' = 'to-b',
+  'Bottom to Top' = 'to-t',
+  'Top Left to Bottom Right' = 'to-br',
+  'Top Right to Bottom Left' = 'to-bl',
+  'Bottom Left to Top Right' = 'to-tr',
+  'Bottom Right to Top Left' = 'to-tl',
+}

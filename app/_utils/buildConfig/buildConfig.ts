@@ -53,9 +53,9 @@ function buildConfig({ contentType, id, properties }: any) {
   // TODO: Replace this with a better solution
   const styling = {
     background: {
-      backgroundColor: b?.appearance?.backgroundColor,
-      backgroundGradientColor: b?.appearance?.backgroundGradientColor,
-      gradientDirection: b?.appearance?.gradientDirection,
+      backgroundColor: b?.appearance?.backgroundColor || block?.appearance?.backgroundColor,
+      backgroundGradientColor: b?.appearance?.backgroundGradientColor || block?.appearance?.backgroundGradientColor,
+      gradientDirection: b?.appearance?.gradientDirection || block?.appearance?.gradientDirection,
     },
     spacing: {
       ...block?.appearance?.spacing,

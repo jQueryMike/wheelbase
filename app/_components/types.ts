@@ -14,8 +14,8 @@ export type Typography = {
 };
 
 export type Background = {
-  backgroundColor?: string;
-  backgroundGradientColor?: string;
+  backgroundColor?: Color;
+  backgroundGradientColor?: Color;
   gradientDirection?: GradientDirections;
 };
 
