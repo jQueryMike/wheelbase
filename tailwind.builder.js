@@ -22,7 +22,7 @@ const generateTailwindConfig = async () => {
 
     const config = {
       content: buildContent(pages),
-      safelist: buildSafelist(pages),
+      safelist: await buildSafelist(pages),
       theme: {
         container: buildContainer(),
         extend: {

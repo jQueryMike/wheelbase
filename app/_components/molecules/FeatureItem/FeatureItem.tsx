@@ -1,19 +1,14 @@
 // eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
+import { Icon } from '@components/atoms';
 import { BaseComponent } from '@components/utils/BaseComponent';
 import { buildClasses } from '@utils/buildClasses';
 import { Suspense } from 'react';
-import { Icon } from '@components/atoms';
 
-import { FeatureItemProps } from './FeatureItem.types';
 import featureItemClasses from './FeatureItem.classes';
+import { FeatureItemProps } from './FeatureItem.types';
 
-const FeatureItem = async ({
-  contentArea = [],
-  icon,
-  styling,
-  overrides
- }: FeatureItemProps) => {
+const FeatureItem = async ({ contentArea = [], icon, styling, overrides }: FeatureItemProps) => {
   const classes = buildClasses(featureItemClasses, overrides);
   const components = contentArea.map(({ name, id, ...props }: any) => [
     name,
@@ -21,12 +16,11 @@ const FeatureItem = async ({
     id,
     props,
   ]);
-  console.log({ icon, styling })
   return (
-  <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: "molecule"}} className="{itemContainer}">
-    <div className="{root} space-y-2 text-center xs:text-left">
-      <Icon styling={icon?.styling} {...icon} />
-      {components?.length > 0 && (
+    <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: 'molecule' }} className="{itemContainer}">
+      <div className="{root} xs:text-left space-y-2 text-center">
+        <Icon styling={icon?.styling} {...icon} />
+        {components?.length > 0 && (
           <div className={classes?.contentAreaContainer} data-testid="content-area">
             {components.map(([name, Component, id, props]: any) => (
               <Suspense fallback={<div>Loading {name}...</div>} key={id}>
@@ -35,8 +29,9 @@ const FeatureItem = async ({
             ))}
           </div>
         )}
-    </div>
-  </BaseComponent>)
+      </div>
+    </BaseComponent>
+  );
 };
 
 export default FeatureItem;

@@ -111,7 +111,18 @@ const buildSafelist = async (pages) => {
       const data = await response.json();
       return getColors(data.items[0].properties.organismGrid.items);
     })();
-    const colors = colorsData.map((x) => Array.from(x)).flat();
+    const colors = colorsData
+      .map((x, i) => {
+        switch (i) {
+          case 0:
+            return Array.from(x).map((y) => `bg-${y}`);
+          case 1:
+            return Array.from(x).map((y) => `text-${y}`);
+          default:
+            return [];
+        }
+      })
+      .flat();
 
     return [
       ...layoutClasses,

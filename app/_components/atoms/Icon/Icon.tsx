@@ -1,4 +1,4 @@
-import cn from 'classnames';
+// import cn from 'classnames';
 import { BaseComponent } from '@components/utils/BaseComponent';
 import { buildClasses } from '@utils/buildClasses';
 import iconClasses from './Icon.classes';
@@ -10,7 +10,6 @@ import { IconProps } from './Icon.types';
     // "{iconContainer} inline-flex justify-center items-center bg-accent bg-opacity-5 rounded-lg"
 
 const Icon = async ({ icon, styling, overrides }: IconProps) => {
-  console.log({styling})
 
   const classes = buildClasses(iconClasses, overrides);
 
