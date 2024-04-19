@@ -2,7 +2,31 @@ const flatten = require('flat');
 
 const TAILWIND_PREFIX = 'tw_';
 
-const buildSafelist = (pages) => {
+const childFields = [
+  'content_contentArea_content',
+  'content_buttonList_items',
+  'content_features_items',
+  'content_reviews_items',
+];
+
+function getColors(data, bgColors = new Set(), textColors = new Set()) {
+  data.forEach(({ content: { properties } }) => {
+    Object.entries(properties).forEach(([key, value]) => {
+      if (key.endsWith('_backgroundColor') && value) {
+        bgColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
+      }
+      if (key.endsWith('_color') && value?.id.toLowerCase().startsWith('custom')) {
+        textColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
+      }
+      if (childFields.includes(key)) {
+        getColors(value.items, bgColors, textColors);
+      }
+    });
+  });
+  return [bgColors, textColors];
+}
+
+const buildSafelist = async (pages) => {
   try {
     const safelist = new Set();
 
@@ -80,16 +104,14 @@ const buildSafelist = (pages) => {
         .map((x) => `gradient-to-${x}`),
     ].map((x) => `bg-${x}`);
 
-    /**
-     * Retrieve site from umbraco and build up the custom colour classes
-     */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const colorClasses = fetch(
-      `${process.env.API_URL}/umbraco/delivery/api/v2/content?fetch=children:${process.env.API_ROOT_NODE_GUID}&filter=contentType:!theme&filter=contentType:!globalConfig`,
-    )
-      .then((response) => response.json())
-      // eslint-disable-next-line no-console
-      .then((data) => console.log(data.properties));
+    const colorsData = await (async () => {
+      const response = await fetch(
+        `${process.env.API_URL}/umbraco/delivery/api/v2/content?fetch=children:${process.env.API_ROOT_NODE_GUID}&filter=contentType:!theme&filter=contentType:!globalConfig`,
+      );
+      const data = await response.json();
+      return getColors(data.items[0].properties.organismGrid.items);
+    })();
+    const colors = colorsData.map((x) => Array.from(x)).flat();
 
     return [
       ...layoutClasses,
@@ -98,7 +120,7 @@ const buildSafelist = (pages) => {
       ...safelist,
       ...colCounts.map((colCount) => `grid-cols-${colCount}`),
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
-      ...['bg-[#121643]/[0.05]', 'bg-[#4087D9]/[1]'], // TODO Dynamically build this up
+      ...colors,
       ...gradientClasses,
     ];
   } catch (error) {

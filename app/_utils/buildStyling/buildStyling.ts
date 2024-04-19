@@ -54,22 +54,6 @@ export default function buildStyling(
     {
       ...backgroundVars,
       ...borderVars,
-      // '--tw-gradient-from': backgroundColor?.hex,
-      // '--tw-gradient-to': backgroundGradientColor?.hex,
-      // '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to, --tw-gradient-from)',
-      // '--body-alt': backgroundColor?.hex ? rgbString(hexToRgb(backgroundColor?.hex as `#${string}`)) : undefined,
-      // '--tw-bg-opacity': (backgroundColor?.opacity ?? 100) / 100,
     } as CSSProperties,
   ];
 }
-
-/**
- * [`bg-gradient-${gradientDirection ? GradientDirectionMap[gradientDirection] : 'none'}`],
-        {
-          [`bg-[${backgroundColor?.hex}]`]: backgroundColor?.hex && !backgroundGradientColor,
-          [`from-[${backgroundColor?.hex}]`]: backgroundColor?.hex && backgroundGradientColor,
-          [`to-[${backgroundGradientColor?.hex}]`]: backgroundGradientColor?.hex,
-        }
- * 
- * 
- */
