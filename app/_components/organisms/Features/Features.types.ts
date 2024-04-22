@@ -3,13 +3,12 @@ import { BaseProps } from '@components/types';
 import { Color, Spacing } from '@types';
 
 export type FeaturesClasses<T = string> = {
-  [key in 'root']?: T;
+  [key in 'root' | 'container' | 'featuresBlock']?: T;
 }
 
 export type FeaturesProps = BaseProps<{
   title: string;
   classes?: FeaturesClasses<string>;
-  variant?: '1' | '2' | '5' | '6' | string;
   heading?: HeadingProps;
   subheading?: HeadingProps;
   backgroundColor?: Color;

@@ -1,22 +1,17 @@
 import { Button } from '@components/atoms';
+import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
-import { buildStyling } from '@utils/buildStyling';
 import { Sizes } from '@utils/constants';
 import cn from 'classnames';
-import { AtomicType } from '@types';
 
+import ButtonListClasses from './ButtonList.classes';
 import { ButtonListProps } from './ButtonList.types';
 
-const BLOCK_TYPE: AtomicType = 'molecule';
-
-const ButtonList = async ({ variant = '1', gap = Sizes.Medium, items = [], overrides, spacing }: ButtonListProps) => {
+const ButtonList = async ({ gap = Sizes.Medium, items = [], overrides, styling }: ButtonListProps) => {
   if (items.length < 1) return null;
-  const {
-    default: { classes: variantClasses },
-  } = await import(`./variants/${variant}`);
-  const classes = buildClasses(variantClasses, overrides);
+  const classes = buildClasses(ButtonListClasses, overrides);
   return (
-    <div className={cn(classes.root, buildStyling({ spacing }, BLOCK_TYPE))}>
+    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'molecule' }}>
       <ul className={cn(classes.list, classes[`gap-${gap}`])}>
         {items.map((item) => (
           <li key={item.id} className={classes.listItem}>
@@ -24,7 +19,7 @@ const ButtonList = async ({ variant = '1', gap = Sizes.Medium, items = [], overr
           </li>
         ))}
       </ul>
-    </div>
+    </BaseComponent>
   );
 };
 

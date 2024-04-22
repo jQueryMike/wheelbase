@@ -27,7 +27,6 @@ export type ButtonClasses<T = string> = {
 };
 
 export type ButtonProps = BaseProps<{
-  variant?: '1' | '2' | '5' | string;
   classes?: ButtonClasses<string>;
   text?: string;
   href?: string;

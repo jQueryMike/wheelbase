@@ -94,7 +94,7 @@ const fontSizeMappings: FontSizeMap = {
  * // "md:text-[40px] lg:text-[46px] xl:text-[56px]"
  * ```
  */
-export function getFontSize(size: FontSizeOptions, textType: TextType): string {
+export function getFontSize(size: FontSizeOptions = "Medium", textType: TextType = "text"): string {
   return Object.entries(fontSizeMappings[textType]?.[size] || {})
     .map(([key, value]) => `${key}:${value}`, [])
     .join(' ');

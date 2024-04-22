@@ -2,7 +2,31 @@ const flatten = require('flat');
 
 const TAILWIND_PREFIX = 'tw_';
 
-const buildSafelist = (pages) => {
+const childFields = [
+  'content_contentArea_content',
+  'content_buttonList_items',
+  'content_features_items',
+  'content_reviews_items',
+];
+
+function getColors(data, bgColors = new Set(), textColors = new Set()) {
+  data.forEach(({ content: { properties } }) => {
+    Object.entries(properties).forEach(([key, value]) => {
+      if (key.endsWith('_backgroundColor') && value) {
+        bgColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
+      }
+      if (key.endsWith('_color') && value?.id.toLowerCase().startsWith('custom')) {
+        textColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
+      }
+      if (childFields.includes(key)) {
+        getColors(value.items, bgColors, textColors);
+      }
+    });
+  });
+  return [bgColors, textColors];
+}
+
+const buildSafelist = async (pages) => {
   try {
     const safelist = new Set();
 
@@ -60,13 +84,55 @@ const buildSafelist = (pages) => {
       paddingPrefixes.map((prefix) => paddingClasses.push(`${prefix}-${value}`));
       marginPrefixes.map((prefix) => marginClasses.push(`${prefix}-${value}`));
     }
+    // TODO: will need to expand on these and separate into other functions
+    const layoutClasses = ['w-1/2', 'col-start-2', 'col-span-2'];
+    for (let v = 0; v < 6; v++) {
+      const value = v;
+      queries.map((query) => layoutClasses.push(`${query}:gap-${value}`));
+      queries.map((query) => layoutClasses.push(`${query}:grid-cols-${value}`));
+    }
+    /**
+     * Build up all of the available gradient classes.
+     */
+    const gradientClasses = [
+      'none',
+      ...['t', 'b']
+        .reduce(
+          (prev, curr) => [...prev, ...['l', 'r'].reduce((p, c) => [...p, `${curr}${c}`], [])],
+          ['t', 'b', 'l', 'r'],
+        )
+        .map((x) => `gradient-to-${x}`),
+    ].map((x) => `bg-${x}`);
+
+    const colorsData = await (async () => {
+      const response = await fetch(
+        `${process.env.API_URL}/umbraco/delivery/api/v2/content?fetch=children:${process.env.API_ROOT_NODE_GUID}&filter=contentType:!theme&filter=contentType:!globalConfig`,
+      );
+      const data = await response.json();
+      return getColors(data.items[0].properties.organismGrid.items);
+    })();
+    const colors = colorsData
+      .map((x, i) => {
+        switch (i) {
+          case 0:
+            return Array.from(x).map((y) => `bg-${y}`);
+          case 1:
+            return Array.from(x).map((y) => `text-${y}`);
+          default:
+            return [];
+        }
+      })
+      .flat();
 
     return [
+      ...layoutClasses,
       ...paddingClasses,
       ...marginClasses,
       ...safelist,
       ...colCounts.map((colCount) => `grid-cols-${colCount}`),
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
+      ...colors,
+      ...gradientClasses,
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');

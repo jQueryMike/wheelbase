@@ -50,6 +50,36 @@ function buildConfig({ contentType, id, properties }: any) {
     items = b?.content?.items?.items.map((item: any) => buildConfig(item.content));
     delete b?.content?.items;
   }
+  // TODO: Replace this with a better solution
+  const styling = {
+    background: {
+      backgroundColor: b?.appearance?.backgroundColor || block?.appearance?.backgroundColor,
+      backgroundGradientColor: b?.appearance?.backgroundGradientColor || block?.appearance?.backgroundGradientColor,
+      gradientDirection: b?.appearance?.gradientDirection || block?.appearance?.gradientDirection,
+    },
+    spacing: {
+      ...block?.appearance?.spacing,
+      ...b?.appearance?.spacing,
+    },
+    typography: {
+      fontColor: b?.appearance?.color,
+      fontSize: b?.appearance?.size,
+      fontWeight: b?.appearance?.fontWeight,
+      lineHeight: b?.appearance?.lineHeight,
+      letterSpacing: b?.appearance?.letterSpacing,
+    },
+    border: {
+      borderColor: b?.appearance?.borderColor,
+      borderRadius: b?.appearance?.borderRadius,
+      borderWidth: b?.appearance?.borderWidth,
+      borderStyle: b?.appearance?.borderStyle,
+      borderAlignment: b?.appearance?.borderAlignment,
+    },
+    layout: {
+      columns: b?.appearance?.columns,
+      columnGap: b?.appearance?.columnGap,
+    }
+  };
   const config: any = {
     id,
     name: key,
@@ -57,23 +87,15 @@ function buildConfig({ contentType, id, properties }: any) {
       ...block?.content,
       ...b?.content,
     },
+    // TODO: Review whether we will still need this after all the styling utility work
     appearance: {
       ...block?.appearance,
       ...b?.appearance,
     },
+    styling,
     settings: { ...block?.settings, ...b?.settings },
-    variants: {
-      ...block?.variants,
-      ...b?.variants,
-    },
   };
   const output: any = BuilderMap.has(name) ? BuilderMap.get(name)?.(config) : builder(config);
-  /**
-   * TODO: This will probably need to be refactored to support separate headings
-   */
-  // if (heading || heading1) {
-  //   output.headings = buildHeadings({ heading, subheading: heading1 }, uuidv4());
-  // }
 
   output.items = items;
   /**
@@ -88,10 +110,37 @@ function buildConfig({ contentType, id, properties }: any) {
    */
   const scs = subComps
     ? Object.fromEntries(
-        Object.entries(subComps).map(([k, value]) => [
-          k,
-          BuilderMap.has(getName(k)) ? BuilderMap.get(getName(k))?.(value) : builder(value),
-        ]),
+        Object.entries(subComps).map(([k, value]: any) => {
+          const s = {
+            background: {
+              backgroundColor: value?.appearance?.backgroundColor,
+              backgroundGradientColor: value?.appearance?.backgroundGradientColor,
+              gradientDirection: value?.appearance?.gradientDirection,
+            },
+            spacing: {
+              ...value?.appearance?.spacing,
+            },
+            typography: {
+              fontColor: value?.appearance?.color,
+              fontSize: value?.appearance?.size,
+              fontWeight: value?.appearance?.fontWeight,
+              lineHeight: value?.appearance?.lineHeight,
+              letterSpacing: value?.appearance?.letterSpacing,
+            },
+            border: {
+              borderColor: value?.appearance?.borderColor,
+              borderRadius: value?.appearance?.borderRadius,
+              borderWidth: value?.appearance?.borderWidth,
+              borderStyle: value?.appearance?.borderStyle,
+            },
+            layout: {
+              columns: value?.appearance?.columns,
+              columnGap: value?.appearance?.columnGap,
+            }
+          };
+          value.styling = s;
+          return [k, BuilderMap.has(getName(k)) ? BuilderMap.get(getName(k))?.(value) : builder(value)];
+        }),
       )
     : {};
 

@@ -1,3 +1,4 @@
+// file deepcode ignore DuplicateCaseBody: switch statements will never fallthrough because cases are return statements.
 import { ButtonSize, ButtonStyle } from '@utils/constants';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -30,6 +31,7 @@ export const BuilderMap = new Map([
         alt: altText || alternativeText || name,
         ...(settings.loading ? { ...settings, fill: isFill } : { ...settings, fill: isFill, loading: 'lazy' }),
         ...(isFill ? { sizes: `${appearance.width ?? w}px`, objectFit: 'contain' } : { width: w, height: h }),
+        styling: config.styling,
       };
       return image;
     },
@@ -82,6 +84,7 @@ export const BuilderMap = new Map([
         rightIcon: config.content?.rightIcon ?? null,
         size: getSizeKey(config.appearance?.size),
         style: getStyleKey(config.appearance?.style),
+        styling: config.styling,
       };
       return button;
     },
@@ -95,19 +98,20 @@ export const BuilderMap = new Map([
         text: config.content?.text.markup,
         ...config.settings,
         ...config.appearance,
+        styling: config.styling,
       };
       return text;
     },
   ],
 ]);
 
-export function builder({ name, id, content, appearance, settings, variants }: any) {
+export function builder({ name, id, content, appearance, settings, styling }: any) {
   return {
     name,
     id,
     ...content,
     ...appearance,
     ...settings,
-    ...variants,
+    styling,
   };
 }

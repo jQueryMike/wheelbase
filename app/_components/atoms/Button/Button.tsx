@@ -1,17 +1,14 @@
+import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
-import { buildStyling } from '@utils/buildStyling';
 import { ButtonSize, ButtonStyle } from '@utils/constants';
 import cn from 'classnames';
 import NextLink from 'next/link';
 
-import { AtomicType } from '@types';
 import { Icon } from '../Icon';
+import buttonClasses from './Button.classes';
 import { ButtonProps } from './Button.types';
 
-const BLOCK_TYPE: AtomicType = 'atom';
-
 const Button = async ({
-  variant = '1',
   text,
   href,
   target = '_self',
@@ -23,23 +20,17 @@ const Button = async ({
   style = ButtonStyle.Primary,
   loading = false,
   overrides,
-  spacing,
+  styling,
 }: ButtonProps) => {
-  const {
-    default: { classes: variantClasses },
-  } = await import(`./variants/${variant}`);
-  const classes = buildClasses(variantClasses, overrides);
+  const classes = buildClasses(buttonClasses, overrides);
   let button = (
-    <button
-      className={cn(
-        classes?.button,
-        classes?.[`${size}Button`],
-        classes?.[`${style}Button`],
-        {
-          [classes?.buttonLoading || '']: loading,
-        },
-        buildStyling({ spacing }, BLOCK_TYPE),
-      )}
+    <BaseComponent
+      as="button"
+      className={cn(classes?.root, classes?.button, classes?.[`${size}Button`], classes?.[`${style}Button`], {
+        [classes?.buttonLoading || '']: loading,
+      })}
+      styling={styling}
+      stylingOptions={{ atomicType: 'atom' }}
       type={type === 'button' ? 'button' : 'submit'}
       onClick={onClick}
     >
@@ -55,7 +46,7 @@ const Button = async ({
         {text && <span className={classes?.textContainer}>{text}</span>}
         {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} />}
       </span>
-    </button>
+    </BaseComponent>
   );
 
   if (href && target === '_self') {

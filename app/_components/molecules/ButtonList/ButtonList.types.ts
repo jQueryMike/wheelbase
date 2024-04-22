@@ -6,7 +6,6 @@ export type ButtonListClasses<T = string> = {
 };
 
 export type ButtonListProps = BaseProps<{
-  variant?: '1' | string;
   gap?: Sizes;
   items: any[];
   overrides?: {
