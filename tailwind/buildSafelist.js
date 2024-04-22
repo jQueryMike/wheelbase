@@ -84,7 +84,7 @@ const buildSafelist = async (pages) => {
       paddingPrefixes.map((prefix) => paddingClasses.push(`${prefix}-${value}`));
       marginPrefixes.map((prefix) => marginClasses.push(`${prefix}-${value}`));
     }
-
+    // TODO: will need to expand on these and separate into other functions
     const layoutClasses = ['w-1/2', 'col-start-2', 'col-span-2'];
     for (let v = 0; v < 6; v++) {
       const value = v;

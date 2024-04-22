@@ -2,6 +2,7 @@ import { Background } from '@components/types';
 import { CSSProperties } from 'react';
 
 import { GradientDirection } from '../../constants';
+import { getColour } from '../colours/getColour';
 
 /**
  * @description Get background classes and styles
@@ -22,10 +23,7 @@ export function getBackground(background?: Background): [string, CSSProperties] 
         } as CSSProperties,
       ];
     }
-    if (backgroundColor.id.toLowerCase().startsWith('custom')) {
-      return [`bg-[${backgroundColor.hex}]/[${backgroundColor.opacity / 100}]`, {}];
-    }
-    return [`bg-${backgroundColor.id.split('.').join('-')}`, {}];
+    return [getColour(backgroundColor, "bg"), {}]
   }
   return ['', {}];
 }

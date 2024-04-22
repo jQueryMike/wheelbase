@@ -199,3 +199,50 @@ export type GridGapMap = {
     [key2 in ScreenSizes]?: string;
   }
 }
+
+/**
+ * Tailwing colour prefixes
+ */
+export type TailwindColourPrefix = "bg" | "text" | "border";
+
+/**
+ * Border width option
+ */
+
+export type BorderWidthOptions = "none" | "thin" | "regular" | "bold";
+
+/**
+ * Border width Map
+ */
+
+export type BorderWidthMap = {
+  [key in BorderWidthOptions]?: string;
+}
+
+/**
+ * Border radius option
+ */
+
+export type BorderRadiusOptions = "none" | "small" | "medium" | "large" | "extra large" | "full";
+
+/**
+ * Border radius Map
+ */
+
+export type BorderRadiusMap = {
+  [key in BorderRadiusOptions]?: string;
+}
+
+/**
+ * Border style option
+ */
+
+export type BorderStyleOptions = "none" | "solid" | "dashed" | "dotted" | "double";
+
+/**
+ * Border style Map
+ */
+
+export type BorderStyleMap = {
+  [key in BorderStyleOptions]?: string;
+}

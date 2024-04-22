@@ -73,6 +73,7 @@ function buildConfig({ contentType, id, properties }: any) {
       borderRadius: b?.appearance?.borderRadius,
       borderWidth: b?.appearance?.borderWidth,
       borderStyle: b?.appearance?.borderStyle,
+      borderAlignment: b?.appearance?.borderAlignment,
     },
     layout: {
       columns: b?.appearance?.columns,
