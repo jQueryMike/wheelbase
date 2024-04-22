@@ -1,4 +1,4 @@
-import { Border, Styling } from '@components/types';
+import { Styling } from '@components/types';
 import { CSSProperties } from 'react';
 
 import { getBackground } from './background/getBackground';
@@ -55,7 +55,7 @@ export default function buildStyling(
   if (border) {
     classes.push(getBorderStyle(border?.borderStyle || 'none'));
     classes.push(getBorderWidth(border?.borderWidth || 'none'));
-    classes.push(getBorderColor(border?.borderColor || 'none'));
+    classes.push(getBorderColor(border?.borderColor));
     classes.push(getBorderRadius(border?.borderRadius || 'none'));
   }
   return [
