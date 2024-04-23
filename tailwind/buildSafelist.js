@@ -9,20 +9,32 @@ const childFields = [
   'content_reviews_items',
 ];
 
+function updateColourSet(value, dataSet) {
+  if (!value) return;
+  if (!value.id || value.id.toLowerCase().startsWith('custom')) {
+    dataSet.add(`[${value.hex}]/[${value.opacity / 100}]`);
+  } else {
+    const [variant, suffix] = value?.id?.split('.') ?? [];
+    if (!variant || !suffix) return;
+    dataSet.add(`${variant}${suffix.toLowerCase() === 'default' ? '' : `-${suffix.toLowerCase()}`}`);
+  }
+}
+
 function getColors(data, bgColors = new Set(), borderColors = new Set(), textColors = new Set()) {
   data.forEach(({ content: { properties } }) => {
     Object.entries(properties).forEach(([key, value]) => {
       if (key.endsWith('_backgroundColor') && value) {
-        bgColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
+        updateColourSet(value, bgColors);
       }
-      if (key.endsWith('_borderColor') && value) {
-        borderColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
+      if (key.endsWith('_border') && value?.borderColor) {
+        updateColourSet(value.borderColor, borderColors);
       }
-      if (key.endsWith('_color') && value?.id.toLowerCase().startsWith('custom')) {
-        textColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
+      if (key.endsWith('_color')) {
+        // console.log(key, value);
+        updateColourSet(value, textColors);
       }
       if (childFields.includes(key)) {
-        getColors(value.items, bgColors, textColors);
+        getColors(value.items, bgColors, borderColors, textColors);
       }
     });
   });
@@ -137,7 +149,7 @@ const buildSafelist = async (pages) => {
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
       ...colors,
       ...gradientClasses,
-      ...["bg-secondary-dark", "border-[#e69138]/[1]", "border-1"]
+      ...['bg-secondary-dark', 'border-[#e69138]/[1]', 'border-1'],
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');

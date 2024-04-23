@@ -2,15 +2,16 @@ import { Styling } from '@components/types';
 import { CSSProperties } from 'react';
 
 import { getBackground } from './background/getBackground';
+import { getBorderColor } from './borders/getBorderColor';
+import { getBorderRadius } from './borders/getBorderRadius';
+import { getBorderStyle } from './borders/getBorderStyle';
+import { getBorderWidth } from './borders/getBorderWidth';
+import { getColour } from './colours/getColour';
+import { getGridColumns } from './layout/getGridColumns';
+import { getGridGap } from './layout/getGridGap';
 import { getSpacing } from './spacing/getSpacing';
 import { getFontSize } from './typography/getFontSize';
 import { getFontWeight } from './typography/getFontWeight';
-import { getGridColumns } from './layout/getGridColumns';
-import { getGridGap } from './layout/getGridGap';
-import { getBorderStyle } from './borders/getBorderStyle';
-import { getBorderWidth } from './borders/getBorderWidth';
-import { getBorderColor } from './borders/getBorderColor';
-import { getBorderRadius } from './borders/getBorderRadius';
 
 // function getBorder(border?: Border): [string, CSSProperties] {
 //   if (!border) return ['', {}];
@@ -41,16 +42,17 @@ export default function buildStyling(
   const [backgroundClasses, backgroundVars] = getBackground(background);
   // const [borderClasses, borderVars] = getBorder(border);
   const classes: Array<string> = [backgroundClasses];
-  if(layout) {
+  if (layout) {
     classes.push(getGridGap(layout?.columnGap || 4));
     classes.push(getGridColumns(layout?.columns || 4));
-  }  
-  if(spacing) {
+  }
+  if (spacing) {
     classes.push(getSpacing(spacing, atomicType));
   }
   if (typography) {
     classes.push(getFontWeight(typography?.fontWeight || 'Medium'));
     classes.push(getFontSize(typography?.fontSize || 'Medium', options?.textType));
+    if (typography.fontColor) classes.push(getColour(typography.fontColor, 'text'));
   }
   if (border) {
     classes.push(getBorderStyle(border?.borderStyle || 'none'));
