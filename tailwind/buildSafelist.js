@@ -9,11 +9,14 @@ const childFields = [
   'content_reviews_items',
 ];
 
-function getColors(data, bgColors = new Set(), textColors = new Set()) {
+function getColors(data, bgColors = new Set(), borderColors = new Set(), textColors = new Set()) {
   data.forEach(({ content: { properties } }) => {
     Object.entries(properties).forEach(([key, value]) => {
       if (key.endsWith('_backgroundColor') && value) {
         bgColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
+      }
+      if (key.endsWith('_borderColor') && value) {
+        borderColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
       }
       if (key.endsWith('_color') && value?.id.toLowerCase().startsWith('custom')) {
         textColors.add(`[${value.hex}]/[${value.opacity / 100}]`);
@@ -23,7 +26,7 @@ function getColors(data, bgColors = new Set(), textColors = new Set()) {
       }
     });
   });
-  return [bgColors, textColors];
+  return [bgColors, borderColors, textColors];
 }
 
 const buildSafelist = async (pages) => {
@@ -109,7 +112,7 @@ const buildSafelist = async (pages) => {
         `${process.env.API_URL}/umbraco/delivery/api/v2/content?fetch=children:${process.env.API_ROOT_NODE_GUID}&filter=contentType:!theme&filter=contentType:!globalConfig`,
       );
       const data = await response.json();
-      return getColors(data.items[0].properties.organismGrid.items);
+      return getColors(data.items[0]?.properties?.organismGrid?.items || []);
     })();
     const colors = colorsData
       .map((x, i) => {
@@ -117,13 +120,14 @@ const buildSafelist = async (pages) => {
           case 0:
             return Array.from(x).map((y) => `bg-${y}`);
           case 1:
+            return Array.from(x).map((y) => `border-${y}`);
+          case 2:
             return Array.from(x).map((y) => `text-${y}`);
           default:
             return [];
         }
       })
       .flat();
-
     return [
       ...layoutClasses,
       ...paddingClasses,
@@ -133,6 +137,7 @@ const buildSafelist = async (pages) => {
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
       ...colors,
       ...gradientClasses,
+      ...["bg-secondary-dark", "border-[#e69138]/[1]", "border-1"]
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');

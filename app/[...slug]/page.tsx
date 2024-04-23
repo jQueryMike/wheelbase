@@ -22,7 +22,7 @@ export default async function Page({ params }: any) {
   ]);
   return (
     <main>
-      <GlobalStyles />
+      {/* <GlobalStyles /> */}
       {components.map(([name, Component, id, props]: any) => (
         <Suspense fallback={<div>Loading {name}...</div>} key={id}>
           <Component {...props} />

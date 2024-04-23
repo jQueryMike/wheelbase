@@ -17,5 +17,5 @@ const borderWidthMappings: BorderWidthMap = {
   */
  
 export function getBorderWidth(borderWidth: BorderWidthOptions = "none"): string {
-    return `${borderWidthMappings[borderWidth]}`;
+    return borderWidthMappings[borderWidth] || "";
   }

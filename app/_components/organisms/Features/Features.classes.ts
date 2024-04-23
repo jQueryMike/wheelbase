@@ -8,6 +8,7 @@ let classes: FeaturesClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
+  headingContainer: tw`text-center`
 };
 
 const featuresClasses = new ClassesBuilder({ location, classes }).classes;

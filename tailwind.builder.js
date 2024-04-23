@@ -14,11 +14,12 @@ const buildFontFamily = require('./tailwind/buildFontFamily');
 const buildScreens = require('./tailwind/buildScreens');
 const buildTypography = require('./tailwind/buildTypography');
 
+
 const generateTailwindConfig = async () => {
   try {
     const { pages, theme } = await fetchData();
 
-    const colors = buildColors(theme);
+    const colors = await buildColors();
 
     const config = {
       content: buildContent(pages),
@@ -27,9 +28,9 @@ const generateTailwindConfig = async () => {
         container: buildContainer(),
         extend: {
           screens: buildScreens(),
-          colors,
           fontFamily: buildFontFamily(theme),
           typography: buildTypography(colors),
+          colors,
         },
       },
     };
