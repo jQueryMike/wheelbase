@@ -19,5 +19,5 @@ const borderRadiusMappings: BorderRadiusMap = {
   */
  
 export function getBorderRadius(borderRadius: BorderRadiusOptions = "none"): string {
-    return `${borderRadiusMappings[borderRadius]}`;
+    return borderRadiusMappings[borderRadius] || "";
   }

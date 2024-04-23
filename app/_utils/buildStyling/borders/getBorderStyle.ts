@@ -18,5 +18,5 @@ const borderStyleMappings: BorderStyleMap = {
   */
  
 export function getBorderStyle(borderStyle: BorderStyleOptions = "none"): string {
-    return `${borderStyleMappings[borderStyle]}`;
+    return borderStyleMappings[borderStyle] || "";
   }

@@ -69,11 +69,7 @@ function buildConfig({ contentType, id, properties }: any) {
       letterSpacing: b?.appearance?.letterSpacing,
     },
     border: {
-      borderColor: b?.appearance?.borderColor,
-      borderRadius: b?.appearance?.borderRadius,
-      borderWidth: b?.appearance?.borderWidth,
-      borderStyle: b?.appearance?.borderStyle,
-      borderAlignment: b?.appearance?.borderAlignment,
+      ...(b?.appearance?.border || {})
     },
     layout: {
       columns: b?.appearance?.columns,
@@ -128,10 +124,7 @@ function buildConfig({ contentType, id, properties }: any) {
               letterSpacing: value?.appearance?.letterSpacing,
             },
             border: {
-              borderColor: value?.appearance?.borderColor,
-              borderRadius: value?.appearance?.borderRadius,
-              borderWidth: value?.appearance?.borderWidth,
-              borderStyle: value?.appearance?.borderStyle,
+              ...(value?.appearance?.border || {})
             },
             layout: {
               columns: value?.appearance?.columns,
