@@ -48,6 +48,7 @@ function buildConfig({ contentType, id, properties }: any) {
   let items;
   if (b?.content?.items?.items) {
     items = b?.content?.items?.items.map((item: any) => buildConfig(item.content));
+    // deepcode ignore DeleteOfNonProperty: <please specify a reason of ignoring this>
     delete b?.content?.items;
   }
   // TODO: Replace this with a better solution

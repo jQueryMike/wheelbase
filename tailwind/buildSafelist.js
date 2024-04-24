@@ -121,10 +121,10 @@ const buildSafelist = async (pages) => {
 
     const colorsData = await (async () => {
       const response = await fetch(
-        `${process.env.API_URL}/umbraco/delivery/api/v2/content?fetch=children:${process.env.API_ROOT_NODE_GUID}&filter=contentType:!theme&filter=contentType:!globalConfig`,
+        `${process.env.API_URL}/umbraco/delivery/api/v1/content/item/${process.env.API_ROOT_NODE_PATH}/home`,
       );
       const data = await response.json();
-      return getColors(data.items[0]?.properties?.organismGrid?.items || []);
+      return getColors(data.properties?.organismGrid?.items || []);
     })();
     const colors = colorsData
       .map((x, i) => {
@@ -149,7 +149,7 @@ const buildSafelist = async (pages) => {
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
       ...colors,
       ...gradientClasses,
-      ...['bg-secondary-dark', 'border-[#e69138]/[1]', 'border-1'],
+      ...['bg-secondary-dark', 'border-[#e69138]/[1]', 'border-1', 'font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl'],
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');

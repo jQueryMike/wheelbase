@@ -3,8 +3,6 @@ import { buildPageContent } from '@utils';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-import { GlobalStyles } from '@components';
-
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const { seo } = await buildPageContent(params.slug);
   return {
@@ -22,7 +20,6 @@ export default async function Page({ params }: any) {
   ]);
   return (
     <main>
-      {/* <GlobalStyles /> */}
       {components.map(([name, Component, id, props]: any) => (
         <Suspense fallback={<div>Loading {name}...</div>} key={id}>
           <Component {...props} />
