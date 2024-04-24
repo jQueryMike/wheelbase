@@ -1,6 +1,8 @@
 import { Grid } from '@components/_layouts/Grid';
 import { Heading } from '@components/atoms';
 import { ReviewItem, ReviewItemProps } from '@components/molecules/ReviewItem';
+import { buildClasses } from '@utils/buildClasses';
+import { Grid } from '@components/_layouts/Grid';
 import { BaseComponent } from '@components/utils/BaseComponent';
 import { Block } from '@types';
 import { buildClasses } from '@utils/buildClasses';

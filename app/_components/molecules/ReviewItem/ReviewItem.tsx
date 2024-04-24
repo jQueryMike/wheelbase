@@ -22,6 +22,17 @@ const ReviewItem = ({
   overrides,
   styling,
 }: ReviewItemProps) => {
+  console.log({
+    avatar,
+    reviewerName,
+    reviewDate,
+    reviewTitle,
+    reviewContent,
+    itemRating,
+    imageLink,
+    overrides,
+    styling,
+  });
   const classes = buildClasses(reviewItemClasses, overrides);
   return (
     <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: 'molecule' }} className="{itemContainer}">
