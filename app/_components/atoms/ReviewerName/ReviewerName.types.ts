@@ -1,7 +1,7 @@
 import { BaseProps } from '@components/types';
 
 export type ReviewerNameClasses<T = string> = {
-  [key in 'root']?: T;
+  [key in 'root' | 'reviewerName']?: T;
 };
 
 export type ReviewerNameProps = BaseProps<{

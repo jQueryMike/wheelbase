@@ -1,0 +1,46 @@
+import { BaseComponent } from '@components/utils';
+import { buildClasses } from '@utils/buildClasses';
+
+import { Icon } from '../Icon';
+import itemRatingClasses from './ItemRating.classes';
+import { ItemRatingProps } from './ItemRating.types';
+
+const ItemRating = ({ itemRating, overrides, styling }: ItemRatingProps) => {
+  const classes = buildClasses(itemRatingClasses, overrides);
+  const calculateStarRating = (rating: number) => {
+    const wholeStars = Math.floor(rating);
+    const percentageFilled = (rating - wholeStars) * 100;
+    return { wholeStars, percentageFilled };
+  };
+
+  const renderStars = (wholeStars: number, percentageFilled: number) => {
+    const stars: JSX.Element[] = [];
+
+    for (let i = 0; i < wholeStars; i++) {
+      stars.push(<Icon key={i} icon="fa-solid fa-star" styling={{}} />);
+    }
+
+    if (percentageFilled > 0) {
+      stars.push(<Icon key={wholeStars} icon="fa-solid fa-star-half" styling={{}} />);
+    }
+
+    return stars;
+  };
+
+  const { wholeStars, percentageFilled } = calculateStarRating(itemRating);
+  const stars = renderStars(wholeStars, percentageFilled);
+
+  return (
+    <BaseComponent
+      as="div"
+      styling={styling}
+      stylingOptions={{ atomicType: 'atom' }}
+      className={classes.ratingContainer}
+    >
+      <div className={classes.ratingStars}>{stars}</div>
+      <span className={classes.ratingFigure}>{itemRating}/5</span>
+    </BaseComponent>
+  );
+};
+
+export default ItemRating;

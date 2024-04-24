@@ -16,7 +16,6 @@ classes = {
   reviewerName: tw``,
   reviewDate: tw``,
   reviewContentContainer: tw`flex-1 space-y-1`,
-  reviewTitle: tw`text-heading font-semibold`,
   reviewContent: tw`text-sm leading-normal text-copy`,
   bottomContainer: tw`flex items-center justify-between`,
   imageLinkContainer: tw``,
