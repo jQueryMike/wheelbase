@@ -1,4 +1,7 @@
 import { Icon, Image } from '@components/atoms';
+import Avatar from '@components/atoms/Avatar/Avatar';
+import { ReviewDate } from '@components/atoms/ReviewDate';
+import { ReviewerName } from '@components/atoms/ReviewerName';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import DOMPurify from 'isomorphic-dompurify';
@@ -17,15 +20,6 @@ const ReviewItem = ({
   overrides,
   styling,
 }: ReviewItemProps) => {
-  console.log({avatar,
-    reviewerName,
-    reviewDate,
-    reviewTitle,
-    reviewContent,
-    itemRating,
-    imageLink,
-    overrides,
-    styling,})
   const classes = buildClasses(reviewItemClasses, overrides);
   const calculateStarRating = (rating: number) => {
     const wholeStars = Math.floor(rating);
@@ -54,33 +48,18 @@ const ReviewItem = ({
     <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: 'molecule' }} className="{itemContainer}">
       <figure className={classes.reviewItem}>
         <figcaption className={classes.captionContainer}>
-          <div className={classes.avatarContainer}>
-            {avatar && (
-              <Image
-                alt={avatar.alt || 'Avatar'}
-                loading={avatar.loading || 'lazy'}
-                width={avatar.width || '128'}
-                height={avatar.height || '128'}
-                className={classes?.avatar}
-                src={avatar.src}
-                id=""
-                name=""
-              />
-            )}
-          </div>
+          <div className={classes.avatarContainer}>{avatar && <Avatar styling={avatar.styling} avatar={avatar} />}</div>
           <div className={classes.citeContainer}>
-            <cite className={classes.reviewerName}>{reviewerName.text || 'Anonymous'}</cite>
-            {reviewDate && <div className={classes.reviewDate}>{reviewDate.text}</div>}
+            <ReviewerName reviewerName={reviewerName.text} styling={reviewerName.styling} />
+            {reviewDate && <ReviewDate reviewDate={reviewDate.text} styling={reviewDate.styling} />}
           </div>
         </figcaption>
         <blockquote className={classes.reviewContentContainer}>
           {reviewTitle && <div className={classes.reviewTitle}>{reviewTitle.text}</div>}
-          &quot;
-          <div
-            className={classes.reviewContent}
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(reviewContent.text.markup) }}
-          />
-          &quot;
+
+          <div className={classes.reviewContent}>
+            <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(reviewContent.text.markup) }} />
+          </div>
         </blockquote>
         <div className={classes.bottomContainer}>
           {imageLink && (
@@ -91,7 +70,7 @@ const ReviewItem = ({
                 width={imageLink.width || '194'}
                 height={imageLink.height || '64'}
                 className={classes?.imageLink}
-                src={imageLink.image[0].src}
+                src={imageLink.src}
                 id=""
                 name=""
               />
