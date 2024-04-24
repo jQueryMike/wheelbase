@@ -28,7 +28,7 @@ const Header = (/*{ ...rest }: HeaderProps*/) => {
                 decoding="async"
                 data-nimg="1"
                 style={{ color: 'transparent' }}
-                src="http://localhost:3227/media/3rpd2eqh/logo.svg"
+                src="https://cms-web-001.clickdealer.dev/media/3rpd2eqh/logo.svg"
               />
               {/* <img
                 alt="Click Motors Logo"

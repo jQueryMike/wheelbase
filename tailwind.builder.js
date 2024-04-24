@@ -14,7 +14,6 @@ const buildFontFamily = require('./tailwind/buildFontFamily');
 const buildScreens = require('./tailwind/buildScreens');
 const buildTypography = require('./tailwind/buildTypography');
 
-
 const generateTailwindConfig = async () => {
   try {
     const { pages, theme } = await fetchData();
