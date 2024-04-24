@@ -142,6 +142,16 @@ export type TextType = 'heading' | 'subheading' | 'text';
 export type FontSizeOptions = 'Extra Small' | 'Small' | 'Medium' | 'Large' | 'Extra Large';
 
 /**
+ * Line height options 
+ */
+export type LineHeightOption = 'none' | 'tight' | 'snug' | 'normal' | 'relaxed' | 'loose';
+
+/**
+ * Letter spacing options
+ */
+export type LetterSpacingOption = 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest';
+
+/**
  * Positions within a size
  */
 export type ScreenSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';

@@ -1,4 +1,16 @@
-import { BorderRadiusOptions, BorderStyleOptions, BorderWidthOptions, Color, FontSizeOptions, FontWeightType, GridColumnOptions, GridGapOptions, SpacingConfig } from '@types';
+import {
+  BorderRadiusOptions,
+  BorderStyleOptions,
+  BorderWidthOptions,
+  Color,
+  FontSizeOptions,
+  FontWeightType,
+  GridColumnOptions,
+  GridGapOptions,
+  LetterSpacingOption,
+  LineHeightOption,
+  SpacingConfig,
+} from '@types';
 import { ComponentType } from 'react';
 
 export type Comps<T, U = undefined> = {
@@ -9,8 +21,8 @@ export type Typography = {
   fontColor?: Color;
   fontSize?: FontSizeOptions;
   fontWeight?: FontWeightType;
-  lineHeight?: string;
-  letterSpacing?: string;
+  lineHeight?: Capitalize<LineHeightOption>;
+  letterSpacing?: Capitalize<LetterSpacingOption>;
 };
 
 export type Background = {
@@ -29,7 +41,7 @@ export type Border = {
 export type Layout = {
   columns?: GridColumnOptions;
   columnGap?: GridGapOptions;
-}
+};
 
 export type Styling = {
   spacing?: SpacingConfig;

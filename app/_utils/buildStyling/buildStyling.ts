@@ -12,6 +12,8 @@ import { getGridGap } from './layout/getGridGap';
 import { getSpacing } from './spacing/getSpacing';
 import { getFontSize } from './typography/getFontSize';
 import { getFontWeight } from './typography/getFontWeight';
+import { getLetterSpacing } from './typography/getLetterSpacing';
+import { getLineHeight } from './typography/getLineHeight';
 
 // function getBorder(border?: Border): [string, CSSProperties] {
 //   if (!border) return ['', {}];
@@ -53,6 +55,8 @@ export default function buildStyling(
     classes.push(getFontWeight(typography?.fontWeight || 'Medium'));
     classes.push(getFontSize(typography?.fontSize || 'Medium', options?.textType));
     if (typography.fontColor) classes.push(getColour(typography.fontColor, 'text'));
+    classes.push(getLineHeight(typography?.lineHeight));
+    classes.push(getLetterSpacing(typography?.letterSpacing));
   }
   if (border) {
     classes.push(getBorderStyle(border?.borderStyle || 'none'));
