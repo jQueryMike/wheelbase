@@ -24,12 +24,12 @@ export type ReviewItemClasses<T = string> = {
 
 export type ReviewItemProps = BaseProps<{
   avatar: ImageProps;
-  reviewerName: string;
-  reviewDate: string;
-  reviewTitle: string;
-  reviewContent: string;
+  reviewerName: any;
+  reviewDate: any;
+  reviewTitle: any;
+  reviewContent: any;
   itemRating: number;
-  reviewImage: ImageProps;
+  imageLink: ImageProps;
   classes?: ReviewItemClasses<string>;
   overrides?: {
     [key in keyof ReviewItemClasses]?: string;

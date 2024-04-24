@@ -25,7 +25,7 @@ const Features = async ({
     <BaseComponent {...rest}>
       <div className={classes.rootInner}>
         <div className={classes.container}>{(heading || subheading) && (
-          <div data-testid="headings-container" className={featuresClasses.headingContainer}>
+          <div data-testid="headings-container" className={classes.headingContainer}>
             {resolvedHeading}
             {resolvedSubheading}
           </div>
