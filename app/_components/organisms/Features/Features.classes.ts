@@ -8,6 +8,9 @@ let classes: FeaturesClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
+  container: {
+    default: tw`container mx-auto grid h-full gap-6`,
+  },
   headingContainer: tw`text-center`
 };
 
