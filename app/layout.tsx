@@ -1,5 +1,5 @@
-// import { Footer } from '@components/organisms/Footer';
-// import { Header } from '@components/organisms/Header';
+import { Footer } from '@components/organisms/Footer';
+import { Header } from '@components/organisms/Header';
 // import { getGlobalConfig, getSharedContent } from '@utils';
 // import { buildConfig } from '@utils/buildConfig';
 // import { mergeVars } from '@utils/mergeVars';
@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       {/* {header ?? <Header {...header} />} */}
       <body className={inter.className}>
-        {/* <Header /> */}
+        <Header />
         {children}
         <Suspense fallback={null}>
           <Script
@@ -36,7 +36,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             async
           />
         </Suspense>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );

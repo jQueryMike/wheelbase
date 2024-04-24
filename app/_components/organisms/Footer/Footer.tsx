@@ -6,10 +6,11 @@ import cn from 'classnames';
 import NextImage from 'next/image';
 
 import footerClasses from './Footer.classes';
-import { FooterProps } from './Footer.types';
 
-// eslint-disable-next-line no-empty-pattern
-const Footer = async ({}: FooterProps) => {
+// import { FooterProps } from './Footer.types';
+
+// eslint-disable-next-line spaced-comment
+const Footer = (/*{}: FooterProps*/) => {
   const classes = buildClasses(footerClasses);
   return (
     <footer className={cn('{root} bg-primary blockPadding p-8', classes.root)} aria-labelledby="footer-heading">
