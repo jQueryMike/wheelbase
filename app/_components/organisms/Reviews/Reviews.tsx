@@ -1,21 +1,14 @@
+import { Grid } from '@components/_layouts/Grid';
 import { Heading } from '@components/atoms';
 import { ReviewItem, ReviewItemProps } from '@components/molecules/ReviewItem';
-import { buildClasses } from '@utils/buildClasses';
-import { Grid } from '@components/_layouts/Grid';
 import { BaseComponent } from '@components/utils/BaseComponent';
 import { Block } from '@types';
-import reviewsClasses from './Reviews.classes'
+import { buildClasses } from '@utils/buildClasses';
 
+import reviewsClasses from './Reviews.classes';
 import { ReviewsProps } from './Reviews.types';
 
-const Reviews = async ({
-  heading,
-  subheading,
-  reviewsBlock,
-  items,
-  overrides,
-  styling
- }: ReviewsProps & Block) => {
+const Reviews = async ({ heading, subheading, reviewsBlock, items, overrides, styling }: ReviewsProps & Block) => {
   const classes = buildClasses(reviewsClasses, overrides);
   const resolvedHeading = heading ? await Heading(heading) : undefined;
   const resolvedSubheading = subheading
@@ -39,10 +32,10 @@ const Reviews = async ({
             reviewerName={item.reviewerName}
             reviewDate={item.reviewDate}
             reviewTitle={item.reviewTitle}
-            reviewContent={item.reviewContent} />
+            reviewContent={item.reviewContent}
+          />
         ))}
       </Grid>
-
     </BaseComponent>
   );
 };
