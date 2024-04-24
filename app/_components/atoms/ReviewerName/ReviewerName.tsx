@@ -7,7 +7,7 @@ import { ReviewerNameProps } from './ReviewerName.types';
 const ReviewerName = ({ reviewerName, overrides, styling }: ReviewerNameProps) => {
   const classes = buildClasses(reviewerNameClasses, overrides);
   return (
-    <BaseComponent as="cite" styling={styling} className={classes.reviewerName}>
+    <BaseComponent as="cite" styling={styling} className={classes.reviewerName} stylingOptions={{ atomicType: 'atom' }}>
       {reviewerName || 'Anonymous'}
     </BaseComponent>
   );

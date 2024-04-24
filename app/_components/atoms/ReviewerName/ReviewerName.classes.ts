@@ -8,6 +8,7 @@ let classes: ReviewerNameClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
+  reviewerName: tw`not-italic`,
 };
 
 const reviewerNameClasses = new ClassesBuilder({ location, classes }).classes;
