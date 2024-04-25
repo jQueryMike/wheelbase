@@ -48,7 +48,7 @@ const Hero = async ({
               </div>
             )}
             {components?.length > 0 && (
-              <div className={classes?.contentAreaContainer} data-testid="content-area">
+              <div className={classes?.contentAreaContainer} data-testid="content-area" style={{ marginTop: '-6px' }}>
                 {components.map(([name, Component, id, props]: any) => (
                   <Suspense fallback={<div>Loading {name}...</div>} key={id}>
                     <Component {...props} />
