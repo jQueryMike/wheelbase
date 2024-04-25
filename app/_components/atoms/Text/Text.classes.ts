@@ -8,7 +8,7 @@ let classes: TextClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`prose`,
-  textContent: tw`max-w-full`,
+  textContent: tw`max-w-full text-sm`,
 };
 
 const textContentClasses = new ClassesBuilder({ location, classes }).classes;

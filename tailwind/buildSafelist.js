@@ -149,7 +149,7 @@ const buildSafelist = async (pages) => {
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
       ...colors,
       ...gradientClasses,
-      ...['bg-secondary-dark', 'border-[#e69138]/[1]', 'border-1', 'font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl'],
+      ...['bg-secondary-dark', 'border-[#e69138]/[1]', 'border-1', 'font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl', 'text-md'],
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');
