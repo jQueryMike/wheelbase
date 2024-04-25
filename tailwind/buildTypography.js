@@ -3,11 +3,11 @@ const buildTypography = (colors) => {
     return {
       DEFAULT: {
         css: {
-          color: colors.copy.DEFAULT,
+          color: colors.copy?.DEFAULT,
           a: {
-            color: colors.link.DEFAULT,
+            color: colors.link?.DEFAULT,
             '&:hover': {
-              color: colors.link.light,
+              color: colors.link?.light,
             },
           },
         },

@@ -33,8 +33,8 @@ function getColors(data, bgColors = new Set(), borderColors = new Set(), textCol
         // console.log(key, value);
         updateColourSet(value, textColors);
       }
-      if (childFields.includes(key)) {
-        getColors(value.items, bgColors, borderColors, textColors);
+      if (childFields.includes(key) && value) {
+        getColors(value?.items, bgColors, borderColors, textColors);
       }
     });
   });
