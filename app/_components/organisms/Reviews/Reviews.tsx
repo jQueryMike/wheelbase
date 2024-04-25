@@ -15,28 +15,30 @@ const Reviews = async ({ heading, subheading, reviewsBlock, items, overrides, st
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <BaseComponent styling={styling}>
-      {(heading || subheading) && (
-        <div data-testid="headings-container" className={classes.headingContainer}>
-          {resolvedHeading}
-          {resolvedSubheading}
-        </div>
-      )}
-      <Grid styling={reviewsBlock.styling}>
-        {items.map((item: ReviewItemProps) => (
-          <ReviewItem
-            styling={item.styling}
-            itemRating={item.itemRating}
-            avatar={item.avatar}
-            imageLink={item.imageLink}
-            reviewerName={item.reviewerName}
-            reviewDate={item.reviewDate}
-            reviewTitle={item.reviewTitle}
-            reviewContent={item.reviewContent}
-          />
-        ))}
-      </Grid>
-    </BaseComponent>
+    <div className={classes.reviews}>
+      <BaseComponent styling={styling}>
+        {(heading || subheading) && (
+          <div data-testid="headings-container" className={classes.headingContainer}>
+            {resolvedHeading}
+            {resolvedSubheading}
+          </div>
+        )}
+        <Grid styling={reviewsBlock.styling}>
+          {items.map((item: ReviewItemProps) => (
+            <ReviewItem
+              styling={item.styling}
+              itemRating={item.itemRating}
+              avatar={item.avatar}
+              imageLink={item.imageLink}
+              reviewerName={item.reviewerName}
+              reviewDate={item.reviewDate}
+              reviewTitle={item.reviewTitle}
+              reviewContent={item.reviewContent}
+            />
+          ))}
+        </Grid>
+      </BaseComponent>
+    </div>
   );
 };
 

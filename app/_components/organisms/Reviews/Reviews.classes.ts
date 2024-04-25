@@ -8,7 +8,8 @@ let classes: ReviewsClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  headingContainer: tw`text-center`
+  headingContainer: tw`text-center`,
+  reviews: tw`container mx-auto grid h-full`,
 };
 
 const reviewsClasses = new ClassesBuilder({ location, classes }).classes;
