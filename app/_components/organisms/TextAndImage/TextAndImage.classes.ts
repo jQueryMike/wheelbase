@@ -18,23 +18,23 @@ classes = {
     xl: tw`xl:gap-20`,
   },
   textAndImageContentContainer: {
-    default: tw`my-8 flex flex-col justify-center space-y-8`,
-    md: tw`md:my-16 md:space-y-10`,
-    lg: tw`lg:my-20 lg:space-y-12`,
-    xl: tw`xl:my-14 xl:space-y-14`,
+    default: tw`my-8 flex flex-col justify-center`,
+    md: tw`md:my-16`,
+    lg: tw`lg:my-20`,
+    xl: tw`xl:my-14`,
   },
   textAndImageContentContainerReverse: {
-    default: tw`order-2 my-8 flex flex-col justify-center space-y-8`,
-    md: tw`md:my-16 md:space-y-10`,
-    lg: tw`lg:my-20 lg:space-y-12`,
-    xl: tw`xl:my-14 xl:space-y-14`,
+    default: tw`order-2 my-8 flex flex-col justify-center`,
+    md: tw`md:my-16`,
+    lg: tw`lg:my-20`,
+    xl: tw`xl:my-14`,
   },
   headingsContainer: {
     default: tw`space-y-2`,
   },
   contentAreaContainer: {
     default: tw`space-y-4`,
-    '@xl/image-with-text': tw`@xl/image-with-text:space-y-6`,
+    '@xl/image-with-text': tw``,
   },
   imageContainer: {
     default: tw`relative`,
