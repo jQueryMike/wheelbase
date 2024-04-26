@@ -67,7 +67,7 @@ export type AtomicType = 'atom' | 'molecule' | 'organism';
 /**
  * Spacing types
  */
-export type SpacingType = 'padding' | 'margin';
+export type SpacingType = 'spacing';
 
 /**
  * Spacing Positions
@@ -85,13 +85,13 @@ export type SizeType = 'none' | 'xsmall' | 'small' | 'medium' | 'large' | 'xlarg
 export type SpacingMap = {
   /** Map atomic types */
   [key1 in AtomicType]: {
-    /** Map spacing types */
-    [key2 in SpacingType]?: {
-      /** Map size types */
-      [key3 in Partial<SizeType>]?: string;
+    /** Map size types */
+    [key2 in Partial<SizeType>]?: {
+      [key3 in ScreenSizes]?: string;
     };
   };
 };
+
 
 /**
  * Positions within a size

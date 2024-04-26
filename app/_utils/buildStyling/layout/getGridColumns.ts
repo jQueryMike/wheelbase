@@ -31,7 +31,7 @@ const gridColumnMappings: GridColumnMap = {
         md: "grid-cols-3",
         lg: "grid-cols-6",
     },
-  };    
+};
 
 /**
  * @description Get grid cols classes for a specified column number
@@ -39,11 +39,11 @@ const gridColumnMappings: GridColumnMap = {
  * @returns Tailwind classes for all text types
  * ```
  * @example getGridColumns(2)
- * // "sm:grid-cols-1 md:grid-cols-2"
+ *  "grid-cols-1 md:grid-cols-2"
  * ```
  */
 export function getGridColumns(columns: GridColumnOptions = 4): string {
     return Object.entries(gridColumnMappings[columns] || {})
-      .map(([key, value]) => `${key}:${value}`, [])
-      .join(' ');
-  }
+        .map(([key, value]) => key === 'sm' ? `${value}` : `${key}:${value}`, [])
+        .join(' ');
+}
