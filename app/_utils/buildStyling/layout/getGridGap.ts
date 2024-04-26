@@ -40,6 +40,6 @@ const gridGapMappings: GridGapMap = {
  */
 export function getGridGap(gap: GridGapOptions = 4): string {
     return Object.entries(gridGapMappings[gap] || {})
-      .map(([key, value]) => `${key}:${value}`, [])
-      .join(' ');
+        .map(([key, value]) => key === 'sm' ? `${value}` : `${key}:${value}`, [])
+        .join(' ');
 }
