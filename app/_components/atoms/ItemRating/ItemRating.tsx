@@ -5,7 +5,7 @@ import { Icon } from '../Icon';
 import itemRatingClasses from './ItemRating.classes';
 import { ItemRatingProps } from './ItemRating.types';
 
-const ItemRating = ({ itemRating, overrides, styling }: ItemRatingProps) => {
+const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) => {
   const classes = buildClasses(itemRatingClasses, overrides);
   const calculateStarRating = (rating: number) => {
     const wholeStars = Math.floor(rating);
@@ -17,11 +17,15 @@ const ItemRating = ({ itemRating, overrides, styling }: ItemRatingProps) => {
     const stars: JSX.Element[] = [];
 
     for (let i = 0; i < wholeStars; i++) {
-      stars.push(<Icon key={i} icon="fa-solid fa-star" styling={{}} />);
+      stars.push(<Icon key={i} icon={icon.icon} styling={icon.styling} />);
     }
 
     if (percentageFilled > 0) {
-      stars.push(<Icon key={wholeStars} icon="fa-solid fa-star-half" styling={{}} />);
+      stars.push(<Icon key={wholeStars} icon={`${icon.icon}-half-o`} styling={icon.styling} />);
+    }
+
+    if (Math.floor(5 - itemRating) === 1) {
+      stars.push(<Icon key={5 - itemRating} icon={`${icon.icon} text-black opacity-25`} styling={icon.styling} />);
     }
 
     return stars;

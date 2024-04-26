@@ -12,6 +12,7 @@ const Heading = async ({
   overrides,
   'data-testid': dataTestId = 'heading',
 }: HeadingProps) => {
+  console.log({ text, styling });
   const classes = buildClasses(headingClasses, overrides);
   return (
     <BaseComponent
