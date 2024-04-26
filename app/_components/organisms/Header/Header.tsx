@@ -3,6 +3,7 @@ import { buildClasses } from '@utils/buildClasses';
 import NextImage from 'next/image';
 
 import headerClasses from './Header.classes';
+
 // import { HeaderProps } from './Header.types';
 
 // eslint-disable-next-line spaced-comment
@@ -66,34 +67,34 @@ const Header = (/*{ ...rest }: HeaderProps*/) => {
                 </svg>
               </button>
               <a
-                className="text-primary hover:text-accent transitionbefore:absolute before:bg-accent relative py-3 text-base font-bold before:-bottom-1 before:h-1 before:w-full"
+                className="transitionbefore:absolute relative py-3 text-base font-bold text-primary before:-bottom-1 before:h-1 before:w-full before:bg-accent hover:text-accent"
                 href="/"
               >
                 Home
               </a>
               <a
-                className="text-primary hover:text-accent relative py-3 text-base font-bold transition"
+                className="relative py-3 text-base font-bold text-primary transition hover:text-accent"
                 href="/sell-your-car"
               >
                 Sell your car
               </a>
               <a
-                className="text-primary hover:text-accent relative py-3 text-base font-bold transition"
+                className="relative py-3 text-base font-bold text-primary transition hover:text-accent"
                 href="/how-it-works"
               >
                 How it works
               </a>
-              <a className="text-primary hover:text-accent relative py-3 text-base font-bold transition" href="/faq">
+              <a className="relative py-3 text-base font-bold text-primary transition hover:text-accent" href="/faq">
                 FAQ
               </a>
               <a
-                className="text-primary hover:text-accent relative py-3 text-base font-bold transition"
+                className="relative py-3 text-base font-bold text-primary transition hover:text-accent"
                 href="/reviews"
               >
                 Reviews
               </a>
               <a
-                className="text-primary hover:text-accent relative py-3 text-base font-bold transition"
+                className="relative py-3 text-base font-bold text-primary transition hover:text-accent"
                 href="/contact"
               >
                 Contact
@@ -103,18 +104,18 @@ const Header = (/*{ ...rest }: HeaderProps*/) => {
           <div className="{menuIconWrapper} flex items-center xl:hidden">
             <button aria-label="Open navigation" className="{hamburger} group">
               <div className="{hamburgerWrapper} space-y-1.5">
-                <div className="{topBun} bg-primary group-hover:bg-accent h-1 w-8 rounded-full transition" />
-                <div className="{meat} bg-primary group-hover:bg-accent h-1 w-8 rounded-full transition" />
-                <div className="{bottomBun} bg-primary group-hover:bg-accent h-1 w-8 rounded-full transition" />
+                <div className="{topBun} h-1 w-8 rounded-full bg-primary transition group-hover:bg-accent" />
+                <div className="{meat} h-1 w-8 rounded-full bg-primary transition group-hover:bg-accent" />
+                <div className="{bottomBun} h-1 w-8 rounded-full bg-primary transition group-hover:bg-accent" />
               </div>
             </button>
           </div>
-          <div className="{headerSlot} xs:block hidden">
+          <div className="{headerSlot} hidden xs:block">
             <div className="{headerCtaBlock}">
               <a title="" href="/sell-your-car">
                 <button
                   aria-label="Get a valuation"
-                  className="{btn} bg-accent hover:bg-primary rounded-md p-3 px-4 text-sm font-semibold text-white transition hover:text-white active:scale-95"
+                  className="{btn} rounded-md bg-accent p-3 px-4 text-sm font-semibold text-white transition hover:bg-primary hover:text-white active:scale-95"
                 >
                   Get a valuation
                 </button>

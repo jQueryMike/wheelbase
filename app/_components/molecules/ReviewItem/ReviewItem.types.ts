@@ -1,4 +1,4 @@
-import { ImageProps } from '@components/atoms';
+import { AvatarProps, ImageProps } from '@components/atoms';
 import { BaseProps } from '@components/types';
 
 export type ReviewItemClasses<T = string> = {
@@ -23,12 +23,13 @@ export type ReviewItemClasses<T = string> = {
 };
 
 export type ReviewItemProps = BaseProps<{
-  avatar: ImageProps;
+  avatar: AvatarProps;
   reviewerName: any;
   reviewDate: any;
   reviewTitle: any;
   reviewContent: any;
   itemRating: number;
+  ratingIcon: any;
   imageLink: ImageProps;
   classes?: ReviewItemClasses<string>;
   overrides?: {
