@@ -12,9 +12,9 @@ const BLOCK_TYPE: AtomicType = 'atom';
 const Image = async ({ overrides, spacing, ...rest }: ImageProps & Block) => {
   const classes = buildClasses(imageClasses, overrides);
   return (
-    <div className={cn(classes?.root, buildStyling({ spacing }, BLOCK_TYPE))}>
-      <NextImage className={classes?.image} {...rest} />
-    </div>
+    //<div className={cn(classes?.root, buildStyling({ spacing }, BLOCK_TYPE))}>
+    <NextImage className={classes?.image} {...rest} />
+    //</div>
   );
 };
 

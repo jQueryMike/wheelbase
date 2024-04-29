@@ -78,8 +78,6 @@ export const BuilderMap = new Map([
       const { id, name, url, alternativeText, width, height } = imageData?.[0] || {
         id: uuidv4(),
         name: 'Image',
-        url: '/media/vprlmnok/placeholder_view_vector.svg', // remote url, can't get public folder in build
-        src: '/media/vprlmnok/placeholder_view_vector.svg', // remote url, can't get public folder in build
         alt: 'Placholder Image',
         alternativeText: 'Placholder Image',
         width: '128',
@@ -91,7 +89,7 @@ export const BuilderMap = new Map([
       const image = {
         id,
         name: 'Image',
-        src: `${process.env.MEDIA_URL}${url}`,
+        src: url ? `${process.env.MEDIA_URL}${url}` : '',
         alt: altText || alternativeText || name,
         ...(settings.loading ? { ...settings, fill: isFill } : { ...settings, fill: isFill, loading: 'lazy' }),
         ...(isFill ? { sizes: `${appearance.width ?? w}px`, objectFit: 'contain' } : { width: w, height: h }),

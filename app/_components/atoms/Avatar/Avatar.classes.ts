@@ -8,7 +8,7 @@ let classes: AvatarClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  avatar: tw`border-4" h-14 w-14 rounded-full border-accent`,
+  avatar: tw`h-14 w-14`,
 };
 
 const avatarClasses = new ClassesBuilder({ location, classes }).classes;

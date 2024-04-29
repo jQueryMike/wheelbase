@@ -28,7 +28,7 @@ export type ReviewItemProps = BaseProps<{
   reviewDate: any;
   reviewTitle: any;
   reviewContent: any;
-  itemRating: number;
+  itemRating: any;
   ratingIcon: any;
   imageLink: ImageProps;
   classes?: ReviewItemClasses<string>;

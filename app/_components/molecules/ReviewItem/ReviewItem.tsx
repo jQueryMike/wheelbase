@@ -24,29 +24,37 @@ const ReviewItem = ({
   styling,
 }: ReviewItemProps) => {
   const classes = buildClasses(reviewItemClasses, overrides);
+  console.log(styling);
   return (
-    <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: 'molecule' }} className="{itemContainer}">
-      <figure className={classes.reviewItem}>
-        <figcaption className={classes.captionContainer}>
-          <div className={classes.avatarContainer}>
-            {avatar.src ? <Avatar {...avatar} /> : <Gravatar reviewerName={reviewerName.text} styling={{}} />}
-          </div>
-          <div className={classes.citeContainer}>
-            <ReviewerName reviewerName={reviewerName.text} styling={reviewerName.styling} />
-            {reviewDate && <ReviewDate reviewDate={reviewDate.text} styling={reviewDate.styling} />}
-          </div>
-        </figcaption>
-        <blockquote className={classes.reviewContentContainer}>
-          {reviewTitle && <ReviewTitle reviewTitle={reviewTitle.text} styling={reviewTitle.styling} />}
-          {reviewContent.text.markup.length > 0 && (
-            <ReviewContent reviewContent={reviewContent.text.markup} styling={reviewContent.styling} />
+    <BaseComponent
+      as="figure"
+      styling={styling}
+      stylingOptions={{ atomicType: 'molecule' }}
+      className={classes.reviewItem}
+    >
+      <figcaption className={classes.captionContainer}>
+        <div className={classes.avatarContainer}>
+          {avatar.src ? (
+            <Avatar {...avatar} styling={avatar.styling} />
+          ) : (
+            <Gravatar reviewerName={reviewerName.text} styling={{}} />
           )}
-        </blockquote>
-        <div className={classes.bottomContainer}>
-          {imageLink && <ImageLink styling={imageLink.styling} imageLink={imageLink} />}
-          {itemRating && <ItemRating {...itemRating} icon={ratingIcon} />}
         </div>
-      </figure>
+        <div className={classes.citeContainer}>
+          <ReviewerName reviewerName={reviewerName.text} styling={reviewerName.styling} />
+          {reviewDate && <ReviewDate reviewDate={reviewDate.text} styling={reviewDate.styling} />}
+        </div>
+      </figcaption>
+      <blockquote className={classes.reviewContentContainer}>
+        {reviewTitle && <ReviewTitle reviewTitle={reviewTitle.text} styling={reviewTitle.styling} />}
+        {reviewContent.text.markup.length > 0 && (
+          <ReviewContent reviewContent={reviewContent.text.markup} styling={reviewContent.styling} />
+        )}
+      </blockquote>
+      <div className={classes.bottomContainer}>
+        {imageLink.src && <ImageLink {...imageLink} styling={imageLink.styling} />}
+        {itemRating && <ItemRating {...itemRating} icon={ratingIcon} />}
+      </div>
     </BaseComponent>
   );
 };

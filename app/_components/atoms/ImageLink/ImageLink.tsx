@@ -5,18 +5,18 @@ import { buildClasses } from '@utils/buildClasses';
 import imageLinkClasses from './ImageLink.classes';
 import { ImageLinkProps } from './ImageLink.types';
 
-const ImageLink = ({ styling, imageLink, overrides }: ImageLinkProps) => {
+const ImageLink = ({ styling, overrides, ...image }: ImageLinkProps) => {
   const classes = buildClasses(imageLinkClasses, overrides);
 
   return (
     <BaseComponent styling={styling} stylingOptions={{ atomicType: 'atom' }}>
       <Image
-        alt={imageLink.alt || 'ImageLink'}
-        loading={imageLink.loading || 'lazy'}
-        width={imageLink.width || '128'}
-        height={imageLink.height || '128'}
+        alt={image.alt || 'ImageLink'}
+        loading={image.loading || 'lazy'}
+        width={image.width || '128'}
+        height={image.height || '128'}
         className={classes?.imageLink}
-        src={imageLink.src}
+        src={image.src}
         id=""
         name=""
       />
