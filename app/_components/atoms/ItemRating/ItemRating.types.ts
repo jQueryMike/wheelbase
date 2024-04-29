@@ -5,7 +5,7 @@ export type ItemRatingClasses<T = string> = {
 };
 
 export type ItemRatingProps = BaseProps<{
-  icon: string;
+  icon: any;
   itemRating: number;
   classes?: ItemRatingClasses<string>;
   overrides?: {

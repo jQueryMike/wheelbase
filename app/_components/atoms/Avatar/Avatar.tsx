@@ -9,7 +9,7 @@ const Avatar = ({ styling, overrides, ...image }: AvatarProps) => {
   const classes = buildClasses(avatarClasses, overrides);
 
   return (
-    <BaseComponent styling={styling} stylingOptions={{ atomicType: 'atom' }}>
+    <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: 'atom' }}>
       <Image
         alt={image.alt || 'Avatar'}
         loading={image.loading || 'lazy'}

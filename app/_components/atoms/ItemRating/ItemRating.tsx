@@ -6,6 +6,7 @@ import itemRatingClasses from './ItemRating.classes';
 import { ItemRatingProps } from './ItemRating.types';
 
 const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) => {
+  console.log(icon);
   const classes = buildClasses(itemRatingClasses, overrides);
   const calculateStarRating = (rating: number) => {
     const wholeStars = Math.floor(rating);
@@ -23,9 +24,10 @@ const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) =
     if (percentageFilled > 0) {
       stars.push(<Icon key={wholeStars} icon={`${icon.icon}-half-o`} styling={icon.styling} />);
     }
-
-    if (Math.floor(5 - itemRating) === 1) {
-      stars.push(<Icon key={5 - itemRating} icon={`${icon.icon} text-black opacity-25`} styling={icon.styling} />);
+    if (Math.floor(5 - itemRating) >= 1 && Math.floor(5 - itemRating) <= 5) {
+      for (let j = 1; j <= 5 - itemRating; j++) {
+        stars.push(<Icon key={j} icon={`${icon.icon} text-black opacity-25`} styling={icon.styling} />);
+      }
     }
 
     return stars;

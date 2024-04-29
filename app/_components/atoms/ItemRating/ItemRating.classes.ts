@@ -8,8 +8,8 @@ let classes: ItemRatingClasses<ClassesProperty> = {};
 
 classes = {
   root: tw``,
-  ratingContainer: tw`flex items-center gap-2`,
-  ratingStars: tw`flex items-center gap-[1px]`,
+  ratingContainer: tw`flex items-center`,
+  ratingStars: tw`flex items-center`,
   ratingFigure: tw`rounded-full bg-black p-1 px-2 text-[12px] font-bold text-white`,
 };
 
