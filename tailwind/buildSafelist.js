@@ -165,6 +165,7 @@ const buildSafelist = async (pages) => {
         'xl:text-2xl',
         'text-md',
         'rounded-full',
+        'overflow-hidden'
       ],
     ];
   } catch (error) {

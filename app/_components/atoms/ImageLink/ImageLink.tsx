@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { Image } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
@@ -9,7 +10,7 @@ const ImageLink = ({ styling, overrides, ...image }: ImageLinkProps) => {
   const classes = buildClasses(imageLinkClasses, overrides);
 
   return (
-    <BaseComponent styling={styling} stylingOptions={{ atomicType: 'atom' }}>
+    <BaseComponent styling={styling} stylingOptions={{ atomicType: 'atom' }} className={classes?.root}>
       <Image
         alt={image.alt || 'ImageLink'}
         loading={image.loading || 'lazy'}
