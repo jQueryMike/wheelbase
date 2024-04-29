@@ -1,5 +1,6 @@
 import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
+// eslint-disable-next-line import/no-cycle
 import { ImageLinkClasses } from './ImageLink.types';
 
 const location = 'ImageLink/ImageLink.classes';

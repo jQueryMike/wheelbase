@@ -4,16 +4,16 @@ import { BorderStyleMap, BorderStyleOptions } from '@types';
  * Grid Columns map
  */
 const borderStyleMappings: BorderStyleMap = {
-  none: 'rounded-none',
-  solid: 'rounded-sm',
-  dashed: 'rounded-md',
-  dotted: 'rounded-lg',
-  double: 'rounded-xl',
+  none: 'border-none',
+  solid: 'border-solid',
+  dashed: 'border-dashed',
+  dotted: 'border-dotted',
+  double: 'border-double',
 };
 
 /**
- * Return tailwind class for border colour
- * @param {any} borderStyle:BorderRadiusOption
+ * Return tailwind class for border Style
+ * @param {any} borderStyle:BorderStyleOption
  * @returns {string}
  */
 
