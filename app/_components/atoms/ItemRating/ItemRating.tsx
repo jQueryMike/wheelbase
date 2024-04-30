@@ -25,7 +25,7 @@ const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) =
       stars.push(<Icon key={wholeStars} icon={`${starIcon}-half-o`} styling={icon.styling} />);
     }
     if (Math.floor(5 - itemRating) >= 1 && Math.floor(5 - itemRating) <= 5) {
-      for (let j = 1; j <= 5 - itemRating; j++) {
+      for (let j = 1, l = 5 - itemRating; j <= l; j++) {
         stars.push(<Icon key={j} icon={`${starIcon} text-black opacity-25`} styling={icon.styling} />);
       }
     }

@@ -1,7 +1,7 @@
 import { BaseProps } from '@components/types';
 
 export type GravatarClasses<T = string> = {
-  [key in 'root']?: T;
+  [key in 'root' | 'gravatar']?: T;
 };
 
 export type GravatarProps = BaseProps<{
