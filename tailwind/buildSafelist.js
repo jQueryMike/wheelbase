@@ -94,6 +94,12 @@ const buildSafelist = async (pages) => {
 
     const paddingClasses = [];
     const marginClasses = [];
+
+    const addQueryPrefixes = (classes) => {
+      const prefixed = classes.map((cssClass) => queries.map((query) => `${query}:${cssClass}`))
+      return [ ...classes, ...prefixed.flat(1)]
+    }
+
     for (let v = 0; v < 8; v++) {
       const value = v;
       paddingPrefixes.map((prefix) => paddingClasses.push(`${prefix}-${value}`));
@@ -142,8 +148,8 @@ const buildSafelist = async (pages) => {
       .flat();
     return [
       ...layoutClasses,
-      ...paddingClasses,
-      ...marginClasses,
+      ...addQueryPrefixes(paddingClasses),
+      ...addQueryPrefixes(marginClasses),
       ...safelist,
       ...colCounts.map((colCount) => `grid-cols-${colCount}`),
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
