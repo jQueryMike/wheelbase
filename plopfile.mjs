@@ -1,6 +1,8 @@
 // eslint-disable-next-line func-names
 export default function (plop) {
   plop.setHelper('componentCase', (text) => text.replace(' ', '').toLowerCase());
+  plop.setHelper('wrapCurly', (text) => `{${text}}`);
+  plop.setHelper('jsonString', (obj = {}) => JSON.stringify(obj));
 
   plop.setGenerator('Component', {
     description: 'this will generate a component with basic boilerplate code.',
@@ -29,12 +31,6 @@ export default function (plop) {
         destination: 'app/_components/{{atomicType}}/{{pascalCase name}}',
         base: 'plop-templates/Component/',
         templateFiles: 'plop-templates/Component/*',
-      },
-      {
-        type: 'addMany',
-        destination: 'app/_components/{{atomicType}}/{{pascalCase name}}/variants/',
-        base: 'plop-templates/Component/variants/',
-        templateFiles: 'plop-templates/Component/variants/*',
       },
     ],
   });

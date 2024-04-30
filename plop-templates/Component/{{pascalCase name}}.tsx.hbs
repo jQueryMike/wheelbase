@@ -1,24 +1,16 @@
-{{#if asynchronous}}import { buildClasses } from '@utils/buildClasses';{{/if}}
-import { {{pascalCase name}}Props } from './{{pascalCase name}}.types';
+import { BaseComponent } from '@components/utils';
+import { buildClasses } from '@utils/buildClasses';
 
-const {{pascalCase name}} = {{#if asynchronous}}async {{/if}}({title}: {{pascalCase name}}Props) => {
-  {{#if asynchronous}}
-  const {
-    default: { classes: variantClasses },
-  } = await import(`./variants/${1}`);
-  const classes = buildClasses(variantClasses);
+import { {{pascalCase name}}Props } from './{{pascalCase name}}.types';
+import {{camelCase name}}Classes from './{{pascalCase name}}.classes';
+
+const {{pascalCase name}} = ({ title, styling, overrides }: {{pascalCase name}}Props) => {
+  const classes = buildClasses({{camelCase name}}Classes, overrides);
   return (
-    <div className={classes?.root}>
+    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions=\{{ atomicType: '{{atomicType}}' }}>
       {title}
-    </div>
+    </BaseComponent>
   );
-  {{^}}
-  return (
-    <div>
-      {title}
-    </div>
-  )
-  {{/if}}
 };
 
 export default {{pascalCase name}};

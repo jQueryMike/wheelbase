@@ -1,0 +1,13 @@
+import { ClassesBuilder, tw } from '@utils';
+
+import { {{pascalCase name}}Classes } from './{{pascalCase name}}.types';
+
+const location = '{{pascalCase name}}/{{pascalCase name}}.classes';
+
+const classes: {{pascalCase name}}Classes = {
+  root: tw``,
+};
+
+const {{camelCase name}}Classes = new ClassesBuilder({ location, classes }).classes;
+
+export default {{camelCase name}}Classes;
