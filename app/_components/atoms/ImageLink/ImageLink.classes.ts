@@ -8,7 +8,7 @@ const location = 'ImageLink/ImageLink.classes';
 let classes: ImageLinkClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw``,
+  root: tw`max-w-24`,
 };
 
 const imageLinkClasses = new ClassesBuilder({ location, classes }).classes;

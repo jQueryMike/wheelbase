@@ -24,7 +24,6 @@ const ReviewItem = ({
   styling,
 }: ReviewItemProps) => {
   const classes = buildClasses(reviewItemClasses, overrides);
-  console.log(styling);
   return (
     <BaseComponent
       as="figure"
