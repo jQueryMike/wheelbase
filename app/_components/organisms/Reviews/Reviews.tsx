@@ -13,7 +13,7 @@ const Reviews = async ({
   subheading,
   reviewsBlock,
   items,
-  icon,
+  fixedIcon,
   overrides,
   styling,
 }: ReviewsProps & Block) => {
@@ -36,7 +36,7 @@ const Reviews = async ({
             <ReviewItem
               styling={item.styling}
               itemRating={item.itemRating}
-              ratingIcon={icon}
+              ratingIcon={fixedIcon}
               avatar={item.avatar}
               imageLink={item.imageLink}
               reviewerName={item.reviewerName}
