@@ -2,16 +2,43 @@
 import { ButtonSize, ButtonStyle } from '@utils/constants';
 import { v4 as uuidv4 } from 'uuid';
 
+function imageBuilder(
+  config: any,
+  fallbackImage: any = {
+    id: uuidv4(),
+    name: 'Image',
+    alt: 'Placholder Image',
+    alternativeText: 'Placholder Image',
+    width: '128',
+    height: '128',
+  },
+) {
+  const {
+    content: { image: imageData, altText },
+    appearance,
+    settings,
+  } = config;
+  const { id, name, url, alternativeText, width, height } = imageData?.[0] || fallbackImage;
+  const isFill = settings.fill === 'true';
+  const w = appearance.width ?? width;
+  const h = appearance.height ?? height;
+  const image = {
+    id,
+    name: 'Image',
+    src: url ? `${process.env.MEDIA_URL}${url}` : undefined,
+    alt: altText || alternativeText || name,
+    ...(settings.loading ? { ...settings, fill: isFill } : { ...settings, fill: isFill, loading: 'lazy' }),
+    ...(isFill ? { sizes: `${appearance.width ?? w}px`, objectFit: 'contain' } : { width: w, height: h }),
+    styling: config.styling,
+  };
+  return image;
+}
+
 export const BuilderMap = new Map([
   [
     'image',
-    (config: any) => {
-      const {
-        content: { image: imageData, altText },
-        appearance,
-        settings,
-      } = config;
-      const { id, name, url, alternativeText, width, height } = imageData?.[0] || {
+    (config: any) =>
+      imageBuilder(config, {
         id: uuidv4(),
         name: 'Image',
         url: '/media/vprlmnok/placeholder_view_vector.svg', // remote url, can't get public folder in build
@@ -20,22 +47,10 @@ export const BuilderMap = new Map([
         alternativeText: 'Placholder Image',
         width: '300',
         height: '200',
-      };
-      const isFill = settings.fill === 'true';
-      const w = appearance.width ?? width;
-      const h = appearance.height ?? height;
-      const image = {
-        id,
-        name: 'Image',
-        src: `${process.env.MEDIA_URL}${url}`,
-        alt: altText || alternativeText || name,
-        ...(settings.loading ? { ...settings, fill: isFill } : { ...settings, fill: isFill, loading: 'lazy' }),
-        ...(isFill ? { sizes: `${appearance.width ?? w}px`, objectFit: 'contain' } : { width: w, height: h }),
-        styling: config.styling,
-      };
-      return image;
-    },
+      }),
   ],
+  ['avatar', imageBuilder],
+  ['imageLink', imageBuilder],
   [
     'button',
     (config: any) => {

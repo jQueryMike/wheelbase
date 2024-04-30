@@ -96,9 +96,9 @@ const buildSafelist = async (pages) => {
     const marginClasses = [];
 
     const addQueryPrefixes = (classes) => {
-      const prefixed = classes.map((cssClass) => queries.map((query) => `${query}:${cssClass}`))
-      return [ ...classes, ...prefixed.flat(1)]
-    }
+      const prefixed = classes.map((cssClass) => queries.map((query) => `${query}:${cssClass}`));
+      return [...classes, ...prefixed.flat(1)];
+    };
 
     for (let v = 0; v < 8; v++) {
       const value = v;
@@ -155,7 +155,18 @@ const buildSafelist = async (pages) => {
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
       ...colors,
       ...gradientClasses,
-      ...['bg-secondary-dark', 'border-[#e69138]/[1]', 'border-1', 'font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl', 'text-md'],
+      ...[
+        'bg-secondary-dark',
+        'border-[#e69138]/[1]',
+        'border-1',
+        'font-medium',
+        'md:text-base',
+        'lg:text-xl',
+        'xl:text-2xl',
+        'text-md',
+        'rounded-full',
+        'overflow-hidden',
+      ],
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');
