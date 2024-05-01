@@ -8,7 +8,7 @@ import { buildClasses } from '@utils/buildClasses';
 import accordionClasses from './Accordion.classes';
 import { AccordionProps } from './Accordion.types';
 
-const Accordion = async ({ heading, subheading, items, fixedIcon, styling, overrides }: AccordionProps & Block) => {
+const Accordion = ({ heading, subheading, items, fixedIcon, styling, overrides }: AccordionProps & Block) => {
   const classes = buildClasses(accordionClasses, overrides);
 
   return (
