@@ -8,7 +8,7 @@ import { Icon } from '../Icon';
 import buttonClasses from './Button.classes';
 import { ButtonProps } from './Button.types';
 
-const Button = async ({
+const Button = ({
   text,
   href,
   target = '_self',

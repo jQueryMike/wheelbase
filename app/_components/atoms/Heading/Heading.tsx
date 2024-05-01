@@ -4,7 +4,7 @@ import { buildClasses } from '@utils/buildClasses';
 import headingClasses from './Heading.classes';
 import { HeadingProps, HeadingTag } from './Heading.types';
 
-const Heading = async ({
+const Heading = ({
   text,
   tag,
   textType = 'heading',

@@ -6,7 +6,7 @@ import NextImage from 'next/image';
 import imageClasses from './Image.classes';
 import { ImageProps } from './Image.types';
 
-const Image = async ({ overrides, styling, ...rest }: ImageProps & Block) => {
+const Image = ({ overrides, styling, ...rest }: ImageProps & Block) => {
   const classes = buildClasses(imageClasses, overrides);
   return (
     <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: "atom" }}>

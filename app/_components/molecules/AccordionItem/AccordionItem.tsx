@@ -1,5 +1,8 @@
 'use client';
 
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 // eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
 import { Heading, Icon } from '@components/atoms';
@@ -7,13 +10,12 @@ import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import { useToggle } from 'app/_hooks';
 import cn from 'classnames';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 
 import accordionItemClasses from './AccordionItem.classes';
 import { AccordionItemProps } from './AccordionItem.types';
 
 const AccordionItem = ({ heading, contentArea = [], styling, overrides, icon }: AccordionItemProps) => {
-  const resolvedHeading = heading ? Heading(heading) : undefined;
   const classes = buildClasses(accordionItemClasses, overrides);
   const components = contentArea.map(({ name, id, ...props }: any) => [
     name,
@@ -25,7 +27,10 @@ const AccordionItem = ({ heading, contentArea = [], styling, overrides, icon }: 
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'molecules' }}>
       <div className="flex cursor-pointer items-center justify-between border border-gray-200 p-4">
-        {resolvedHeading}
+        {heading && <Heading {...heading} />}
+        {/* 
+          TODO: Fix a11y issue with keyboard control
+        */}
         <span onClick={() => toggle()}>
           <Icon icon="fa fa-chevron-down" styling={icon.styling} />
         </span>
