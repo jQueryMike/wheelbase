@@ -8,8 +8,8 @@ import * as Organisms from './organisms';
 import { Comps } from './types';
 
 const layouts: Comps<typeof Layouts> = {
-  Grid: dynamic(() => import('./_layouts/Grid/Grid'))
-}
+  Grid: dynamic(() => import('./_layouts/Grid/Grid')),
+};
 
 const atoms: Comps<typeof Atoms, 'HeadingSize' | 'HeadingTag' | 'Icon' | 'Avatar' | 'ImageLink' | 'ItemRating' | 'ReviewContent' | 'ReviewDate' | 'ReviewerName' | 'ReviewTitle'> = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
@@ -27,13 +27,14 @@ const organisms: Comps<Omit<typeof Organisms, 'Header' | 'Footer'>> = {
   TextAndImage: dynamic(() => import('./organisms/TextAndImage/TextAndImage'), {}),
   Features: dynamic(() => import('./organisms/Features/Features')),
   Reviews: dynamic(() => import('./organisms/Reviews/Reviews')),
+  Accordion: dynamic(() => import('./organisms/Accordion/Accordion')),
 };
 
 /**
  * Map of all blocks
  */
 const BLOCKS = {
-  ...layouts, 
+  ...layouts,
   ...atoms,
   ...molecules,
   ...organisms,
