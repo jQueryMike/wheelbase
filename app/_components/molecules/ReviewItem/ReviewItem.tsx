@@ -7,6 +7,8 @@ import { ReviewTitle } from '@components/atoms/ReviewTitle';
 import { ReviewerName } from '@components/atoms/ReviewerName';
 import { BaseComponent, Gravatar } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
+import buildLink from '@utils/buildLink/buildLink';
+import Link from 'next/link';
 
 import reviewItemClasses from './ReviewItem.classes';
 import { ReviewItemProps } from './ReviewItem.types';
@@ -24,6 +26,7 @@ const ReviewItem = ({
   styling,
 }: ReviewItemProps) => {
   const classes = buildClasses(reviewItemClasses, overrides);
+  const link = buildLink(imageLink.link[0]);
   return (
     <BaseComponent
       as="figure"
@@ -51,7 +54,14 @@ const ReviewItem = ({
         )}
       </blockquote>
       <div className={classes.bottomContainer}>
-        {imageLink.src && <ImageLink {...imageLink} styling={imageLink.styling} />}
+        {imageLink.src && link.href ? (
+          <Link {...link}>
+            <ImageLink {...imageLink} styling={imageLink.styling} />
+          </Link>
+        ) : (
+          <ImageLink {...imageLink} styling={imageLink.styling} />
+        )}
+
         {itemRating && <ItemRating {...itemRating} icon={ratingIcon} />}
       </div>
     </BaseComponent>

@@ -37,6 +37,20 @@ const Reviews = async ({ heading, subheading, reviewsBlock, items, overrides, st
               reviewContent={item.reviewContent}
             />
           ))}
+          {items?.length &&
+            items.map((item: ReviewItemProps) => (
+              <ReviewItem
+                styling={item.styling}
+                itemRating={item.itemRating}
+                ratingIcon={item.fixedIcon}
+                avatar={item.avatar}
+                imageLink={item.imageLink}
+                reviewerName={item.reviewerName}
+                reviewDate={item.reviewDate}
+                reviewTitle={item.reviewTitle}
+                reviewContent={item.reviewContent}
+              />
+            ))}
         </Grid>
       </BaseComponent>
     </div>

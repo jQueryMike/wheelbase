@@ -14,7 +14,7 @@ function imageBuilder(
   },
 ) {
   const {
-    content: { image: imageData, altText },
+    content: { image: imageData, altText, link },
     appearance,
     settings,
   } = config;
@@ -30,6 +30,7 @@ function imageBuilder(
     ...(settings.loading ? { ...settings, fill: isFill } : { ...settings, fill: isFill, loading: 'lazy' }),
     ...(isFill ? { sizes: `${appearance.width ?? w}px`, objectFit: 'contain' } : { width: w, height: h }),
     styling: config.styling,
+    link,
   };
   return image;
 }
