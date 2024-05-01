@@ -11,7 +11,19 @@ const layouts: Comps<typeof Layouts> = {
   Grid: dynamic(() => import('./_layouts/Grid/Grid')),
 };
 
-const atoms: Comps<typeof Atoms, 'HeadingSize' | 'HeadingTag' | 'Icon' | 'Avatar' | 'ImageLink' | 'ItemRating' | 'ReviewContent' | 'ReviewDate' | 'ReviewerName' | 'ReviewTitle'> = {
+const atoms: Comps<
+  typeof Atoms,
+  | 'HeadingSize'
+  | 'HeadingTag'
+  | 'Icon'
+  | 'Avatar'
+  | 'ImageLink'
+  | 'ItemRating'
+  | 'ReviewContent'
+  | 'ReviewDate'
+  | 'ReviewerName'
+  | 'ReviewTitle'
+> = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
   Heading: dynamic(() => import('./atoms/Heading/Heading'), {}),
   Image: dynamic(() => import('./atoms/Image/Image'), {}),
@@ -20,6 +32,9 @@ const atoms: Comps<typeof Atoms, 'HeadingSize' | 'HeadingTag' | 'Icon' | 'Avatar
 
 const molecules: Comps<typeof Molecules> = {
   ButtonList: dynamic(() => import('./molecules/ButtonList/ButtonList'), {}),
+  AccordionItem: dynamic(() => import('./molecules/AccordionItem/AccordionItem'), {}),
+  ReviewItem: dynamic(() => import('./molecules/ReviewItem/ReviewItem'), {}),
+  FeatureItem: dynamic(() => import('./molecules/FeatureItem/FeatureItem'), {}),
 };
 
 const organisms: Comps<Omit<typeof Organisms, 'Header' | 'Footer'>> = {

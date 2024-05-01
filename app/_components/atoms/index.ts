@@ -5,6 +5,7 @@ export * from './Heading';
 export * from './Image';
 export * from './ImageLink';
 export * from './Icon';
+export * from './ItemRating';
 export * from './ReviewContent';
 export * from './ReviewDate';
 export * from './ReviewTitle';
