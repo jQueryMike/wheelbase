@@ -16,19 +16,19 @@ export default function (plop) {
         type: 'list',
         name: 'atomicType',
         message: 'Select the atomic type',
-        choices: ['atoms', 'molecules', 'organisms'],
+        choices: ['atom', 'molecule', 'organism'],
       },
       {
         type: 'confirm',
         name: 'asynchronous',
         message: 'Is this component asynchronous?',
-        default: false
-      }
+        default: false,
+      },
     ],
     actions: [
       {
         type: 'addMany',
-        destination: 'app/_components/{{atomicType}}/{{pascalCase name}}',
+        destination: 'app/_components/{{atomicType}}s/{{pascalCase name}}',
         base: 'plop-templates/Component/',
         templateFiles: 'plop-templates/Component/*',
       },
