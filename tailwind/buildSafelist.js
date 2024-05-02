@@ -9,6 +9,13 @@ const childFields = [
   'content_reviews_items',
 ];
 
+function buildPossibilities(data, delimiter = '-') {
+  return data.reduceRight((prev, curr) => {
+    if (!prev.length) return curr;
+    return curr.reduce((p, c) => [...p, ...prev.map((x) => [c, x].join(delimiter))], []);
+  }, []);
+}
+
 function updateColourSet(value, dataSet) {
   if (!value) return;
   if (!value.id || value.id.toLowerCase().startsWith('custom')) {
@@ -146,6 +153,11 @@ const buildSafelist = async (pages) => {
         }
       })
       .flat();
+
+    const borders = [
+      ...buildPossibilities([['rounded'], ['none', 'sm', 'md', 'lg', 'xl', 'full']]),
+      ...buildPossibilities([['border'], ['none', 'solid', 'dashed', 'dotted', 'double', '0', '1', '2', '4']]),
+    ];
     return [
       ...layoutClasses,
       ...addQueryPrefixes(paddingClasses),
@@ -155,18 +167,8 @@ const buildSafelist = async (pages) => {
       ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
       ...colors,
       ...gradientClasses,
-      ...[
-        'bg-secondary-dark',
-        'border-[#e69138]/[1]',
-        'border-1',
-        'font-medium',
-        'md:text-base',
-        'lg:text-xl',
-        'xl:text-2xl',
-        'text-md',
-        'rounded-full',
-        'overflow-hidden',
-      ],
+      ...borders,
+      ...['font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl', 'text-md', 'overflow-hidden'],
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');
