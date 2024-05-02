@@ -35,17 +35,18 @@ const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) =
 
   const { wholeStars, percentageFilled } = calculateStarRating(itemRating);
   const stars = renderStars(wholeStars, percentageFilled);
-
   return (
-    <BaseComponent
-      as="div"
-      styling={styling}
-      stylingOptions={{ atomicType: 'atom' }}
-      className={classes.ratingContainer}
-    >
+    <div className={classes.ratingContainer}>
       <div className={classes.ratingStars}>{stars}</div>
-      <span className={classes.ratingFigure}>{itemRating}/5</span>
-    </BaseComponent>
+      <BaseComponent
+        as="span"
+        styling={styling}
+        stylingOptions={{ atomicType: 'atom', textType: 'text' }}
+        className={classes.ratingFigure}
+      >
+        {itemRating}/5
+      </BaseComponent>
+    </div>
   );
 };
 

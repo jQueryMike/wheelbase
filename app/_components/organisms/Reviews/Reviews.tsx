@@ -15,31 +15,33 @@ const Reviews = async ({ heading, subheading, reviewsBlock, items, overrides, st
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <div className={classes.reviews}>
-      <BaseComponent styling={styling}>
-        {(heading || subheading) && (
-          <div data-testid="headings-container" className={classes.headingContainer}>
-            {resolvedHeading}
-            {resolvedSubheading}
-          </div>
-        )}
-        <Grid styling={reviewsBlock.styling}>
-          {items?.map((item: ReviewItemProps) => (
-            <ReviewItem
-              styling={item.styling}
-              itemRating={item.itemRating}
-              ratingIcon={item.fixedIcon}
-              avatar={item.avatar}
-              imageLink={item.imageLink}
-              reviewerName={item.reviewerName}
-              reviewDate={item.reviewDate}
-              reviewTitle={item.reviewTitle}
-              reviewContent={item.reviewContent}
-            />
-          ))}
-        </Grid>
-      </BaseComponent>
-    </div>
+    <BaseComponent styling={styling}>
+      <div className={classes.reviews}>
+        <div className={classes.container}>
+          {(heading || subheading) && (
+            <div data-testid="headings-container" className={classes.headingContainer}>
+              {resolvedHeading}
+              {resolvedSubheading}
+            </div>
+          )}
+          <Grid styling={reviewsBlock.styling}>
+            {items.map((item: ReviewItemProps) => (
+              <ReviewItem
+                styling={item.styling}
+                itemRating={item.itemRating}
+                ratingIcon={item.fixedIcon}
+                avatar={item.avatar}
+                imageLink={item.imageLink}
+                reviewerName={item.reviewerName}
+                reviewDate={item.reviewDate}
+                reviewTitle={item.reviewTitle}
+                reviewContent={item.reviewContent}
+              />
+            ))}
+          </Grid>
+        </div>
+      </div>
+    </BaseComponent>
   );
 };
 
