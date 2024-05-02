@@ -42,9 +42,9 @@ const Button = async ({
           [classes?.buttonContentLoading || '']: loading,
         })}
       >
-        {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} />}
+        {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} styling={{}} />}
         {text && <span className={classes?.textContainer}>{text}</span>}
-        {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} />}
+        {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} styling={{}} />}
       </span>
     </BaseComponent>
   );

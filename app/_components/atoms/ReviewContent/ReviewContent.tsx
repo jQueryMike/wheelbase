@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import DOMPurify from 'isomorphic-dompurify';

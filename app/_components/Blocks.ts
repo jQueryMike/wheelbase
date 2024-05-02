@@ -11,7 +11,7 @@ const layouts: Comps<typeof Layouts> = {
   Grid: dynamic(() => import('./_layouts/Grid/Grid'))
 }
 
-const atoms: Comps<typeof Atoms, 'HeadingSize' | 'HeadingTag' | 'Icon'> = {
+const atoms: Comps<typeof Atoms, 'HeadingSize' | 'HeadingTag' | 'Icon' | 'Avatar' | 'ImageLink' | 'ItemRating' | 'ReviewContent' | 'ReviewDate' | 'ReviewerName' | 'ReviewTitle'> = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
   Heading: dynamic(() => import('./atoms/Heading/Heading'), {}),
   Image: dynamic(() => import('./atoms/Image/Image'), {}),
