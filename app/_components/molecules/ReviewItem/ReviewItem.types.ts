@@ -31,6 +31,7 @@ export type ReviewItemProps = BaseProps<{
   itemRating: any;
   ratingIcon: any;
   imageLink: ImageProps;
+  fixedIcon?: any;
   classes?: ReviewItemClasses<string>;
   overrides?: {
     [key in keyof ReviewItemClasses]?: string;

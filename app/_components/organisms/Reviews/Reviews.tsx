@@ -8,15 +8,7 @@ import { buildClasses } from '@utils/buildClasses';
 import reviewsClasses from './Reviews.classes';
 import { ReviewsProps } from './Reviews.types';
 
-const Reviews = async ({
-  heading,
-  subheading,
-  reviewsBlock,
-  items,
-  fixedIcon,
-  overrides,
-  styling,
-}: ReviewsProps & Block) => {
+const Reviews = async ({ heading, subheading, reviewsBlock, items, overrides, styling }: ReviewsProps & Block) => {
   const classes = buildClasses(reviewsClasses, overrides);
   const resolvedHeading = heading ? await Heading(heading) : undefined;
   const resolvedSubheading = subheading
@@ -36,7 +28,7 @@ const Reviews = async ({
             <ReviewItem
               styling={item.styling}
               itemRating={item.itemRating}
-              ratingIcon={fixedIcon}
+              ratingIcon={item.fixedIcon}
               avatar={item.avatar}
               imageLink={item.imageLink}
               reviewerName={item.reviewerName}
