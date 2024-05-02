@@ -30,11 +30,8 @@ const atoms: Comps<
   Text: dynamic(() => import('./atoms/Text/Text'), {}),
 };
 
-const molecules: Comps<typeof Molecules> = {
+const molecules: Comps<typeof Molecules, 'AccordionItem' | 'ReviewItem' | 'FeatureItem'> = {
   ButtonList: dynamic(() => import('./molecules/ButtonList/ButtonList'), {}),
-  AccordionItem: dynamic(() => import('./molecules/AccordionItem/AccordionItem'), {}),
-  ReviewItem: dynamic(() => import('./molecules/ReviewItem/ReviewItem'), {}),
-  FeatureItem: dynamic(() => import('./molecules/FeatureItem/FeatureItem'), {}),
 };
 
 const organisms: Comps<Omit<typeof Organisms, 'Header' | 'Footer'>> = {
