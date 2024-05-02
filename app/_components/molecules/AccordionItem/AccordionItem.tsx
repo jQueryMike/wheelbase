@@ -25,7 +25,7 @@ const AccordionItem = ({ heading, contentArea = [], styling, overrides, icon }: 
   ]);
   const [isOpen, toggle] = useToggle();
   return (
-    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'molecules' }}>
+    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'molecule' }}>
       <div className="flex cursor-pointer items-center justify-between border border-gray-200 p-4">
         {heading && <Heading {...heading} />}
         {/* 

@@ -10,9 +10,8 @@ import { AccordionProps } from './Accordion.types';
 
 const Accordion = ({ heading, subheading, items, fixedIcon, styling, overrides }: AccordionProps & Block) => {
   const classes = buildClasses(accordionClasses, overrides);
-
   return (
-    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organisms' }}>
+    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.container}>
         {(heading || subheading) && (
           <div data-testid="headings-container" className={classes.headingContainer}>
