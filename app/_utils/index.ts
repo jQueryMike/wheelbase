@@ -6,3 +6,4 @@ export * from './getGlobalContent';
 export * from './getGlobalTheme';
 export * from './getNavUrl';
 export * from './getSharedContent';
+export * from './buildLink';

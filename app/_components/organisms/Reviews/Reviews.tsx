@@ -24,7 +24,7 @@ const Reviews = async ({ heading, subheading, reviewsBlock, items, overrides, st
           </div>
         )}
         <Grid styling={reviewsBlock.styling}>
-          {items.map((item: ReviewItemProps) => (
+          {items?.map((item: ReviewItemProps) => (
             <ReviewItem
               styling={item.styling}
               itemRating={item.itemRating}
