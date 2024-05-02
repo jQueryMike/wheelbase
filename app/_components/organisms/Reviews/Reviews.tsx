@@ -8,7 +8,7 @@ import { buildClasses } from '@utils/buildClasses';
 import reviewsClasses from './Reviews.classes';
 import { ReviewsProps } from './Reviews.types';
 
-const Reviews = async ({ heading, subheading, reviewsBlock, items, overrides, styling }: ReviewsProps & Block) => {
+const Reviews = ({ heading, subheading, reviewsBlock, items, overrides, styling }: ReviewsProps & Block) => {
   const classes = buildClasses(reviewsClasses, overrides);
   return (
     <BaseComponent styling={styling}>
