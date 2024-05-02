@@ -14,7 +14,7 @@ function imageBuilder(
   },
 ) {
   const {
-    content: { image: imageData, altText, link },
+    content: { image: imageData, altText, ...content },
     appearance,
     settings,
   } = config;
@@ -30,8 +30,9 @@ function imageBuilder(
     ...(settings.loading ? { ...settings, fill: isFill } : { ...settings, fill: isFill, loading: 'lazy' }),
     ...(isFill ? { sizes: `${appearance.width ?? w}px`, objectFit: 'contain' } : { width: w, height: h }),
     styling: config.styling,
-    link,
+    ...content,
   };
+
   return image;
 }
 
@@ -45,7 +46,6 @@ export const BuilderMap = new Map([
         url: '/media/vprlmnok/placeholder_view_vector.svg', // remote url, can't get public folder in build
         src: '/media/vprlmnok/placeholder_view_vector.svg', // remote url, can't get public folder in build
         alt: 'Placholder Image',
-        alternativeText: 'Placholder Image',
         width: '300',
         height: '200',
       }),

@@ -26,10 +26,9 @@ const Features = async ({ heading, subheading, featuresBlock, items, overrides, 
             </div>
           )}
           <Grid styling={featuresBlock.styling}>
-            {items?.length &&
-              items?.map((item: any) => (
-                <FeatureItem contentArea={item.contentArea} icon={item.icon} styling={item.styling} />
-              ))}
+            {items?.map((item: any) => (
+              <FeatureItem contentArea={item.contentArea} icon={item.icon} styling={item.styling} />
+            ))}
           </Grid>
         </div>
       </div>
