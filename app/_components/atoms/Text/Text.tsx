@@ -6,7 +6,7 @@ import * as DOMPurify from 'isomorphic-dompurify';
 import textContentClasses from './Text.classes';
 import { TextProps } from './Text.types';
 
-const Text = async ({ text, overrides, styling }: TextProps) => {
+const Text = ({ text, overrides, styling }: TextProps) => {
   if (!text) return null;
 
   const classes = buildClasses(textContentClasses, overrides);
