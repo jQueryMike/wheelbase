@@ -10,18 +10,14 @@ import { ReviewsProps } from './Reviews.types';
 
 const Reviews = async ({ heading, subheading, reviewsBlock, items, overrides, styling }: ReviewsProps & Block) => {
   const classes = buildClasses(reviewsClasses, overrides);
-  const resolvedHeading = heading ? await Heading(heading) : undefined;
-  const resolvedSubheading = subheading
-    ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
-    : undefined;
   return (
     <BaseComponent styling={styling}>
       <div className={classes.reviews}>
         <div className={classes.container}>
           {(heading || subheading) && (
             <div data-testid="headings-container" className={classes.headingContainer}>
-              {resolvedHeading}
-              {resolvedSubheading}
+              {heading && <Heading {...heading} />}
+              {subheading && <Heading {...subheading} data-testid="subheading" textType="subheading" />}
             </div>
           )}
           <Grid styling={reviewsBlock.styling}>
