@@ -8,9 +8,9 @@ import headerClasses from './Header.classes';
 
 // eslint-disable-next-line spaced-comment
 const Header = (/*{ ...rest }: HeaderProps*/) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const classes = buildClasses(headerClasses);
   // eslint-disable-next-line no-console
-  console.log(classes);
   return (
     // <BaseComponent className={classes.root} as="header" {...rest}>
     //   Header

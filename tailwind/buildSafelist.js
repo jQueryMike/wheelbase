@@ -12,7 +12,7 @@ const childFields = [
 function buildPossibilities(data, delimiter = '-') {
   return data.reduceRight((prev, curr) => {
     if (!prev.length) return curr;
-    return curr.reduce((p, c) => [...p, ...prev.map((x) => [c, x].join(delimiter))], []);
+    return curr.reduce((p, c) => [...p, ...prev.map((x) => (x ? [c, x].join(delimiter) : c))], []);
   }, []);
 }
 
@@ -37,7 +37,6 @@ function getColors(data, bgColors = new Set(), borderColors = new Set(), textCol
         updateColourSet(value.borderColor, borderColors);
       }
       if (key.endsWith('_color')) {
-        // console.log(key, value);
         updateColourSet(value, textColors);
       }
       if (childFields.includes(key) && value) {
@@ -156,7 +155,7 @@ const buildSafelist = async (pages) => {
 
     const borders = [
       ...buildPossibilities([['rounded'], ['none', 'sm', 'md', 'lg', 'xl', 'full']]),
-      ...buildPossibilities([['border'], ['none', 'solid', 'dashed', 'dotted', 'double', '0', '1', '2', '4']]),
+      ...buildPossibilities([['border'], ['none', 'solid', 'dashed', 'dotted', 'double', '0', '', '2', '4']]),
     ];
     return [
       ...layoutClasses,

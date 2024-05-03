@@ -5,7 +5,7 @@ import { BorderWidthMap, BorderWidthOptions } from '@types';
  */
 const borderWidthMappings: BorderWidthMap = {
   none: 'border-0',
-  thin: 'border-1',
+  thin: 'border',
   regular: 'border-2',
   bold: 'border-4',
 };

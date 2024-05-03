@@ -9,6 +9,8 @@ import buttonClasses from './Button.classes';
 import { ButtonProps } from './Button.types';
 
 const Button = ({
+  style,
+  size,
   text,
   href,
   target = '_self',
@@ -20,7 +22,12 @@ const Button = ({
 }: ButtonProps) => {
   const classes = buildClasses(buttonClasses, overrides);
   return (
-    <BaseComponent as="span" styling={styling} stylingOptions={{ atomicType: 'atom' }}>
+    <BaseComponent
+      as="span"
+      className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
+      styling={styling}
+      stylingOptions={{ atomicType: 'atom' }}
+    >
       <NextLink
         href={href || ''}
         target={target || '_self'}

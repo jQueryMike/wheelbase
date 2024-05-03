@@ -8,14 +8,10 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  button: tw`flex items-center justify-center whitespace-nowrap rounded-lg font-button font-semibold transition`,
-  buttonLoading: tw`pointer-events-none`,
-  buttonContent: tw`inline-flex items-center justify-center`,
+  buttonContent: tw`flex items-center justify-center`,
   buttonContentLoading: tw`opacity-0`,
-  loadingIconContainer: tw`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform`,
-  loadingIcon: tw`fa-duotone fa-spinner-third fa-spin`,
   primaryButton: {
-    default: tw`bg-accent text-accent-contrast`,
+    default: tw`bg-primary text-primary-contrast`,
     hover: tw`hover:bg-primary`,
     active: tw`active:scale-95`,
   },
