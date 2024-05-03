@@ -12,13 +12,14 @@ import heroClasses from './Hero.classes';
 // eslint-disable-next-line import/no-cycle
 import { HeroProps } from './Hero.types';
 
-const Hero = async ({
+const Hero = ({
   heading,
   subheading,
   image1: image,
   contentArea = [],
   imagePlacement,
   overrides,
+  styling,
   ...rest
 }: HeroProps & Block) => {
   const classes = buildClasses(heroClasses, overrides);
@@ -28,12 +29,8 @@ const Hero = async ({
     id,
     props,
   ]);
-  const resolvedHeading = heading ? await Heading(heading) : undefined;
-  const resolvedSubheading = subheading
-    ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
-    : undefined;
   return (
-    <BaseComponent className={classes.root} {...rest}>
+    <BaseComponent className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }} {...rest}>
       <div className={classes.rootInner}>
         <div className={classes.container}>
           <div
@@ -43,8 +40,8 @@ const Hero = async ({
           >
             {(heading || subheading) && (
               <div className={classes?.headingsContainer} data-testid="headings-container">
-                {resolvedHeading}
-                {resolvedSubheading}
+                {heading && <Heading {...heading} />}
+                {subheading && <Heading {...subheading} data-testid="subheading" textType="subheading" />}
               </div>
             )}
             {components?.length > 0 && (

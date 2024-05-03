@@ -1,10 +1,6 @@
-async function buildColors() {
-  const response = await fetch(
-    `${process.env.API_URL}/umbraco/delivery/api/v1/content/item/${process.env.API_ROOT_NODE_PATH}/theme`,
-  );
-  const { properties: themeColors } = await response.json();
-  if (!themeColors) return {};
-  const colorMap = Object.entries(themeColors)
+async function buildColors(theme) {
+  if (!theme) return {};
+  const colorMap = Object.entries(theme)
     .filter(([, value]) => value)
     .reduce((prev, [key, value]) => {
       const output = { ...prev };

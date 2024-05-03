@@ -70,12 +70,12 @@ function buildConfig({ contentType, id, properties }: any) {
       letterSpacing: b?.appearance?.letterSpacing,
     },
     border: {
-      ...(b?.appearance?.border || {})
+      ...(b?.appearance?.border || block?.appearance?.border || {}),
     },
     layout: {
       columns: b?.appearance?.columns,
       columnGap: b?.appearance?.columnGap,
-    }
+    },
   };
   const config: any = {
     id,
@@ -125,12 +125,12 @@ function buildConfig({ contentType, id, properties }: any) {
               letterSpacing: value?.appearance?.letterSpacing,
             },
             border: {
-              ...(value?.appearance?.border || {})
+              ...(value?.appearance?.border || {}),
             },
             layout: {
               columns: value?.appearance?.columns,
               columnGap: value?.appearance?.columnGap,
-            }
+            },
           };
           value.styling = s;
           return [k, BuilderMap.has(getName(k)) ? BuilderMap.get(getName(k))?.(value) : builder(value)];

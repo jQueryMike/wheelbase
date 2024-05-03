@@ -18,7 +18,7 @@ const generateTailwindConfig = async () => {
   try {
     const { pages, theme } = await fetchData();
 
-    const colors = await buildColors();
+    const colors = await buildColors(theme);
 
     const config = {
       content: buildContent(pages),
