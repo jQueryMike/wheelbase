@@ -11,7 +11,7 @@ classes = {
   container: {
     default: tw`container mx-auto grid h-full gap-6`,
   },
-  headingContainer: tw`text-center`
+  headingContainer: tw`text-center`,
 };
 
 const featuresClasses = new ClassesBuilder({ location, classes }).classes;

@@ -2,7 +2,6 @@ import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 // eslint-disable-next-line import/no-cycle
 import { AvatarClasses } from './Avatar.types';
 
-
 const location = 'Avatar/Avatar.classes';
 
 let classes: AvatarClasses<ClassesProperty> = {};

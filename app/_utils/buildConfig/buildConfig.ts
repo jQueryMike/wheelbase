@@ -46,6 +46,13 @@ function buildConfig({ contentType, id, properties }: any) {
   const key = capitalise(name);
   const { block, [name]: b, contentArea, ...subComps } = props ?? {};
   let items;
+
+  // const defaults = {
+  //   content,
+  //   appearance,
+  //   settings,
+  // };
+
   if (b?.content?.items?.items) {
     items = b?.content?.items?.items.map((item: any) => buildConfig(item.content));
     // deepcode ignore DeleteOfNonProperty: <please specify a reason of ignoring this>
@@ -70,7 +77,7 @@ function buildConfig({ contentType, id, properties }: any) {
       letterSpacing: b?.appearance?.letterSpacing,
     },
     border: {
-      ...(b?.appearance?.border || block?.appearance?.border || {}),
+      ...(b?.appearance?.border || {}),
     },
     layout: {
       columns: b?.appearance?.columns,
@@ -137,6 +144,7 @@ function buildConfig({ contentType, id, properties }: any) {
         }),
       )
     : {};
+
 
   return {
     ...output,

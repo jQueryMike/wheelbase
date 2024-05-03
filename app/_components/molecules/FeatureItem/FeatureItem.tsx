@@ -18,7 +18,7 @@ const FeatureItem = async ({ contentArea = [], icon, styling, overrides }: Featu
   ]);
   return (
     <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: 'molecule' }} className="{itemContainer}">
-      <div className="{root} xs:text-left space-y-2 text-center">
+      <div className="{root} space-y-2 text-center xs:text-left">
         <Icon styling={styling} {...icon} />
         {components?.length > 0 && (
           <div className={classes?.contentAreaContainer} data-testid="content-area">

@@ -23,7 +23,7 @@ export function getBackground(background?: Background): [string, CSSProperties] 
         } as CSSProperties,
       ];
     }
-    return [getColour(backgroundColor, "bg"), {}]
+    return [getColour(backgroundColor, 'bg'), {}];
   }
   return ['', {}];
 }

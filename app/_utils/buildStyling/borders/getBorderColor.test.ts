@@ -1,5 +1,5 @@
 describe('getBorderColor test suite', () => {
   it('should work', () => {
-    expect(true).toBe(true)
+    expect(true).toBe(true);
   });
 });

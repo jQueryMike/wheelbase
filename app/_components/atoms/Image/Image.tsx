@@ -9,7 +9,7 @@ import { ImageProps } from './Image.types';
 const Image = ({ overrides, styling, ...rest }: ImageProps & Block) => {
   const classes = buildClasses(imageClasses, overrides);
   return (
-    <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: "atom" }}>
+    <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: 'atom' }}>
       <NextImage className={classes?.image} {...rest} />
     </BaseComponent>
   );

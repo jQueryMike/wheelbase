@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
-import Footer from "./Footer";
+import Footer from './Footer';
 
 describe('Footer test suite', () => {
   it('should work', () => {
-    expect(true).toBe(true)
-  })
+    expect(true).toBe(true);
+  });
 
   it('should have no accessibility violations', async () => {
     const ResolvedComponent = await Footer({
@@ -20,7 +20,7 @@ describe('Footer test suite', () => {
         paddingTop: '0',
         paddingLeft: '0',
         paddingRight: '0',
-      }
+      },
     });
     const { container } = render(ResolvedComponent);
     const results = await axe(container);

@@ -13,7 +13,7 @@ import footerClasses from './Footer.classes';
 const Footer = (/*{}: FooterProps*/) => {
   const classes = buildClasses(footerClasses);
   return (
-    <footer className={cn('{root} bg-primary blockPadding p-8', classes.root)} aria-labelledby="footer-heading">
+    <footer className={cn('{root} blockPadding bg-primary p-8', classes.root)} aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
@@ -46,21 +46,21 @@ const Footer = (/*{}: FooterProps*/) => {
             <div className="{socialContainer} flex justify-center">
               <nav className="{socialItems} flex gap-1.5" role="navigation" aria-label="Social media links">
                 <a
-                  className="{socialItem} hover:text-accent inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-blue-500 transition"
+                  className="{socialItem} inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-blue-500 transition hover:text-accent"
                   title="Facebook"
                   href="#"
                 >
                   <i className="fa fa-facebook" />
                 </a>
                 <a
-                  className="{socialItem} hover:text-accent inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-blue-500 transition"
+                  className="{socialItem} inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-blue-500 transition hover:text-accent"
                   title="Twitter"
                   href="#"
                 >
                   <i className="fa fa-twitter" />
                 </a>
                 <a
-                  className="{socialItem} hover:text-accent inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-blue-500 transition"
+                  className="{socialItem} inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-blue-500 transition hover:text-accent"
                   title="YouTube"
                   href="#"
                 >
