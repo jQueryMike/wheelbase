@@ -27,7 +27,13 @@ function updateColourSet(value, dataSet) {
   }
 }
 
-function getColors(data, bgColors = new Set(), borderColors = new Set(), textColors = new Set()) {
+function getCustomClasses(
+  data,
+  bgColors = new Set(),
+  borderColors = new Set(),
+  textColors = new Set(),
+  classSet = new Set(),
+) {
   data.forEach(({ content: { properties } }) => {
     Object.entries(properties).forEach(([key, value]) => {
       if (key.endsWith('_backgroundColor') && value) {
@@ -39,12 +45,15 @@ function getColors(data, bgColors = new Set(), borderColors = new Set(), textCol
       if (key.endsWith('_color')) {
         updateColourSet(value, textColors);
       }
+      if (key.startsWith('overrides') && value) {
+        classSet.add(value.split(' '));
+      }
       if (childFields.includes(key) && value) {
-        getColors(value?.items, bgColors, borderColors, textColors);
+        getCustomClasses(value?.items, bgColors, borderColors, textColors, classSet);
       }
     });
   });
-  return [bgColors, borderColors, textColors];
+  return [bgColors, borderColors, textColors, classSet];
 }
 
 const buildSafelist = async (pages) => {
@@ -131,14 +140,14 @@ const buildSafelist = async (pages) => {
         .map((x) => `gradient-to-${x}`),
     ].map((x) => `bg-${x}`);
 
-    const colorsData = await (async () => {
+    const customClasses = await (async () => {
       const response = await fetch(
         `${process.env.API_URL}/umbraco/delivery/api/v1/content/item/${process.env.API_ROOT_NODE_PATH}/home`,
       );
       const data = await response.json();
-      return getColors(data.properties?.organismGrid?.items || []);
+      return getCustomClasses(data.properties?.organismGrid?.items || []);
     })();
-    const colors = colorsData
+    const colors = customClasses
       .map((x, i) => {
         switch (i) {
           case 0:
@@ -148,7 +157,7 @@ const buildSafelist = async (pages) => {
           case 2:
             return Array.from(x).map((y) => `text-${y}`);
           default:
-            return [];
+            return Array.from(x).flat();
         }
       })
       .flat();

@@ -127,6 +127,7 @@ function buildConfig({ contentType, id, properties }: any) {
     content,
     appearance,
     settings,
+    overrides: b?.overrides || block?.overrides || {},
     styling: buildStyling(appearance),
   };
 
