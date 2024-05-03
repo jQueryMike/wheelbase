@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { ImageProps } from '@components/atoms';
 import { BaseProps } from '@components/types';
 

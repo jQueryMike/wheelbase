@@ -1,21 +1,15 @@
-import { Heading } from '@components/atoms';
-import { BaseComponent } from '@components/utils/BaseComponent';
 import { Grid } from '@components/_layouts/Grid';
+import { Heading } from '@components/atoms';
 // eslint-disable-next-line import/no-cycle
 import { FeatureItem } from '@components/molecules/FeatureItem';
-import { buildClasses } from '@utils/buildClasses';
+import { BaseComponent } from '@components/utils/BaseComponent';
 import { Block } from '@types';
+import { buildClasses } from '@utils/buildClasses';
 
-import featuresClasses from './Features.classes'
+import featuresClasses from './Features.classes';
 import { FeaturesProps } from './Features.types';
 
-const Features = async ({ 
-  heading,
-  subheading,
-  featuresBlock,
-  items,
-  overrides,
-  ...rest }: FeaturesProps & Block) => {
+const Features = async ({ heading, subheading, featuresBlock, items, overrides, ...rest }: FeaturesProps & Block) => {
   const classes = buildClasses(featuresClasses, overrides);
   const resolvedHeading = heading ? await Heading(heading) : undefined;
   const resolvedSubheading = subheading
@@ -24,14 +18,17 @@ const Features = async ({
   return (
     <BaseComponent {...rest}>
       <div className={classes.rootInner}>
-        <div className={classes.container}>{(heading || subheading) && (
-          <div data-testid="headings-container" className={classes.headingContainer}>
-            {resolvedHeading}
-            {resolvedSubheading}
-          </div>
-        )}
+        <div className={classes.container}>
+          {(heading || subheading) && (
+            <div data-testid="headings-container" className={classes.headingContainer}>
+              {resolvedHeading}
+              {resolvedSubheading}
+            </div>
+          )}
           <Grid styling={featuresBlock.styling}>
-            {items?.map((item: any) => (<FeatureItem contentArea={item.contentArea} icon={item.icon} styling={item.styling} />))}
+            {items?.map((item: any) => (
+              <FeatureItem contentArea={item.contentArea} icon={item.icon} styling={item.styling} />
+            ))}
           </Grid>
         </div>
       </div>

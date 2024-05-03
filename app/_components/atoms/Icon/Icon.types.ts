@@ -6,6 +6,7 @@ export type IconClasses<T = string> = {
 
 export type IconProps = BaseProps< {
   icon?: string;
+  className?: string;
   overrides?: {
     [key in keyof IconClasses]?: string;
   };}>

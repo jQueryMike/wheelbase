@@ -8,7 +8,7 @@ import { Icon } from '../Icon';
 import buttonClasses from './Button.classes';
 import { ButtonProps } from './Button.types';
 
-const Button = async ({
+const Button = ({
   text,
   href,
   target = '_self',
@@ -42,9 +42,9 @@ const Button = async ({
           [classes?.buttonContentLoading || '']: loading,
         })}
       >
-        {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} />}
+        {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} styling={{}} />}
         {text && <span className={classes?.textContainer}>{text}</span>}
-        {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} />}
+        {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} styling={{}} />}
       </span>
     </BaseComponent>
   );
