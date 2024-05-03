@@ -35,9 +35,9 @@ const Button = ({
           [classes?.buttonContentLoading || '']: loading,
         })}
       >
-        {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} styling={{}} />}
+        {leftIcon && <Icon icon={leftIcon} className={classes.leftIcon} styling={{}} />}
         {text && <span className={classes?.textContainer}>{text}</span>}
-        {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} styling={{}} />}
+        {rightIcon && <Icon icon={rightIcon} className={classes.rightIcon} styling={{}} />}
       </NextLink>
     </BaseComponent>
   );
