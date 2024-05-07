@@ -6,8 +6,8 @@ export type AddressClasses<T = string> = {
 
 export type AddressProps = BaseProps<{
   companyName: string;
-  addressOne: string;
-  addressTwo: string;
+  addressLineOne: string;
+  addressLineTwo: string;
   city: string;
   county: string;
   postcode: string;
