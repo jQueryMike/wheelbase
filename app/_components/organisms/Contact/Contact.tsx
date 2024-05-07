@@ -1,20 +1,30 @@
+import { Address } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
+import { getGlobalConfig } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
+import { buildConfig } from '@utils/buildConfig';
 
 import contactClasses from './Contact.classes';
 import { ContactProps } from './Contact.types';
-import { Address } from '@components/atoms';
-import { getGlobalConfig } from '@utils';
-
 
 const Contact = async ({ title, styling, overrides }: ContactProps) => {
-  const properties = await getGlobalConfig();
-  const globalConfig = properties.properties;
+  const {
+    properties: {
+      addresses: { items: addresses },
+      phoneNumbers: { items: phoneNumbers },
+      emails: { items: emails },
+      socials: { items: socials },
+    },
+  } = (await getGlobalConfig()) || {};
   const classes = buildClasses(contactClasses, overrides);
 
-  console.log(
-    globalConfig.addresses.items[0]
-  );
+  const [defaultAddress, defaultPhone, defaultEmail, defaultSocials] = [
+    addresses[0].content,
+    phoneNumbers[0].content,
+    emails[0].content,
+    socials[0].content,
+  ].map((x) => buildConfig(x));
+  console.log(defaultAddress, defaultPhone, defaultEmail, defaultSocials);
 
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
@@ -22,7 +32,7 @@ const Contact = async ({ title, styling, overrides }: ContactProps) => {
         <div className="{container} container mx-auto ">
           <div className="{root} grid bg-primary text-white md:grid-cols-12">
             <div className="{contentArea} col-span-12 space-y-4 p-8 md:p-10 lg:col-span-5 lg:p-12 xl:col-span-4">
-              {/* <Address {...globalConfig.addresses[0]}></Address> */}
+              {/* <Address {address ? {...address} : {...defaultAddress} }></Address> */}
               <div className="{contactInfoContainer} font-bold">
                 <div className="{contactInfo}">
                   <div className="{phoneNumberContainer}">
