@@ -1,5 +1,6 @@
 /* eslint-disable import/no-cycle */
 export * from './Avatar';
+export * from './Address';
 export * from './Button';
 export * from './Heading';
 export * from './Image';
