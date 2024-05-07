@@ -23,6 +23,7 @@ const atoms: Comps<
   | 'ReviewDate'
   | 'ReviewerName'
   | 'ReviewTitle'
+  | 'Address'
 > = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
   Heading: dynamic(() => import('./atoms/Heading/Heading'), {}),
