@@ -26,11 +26,13 @@ const Contact = async ({ address, telephoneNumbers, email, map, styling, overrid
     emails[0].content,
   ].map((x) => buildConfig(x));
 
-  const chosenAddress = address?.items?.items[0]?.content ? buildConfig(address?.items?.items[0]?.content) : null;
+  const chosenAddress = address?.items?.items[0]?.content
+    ? buildConfig(address?.items?.items[0]?.content)
+    : defaultAddress;
   const chosenPhoneNumber = telephoneNumbers?.items?.items[0].content
     ? buildConfig(telephoneNumbers?.items?.items[0].content)
-    : null;
-  const chosenEmail = email?.items?.items[0].content ? buildConfig(email?.items?.items[0].content) : null;
+    : defaultPhone;
+  const chosenEmail = email?.items?.items[0].content ? buildConfig(email?.items?.items[0].content) : defaultEmail;
 
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
@@ -38,30 +40,24 @@ const Contact = async ({ address, telephoneNumbers, email, map, styling, overrid
         <div className="{container} container mx-auto ">
           <div className="{root} grid bg-primary text-white md:grid-cols-12">
             <div className="{contentArea} col-span-12 space-y-4 p-8 md:p-10 lg:col-span-5 lg:p-12 xl:col-span-4">
-              <Address companyName={companyName} {...(chosenAddress ? { ...chosenAddress } : { ...defaultAddress })} />
+              <Address companyName={companyName} {...chosenAddress} />
+
               <div className="{contactInfoContainer} font-bold">
                 <div className="{contactInfo}">
                   <PhoneNumbers
-                    icon={chosenPhoneNumber?.icon ? chosenPhoneNumber.icon : defaultPhone.icon}
-                    number={
-                      chosenPhoneNumber?.keyValue.value ? chosenPhoneNumber.keyValue.value : defaultPhone.keyValue.value
-                    }
-                    styling={
-                      chosenPhoneNumber?.keyValue.styling
-                        ? chosenPhoneNumber.keyValue.styling
-                        : defaultPhone.keyValue.styling
-                    }
+                    icon={chosenPhoneNumber.icon}
+                    number={chosenPhoneNumber.keyValue.value}
+                    styling={chosenPhoneNumber.keyValue.styling}
                   />
 
                   <EmailAddress
-                    icon={chosenEmail?.icon ? chosenEmail.icon : defaultEmail.icon}
-                    email={chosenEmail?.keyValue.value ? chosenEmail.keyValue.value : defaultEmail.keyValue.value}
-                    styling={
-                      chosenEmail?.keyValue.styling ? chosenEmail.keyValue.styling : defaultEmail.keyValue.styling
-                    }
+                    icon={chosenEmail.icon}
+                    email={chosenEmail.keyValue.value}
+                    styling={chosenEmail.keyValue.styling}
                   />
                 </div>
               </div>
+              
               <div className="{socialItemsContainer}">
                 <nav className="{socialItems} flex gap-1.5" role="navigation" aria-label="Social media links">
                   {defaultSocials.map((item: any) => (
@@ -70,6 +66,7 @@ const Contact = async ({ address, telephoneNumbers, email, map, styling, overrid
                 </nav>
               </div>
             </div>
+
             <Map src={map.googleMapsURL} styling={{}} />
           </div>
         </div>
