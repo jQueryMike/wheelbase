@@ -6,3 +6,4 @@ export * from './Features';
 export * from './Reviews';
 export * from './Header';
 export * from './Footer';
+export * from './Contact'
