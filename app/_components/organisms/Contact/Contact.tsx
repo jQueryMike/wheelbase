@@ -42,22 +42,22 @@ const Contact = async ({ address, telephoneNumbers, email, map, styling, overrid
               <div className="{contactInfoContainer} font-bold">
                 <div className="{contactInfo}">
                   <PhoneNumbers
-                    icon={chosenPhoneNumber.icon ? chosenPhoneNumber.icon : defaultPhone.icon}
+                    icon={chosenPhoneNumber?.icon ? chosenPhoneNumber.icon : defaultPhone.icon}
                     number={
-                      chosenPhoneNumber.keyValue.value ? chosenPhoneNumber.keyValue.value : defaultPhone.keyValue.value
+                      chosenPhoneNumber?.keyValue.value ? chosenPhoneNumber.keyValue.value : defaultPhone.keyValue.value
                     }
                     styling={
-                      chosenPhoneNumber.keyValue.styling
+                      chosenPhoneNumber?.keyValue.styling
                         ? chosenPhoneNumber.keyValue.styling
                         : defaultPhone.keyValue.styling
                     }
                   />
 
                   <EmailAddress
-                    icon={chosenEmail.icon ? chosenEmail.icon : defaultEmail.icon}
-                    email={chosenEmail.keyValue.value ? chosenEmail.keyValue.value : defaultEmail.keyValue.value}
+                    icon={chosenEmail?.icon ? chosenEmail.icon : defaultEmail.icon}
+                    email={chosenEmail?.keyValue.value ? chosenEmail.keyValue.value : defaultEmail.keyValue.value}
                     styling={
-                      chosenEmail.keyValue.styling ? chosenEmail.keyValue.styling : defaultEmail.keyValue.styling
+                      chosenEmail?.keyValue.styling ? chosenEmail.keyValue.styling : defaultEmail.keyValue.styling
                     }
                   />
                 </div>
