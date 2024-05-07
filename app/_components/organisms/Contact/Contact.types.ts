@@ -1,3 +1,4 @@
+import { AddressProps } from '@components/atoms';
 import { BaseProps } from '@components/types';
 
 export type ContactClasses<T = string> = {
@@ -5,7 +6,10 @@ export type ContactClasses<T = string> = {
 }
 
 export type ContactProps = BaseProps<{
-  title: string;
+  address: any;
+  telephoneNumbers: any;
+  email: any;
+  map: any;
   overrides?: {
     [key in keyof ContactClasses]?: string;
   };

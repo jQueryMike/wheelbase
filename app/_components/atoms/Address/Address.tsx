@@ -7,8 +7,8 @@ import { AddressProps } from './Address.types';
 
 const Address = ({
   companyName,
-  addressOne,
-  addressTwo,
+  addressLineOne,
+  addressLineTwo,
   city,
   county,
   country,
@@ -39,19 +39,24 @@ const Address = ({
   }
 
   if (companyName) addressLines.push(companyName);
-  if (addressOne) addressLines.push(addressOne);
-  if (addressTwo) addressLines.push(addressTwo);
+  if (addressLineOne) addressLines.push(addressLineOne);
+  if (addressLineTwo) addressLines.push(addressLineTwo);
   if (city) addressLines.push(city);
   if (county) addressLines.push(county);
-  if (country) addressLines.push(country);
+  if (country && showCountry) addressLines.push(country);
   if (postcode) addressLines.push(postcode);
 
   const address = addressLines.join(separator);
 
   return (
-    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'atom' }}>
+    <BaseComponent
+      as="div"
+      className={classes.root}
+      styling={styling}
+      stylingOptions={{ atomicType: 'atom', textType: 'text' }}
+    >
       <address
-        className="{address} flex flex-col not-italic [&>*:first-child]:font-bold"
+        className="{address} flex flex-col text-sm font-normal not-italic [&>*:first-child]:font-bold"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(address) }}
       />
     </BaseComponent>
