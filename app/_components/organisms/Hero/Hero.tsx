@@ -17,7 +17,7 @@ const Hero = ({
   subheading,
   image1: image,
   contentArea = [],
-  imagePlacement,
+  reverse,
   overrides,
   styling,
   ...rest
@@ -33,11 +33,7 @@ const Hero = ({
     <BaseComponent className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }} {...rest}>
       <div className={classes.rootInner}>
         <div className={classes.container}>
-          <div
-            className={cn(
-              imagePlacement === 'left' ? classes?.heroContentContainerReverse : classes?.heroContentContainer,
-            )}
-          >
+          <div className={cn(reverse === true ? classes?.heroContentContainerReverse : classes?.heroContentContainer)}>
             {(heading || subheading) && (
               <div className={classes?.headingsContainer} data-testid="headings-container">
                 {heading && <Heading {...heading} />}
@@ -56,7 +52,7 @@ const Hero = ({
           </div>
           {image && (
             <div
-              className={cn(imagePlacement === 'left' ? classes?.imageContainerReverse : classes?.imageContainer)}
+              className={cn(reverse === true ? classes?.imageContainerReverse : classes?.imageContainer)}
               data-testid="image-container"
             >
               <NextImage className={classes?.image} {...image} data-testid="image" />
