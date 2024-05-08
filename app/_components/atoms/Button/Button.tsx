@@ -35,9 +35,19 @@ const Button = ({
         styling={styling}
         stylingOptions={{ atomicType: 'atom' }}
       >
-        {leftIcon && <Icon icon={leftIcon} className={classes.leftIcon} styling={{}} />}
-        {text && <span className={classes?.textContainer}>{text}</span>}
-        {rightIcon && <Icon icon={rightIcon} className={classes.rightIcon} styling={{}} />}
+        <span className={classes.buttonContent}>
+          {leftIcon && (
+            <span className={classes.leftIcon}>
+              <Icon icon={leftIcon} styling={{}} />
+            </span>
+          )}
+          {text && <span className={classes?.textContainer}>{text}</span>}
+          {rightIcon && (
+            <span className={classes.rightIcon}>
+              <Icon icon={rightIcon} styling={{}} />
+            </span>
+          )}
+        </span>
       </BaseComponent>
     </NextLink>
   );

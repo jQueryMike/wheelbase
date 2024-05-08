@@ -8,7 +8,7 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  buttonContent: tw``,
+  buttonContent: tw`flex flex-row flex-nowrap`,
   buttonContentLoading: tw`opacity-0`,
   primaryButton: {
     default: tw`bg-primary text-primary-contrast`,
@@ -36,6 +36,8 @@ classes = {
   smallButtonContent: tw`space-x-2 p-2 px-3`,
   mediumButtonContent: tw`space-x-3 p-3 px-4`,
   largeButtonContent: tw`space-x-4 p-4 px-5`,
+  rightIcon: tw`ml-1`,
+  leftIcon: tw`mr-1`,
 };
 
 const buttonClasses = new ClassesBuilder({ location, classes }).classes;
