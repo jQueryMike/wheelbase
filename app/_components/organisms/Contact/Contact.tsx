@@ -10,13 +10,14 @@ import { ContactProps } from './Contact.types';
 const Contact = async ({ address, telephoneNumbers, email, map, styling, overrides }: ContactProps) => {
   const {
     properties: {
-      addresses: { items: addresses },
+      addresses: { items: addresses } = { items: '' },
       phoneNumbers: { items: phoneNumbers },
       emails: { items: emails },
       socials: { items: socials },
       displayName: companyName,
     },
   } = (await getGlobalConfig()) || {};
+
   const classes = buildClasses(contactClasses, overrides);
 
   const defaultSocials = socials.map((x: any) => buildConfig(x.content));
@@ -37,8 +38,8 @@ const Contact = async ({ address, telephoneNumbers, email, map, styling, overrid
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.container}>
-        {(chosenAddress || chosenEmail || chosenPhoneNumber || defaultSocials) && (
-          <div className={classes.contactWrapper}>
+        <div className={classes.contactWrapper}>
+          {(chosenAddress || chosenEmail || chosenPhoneNumber || defaultSocials) && (
             <div className={classes.contact}>
               {chosenAddress && <Address companyName={companyName} {...chosenAddress} />}
 
@@ -74,10 +75,9 @@ const Contact = async ({ address, telephoneNumbers, email, map, styling, overrid
                 </div>
               )}
             </div>
-
-            <Map src={map.googleMapsURL} styling={{}} />
-          </div>
-        )}
+          )}
+          <Map src={map.googleMapsURL} styling={{}} />
+        </div>
       </div>
     </BaseComponent>
   );
