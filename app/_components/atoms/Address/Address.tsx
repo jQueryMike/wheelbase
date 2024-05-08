@@ -38,7 +38,7 @@ const Address = ({
       break;
   }
 
-  if (companyName) addressLines.push(companyName);
+  if (companyName) addressLines.push(`<span>${companyName}</span>`);
   if (addressLineOne) addressLines.push(addressLineOne);
   if (addressLineTwo) addressLines.push(addressLineTwo);
   if (city) addressLines.push(city);
@@ -55,7 +55,10 @@ const Address = ({
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
     >
-      <address className={classes.address} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(address) }} />
+      <address
+        className="{address} flex flex-col text-sm font-normal not-italic [&>*:first-child]:contents [&>*:first-child]:font-bold"
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(address) }}
+      />
     </BaseComponent>
   );
 };
