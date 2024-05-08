@@ -37,37 +37,51 @@ const Contact = async ({ address, telephoneNumbers, email, map, styling, overrid
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.container}>
-        <div className={classes.contactWrapper}>
-          <div className={classes.contact}>
-            <Address companyName={companyName} {...chosenAddress} />
+        {chosenAddress ||
+          chosenEmail ||
+          chosenPhoneNumber ||
+          (defaultSocials && (
+            <div className={classes.contactWrapper}>
+              <div className={classes.contact}>
+                {chosenAddress && <Address companyName={companyName} {...chosenAddress} />}
 
-            <div className={classes.contactInfoContainer}>
-              <div className={classes.contactInfo}>
-                <PhoneNumbers
-                  icon={chosenPhoneNumber.icon}
-                  number={chosenPhoneNumber.keyValue.value}
-                  styling={chosenPhoneNumber.keyValue.styling}
-                />
+                {chosenPhoneNumber ||
+                  (chosenEmail && (
+                    <div className={classes.contactInfoContainer}>
+                      <div className={classes.contactInfo}>
+                        {chosenPhoneNumber && (
+                          <PhoneNumbers
+                            icon={chosenPhoneNumber.icon}
+                            number={chosenPhoneNumber.keyValue.value}
+                            styling={chosenPhoneNumber.keyValue.styling}
+                          />
+                        )}
 
-                <EmailAddress
-                  icon={chosenEmail.icon}
-                  email={chosenEmail.keyValue.value}
-                  styling={chosenEmail.keyValue.styling}
-                />
+                        {chosenEmail && (
+                          <EmailAddress
+                            icon={chosenEmail.icon}
+                            email={chosenEmail.keyValue.value}
+                            styling={chosenEmail.keyValue.styling}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  ))}
+
+                {defaultSocials && (
+                  <div className={classes.socialsContainer}>
+                    <div className={classes.socials}>
+                      {defaultSocials.map((item: any) => (
+                        <SocialItem icon={item.icon} link={item.keyValue.link} styling={{}} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
 
-            <div className={classes.socialsContainer}>
-              <div className={classes.socials}>
-                {defaultSocials.map((item: any) => (
-                  <SocialItem icon={item.icon} link={item.keyValue.link} styling={{}} />
-                ))}
-              </div>
+              <Map src={map.googleMapsURL} styling={{}} />
             </div>
-          </div>
-
-          <Map src={map.googleMapsURL} styling={{}} />
-        </div>
+          ))}
       </div>
     </BaseComponent>
   );
