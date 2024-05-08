@@ -23,6 +23,7 @@ const atoms: Comps<
   | 'ReviewDate'
   | 'ReviewerName'
   | 'ReviewTitle'
+  | 'Address'
 > = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
   Heading: dynamic(() => import('./atoms/Heading/Heading'), {}),
@@ -40,6 +41,7 @@ const organisms: Comps<Omit<typeof Organisms, 'Header' | 'Footer'>> = {
   Features: dynamic(() => import('./organisms/Features/Features')),
   Reviews: dynamic(() => import('./organisms/Reviews/Reviews')),
   Accordion: dynamic(() => import('./organisms/Accordion/Accordion')),
+  Contact: dynamic(() => import('./organisms/Contact/Contact')),
 };
 
 /**
