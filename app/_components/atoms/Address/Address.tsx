@@ -20,7 +20,8 @@ const Address = ({
 }: AddressProps) => {
   const classes = buildClasses(addressClasses, overrides);
 
-  const delimiter = displayType.toLocaleLowerCase().endsWith('comma') ? ', ' : ' ';
+  const delimiter =
+    displayType.toLocaleLowerCase().includes('comma') && !displayType.toLocaleLowerCase().includes('no') ? ', ' : ' ';
   const inline = displayType.toLocaleLowerCase().startsWith('inline');
 
   return (
