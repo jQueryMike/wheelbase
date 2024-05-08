@@ -22,24 +22,24 @@ const Button = ({
 }: ButtonProps) => {
   const classes = buildClasses(buttonClasses, overrides);
   return (
-    <BaseComponent
-      as="span"
-      className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
-      styling={styling}
-      stylingOptions={{ atomicType: 'atom' }}
+    <NextLink
+      href={href || ''}
+      target={target || '_self'}
+      className={cn(classes?.buttonContent, {
+        [classes?.buttonContentLoading || '']: loading,
+      })}
     >
-      <NextLink
-        href={href || ''}
-        target={target || '_self'}
-        className={cn(classes?.buttonContent, {
-          [classes?.buttonContentLoading || '']: loading,
-        })}
+      <BaseComponent
+        as="span"
+        className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
+        styling={styling}
+        stylingOptions={{ atomicType: 'atom' }}
       >
         {leftIcon && <Icon icon={leftIcon} className={classes.leftIcon} styling={{}} />}
         {text && <span className={classes?.textContainer}>{text}</span>}
         {rightIcon && <Icon icon={rightIcon} className={classes.rightIcon} styling={{}} />}
-      </NextLink>
-    </BaseComponent>
+      </BaseComponent>
+    </NextLink>
   );
 };
 

@@ -8,7 +8,7 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  buttonContent: tw`flex items-center justify-center`,
+  buttonContent: tw``,
   buttonContentLoading: tw`opacity-0`,
   primaryButton: {
     default: tw`bg-primary text-primary-contrast`,
