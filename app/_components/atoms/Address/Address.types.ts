@@ -1,8 +1,8 @@
 import { BaseProps } from '@components/types';
 
 export type AddressClasses<T = string> = {
-  [key in 'root']?: T;
-}
+  [key in 'root' | 'address']?: T;
+};
 
 export type AddressProps = BaseProps<{
   companyName: string;
@@ -12,7 +12,7 @@ export type AddressProps = BaseProps<{
   county: string;
   postcode: string;
   showCountry: Boolean;
-  displayType: string
+  displayType: string;
   country?: string;
   overrides?: {
     [key in keyof AddressClasses]?: string;

@@ -36,41 +36,39 @@ const Contact = async ({ address, telephoneNumbers, email, map, styling, overrid
 
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
-      <section className="{block} blockPadding !md:pt-large !pt-0">
-        <div className="{container} container mx-auto ">
-          <div className="{root} grid bg-primary text-white md:grid-cols-12">
-            <div className="{contentArea} col-span-12 space-y-4 p-8 md:p-10 lg:col-span-5 lg:p-12 xl:col-span-4">
-              <Address companyName={companyName} {...chosenAddress} />
+      <div className={classes.container}>
+        <div className={classes.contactWrapper}>
+          <div className={classes.contact}>
+            <Address companyName={companyName} {...chosenAddress} />
 
-              <div className="{contactInfoContainer} font-bold">
-                <div className="{contactInfo}">
-                  <PhoneNumbers
-                    icon={chosenPhoneNumber.icon}
-                    number={chosenPhoneNumber.keyValue.value}
-                    styling={chosenPhoneNumber.keyValue.styling}
-                  />
+            <div className={classes.contactInfoContainer}>
+              <div className={classes.contactInfo}>
+                <PhoneNumbers
+                  icon={chosenPhoneNumber.icon}
+                  number={chosenPhoneNumber.keyValue.value}
+                  styling={chosenPhoneNumber.keyValue.styling}
+                />
 
-                  <EmailAddress
-                    icon={chosenEmail.icon}
-                    email={chosenEmail.keyValue.value}
-                    styling={chosenEmail.keyValue.styling}
-                  />
-                </div>
-              </div>
-              
-              <div className="{socialItemsContainer}">
-                <nav className="{socialItems} flex gap-1.5" role="navigation" aria-label="Social media links">
-                  {defaultSocials.map((item: any) => (
-                    <SocialItem icon={item.icon} link={item.keyValue.link} styling={{}} />
-                  ))}
-                </nav>
+                <EmailAddress
+                  icon={chosenEmail.icon}
+                  email={chosenEmail.keyValue.value}
+                  styling={chosenEmail.keyValue.styling}
+                />
               </div>
             </div>
 
-            <Map src={map.googleMapsURL} styling={{}} />
+            <div className={classes.socialsContainer}>
+              <div className={classes.socials}>
+                {defaultSocials.map((item: any) => (
+                  <SocialItem icon={item.icon} link={item.keyValue.link} styling={{}} />
+                ))}
+              </div>
+            </div>
           </div>
+
+          <Map src={map.googleMapsURL} styling={{}} />
         </div>
-      </section>
+      </div>
     </BaseComponent>
   );
 };

@@ -3,7 +3,7 @@ import { BaseProps } from '@components/types';
 import { IconProps } from '../Icon';
 
 export type PhoneNumbersClasses<T = string> = {
-  [key in 'root']?: T;
+  [key in 'root' | 'phoneNumbersWrapper' | 'phoneNumbersLink' | 'phoneNumbers']?: T;
 };
 
 export type PhoneNumbersProps = BaseProps<{

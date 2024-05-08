@@ -6,6 +6,9 @@ const location = 'EmailAddress/EmailAddress.classes';
 
 const classes: EmailAddressClasses = {
   root: tw``,
+  emailAddressWrapper: tw`flex items-center gap-2`,
+  emailAddressLink: tw`hover:text-accent-lighter text-sm`,
+  emailAddress: tw`font-normal`,
 };
 
 const emailAddressClasses = new ClassesBuilder({ location, classes }).classes;
