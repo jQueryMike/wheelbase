@@ -1,19 +1,27 @@
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
+import Link from 'next/link';
 
+import { Icon } from '../Icon';
 import phoneNumbersClasses from './PhoneNumbers.classes';
 import { PhoneNumbersProps } from './PhoneNumbers.types';
-import { Icon } from '../Icon';
 
 const PhoneNumbers = ({ icon, number, styling, overrides }: PhoneNumbersProps) => {
   const classes = buildClasses(phoneNumbersClasses, overrides);
   return (
-    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'atom', textType: 'text' }}>
-      <div className="{phoneNumber} flex items-center gap-2">
-        <div className="{icon} text-accent">
+    <BaseComponent
+      as="div"
+      className={classes.root}
+      styling={styling}
+      stylingOptions={{ atomicType: 'atom', textType: 'text' }}
+    >
+      <div className={classes.phoneNumbersWrapper}>
+        <div className={classes.phoneNumbersLink}>
           <Icon {...icon} />
         </div>
-        <div className="{label} text-normal text-sm">{number}</div>
+        <Link href={`tel:${number}`}>
+          <div className={classes.phoneNumbers}>{number}</div>
+        </Link>
       </div>
     </BaseComponent>
   );

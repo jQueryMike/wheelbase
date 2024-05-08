@@ -4,7 +4,7 @@ import { LinkProps } from 'next/link';
 import { IconProps } from '../Icon';
 
 export type SocialItemClasses<T = string> = {
-  [key in 'root']?: T;
+  [key in 'root' | 'iconWrapper']?: T;
 };
 
 export type SocialItemProps = BaseProps<{

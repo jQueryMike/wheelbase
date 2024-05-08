@@ -55,10 +55,7 @@ const Address = ({
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
     >
-      <address
-        className="{address} flex flex-col text-sm font-normal not-italic [&>*:first-child]:font-bold"
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(address) }}
-      />
+      <address className={classes.address} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(address) }} />
     </BaseComponent>
   );
 };
