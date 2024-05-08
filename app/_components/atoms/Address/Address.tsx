@@ -68,12 +68,7 @@ const Address = ({
             {delimiter}
           </span>
         ) : undefined}
-        {postcode ? (
-          <span>
-            {postcode}
-            {delimiter}
-          </span>
-        ) : undefined}
+        {postcode ? <span>{postcode}</span> : undefined}
       </address>
     </BaseComponent>
   );
