@@ -16,7 +16,7 @@ const EmailAddress = ({ icon, email, styling, overrides }: EmailAddressProps) =>
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
     >
       <div className={classes.emailAddressWrapper}>
-        <Icon {...icon} />
+        {icon && <Icon {...icon} />}
         <Link className={classes.emailAddressLink} href={`mailto:${email}`}>
           <div className={classes.emailAddress}>{email}</div>
         </Link>

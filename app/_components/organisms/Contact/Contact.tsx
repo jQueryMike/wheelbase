@@ -69,7 +69,7 @@ const Contact = async ({ address, telephoneNumbers, email, map, styling, overrid
                 <div className={classes.socialsContainer}>
                   <div className={classes.socials}>
                     {defaultSocials.map((item: any) => (
-                      <SocialItem icon={item.icon} link={item.keyValue.link} styling={{}} />
+                      <SocialItem key={item.id} icon={item.icon} link={item.keyValue.link} styling={{}} />
                     ))}
                   </div>
                 </div>

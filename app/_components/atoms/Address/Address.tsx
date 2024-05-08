@@ -1,6 +1,6 @@
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
-import DOMPurify from 'isomorphic-dompurify';
+import cn from 'classnames';
 
 import addressClasses from './Address.classes';
 import { AddressProps } from './Address.types';
@@ -20,33 +20,8 @@ const Address = ({
 }: AddressProps) => {
   const classes = buildClasses(addressClasses, overrides);
 
-  const addressLines: string[] = [];
-  let separator;
-
-  switch (displayType.toLocaleLowerCase()) {
-    case 'comma':
-      separator = ', <br />';
-      break;
-    case 'inline':
-      separator = ' ';
-      break;
-    case 'inline comma':
-      separator = ', ';
-      break;
-    default:
-      separator = '<br />';
-      break;
-  }
-
-  if (companyName) addressLines.push(`<span>${companyName}</span>`);
-  if (addressLineOne) addressLines.push(addressLineOne);
-  if (addressLineTwo) addressLines.push(addressLineTwo);
-  if (city) addressLines.push(city);
-  if (county) addressLines.push(county);
-  if (country && showCountry) addressLines.push(country);
-  if (postcode) addressLines.push(postcode);
-
-  const address = addressLines.join(separator);
+  const delimiter = displayType.toLocaleLowerCase().endsWith('comma') ? ', ' : ' ';
+  const inline = displayType.toLocaleLowerCase().startsWith('inline');
 
   return (
     <BaseComponent
@@ -55,10 +30,50 @@ const Address = ({
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
     >
-      <address
-        className="{address} flex flex-col text-sm font-normal not-italic [&>*:first-child]:contents [&>*:first-child]:font-bold"
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(address) }}
-      />
+      <address className={cn(classes.address, inline ? 'flex-row flex-nowrap' : 'flex-col')}>
+        {companyName ? (
+          <span>
+            {companyName}
+            {delimiter}
+          </span>
+        ) : undefined}
+        {addressLineOne ? (
+          <span>
+            {addressLineOne}
+            {delimiter}
+          </span>
+        ) : undefined}
+        {addressLineTwo ? (
+          <span>
+            {addressLineTwo}
+            {delimiter}
+          </span>
+        ) : undefined}
+        {city ? (
+          <span>
+            {city}
+            {delimiter}
+          </span>
+        ) : undefined}
+        {county ? (
+          <span>
+            {county}
+            {delimiter}
+          </span>
+        ) : undefined}
+        {country && showCountry ? (
+          <span>
+            {country}
+            {delimiter}
+          </span>
+        ) : undefined}
+        {postcode ? (
+          <span>
+            {postcode}
+            {delimiter}
+          </span>
+        ) : undefined}
+      </address>
     </BaseComponent>
   );
 };
