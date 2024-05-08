@@ -589,18 +589,9 @@
         "xs": "480px"
       },
       "fontFamily": {
-        "heading": [
-          "Inter",
-          "sans-serif"
-        ],
-        "body": [
-          "Inter",
-          "sans-serif"
-        ],
-        "button": [
-          "Inter",
-          "sans-serif"
-        ]
+        "heading": ["Inter", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
+        "button": ["Inter", "sans-serif"]
       },
       "typography": {
         "DEFAULT": {

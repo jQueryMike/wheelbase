@@ -4,7 +4,7 @@ import { Color, Spacing } from '@types';
 
 export type FeaturesClasses<T = string> = {
   [key in 'root' | 'container' | 'featuresBlock' | 'headingContainer']?: T;
-}
+};
 
 export type FeaturesProps = BaseProps<{
   title: string;

@@ -8,14 +8,10 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  button: tw`font-button flex items-center justify-center whitespace-nowrap rounded-lg font-semibold transition`,
-  buttonLoading: tw`pointer-events-none`,
-  buttonContent: tw`inline-flex items-center justify-center`,
+  buttonContent: tw`flex flex-row flex-nowrap`,
   buttonContentLoading: tw`opacity-0`,
-  loadingIconContainer: tw`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform`,
-  loadingIcon: tw`fa-duotone fa-spinner-third fa-spin`,
   primaryButton: {
-    default: tw`bg-accent text-accent-contrast`,
+    default: tw`bg-primary text-primary-contrast`,
     hover: tw`hover:bg-primary`,
     active: tw`active:scale-95`,
   },
@@ -30,7 +26,7 @@ classes = {
     active: tw`active:scale-95`,
   },
   plainButton: {
-    default: tw`border-divider text-primary border`,
+    default: tw`border-divider border text-primary`,
     hover: tw`hover:border-primary/50`,
     active: tw`active:scale-95`,
   },
@@ -40,6 +36,8 @@ classes = {
   smallButtonContent: tw`space-x-2 p-2 px-3`,
   mediumButtonContent: tw`space-x-3 p-3 px-4`,
   largeButtonContent: tw`space-x-4 p-4 px-5`,
+  rightIcon: tw`ml-1`,
+  leftIcon: tw`mr-1`,
 };
 
 const buttonClasses = new ClassesBuilder({ location, classes }).classes;

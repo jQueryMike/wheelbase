@@ -1,6 +1,6 @@
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
-import { ButtonSize, ButtonStyle } from '@utils/constants';
+// import { ButtonSize, ButtonStyle } from '@utils/constants';
 import cn from 'classnames';
 import NextLink from 'next/link';
 
@@ -9,57 +9,48 @@ import buttonClasses from './Button.classes';
 import { ButtonProps } from './Button.types';
 
 const Button = ({
+  style,
+  size,
   text,
   href,
   target = '_self',
   leftIcon,
   rightIcon,
-  type,
-  onClick,
-  size = ButtonSize.Medium,
-  style = ButtonStyle.Primary,
   loading = false,
   overrides,
   styling,
 }: ButtonProps) => {
   const classes = buildClasses(buttonClasses, overrides);
-  let button = (
-    <BaseComponent
-      as="button"
-      className={cn(classes?.root, classes?.button, classes?.[`${size}Button`], classes?.[`${style}Button`], {
-        [classes?.buttonLoading || '']: loading,
+  return (
+    <NextLink
+      href={href || ''}
+      target={target || '_self'}
+      className={cn(classes?.buttonContent, {
+        [classes?.buttonContentLoading || '']: loading,
       })}
-      styling={styling}
-      stylingOptions={{ atomicType: 'atom' }}
-      type={type === 'button' ? 'button' : 'submit'}
-      onClick={onClick}
     >
-      {loading && (
-        <span className={classes?.loadingIconContainer}>{/* <Icon className={classes.loadingIcon} /> */}</span>
-      )}
-      <span
-        className={cn(classes?.buttonContent, classes?.[`${size}ButtonContent`], {
-          [classes?.buttonContentLoading || '']: loading,
-        })}
+      <BaseComponent
+        as="span"
+        className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
+        styling={styling}
+        stylingOptions={{ atomicType: 'atom' }}
       >
-        {leftIcon && <Icon className={cn(leftIcon, classes.leftIcon)} styling={{}} />}
-        {text && <span className={classes?.textContainer}>{text}</span>}
-        {rightIcon && <Icon className={cn(rightIcon, classes.rightIcon)} styling={{}} />}
-      </span>
-    </BaseComponent>
+        <span className={classes.buttonContent}>
+          {leftIcon && (
+            <span className={classes.leftIcon}>
+              <Icon icon={leftIcon} styling={{}} />
+            </span>
+          )}
+          {text && <span className={classes?.textContainer}>{text}</span>}
+          {rightIcon && (
+            <span className={classes.rightIcon}>
+              <Icon icon={rightIcon} styling={{}} />
+            </span>
+          )}
+        </span>
+      </BaseComponent>
+    </NextLink>
   );
-
-  if (href && target === '_self') {
-    button = <NextLink href={href}>{button}</NextLink>;
-  } else if (href && target !== '_self') {
-    button = (
-      <a href={href} target={target}>
-        {button}
-      </a>
-    );
-  }
-
-  return <div className={classes?.root}>{button}</div>;
 };
 
 export default Button;

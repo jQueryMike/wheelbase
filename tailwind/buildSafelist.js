@@ -12,7 +12,7 @@ const childFields = [
 function buildPossibilities(data, delimiter = '-') {
   return data.reduceRight((prev, curr) => {
     if (!prev.length) return curr;
-    return curr.reduce((p, c) => [...p, ...prev.map((x) => [c, x].join(delimiter))], []);
+    return curr.reduce((p, c) => [...p, ...prev.map((x) => (x ? [c, x].join(delimiter) : c))], []);
   }, []);
 }
 
@@ -27,7 +27,13 @@ function updateColourSet(value, dataSet) {
   }
 }
 
-function getColors(data, bgColors = new Set(), borderColors = new Set(), textColors = new Set()) {
+function getCustomClasses(
+  data,
+  bgColors = new Set(),
+  borderColors = new Set(),
+  textColors = new Set(),
+  classSet = new Set(),
+) {
   data.forEach(({ content: { properties } }) => {
     Object.entries(properties).forEach(([key, value]) => {
       if (key.endsWith('_backgroundColor') && value) {
@@ -37,15 +43,17 @@ function getColors(data, bgColors = new Set(), borderColors = new Set(), textCol
         updateColourSet(value.borderColor, borderColors);
       }
       if (key.endsWith('_color')) {
-        // console.log(key, value);
         updateColourSet(value, textColors);
       }
+      if (key.startsWith('overrides') && value) {
+        classSet.add(value.split(' '));
+      }
       if (childFields.includes(key) && value) {
-        getColors(value?.items, bgColors, borderColors, textColors);
+        getCustomClasses(value?.items, bgColors, borderColors, textColors, classSet);
       }
     });
   });
-  return [bgColors, borderColors, textColors];
+  return [bgColors, borderColors, textColors, classSet];
 }
 
 const buildSafelist = async (pages) => {
@@ -132,14 +140,14 @@ const buildSafelist = async (pages) => {
         .map((x) => `gradient-to-${x}`),
     ].map((x) => `bg-${x}`);
 
-    const colorsData = await (async () => {
+    const customClasses = await (async () => {
       const response = await fetch(
         `${process.env.API_URL}/umbraco/delivery/api/v1/content/item/${process.env.API_ROOT_NODE_PATH}/home`,
       );
       const data = await response.json();
-      return getColors(data.properties?.organismGrid?.items || []);
+      return getCustomClasses(data.properties?.organismGrid?.items || []);
     })();
-    const colors = colorsData
+    const colors = customClasses
       .map((x, i) => {
         switch (i) {
           case 0:
@@ -149,14 +157,14 @@ const buildSafelist = async (pages) => {
           case 2:
             return Array.from(x).map((y) => `text-${y}`);
           default:
-            return [];
+            return Array.from(x).flat();
         }
       })
       .flat();
 
     const borders = [
       ...buildPossibilities([['rounded'], ['none', 'sm', 'md', 'lg', 'xl', 'full']]),
-      ...buildPossibilities([['border'], ['none', 'solid', 'dashed', 'dotted', 'double', '0', '1', '2', '4']]),
+      ...buildPossibilities([['border'], ['none', 'solid', 'dashed', 'dotted', 'double', '0', '', '2', '4']]),
     ];
     return [
       ...layoutClasses,

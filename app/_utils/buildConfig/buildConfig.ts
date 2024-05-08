@@ -4,6 +4,29 @@ import { getKeys } from '@utils/getKeys';
 import { getName } from '@utils/getName';
 
 import { BuilderMap, builder } from './builders';
+import { DefaultsMap } from './defaults';
+
+/**
+ * @description Override undefined or null data from umbraco with component defaults
+ * @param data Data from umbraco api
+ * @param defaultData Data from defaults map
+ * @returns
+ */
+function handleDefaults<T extends Record<string, any> = {}>(data: T, defaultData?: Partial<T>): T {
+  if (!defaultData) return data;
+  return Object.fromEntries(
+    Object.entries(data).map(([key, value]: [string, any]) => {
+      const defaultVal = defaultData[key];
+      if (value instanceof Object) {
+        if (defaultVal) {
+          return [key, handleDefaults(value, defaultVal)];
+        }
+        return [key, value];
+      }
+      return [key, value || defaultVal];
+    }),
+  ) as T;
+}
 
 /**
  * @description Build properties object
@@ -35,6 +58,32 @@ function buildProperties(data?: { [key: string]: any }) {
   return properties;
 }
 
+function buildStyling(appearance: any) {
+  if (!appearance) return {};
+  return {
+    background: {
+      backgroundColor: appearance?.backgroundColor,
+      backgroundGradientColor: appearance?.backgroundGradientColor,
+      gradientDirection: appearance?.gradientDirection,
+    },
+    spacing: appearance.spacing,
+    typography: {
+      fontColor: appearance?.color,
+      fontSize: appearance?.size,
+      fontWeight: appearance?.fontWeight,
+      lineHeight: appearance?.lineHeight,
+      letterSpacing: appearance?.letterSpacing,
+    },
+    border: {
+      ...(appearance?.border || {}),
+    },
+    layout: {
+      columns: appearance?.columns,
+      columnGap: appearance?.columnGap,
+    },
+  };
+}
+
 /**
  * @description Build configuration object
  * @param param0 Block properties
@@ -46,52 +95,42 @@ function buildConfig({ contentType, id, properties }: any) {
   const key = capitalise(name);
   const { block, [name]: b, contentArea, ...subComps } = props ?? {};
   let items;
+
   if (b?.content?.items?.items) {
     items = b?.content?.items?.items.map((item: any) => buildConfig(item.content));
     // deepcode ignore DeleteOfNonProperty: <please specify a reason of ignoring this>
     delete b?.content?.items;
   }
-  // TODO: Replace this with a better solution
-  const styling = {
-    background: {
-      backgroundColor: b?.appearance?.backgroundColor || block?.appearance?.backgroundColor,
-      backgroundGradientColor: b?.appearance?.backgroundGradientColor || block?.appearance?.backgroundGradientColor,
-      gradientDirection: b?.appearance?.gradientDirection || block?.appearance?.gradientDirection,
-    },
-    spacing: {
-      ...block?.appearance?.spacing,
-      ...b?.appearance?.spacing,
-    },
-    typography: {
-      fontColor: b?.appearance?.color,
-      fontSize: b?.appearance?.size,
-      fontWeight: b?.appearance?.fontWeight,
-      lineHeight: b?.appearance?.lineHeight,
-      letterSpacing: b?.appearance?.letterSpacing,
-    },
-    border: {
-      ...(b?.appearance?.border || block?.appearance?.border || {}),
-    },
-    layout: {
-      columns: b?.appearance?.columns,
-      columnGap: b?.appearance?.columnGap,
-    },
+
+  const content = {
+    ...block?.content,
+    ...b?.content,
   };
-  const config: any = {
-    id,
-    name: key,
-    content: {
-      ...block?.content,
-      ...b?.content,
-    },
-    // TODO: Review whether we will still need this after all the styling utility work
-    appearance: {
+  const defaultConfig = DefaultsMap.get([name].join(':'));
+  const appearance = handleDefaults(
+    {
       ...block?.appearance,
       ...b?.appearance,
     },
-    styling,
-    settings: { ...block?.settings, ...b?.settings },
+    defaultConfig?.appearance,
+  );
+  const settings = handleDefaults(
+    {
+      ...block?.settings,
+      ...b?.settings,
+    },
+    defaultConfig?.settings,
+  );
+  const config: any = {
+    id,
+    name: key,
+    content,
+    appearance,
+    settings,
+    overrides: b?.overrides || block?.overrides || {},
+    styling: buildStyling(appearance),
   };
+
   const output: any = BuilderMap.has(name) ? BuilderMap.get(name)?.(config) : builder(config);
 
   output.items = items;
@@ -99,7 +138,7 @@ function buildConfig({ contentType, id, properties }: any) {
    * If the content area exists, build all of the content area items
    */
   if (contentArea) {
-    output.contentArea = contentArea.content?.content?.items?.map(({ content }: any) => buildConfig(content)) || [];
+    output.contentArea = contentArea.content?.content?.items?.map(({ content: c }: any) => buildConfig(c)) || [];
   }
 
   /**
@@ -108,31 +147,7 @@ function buildConfig({ contentType, id, properties }: any) {
   const scs = subComps
     ? Object.fromEntries(
         Object.entries(subComps).map(([k, value]: any) => {
-          const s = {
-            background: {
-              backgroundColor: value?.appearance?.backgroundColor,
-              backgroundGradientColor: value?.appearance?.backgroundGradientColor,
-              gradientDirection: value?.appearance?.gradientDirection,
-            },
-            spacing: {
-              ...value?.appearance?.spacing,
-            },
-            typography: {
-              fontColor: value?.appearance?.color,
-              fontSize: value?.appearance?.size,
-              fontWeight: value?.appearance?.fontWeight,
-              lineHeight: value?.appearance?.lineHeight,
-              letterSpacing: value?.appearance?.letterSpacing,
-            },
-            border: {
-              ...(value?.appearance?.border || {}),
-            },
-            layout: {
-              columns: value?.appearance?.columns,
-              columnGap: value?.appearance?.columnGap,
-            },
-          };
-          value.styling = s;
+          value.styling = buildStyling(value?.appearance);
           return [k, BuilderMap.has(getName(k)) ? BuilderMap.get(getName(k))?.(value) : builder(value)];
         }),
       )

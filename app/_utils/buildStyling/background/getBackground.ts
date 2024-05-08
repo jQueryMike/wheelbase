@@ -11,7 +11,6 @@ import { getColour } from '../colours/getColour';
  */
 export function getBackground(background?: Background): [string, CSSProperties] {
   const { backgroundColor, backgroundGradientColor, gradientDirection } = background ?? {};
-  //   if (background) console.log('background', background);
   if (backgroundColor) {
     if (backgroundGradientColor && gradientDirection) {
       return [
@@ -23,7 +22,7 @@ export function getBackground(background?: Background): [string, CSSProperties] 
         } as CSSProperties,
       ];
     }
-    return [getColour(backgroundColor, "bg"), {}]
+    return [getColour(backgroundColor, 'bg'), {}];
   }
   return ['', {}];
 }

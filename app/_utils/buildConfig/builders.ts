@@ -121,13 +121,14 @@ export const BuilderMap = new Map([
   ],
 ]);
 
-export function builder({ name, id, content, appearance, settings, styling }: any) {
+export function builder({ name, id, content, appearance, settings, overrides, styling }: any) {
   return {
     name,
     id,
     ...content,
     ...appearance,
     ...settings,
+    overrides,
     styling,
   };
 }
