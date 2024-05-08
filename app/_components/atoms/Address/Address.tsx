@@ -30,7 +30,7 @@ const Address = ({
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
     >
-      <address className={cn(classes.address, inline ? 'flex-row flex-nowrap' : 'flex-col')}>
+      <address className={cn(classes.address, inline ? 'flex-row flex-nowrap' : 'flex flex-col')}>
         {companyName ? (
           <span>
             {companyName}
