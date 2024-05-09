@@ -1,4 +1,3 @@
-import { AddressProps } from '@components/atoms';
 import { BaseProps } from '@components/types';
 
 export type ContactClasses<T = string> = {

@@ -13,9 +13,9 @@ const layouts: Comps<typeof Layouts> = {
 
 const atoms: Comps<
   typeof Atoms,
+  | 'Icon'
   | 'HeadingSize'
   | 'HeadingTag'
-  | 'Icon'
   | 'Avatar'
   | 'ImageLink'
   | 'ItemRating'
@@ -23,7 +23,11 @@ const atoms: Comps<
   | 'ReviewDate'
   | 'ReviewerName'
   | 'ReviewTitle'
+  | 'EmailAddress'
+  | 'PhoneNumbers'
+  | 'SocialItem'
   | 'Address'
+  | 'Map'
 > = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
   Heading: dynamic(() => import('./atoms/Heading/Heading'), {}),
