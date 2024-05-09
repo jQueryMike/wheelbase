@@ -26,12 +26,12 @@ const AccordionItem = ({ heading, contentArea = [], styling, overrides, icon }: 
   const [isOpen, toggle] = useToggle();
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'molecule' }}>
-      <div className="flex cursor-pointer items-center justify-between border border-gray-200 p-4">
+      <div className={classes.accordionHeading} onClick={() => toggle()}>
         {heading && <Heading {...heading} />}
         {/* 
           TODO: Fix a11y issue with keyboard control
         */}
-        <span onClick={() => toggle()}>
+        <span>
           <Icon icon="fa fa-chevron-down" styling={icon.styling} />
         </span>
       </div>
