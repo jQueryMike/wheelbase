@@ -7,7 +7,7 @@ const location = 'Heading/Heading.classes';
 let classes: HeadingClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw``,
+  root: tw`block`,
 };
 
 const headingClasses = new ClassesBuilder({ location, classes }).classes;
