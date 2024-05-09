@@ -115,7 +115,7 @@ const buildSafelist = async (pages) => {
       return [...classes, ...prefixed.flat(1)];
     };
 
-    for (let v = 0; v < 8; v++) {
+    for (let v = 0; v < 21; v++) {
       const value = v;
       paddingPrefixes.map((prefix) => paddingClasses.push(`${prefix}-${value}`));
       marginPrefixes.map((prefix) => marginClasses.push(`${prefix}-${value}`));
