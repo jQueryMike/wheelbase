@@ -3,7 +3,7 @@ import { BaseProps } from '@components/types';
 import { Block } from '@types';
 
 export type AccordionItemClasses<T = string> = {
-  [key in 'root']?: T;
+  [key in 'root' | 'accordionHeading']?: T;
 };
 
 export type AccordionItemProps = BaseProps<{
