@@ -66,7 +66,6 @@
                     "properties": {}
                   }
                 ],
-                "content_image1_alternativeText": "Cool dino",
                 "appearance_image1_fill": null,
                 "appearance_image1_width": null,
                 "appearance_image1_height": null,
@@ -199,7 +198,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image1_alternativeText": null,
                           "appearance_image1_fill": null,
                           "appearance_image1_width": null,
                           "appearance_image1_height": null,
@@ -232,7 +230,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image2_alternativeText": null,
                           "appearance_image2_fill": null,
                           "appearance_image2_width": null,
                           "appearance_image2_height": null,
@@ -272,7 +269,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image1_alternativeText": null,
                           "appearance_image1_fill": null,
                           "appearance_image1_width": null,
                           "appearance_image1_height": null,
@@ -305,7 +301,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image2_alternativeText": null,
                           "appearance_image2_fill": null,
                           "appearance_image2_width": null,
                           "appearance_image2_height": null,
@@ -345,7 +340,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image1_alternativeText": null,
                           "appearance_image1_fill": null,
                           "appearance_image1_width": null,
                           "appearance_image1_height": null,
@@ -378,7 +372,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image2_alternativeText": null,
                           "appearance_image2_fill": null,
                           "appearance_image2_width": null,
                           "appearance_image2_height": null,
@@ -418,7 +411,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image1_alternativeText": "Cool Dino",
                           "appearance_image1_fill": null,
                           "appearance_image1_width": null,
                           "appearance_image1_height": null,
@@ -451,7 +443,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image2_alternativeText": null,
                           "appearance_image2_fill": null,
                           "appearance_image2_width": null,
                           "appearance_image2_height": null,
@@ -629,7 +620,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image_alternativeText": "Cool Dino",
                           "appearance_image_fill": null,
                           "appearance_image_width": null,
                           "appearance_image_height": null,
@@ -764,7 +754,6 @@
                               "properties": {}
                             }
                           ],
-                          "content_image_alternativeText": "Cool Skull",
                           "appearance_image_fill": null,
                           "appearance_image_width": null,
                           "appearance_image_height": null,
