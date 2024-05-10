@@ -20,21 +20,23 @@ const Reviews = ({ heading, subheading, reviewsBlock, items, overrides, styling 
               {subheading && <Heading {...subheading} data-testid="subheading" textType="subheading" />}
             </div>
           )}
-          <Grid styling={reviewsBlock.styling}>
-            {items.map((item: ReviewItemProps) => (
-              <ReviewItem
-                styling={item.styling}
-                itemRating={item.itemRating}
-                ratingIcon={item.fixedIcon}
-                avatar={item.avatar}
-                imageLink={item.imageLink}
-                reviewerName={item.reviewerName}
-                reviewDate={item.reviewDate}
-                reviewTitle={item.reviewTitle}
-                reviewContent={item.reviewContent}
-              />
-            ))}
-          </Grid>
+          <BaseComponent styling={reviewsBlock.styling}>
+            <Grid styling={reviewsBlock.styling}>
+              {items.map((item: ReviewItemProps) => (
+                <ReviewItem
+                  styling={item.styling}
+                  itemRating={item.itemRating}
+                  ratingIcon={item.fixedIcon}
+                  avatar={item.avatar}
+                  imageLink={item.imageLink}
+                  reviewerName={item.reviewerName}
+                  reviewDate={item.reviewDate}
+                  reviewTitle={item.reviewTitle}
+                  reviewContent={item.reviewContent}
+                />
+              ))}
+            </Grid>
+          </BaseComponent>
         </div>
       </div>
     </BaseComponent>
