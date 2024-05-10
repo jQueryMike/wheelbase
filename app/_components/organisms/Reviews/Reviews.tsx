@@ -20,7 +20,7 @@ const Reviews = ({ heading, subheading, reviewsBlock, items, overrides, styling 
               {subheading && <Heading {...subheading} data-testid="subheading" textType="subheading" />}
             </div>
           )}
-          <BaseComponent styling={reviewsBlock.styling}>
+          <BaseComponent as="div" styling={reviewsBlock.styling}>
             <Grid styling={reviewsBlock.styling}>
               {items.map((item: ReviewItemProps) => (
                 <ReviewItem

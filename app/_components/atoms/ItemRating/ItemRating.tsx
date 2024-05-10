@@ -18,13 +18,14 @@ const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) =
   const renderStars = (wholeStars: number) => {
     const stars: JSX.Element[] = [];
     const starIcon = 'fa fa-star';
+    const iconClasses = `${starIcon} ${secondaryColor}`;
 
     for (let i = 0; i < wholeStars; i++) {
       stars.push(<Icon key={i} icon={starIcon} styling={{}} />);
     }
     if (Math.floor(5 - itemRating) >= 1 && Math.floor(5 - itemRating) <= 5) {
       for (let j = 1, l = 5 - itemRating; j <= l; j++) {
-        stars.push(<Icon key={`1${j}`} icon={`${starIcon} ${secondaryColor}`} styling={{}} />);
+        stars.push(<Icon key={`1${j}`} icon={iconClasses} styling={{}} />);
       }
     }
     return stars;
