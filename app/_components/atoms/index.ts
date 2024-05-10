@@ -9,6 +9,7 @@ export * from './ImageLink';
 export * from './Icon';
 export * from './ItemRating';
 export * from './Map';
+export * from './NavigationItem';
 export * from './PhoneNumbers';
 export * from './ReviewContent';
 export * from './ReviewDate';
