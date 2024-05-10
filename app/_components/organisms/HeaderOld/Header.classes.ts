@@ -1,10 +1,12 @@
-import { ClassesBuilder, tw } from '@utils';
+import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
 import { HeaderClasses } from './Header.types';
 
 const location = 'Header/Header.classes';
 
-const classes: HeaderClasses = {
+let classes: HeaderClasses<ClassesProperty> = {};
+
+classes = {
   root: tw``,
 };
 
