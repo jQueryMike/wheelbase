@@ -5,7 +5,15 @@ import { HeaderClasses } from './Header.types';
 const location = 'Header/Header.classes';
 
 const classes: HeaderClasses = {
-  root: tw``,
+  root: tw`sticky top-0 z-50 h-16 w-full md:h-24`,
+  headerContainer: tw`container mx-auto h-full`,
+  component: tw`flex h-full items-center gap-4 sm:gap-6 md:gap-8 lg:gap-10`,
+  logoContainer: tw``,
+  headerLogo: tw``,
+  navContainer: tw`flex flex-1 justify-end`,
+  nav: tw`first-child:divide-y-0 invisible absolute inset-0  -left-full left-auto flex h-screen w-full flex-col divide-y divide-gray-200 p-8 pt-16 shadow-xl transition sm:w-96 xl:visible xl:static xl:-left-96 xl:h-auto xl:w-auto xl:flex-row xl:justify-end xl:gap-6 xl:divide-none xl:bg-transparent xl:p-0 xl:shadow-none`,
+  menuIconWrapper: tw`flex items-center xl:hidden`,
+  headerSlot: tw`hidden xs:block`,
 };
 
 const headerClasses = new ClassesBuilder({ location, classes }).classes;

@@ -25,7 +25,7 @@ function imageBuilder(
     id,
     name: 'Image',
     src: url ? `${process.env.MEDIA_URL}${url}` : undefined,
-    alt: altText || name,
+    alt: altText || `alt${name}`,
     ...(settings.loading ? { ...settings, fill: isFill } : { ...settings, fill: isFill, loading: 'lazy' }),
     ...(isFill ? { sizes: `${appearance.width ?? w}px`, objectFit: 'contain' } : { width: w, height: h }),
     styling: config.styling,
