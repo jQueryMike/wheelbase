@@ -12,4 +12,5 @@ export type ImageLinkProps = Omit<ImageProps, 'classes' | 'overrides'> &
     overrides?: {
       [key in keyof ImageLinkClasses]?: string;
     };
+    image1?: ImageProps;
   }>;
