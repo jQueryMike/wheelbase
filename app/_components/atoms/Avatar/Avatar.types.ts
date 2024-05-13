@@ -12,4 +12,5 @@ export type AvatarProps = Omit<ImageProps, 'classes' | 'overrides'> &
     overrides?: {
       [key in keyof AvatarClasses]?: string;
     };
+    image1?: ImageProps;
   }>;
