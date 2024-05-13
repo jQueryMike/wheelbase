@@ -16,7 +16,7 @@ const buildTypography = (colors) => {
         css: {
           color: `rgb(var(--primary-contrast) / 0.7)`,
           a: {
-            color: 'rgb(var(--primary-conrast))',
+            color: 'rgb(var(--primary-contrast))',
             '&:hover': {
               'text-decoration': 'underline',
             },
@@ -27,7 +27,7 @@ const buildTypography = (colors) => {
         css: {
           color: `rgb(var(--secondary-contrast) / 0.7)`,
           a: {
-            color: 'rgb(var(--secondary-conrast))',
+            color: 'rgb(var(--secondary-contrast))',
             '&:hover': {
               'text-decoration': 'underline',
             },
@@ -38,7 +38,7 @@ const buildTypography = (colors) => {
         css: {
           color: `rgb(var(--accent-contrast) / 0.7)`,
           a: {
-            color: 'rgb(var(--sccent-conrast))',
+            color: 'rgb(var(--accent-contrast))',
             '&:hover': {
               'text-decoration': 'underline',
             },

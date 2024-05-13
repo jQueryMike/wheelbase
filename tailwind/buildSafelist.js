@@ -42,7 +42,7 @@ function getCustomClasses(
       if (key.endsWith('_border') && value?.borderColor) {
         updateColourSet(value.borderColor, borderColors);
       }
-      if (key.endsWith('_color')) {
+      if (key.endsWith('_color') || key.endsWith('_secondaryColor')) {
         updateColourSet(value, textColors);
       }
       if (key.startsWith('overrides') && value) {
