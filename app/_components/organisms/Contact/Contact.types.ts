@@ -17,6 +17,7 @@ export type ContactProps = BaseProps<{
   telephoneNumbers: any;
   email: any;
   map: any;
+  socials: any;
   overrides?: {
     [key in keyof ContactClasses]?: string;
   };
