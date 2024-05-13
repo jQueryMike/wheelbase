@@ -7,69 +7,92 @@ import { buildConfig } from '@utils/buildConfig';
 import contactClasses from './Contact.classes';
 import { ContactProps } from './Contact.types';
 
-const Contact = async ({ address, telephoneNumbers, email, map, styling, overrides }: ContactProps) => {
+const Contact = async ({ address, telephoneNumbers, email, map, socials, styling, overrides }: ContactProps) => {
+  const classes = buildClasses(contactClasses, overrides);
   const {
-    properties: {
-      addresses: { items: addresses } = { items: '' },
-      phoneNumbers: { items: phoneNumbers },
-      emails: { items: emails },
-      socials: { items: socials },
-      displayName: companyName,
-    },
+    properties: { displayName: companyName },
   } = (await getGlobalConfig()) || {};
 
-  const classes = buildClasses(contactClasses, overrides);
+  const buildConfigForItem = (item?: any) => (item ? buildConfig(item.content) : undefined);
 
-  const defaultSocials = socials.map((x: any) => buildConfig(x.content));
-  const [defaultAddress, defaultPhone, defaultEmail] = [
-    addresses[0].content,
-    phoneNumbers[0].content,
-    emails[0].content,
-  ].map((x) => buildConfig(x));
+  const [addressContent, telephoneNumbersContent, emailContent] = [address, telephoneNumbers, email].map((item) =>
+    item?.items?.[0] ? buildConfigForItem(item.items[0]) : undefined,
+  );
 
-  const chosenAddress = address?.items?.items[0]?.content
-    ? buildConfig(address?.items?.items[0]?.content)
-    : defaultAddress;
-  const chosenPhoneNumber = telephoneNumbers?.items?.items[0].content
-    ? buildConfig(telephoneNumbers?.items?.items[0].content)
-    : defaultPhone;
-  const chosenEmail = email?.items?.items[0].content ? buildConfig(email?.items?.items[0].content) : defaultEmail;
+  const socialsContent = socials?.items?.map(buildConfigForItem) || [];
+
+  const chosenSocials = socialsContent.map(({ icon, socials: socialItem, styling: socialStyling }: any) => ({
+    icon,
+    socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
+    styling: socialStyling,
+  }));
+
+  const chosenAddress = addressContent?.addresses?.[0]
+    ? {
+        address: buildConfig(addressContent.addresses[0]),
+        styling: addressContent.styling,
+        displayType: addressContent.displayType,
+        showCountry: addressContent.showCountry,
+      }
+    : undefined;
+
+  const chosenPhone = telephoneNumbersContent?.phoneNumber?.[0]
+    ? {
+        phoneNumber: buildConfig(telephoneNumbersContent.phoneNumber[0]).phoneNumber,
+        icon: telephoneNumbersContent.icon,
+        styling: telephoneNumbersContent.styling,
+      }
+    : undefined;
+
+  const chosenEmail = emailContent?.email?.email?.[0]
+    ? {
+        email: buildConfig(emailContent.email.email[0]).email,
+        icon: emailContent.icon,
+        styling: emailContent.styling,
+      }
+    : undefined;
 
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.container}>
         <div className={classes.contactWrapper}>
-          {(chosenAddress || chosenEmail || chosenPhoneNumber || defaultSocials) && (
+          {(chosenAddress || chosenEmail || chosenPhone) && (
             <div className={classes.contact}>
-              {chosenAddress && <Address companyName={companyName} {...chosenAddress} />}
-
-              {(chosenPhoneNumber || chosenEmail) && (
+              {chosenAddress && (
+                <Address
+                  companyName={companyName}
+                  {...chosenAddress.address}
+                  styling={chosenAddress.styling}
+                  displayType={chosenAddress.displayType}
+                  showCountry={chosenAddress.showCountry}
+                />
+              )}
+              {(chosenPhone || chosenEmail) && (
                 <div className={classes.contactInfoContainer}>
                   <div className={classes.contactInfo}>
-                    {chosenPhoneNumber && (
+                    {chosenPhone && (
                       <PhoneNumbers
-                        icon={chosenPhoneNumber.icon}
-                        number={chosenPhoneNumber.keyValue.value}
-                        styling={chosenPhoneNumber.keyValue.styling}
+                        icon={chosenPhone.icon}
+                        number={chosenPhone.phoneNumber}
+                        styling={chosenPhone.styling}
                       />
                     )}
-
                     {chosenEmail && (
-                      <EmailAddress
-                        icon={chosenEmail.icon}
-                        email={chosenEmail.keyValue.value}
-                        styling={chosenEmail.keyValue.styling}
-                      />
+                      <EmailAddress icon={chosenEmail.icon} email={chosenEmail.email} styling={chosenEmail.styling} />
                     )}
                   </div>
                 </div>
               )}
-
-              {defaultSocials && (
+              {chosenSocials && (
                 <div className={classes.socialsContainer}>
                   <div className={classes.socials}>
-                    {defaultSocials.map((item: any) => (
-                      <SocialItem key={item.id} icon={item.icon} link={item.keyValue.link} styling={{}} />
+                    {chosenSocials.map((item: any) => (
+                      <SocialItem
+                        key={item.id}
+                        icon={item.icon}
+                        link={{ ...item.socials.link[0] }}
+                        styling={item.styling}
+                      />
                     ))}
                   </div>
                 </div>
