@@ -1,11 +1,10 @@
 // eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
-import { Heading } from '@components/atoms';
+import { Heading, Image } from '@components/atoms';
 import { BaseComponent } from '@components/utils/BaseComponent';
 import { Block } from '@types';
 import { buildClasses } from '@utils/buildClasses';
 import cn from 'classnames';
-import NextImage from 'next/image';
 import { Suspense } from 'react';
 
 import heroClasses from './Hero.classes';
@@ -55,7 +54,7 @@ const Hero = ({
               className={cn(reverse === true ? classes?.imageContainerReverse : classes?.imageContainer)}
               data-testid="image-container"
             >
-              <NextImage className={classes?.image} {...image} data-testid="image" />
+              <Image className={classes?.image} styling={image.styling} src={image.src} alt={image.alt} />
             </div>
           )}
         </div>
