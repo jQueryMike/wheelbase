@@ -1,7 +1,6 @@
 import { BaseProps } from '@components/types';
 import { Block } from '@types';
 import { ImageProps } from 'next/image';
-import { LinkProps } from 'next/link';
 
 export type HeaderClasses<T = string> = {
   [key in
@@ -13,12 +12,16 @@ export type HeaderClasses<T = string> = {
     | 'navContainer'
     | 'nav'
     | 'menuIconWrapper'
-    | 'headerSlot']?: T;
+    | 'headerSlot'
+    | 'hamburger'
+    | 'hamburgerWrapper'
+    | 'topBun'
+    | 'meat'
+    | 'bottomBun']?: T;
 };
 
 export type HeaderProps = BaseProps<{
   logo: ImageProps & Block;
-  navigation: LinkProps[];
   link: any;
   overrides?: {
     [key in keyof HeaderClasses]?: string;

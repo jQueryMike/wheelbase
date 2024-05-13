@@ -1,7 +1,7 @@
 import { Footer } from '@components/organisms/Footer';
 import { Header } from '@components/organisms/Header';
-import { getGlobalConfig, getNavUrl } from '@utils';
-import { buildConfig } from '@utils/buildConfig';
+import { getGlobalConfig } from '@utils';
+import getHeader from '@utils/getHeader/getHeader';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { Suspense } from 'react';
@@ -12,24 +12,12 @@ const inter = Inter({ subsets: ['latin'] });
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const globalConfig = await getGlobalConfig();
-  let defaultHeader = null;
-  if (globalConfig.properties.header) {
-    const {
-      properties: { header: { items: header } = { items: '' } },
-    } = globalConfig || {};
-    [defaultHeader] = [header[0].content].map((x: any) => buildConfig(x));
-  }
-  const navigation = await getNavUrl();
+  const header = getHeader(globalConfig);
   return (
     <html lang="en">
       <body className={inter.className}>
-        {defaultHeader !== null && (
-          <Header
-            logo={{ ...defaultHeader?.image1 }}
-            navigation={navigation}
-            link={defaultHeader?.buttons.content}
-            styling={defaultHeader.styling}
-          />
+        {header !== null && (
+          <Header logo={{ ...header?.image1 }} link={header?.buttons.content} styling={header.styling} />
         )}
         {children}
         <Suspense fallback={null}>

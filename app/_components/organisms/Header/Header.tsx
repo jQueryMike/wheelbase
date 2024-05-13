@@ -1,20 +1,22 @@
 import { Image, NavigationItem } from '@components/atoms';
 import { ButtonList } from '@components/molecules';
 import { BaseComponent } from '@components/utils';
+import { getNavUrl } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
 
 import headerClasses from './Header.classes';
 import { HeaderProps } from './Header.types';
 
-const Header = ({ logo, navigation, link, styling, overrides }: HeaderProps) => {
+const Header = async ({ logo, link, styling, overrides }: HeaderProps) => {
+  const navigation = await getNavUrl();
   const classes = buildClasses(headerClasses, overrides);
   return (
     <BaseComponent as="header" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.headerContainer}>
         <div className={classes.component}>
-          <div className={classes.logoContainer}>
-            <a className={classes.headerLogo} href="/">
-              {logo.alt !== 'altImage' && (
+          {logo.alt !== 'altImage' && (
+            <div className={classes.logoContainer}>
+              <a className={classes.headerLogo} href="/">
                 <Image
                   alt={logo.alt || 'Logo image'}
                   loading={logo.loading || 'lazy'}
@@ -26,9 +28,9 @@ const Header = ({ logo, navigation, link, styling, overrides }: HeaderProps) => 
                   name=""
                   styling={logo.styling}
                 />
-              )}
-            </a>
-          </div>
+              </a>
+            </div>
+          )}
           {navigation && (
             <div className={classes.navContainer}>
               <nav className={classes.nav}>
@@ -39,11 +41,11 @@ const Header = ({ logo, navigation, link, styling, overrides }: HeaderProps) => 
             </div>
           )}
           <div className={classes.menuIconWrapper}>
-            <button aria-label="Open navigation" className="{hamburger} group">
-              <div className="{hamburgerWrapper} space-y-1.5">
-                <div className="{topBun} h-1 w-8 rounded-full bg-primary transition group-hover:bg-accent" />
-                <div className="{meat} h-1 w-8 rounded-full bg-primary transition group-hover:bg-accent" />
-                <div className="{bottomBun} h-1 w-8 rounded-full bg-primary transition group-hover:bg-accent" />
+            <button aria-label="Open navigation" className={classes.hamburger}>
+              <div className={classes.hamburgerWrapper}>
+                <div className={classes.topBun} />
+                <div className={classes.meat} />
+                <div className={classes.bottomBun} />
               </div>
             </button>
           </div>
