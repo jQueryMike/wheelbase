@@ -1,7 +1,4 @@
 import { BaseProps } from '@components/types';
-import { Block } from '@types';
-import { ImageProps } from 'next/image';
-import { LinkProps } from 'next/link';
 
 export type FooterClasses<T = string> = {
   [key in
