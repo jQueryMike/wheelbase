@@ -1,7 +1,7 @@
 import { BaseProps } from '@components/types';
 
 export type NavigationItemClasses<T = string> = {
-  [key in 'root']?: T;
+  [key in 'root' | 'link']?: T;
 };
 
 export type NavigationItemProps = BaseProps<{
