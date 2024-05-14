@@ -44,7 +44,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           />
         </Suspense>
         {defaultFooter !== null && (
-          <Footer companyInfo={companyInfo} footerText={defaultFooter.text} styling={defaultFooter.styling} />
+          <Footer socials={defaultFooter.socialItems} companyInfo={companyInfo} footerText={defaultFooter.text} styling={defaultFooter.styling} />
         )}
       </body>
     </html>

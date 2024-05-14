@@ -1,16 +1,25 @@
-import { CompanyInfo, Text } from '@components/atoms';
+import { CompanyInfo, SocialItem, Text } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
 import { getLegalUrl } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
+import { buildConfig } from '@utils/buildConfig';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import footerClasses from './Footer.classes';
 import { FooterProps } from './Footer.types';
 
-const Footer = async ({ companyInfo, footerText, styling, overrides }: FooterProps) => {
+const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: FooterProps) => {
   const classes = buildClasses(footerClasses, overrides);
   const legal = await getLegalUrl();
+  const socialItems = buildConfig(socials.items.items[0].content);
+  const buildConfigForItem = (item?: any) => (item ? buildConfig(item.content) : undefined);
+  const socialContent = socials.items.items.map(buildConfigForItem);
+  const chosenSocials = socialContent.map(({ icon, socials: socialItem, styling: socialStyling }: any) => ({
+    icon,
+    socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
+    styling: socialStyling,
+  }));
 
   return (
     <BaseComponent as="footer" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
@@ -27,29 +36,34 @@ const Footer = async ({ companyInfo, footerText, styling, overrides }: FooterPro
               </div>
             )}
 
-            <div className={classes.socialContainer}>
-              <nav className={classes.socialItems} role="navigation" aria-label="Social media links">
-                <a className={classes.socialItem} title="Facebook" href="#">
-                  <i className="fa fa-facebook"></i>
-                </a>
-                <a className={classes.socialItem} title="Twitter" href="#">
-                  <i className="fa fa-twitter"></i>
-                </a>
-                <a className={classes.socialItem} title="YouTube" href="#">
-                  <i className="fa fa-youtube"></i>
-                </a>
-              </nav>
-            </div>
+            {chosenSocials && (
+              <div className={classes.socialContainer}>
+                <nav className={classes.socialItems} role="navigation" aria-label="Social media links">
+                  {chosenSocials.map((item: any) => (
+                    <SocialItem
+                      key={item.id}
+                      icon={item.icon}
+                      link={{ ...item.socials.link[0] }}
+                      styling={item.styling}
+                    />
+                  ))}
+                </nav>
+              </div>
+            )}
           </div>
 
           <div className={classes.footerSlotTwo}>
-            <div className={classes.legalContainer}>
-              <nav className={classes.navContainer} role="navigation" aria-label="Legal links">
-                {legal.map((legalItem: any) => (
-                  <Link className={classes.navItem} title={legalItem.name} href={legalItem.url}>{legalItem.name}</Link>
-                ))}
-              </nav>
-            </div>
+            {legal && (
+              <div className={classes.legalContainer}>
+                <nav className={classes.navContainer} role="navigation" aria-label="Legal links">
+                  {legal.map((legalItem: any) => (
+                    <Link className={classes.navItem} title={legalItem.name} href={legalItem.url}>
+                      {legalItem.name}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+            )}
 
             <div className={classes.imageContainer}>
               <Link target="_blank" href="https://www.clickdealer.co.uk">

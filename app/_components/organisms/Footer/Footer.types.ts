@@ -25,6 +25,7 @@ export type FooterClasses<T = string> = {
 export type FooterProps = BaseProps<{
   companyInfo: any;
   footerText: any;
+  socials: any;
   overrides?: {
     [key in keyof FooterClasses]?: string;
   };
