@@ -1,8 +1,7 @@
 import { Footer } from '@components/organisms/Footer';
 import { Header } from '@components/organisms/Header';
-// import { getGlobalConfig, getSharedContent } from '@utils';
-// import { buildConfig } from '@utils/buildConfig';
-// import { mergeVars } from '@utils/mergeVars';
+import { getGlobalConfig } from '@utils';
+import getHeader from '@utils/getHeader/getHeader';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { Suspense } from 'react';
@@ -11,22 +10,15 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // const globalConfig = await getGlobalConfig();
-  // const {
-  //   properties: { header: h, footer: f },
-  // } = globalConfig;
-  // const sharedContent = await getSharedContent();
-  // const [header, footer] = [h, f].map((x) =>
-  //   mergeVars(x.items ?? [], globalConfig, sharedContent)
-  //     .map((item: any) => buildConfig(item.content))
-  //     .pop(),
-  // );
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+  const globalConfig = await getGlobalConfig();
+  const header = getHeader(globalConfig);
   return (
     <html lang="en">
-      {/* {header ?? <Header {...header} />} */}
       <body className={inter.className}>
-        <Header />
+        {header !== null && (
+          <Header logo={{ ...header?.image1 }} link={header?.buttons.content} styling={header.styling} />
+        )}
         {children}
         <Suspense fallback={null}>
           <Script
@@ -40,4 +32,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

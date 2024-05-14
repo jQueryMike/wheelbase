@@ -1,6 +1,7 @@
 import { Button } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
+import { buildConfig } from '@utils/buildConfig';
 import { Sizes } from '@utils/constants';
 import cn from 'classnames';
 
@@ -15,7 +16,7 @@ const ButtonList = async ({ gap = Sizes.Medium, items = [], overrides, styling }
       <ul className={cn(classes.list, classes[`gap-${gap}`])}>
         {items.map((item) => (
           <li key={item.id} className={classes.listItem}>
-            <Button {...item} />
+            <Button {...buildConfig(item.content)} />
           </li>
         ))}
       </ul>
