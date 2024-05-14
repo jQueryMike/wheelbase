@@ -4,6 +4,7 @@ export * from './hexToRgb';
 export * from './getGlobalConfig';
 export * from './getGlobalContent';
 export * from './getGlobalTheme';
+export * from './getHeader';
 export * from './getNavUrl';
 export * from './getSharedContent';
 export * from './buildLink';
