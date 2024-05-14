@@ -58,7 +58,7 @@ const TextAndImage = async ({
               className={cn(reverse ? classes?.imageContainerReverse : classes?.imageContainer)}
               data-testid="image-container"
             >
-              <Image className={classes?.image} styling={image.styling} src={image.src} alt={image.alt} />
+              <Image className={classes?.image} {...image} />
             </div>
           )}
         </div>
