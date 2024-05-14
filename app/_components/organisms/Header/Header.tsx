@@ -8,7 +8,7 @@ import headerClasses from './Header.classes';
 import { HeaderProps } from './Header.types';
 
 const Header = async ({ logo, link, styling, overrides }: HeaderProps) => {
-  const navigation = await getNavUrl();
+  const homeObject = (await getNavUrl()).find((item: { name: string }) => item.name === 'Home');
   const classes = buildClasses(headerClasses, overrides);
   return (
     <BaseComponent as="header" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
@@ -31,10 +31,10 @@ const Header = async ({ logo, link, styling, overrides }: HeaderProps) => {
               </a>
             </div>
           )}
-          {navigation && (
+          {homeObject && (
             <div className={classes.navContainer}>
               <nav className={classes.nav}>
-                {navigation.map((item: any) => (
+                {homeObject.children.map((item: any) => (
                   <NavigationItem {...item} />
                 ))}
               </nav>
