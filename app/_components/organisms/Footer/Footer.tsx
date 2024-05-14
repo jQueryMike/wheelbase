@@ -49,7 +49,7 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
             )}
           </div>
           <div className={classes.footerSlotTwo}>
-            {legal && (
+            {legal && legal.length > 0 && (
               <div className={classes.legalContainer}>
                 <nav className={classes.navContainer} role="navigation" aria-label="Legal links">
                   {legal.map((legalItem: any) => (
