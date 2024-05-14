@@ -1,5 +1,6 @@
 import { CompanyInfo, Text } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
+import { getLegalUrl } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,8 +8,10 @@ import Link from 'next/link';
 import footerClasses from './Footer.classes';
 import { FooterProps } from './Footer.types';
 
-const Footer = ({ companyInfo, footerText, styling, overrides }: FooterProps) => {
+const Footer = async ({ companyInfo, footerText, styling, overrides }: FooterProps) => {
   const classes = buildClasses(footerClasses, overrides);
+  const legal = await getLegalUrl();
+
   return (
     <BaseComponent as="footer" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.footerContainer}>
@@ -42,18 +45,9 @@ const Footer = ({ companyInfo, footerText, styling, overrides }: FooterProps) =>
           <div className={classes.footerSlotTwo}>
             <div className={classes.legalContainer}>
               <nav className={classes.navContainer} role="navigation" aria-label="Legal links">
-                <a className={classes.navItem} title="Terms of Use" href="/terms">
-                  Terms of Use
-                </a>
-                <a className={classes.navItem} title="Privacy" href="/privacy">
-                  Privacy
-                </a>
-                <a className={classes.navItem} title="Cookies" href="/cookies">
-                  Cookies
-                </a>
-                <a className={classes.navItem} title="Sitemap" href="/sitemap">
-                  Sitemap
-                </a>
+                {legal.map((legalItem: any) => (
+                  <Link className={classes.navItem} title={legalItem.name} href={legalItem.url}>{legalItem.name}</Link>
+                ))}
               </nav>
             </div>
 
