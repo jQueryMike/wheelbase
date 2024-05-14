@@ -110,7 +110,7 @@ export const BuilderMap = new Map([
       const text = {
         id: config.id,
         name: 'Text',
-        text: config.content?.text.markup,
+        text: config.content?.text?.markup,
         ...config.settings,
         ...config.appearance,
         styling: config.styling,

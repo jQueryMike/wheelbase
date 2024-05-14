@@ -12,9 +12,10 @@ import { FooterProps } from './Footer.types';
 const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: FooterProps) => {
   const classes = buildClasses(footerClasses, overrides);
   const legal = await getLegalUrl();
-  const socialItems = buildConfig(socials.items.items[0].content);
-  const buildConfigForItem = (item?: any) => (item ? buildConfig(item.content) : undefined);
-  const socialContent = socials.items.items.map(buildConfigForItem);
+
+  const buildConfigForItem = (item?: any) => (item?.content ? buildConfig(item.content) : undefined);
+  const socialContent = socials?.items?.items?.map(buildConfigForItem) || [];
+
   const chosenSocials = socialContent.map(({ icon, socials: socialItem, styling: socialStyling }: any) => ({
     icon,
     socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
@@ -27,7 +28,6 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
         <div className={classes.component}>
           <div className={classes.footerSlotOne}>
             {companyInfo && <CompanyInfo {...companyInfo} />}
-
             {footerText && (
               <div className={classes.contentContainer}>
                 <div className={classes.content}>
@@ -35,15 +35,14 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
                 </div>
               </div>
             )}
-
-            {chosenSocials && (
+            {chosenSocials.length > 0 && (
               <div className={classes.socialContainer}>
                 <nav className={classes.socialItems} role="navigation" aria-label="Social media links">
                   {chosenSocials.map((item: any) => (
                     <SocialItem
                       key={item.id}
                       icon={item.icon}
-                      link={{ ...item.socials.link[0] }}
+                      link={item.socials?.link?.[0] || {}}
                       styling={item.styling}
                     />
                   ))}
@@ -51,20 +50,18 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
               </div>
             )}
           </div>
-
           <div className={classes.footerSlotTwo}>
-            {legal && (
+            {legal && legal.length > 0 && (
               <div className={classes.legalContainer}>
                 <nav className={classes.navContainer} role="navigation" aria-label="Legal links">
                   {legal.map((legalItem: any) => (
-                    <Link className={classes.navItem} title={legalItem.name} href={legalItem.url}>
+                    <Link key={legalItem.id} className={classes.navItem} title={legalItem.name} href={legalItem.url}>
                       {legalItem.name}
                     </Link>
                   ))}
                 </nav>
               </div>
             )}
-
             <div className={classes.imageContainer}>
               <Link target="_blank" href="https://www.clickdealer.co.uk">
                 <Image
