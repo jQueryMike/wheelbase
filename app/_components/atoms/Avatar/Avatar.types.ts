@@ -6,11 +6,9 @@ export type AvatarClasses<T = string> = {
   [key in 'root' | 'avatar']?: T;
 };
 
-export type AvatarProps = Omit<ImageProps, 'classes' | 'overrides'> &
-  BaseProps<{
-    classes?: AvatarClasses<string>;
+export type AvatarProps = BaseProps<ImageProps & {
+    gravatarName?: string;
     overrides?: {
       [key in keyof AvatarClasses]?: string;
     };
-    image1?: ImageProps;
   }>;

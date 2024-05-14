@@ -5,10 +5,8 @@ import { ReviewContent } from '@components/atoms/ReviewContent';
 import { ReviewDate } from '@components/atoms/ReviewDate';
 import { ReviewTitle } from '@components/atoms/ReviewTitle';
 import { ReviewerName } from '@components/atoms/ReviewerName';
-import { BaseComponent, Gravatar } from '@components/utils';
+import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
-import buildLink from '@utils/buildLink/buildLink';
-import Link from 'next/link';
 
 import reviewItemClasses from './ReviewItem.classes';
 import { ReviewItemProps } from './ReviewItem.types';
@@ -26,7 +24,6 @@ const ReviewItem = ({
   styling,
 }: ReviewItemProps) => {
   const classes = buildClasses(reviewItemClasses, overrides);
-  const link = buildLink(imageLink.link[0]);
   return (
     <BaseComponent
       as="figure"
@@ -36,11 +33,7 @@ const ReviewItem = ({
     >
       <figcaption className={classes.captionContainer}>
         <div className={classes.avatarContainer}>
-          {avatar.src ? (
-            <Avatar {...avatar} styling={avatar.styling} />
-          ) : (
-            <Gravatar reviewerName={reviewerName.text} styling={{}} />
-          )}
+          <Avatar {...avatar} />
         </div>
         <div className={classes.citeContainer}>
           <ReviewerName reviewerName={reviewerName.text} styling={reviewerName.styling} />
@@ -54,14 +47,7 @@ const ReviewItem = ({
         )}
       </blockquote>
       <div className={classes.bottomContainer}>
-        {imageLink.src && link.href ? (
-          <Link {...link}>
-            <ImageLink {...imageLink} styling={imageLink.styling} />
-          </Link>
-        ) : (
-          <ImageLink {...imageLink} styling={imageLink.styling} />
-        )}
-
+        <ImageLink image={imageLink} link={imageLink.link[0]} styling={imageLink.styling} {...imageLink} />
         {itemRating && <ItemRating {...itemRating} icon={ratingIcon} />}
       </div>
     </BaseComponent>

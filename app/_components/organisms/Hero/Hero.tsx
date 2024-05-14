@@ -54,7 +54,7 @@ const Hero = ({
               className={cn(reverse === true ? classes?.imageContainerReverse : classes?.imageContainer)}
               data-testid="image-container"
             >
-              <Image className={classes?.image} styling={image.styling} src={image.src} alt={image.alt} />
+              <Image className={classes?.image} {...image} />
             </div>
           )}
         </div>
