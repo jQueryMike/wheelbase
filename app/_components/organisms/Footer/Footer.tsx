@@ -11,11 +11,9 @@ import { FooterProps } from './Footer.types';
 
 const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: FooterProps) => {
   const classes = buildClasses(footerClasses, overrides);
-  const legal = await getLegalUrl();
-
+  const legal = await getLegalUrl().catch(() => null);
   const buildConfigForItem = (item?: any) => (item?.content ? buildConfig(item.content) : undefined);
   const socialContent = socials?.items?.items?.map(buildConfigForItem) || [];
-
   const chosenSocials = socialContent.map(({ icon, socials: socialItem, styling: socialStyling }: any) => ({
     icon,
     socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
@@ -51,7 +49,7 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
             )}
           </div>
           <div className={classes.footerSlotTwo}>
-            {legal && legal.length > 0 && (
+            {legal && (
               <div className={classes.legalContainer}>
                 <nav className={classes.navContainer} role="navigation" aria-label="Legal links">
                   {legal.map((legalItem: any) => (
