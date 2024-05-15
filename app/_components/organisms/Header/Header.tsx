@@ -25,7 +25,6 @@ const Header = async ({ logo, link, styling, overrides }: HeaderProps) => {
                   className={classes?.avatar}
                   src={logo.src}
                   id=""
-                  name=""
                   styling={logo.styling}
                 />
               </a>

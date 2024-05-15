@@ -33,6 +33,7 @@ function getCustomClasses(
   borderColors = new Set(),
   textColors = new Set(),
   classSet = new Set(),
+  maxWidth = new Set(),
 ) {
   data.forEach(({ content: { properties } }) => {
     Object.entries(properties).forEach(([key, value]) => {
@@ -48,12 +49,15 @@ function getCustomClasses(
       if (key.startsWith('overrides') && value) {
         classSet.add(value.split(' '));
       }
+      if (key.endsWith('_maxWidth') && value) {
+        maxWidth.add(`max-w-[${value}px]`);
+      }
       if (childFields.includes(key) && value) {
-        getCustomClasses(value?.items, bgColors, borderColors, textColors, classSet);
+        getCustomClasses(value?.items, bgColors, borderColors, textColors, classSet, maxWidth);
       }
     });
   });
-  return [bgColors, borderColors, textColors, classSet];
+  return [bgColors, borderColors, textColors, classSet, maxWidth];
 }
 
 const buildSafelist = async (pages) => {

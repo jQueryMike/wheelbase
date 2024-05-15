@@ -28,6 +28,7 @@ const atoms: Comps<
   | 'SocialItem'
   | 'Address'
   | 'Map'
+  | 'NavigationItem'
 > = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
   Heading: dynamic(() => import('./atoms/Heading/Heading'), {}),
@@ -47,7 +48,6 @@ const organisms: Comps<Omit<typeof Organisms, 'Header' | 'Footer'>> = {
   Accordion: dynamic(() => import('./organisms/Accordion/Accordion')),
   Contact: dynamic(() => import('./organisms/Contact/Contact')),
 };
-
 /**
  * Map of all blocks
  */
