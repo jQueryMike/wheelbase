@@ -181,7 +181,6 @@ const buildSafelist = async (pages) => {
       ...gradientClasses,
       ...borders,
       ...['font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl', 'text-md', 'overflow-hidden'],
-      ...customClasses[4], // Add the max-w-[value] classes from maxWidth
     ];
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');
