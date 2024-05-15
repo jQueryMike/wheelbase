@@ -5,9 +5,9 @@ export type CompanyInfoClasses<T = string> = {
 };
 
 export type CompanyInfoProps = BaseProps<{
-  companyNumber: string;
-  fcaNumber: string;
-  vatNumber: string;
+  companyNumber?: string;
+  fcaNumber?: string;
+  vatNumber?: string;
   overrides?: {
     [key in keyof CompanyInfoClasses]?: string;
   };
