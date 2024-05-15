@@ -6,7 +6,7 @@ const location = 'AccordionItem/AccordionItem.classes';
 
 const classes: AccordionItemClasses = {
   root: tw`mx-auto `,
-  accordionHeading: tw`flex cursor-pointer items-center justify-between p-4`,
+  accordionHeading: tw`flex cursor-pointer items-center justify-between`,
 };
 
 const accordionItemClasses = new ClassesBuilder({ location, classes }).classes;
