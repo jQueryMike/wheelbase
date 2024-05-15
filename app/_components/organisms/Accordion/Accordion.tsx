@@ -4,11 +4,20 @@ import { AccordionItem } from '@components/molecules';
 import { BaseComponent } from '@components/utils';
 import { Block } from '@types';
 import { buildClasses } from '@utils/buildClasses';
+import cn from 'classnames';
 
 import accordionClasses from './Accordion.classes';
 import { AccordionProps } from './Accordion.types';
 
-const Accordion = ({ heading, subheading, items, fixedIcon, styling, overrides }: AccordionProps & Block) => {
+const Accordion = ({
+  heading,
+  subheading,
+  items,
+  fixedIcon,
+  accordionBlock,
+  styling,
+  overrides,
+}: AccordionProps & Block) => {
   const classes = buildClasses(accordionClasses, overrides);
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
@@ -20,7 +29,12 @@ const Accordion = ({ heading, subheading, items, fixedIcon, styling, overrides }
           </div>
         )}
         {items.length > 0 && (
-          <div className={classes.itemsContainer}>
+          <div
+            className={cn(
+              classes.itemsContainer,
+              accordionBlock.maxWidth ? `max-w-[${accordionBlock.maxWidth}px] mx-auto` : '',
+            )}
+          >
             {items.map((item: any) => (
               <AccordionItem {...item} icon={fixedIcon} key={item.id} />
             ))}

@@ -47,7 +47,6 @@ const organisms: Comps<Omit<typeof Organisms, 'Header' | 'Footer'>> = {
   Accordion: dynamic(() => import('./organisms/Accordion/Accordion')),
   Contact: dynamic(() => import('./organisms/Contact/Contact')),
 };
-
 /**
  * Map of all blocks
  */
