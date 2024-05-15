@@ -1,10 +1,11 @@
-import { BaseComponent } from '@components/utils';
-import { buildClasses } from '@utils/buildClasses';
+import mapClasses from "./Map.classes";
+import { MapProps } from "./Map.types";
+import { BaseComponent } from "@components/utils";
+import { buildClasses } from "@utils/buildClasses";
 
-import mapClasses from './Map.classes';
-import { MapProps } from './Map.types';
-
-const extractSrcFromGoogleMaps = (googleMapLink: string): string | undefined => {
+const extractSrcFromGoogleMaps = (
+  googleMapLink: string
+): string | undefined => {
   if (!googleMapLink) return undefined;
   const regex = /src="([^"]+)"/;
   const match = googleMapLink.match(regex);
@@ -20,8 +21,24 @@ const Map = ({ src, fullWidth, styling, overrides }: MapProps) => {
   const parsedSrc = extractSrcFromGoogleMaps(src);
   const classes = buildClasses(mapClasses, overrides);
   return (
-    <BaseComponent as="div" className={fullWidth ? classes.rootFullWidth : classes.root} styling={styling} stylingOptions={{ atomicType: 'atom' }}>
-        <iframe src={parsedSrc} title="google map" loading="lazy" className={classes.map} />
+    <BaseComponent
+      as="div"
+      data-testid="map-container"
+      className={fullWidth ? classes.rootFullWidth : classes.root}
+      styling={styling}
+      stylingOptions={{ atomicType: "atom" }}
+    >
+      <div className={classes.mapContainer}>
+        {parsedSrc && (
+          <iframe
+            data-testid="map-iframe"
+            src={parsedSrc}
+            title="google map"
+            loading="lazy"
+            className={classes.map}
+          />
+        )}
+      </div>
     </BaseComponent>
   );
 };

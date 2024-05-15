@@ -11,14 +11,17 @@ const PhoneNumbers = ({ icon, number, styling, overrides }: PhoneNumbersProps) =
   return (
     <BaseComponent
       as="div"
+      data-testid="phone-numbers"
       className={classes.root}
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
     >
       <div className={classes.phoneNumbersWrapper}>
-        {icon && <Icon {...icon} />}
-        <Link href={`tel:${number}`}>
-          <div className={classes.phoneNumbers}>{number}</div>
+        {icon && <Icon data-testid="phone-numbers-icon" {...icon} />}
+        <Link data-testid="phone-numbers-link" href={`tel:${number}`}>
+          <div data-testid="phone-numbers-number" className={classes.phoneNumbers}>
+            {number}
+          </div>
         </Link>
       </div>
     </BaseComponent>
