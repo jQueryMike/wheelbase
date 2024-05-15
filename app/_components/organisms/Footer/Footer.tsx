@@ -1,4 +1,4 @@
-import { CompanyInfo, SocialItem, Text } from '@components/atoms';
+import { CompanyInfo, NavigationItem, SocialItem, Text } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
 import { getLegalUrl } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
@@ -53,9 +53,9 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
               <div className={classes.legalContainer}>
                 <nav className={classes.navContainer} role="navigation" aria-label="Legal links">
                   {legal.map((legalItem: any) => (
-                    <Link key={legalItem.id} className={classes.navItem} title={legalItem.name} href={legalItem.url}>
-                      {legalItem.name}
-                    </Link>
+                    <div className={classes.navItem}>
+                      <NavigationItem key={legalItem.id} {...legalItem} />
+                    </div>
                   ))}
                 </nav>
               </div>
