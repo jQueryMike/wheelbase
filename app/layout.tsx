@@ -1,6 +1,6 @@
 import { Footer } from '@components/organisms/Footer';
 import { Header } from '@components/organisms/Header';
-import { getGlobalConfig } from '@utils';
+import { getFooter, getGlobalConfig } from '@utils';
 import getHeader from '@utils/getHeader/getHeader';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
@@ -13,6 +13,8 @@ const inter = Inter({ subsets: ['latin'] });
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const globalConfig = await getGlobalConfig();
   const header = getHeader(globalConfig);
+  const { items, companyInfo } = getFooter(globalConfig);
+
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -28,7 +30,14 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
             async
           />
         </Suspense>
-        <Footer />
+        {items !== null && (
+          <Footer
+            socials={items.socialItems}
+            companyInfo={companyInfo}
+            footerText={items.text}
+            styling={items.styling}
+          />
+        )}
       </body>
     </html>
   );

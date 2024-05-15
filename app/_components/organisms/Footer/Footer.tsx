@@ -1,133 +1,85 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-
-/* eslint-disable jsx-a11y/anchor-is-valid */
+import { CompanyInfo, NavigationItem, SocialItem, Text } from '@components/atoms';
+import { BaseComponent } from '@components/utils';
+import { getLegalUrl } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
-import cn from 'classnames';
-import NextImage from 'next/image';
+import { buildConfig } from '@utils/buildConfig';
+import Image from 'next/image';
+import Link from 'next/link';
 
 import footerClasses from './Footer.classes';
+import { FooterProps } from './Footer.types';
 
-// import { FooterProps } from './Footer.types';
+const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: FooterProps) => {
+  const classes = buildClasses(footerClasses, overrides);
+  const legal = await getLegalUrl().catch(() => null);
 
-// eslint-disable-next-line spaced-comment
-const Footer = (/*{}: FooterProps*/) => {
-  const classes = buildClasses(footerClasses);
+  const buildConfigForItem = (item?: any) => (item?.content ? buildConfig(item.content) : undefined);
+  const socialContent = socials?.items?.items?.map(buildConfigForItem) || [];
+
+  const chosenSocials = socialContent.map(({ icon, socials: socialItem, styling: socialStyling }: any) => ({
+    icon,
+    socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
+    styling: socialStyling,
+  }));
+
   return (
-    <footer className={cn('{root} blockPadding bg-primary p-8', classes.root)} aria-labelledby="footer-heading">
-      <h2 id="footer-heading" className="sr-only">
-        Footer
-      </h2>
-      <div className="{container} container mx-auto">
-        <div className="{component} space-y-6">
-          <div className="{slot1} space-y-6">
-            <div
-              className="{infoContainer} flex flex-wrap justify-center gap-y-3 divide-x divide-white divide-opacity-20"
-              aria-label="Company information"
-            >
-              <div className="{infoItem} px-4 leading-none text-white first-of-type:pl-0 last-of-type:pr-0">
-                Company No.12345678
+    <BaseComponent as="footer" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
+      <div className={classes.footerContainer}>
+        <div className={classes.component}>
+          <div className={classes.footerSlotOne}>
+            {companyInfo && <CompanyInfo {...companyInfo} />}
+            {footerText && (
+              <div className={classes.contentContainer}>
+                <div className={classes.content}>
+                  <Text {...footerText} />
+                </div>
               </div>
-              <div className="{infoItem} px-4 leading-none text-white first-of-type:pl-0 last-of-type:pr-0">
-                FCA No.12345678
+            )}
+            {chosenSocials.length > 0 && (
+              <div className={classes.socialContainer}>
+                <nav className={classes.socialItems} role="navigation" aria-label="Social media links">
+                  {chosenSocials.map((item: any) => (
+                    <SocialItem
+                      key={item.id}
+                      icon={item.icon}
+                      link={item.socials?.link?.[0] || {}}
+                      styling={item.styling}
+                    />
+                  ))}
+                </nav>
               </div>
-              <div className="{infoItem} px-4 leading-none text-white first-of-type:pl-0 last-of-type:pr-0">
-                VAT No.12345678
-              </div>
-            </div>
-            <div className="{contentContainer} text-center">
-              <div className="{content} mx-auto max-w-4xl space-y-4 text-white text-opacity-60">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque cupiditate quisquam repellat dolorum
-                  facilis beatae, enim distinctio nihil praesentium at tempore nemo natus accusamus reprehenderit,
-                  voluptate quod deleniti nostrum omnis?
-                </p>
-              </div>
-            </div>
-            <div className="{socialContainer} flex justify-center">
-              <nav className="{socialItems} flex gap-1.5" role="navigation" aria-label="Social media links">
-                <a
-                  className="{socialItem} inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-blue-500 transition hover:text-accent"
-                  title="Facebook"
-                  href="#"
-                >
-                  <i className="fa fa-facebook" />
-                </a>
-                <a
-                  className="{socialItem} inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-blue-500 transition hover:text-accent"
-                  title="Twitter"
-                  href="#"
-                >
-                  <i className="fa fa-twitter" />
-                </a>
-                <a
-                  className="{socialItem} inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-blue-500 transition hover:text-accent"
-                  title="YouTube"
-                  href="#"
-                >
-                  <i className="fa fa-youtube" />
-                </a>
-              </nav>
-            </div>
+            )}
           </div>
-          <div className="{slot2} flex w-full flex-col items-center gap-6 border-t border-white border-opacity-20 pt-6 md:flex-row md:items-start md:justify-between">
-            <div className="{legalContainer} flex flex-col items-center gap-6 md:items-start md:gap-3">
-              <nav
-                className="{navContainer} flex flex-wrap justify-center gap-y-3 divide-x divide-white divide-opacity-20"
-                role="navigation"
-                aria-label="Legal links"
-              >
-                <a
-                  className="{navItem} px-4 font-medium leading-none text-white transition first-of-type:pl-0 last-of-type:pr-0 hover:text-opacity-60"
-                  title="Terms of Use"
-                  href="/terms"
-                >
-                  Terms of Use
-                </a>
-                <a
-                  className="{navItem} px-4 font-medium leading-none text-white transition first-of-type:pl-0 last-of-type:pr-0 hover:text-opacity-60"
-                  title="Privacy"
-                  href="/privacy"
-                >
-                  Privacy
-                </a>
-                <a
-                  className="{navItem} px-4 font-medium leading-none text-white transition first-of-type:pl-0 last-of-type:pr-0 hover:text-opacity-60"
-                  title="Cookies"
-                  href="/cookies"
-                >
-                  Cookies
-                </a>
-                <a
-                  className="{navItem} px-4 font-medium leading-none text-white transition first-of-type:pl-0 last-of-type:pr-0 hover:text-opacity-60"
-                  title="Sitemap"
-                  href="/sitemap"
-                >
-                  Sitemap
-                </a>
-              </nav>
-            </div>
-            <div className="{imageContainer} inline-flex">
-              <a target="_blank" rel="noreferrer" href="https://www.clickdealer.co.uk">
-                <NextImage
-                  className="{image} h-8 w-auto md:h-10"
+          <div className={classes.footerSlotTwo}>
+            {legal && (
+              <div className={classes.legalContainer}>
+                <nav className={classes.navContainer} role="navigation" aria-label="Legal links">
+                  {legal.map((legalItem: any) => (
+                    <div className={classes.navItem}>
+                      <NavigationItem key={legalItem.id} {...legalItem} />
+                    </div>
+                  ))}
+                </nav>
+              </div>
+            )}
+            <div className={classes.imageContainer}>
+              <Link target="_blank" href="https://www.clickdealer.co.uk">
+                <Image
                   alt="Click Dealer Ltd"
                   loading="lazy"
-                  width={0}
-                  height={0}
+                  width="0"
+                  height="0"
                   decoding="async"
                   data-nimg="1"
-                  style={{ color: 'transparent' }}
-                  src="http://localhost:3227/media/johnlmzf/click-dealer-logo-white.svg"
+                  className={classes.image}
+                  src="/click-dealer-logo-white.svg"
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    </footer>
-    // <div className={classes?.root}>
-    //   {title}
-    // </div>
+    </BaseComponent>
   );
 };
 
