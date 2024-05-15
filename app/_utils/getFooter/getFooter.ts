@@ -7,19 +7,17 @@ const getFooter = (globalConfig: any) => {
     } = globalConfig || {};
 
     const footerItems = footer?.items;
-    const [defaultFooter] = footerItems
-      ? [footerItems?.[0]?.content]?.map((x: any) => buildConfig(x)) || [null]
-      : [null];
+    const [items] = footerItems ? [footerItems?.[0]?.content]?.map((x: any) => buildConfig(x)) || [null] : [null];
 
     const companyInfoItemsItems = companyInfoItems?.items;
     const [companyInfo] = companyInfoItemsItems
       ? [companyInfoItemsItems?.[0]?.content]?.map((x: any) => buildConfig(x)) || [null]
       : [null];
 
-    return { defaultFooter, companyInfo };
+    return { items, companyInfo };
   }
 
-  return { defaultFooter: null, companyInfo: null };
+  return { items: null, companyInfo: null };
 };
 
 export default getFooter;

@@ -12,8 +12,10 @@ import { FooterProps } from './Footer.types';
 const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: FooterProps) => {
   const classes = buildClasses(footerClasses, overrides);
   const legal = await getLegalUrl().catch(() => null);
+
   const buildConfigForItem = (item?: any) => (item?.content ? buildConfig(item.content) : undefined);
   const socialContent = socials?.items?.items?.map(buildConfigForItem) || [];
+
   const chosenSocials = socialContent.map(({ icon, socials: socialItem, styling: socialStyling }: any) => ({
     icon,
     socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,

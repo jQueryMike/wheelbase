@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] });
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const globalConfig = await getGlobalConfig();
   const header = getHeader(globalConfig);
-  const { defaultFooter, companyInfo } = getFooter(globalConfig);
+  const { items, companyInfo } = getFooter(globalConfig);
 
   return (
     <html lang="en">
@@ -30,12 +30,12 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
             async
           />
         </Suspense>
-        {defaultFooter !== null && (
+        {items !== null && (
           <Footer
-            socials={defaultFooter.socialItems}
+            socials={items.socialItems}
             companyInfo={companyInfo}
-            footerText={defaultFooter.text}
-            styling={defaultFooter.styling}
+            footerText={items.text}
+            styling={items.styling}
           />
         )}
       </body>
