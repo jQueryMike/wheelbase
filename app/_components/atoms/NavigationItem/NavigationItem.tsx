@@ -8,7 +8,12 @@ import { NavigationItemProps } from './NavigationItem.types';
 const NavigationItem = ({ name, id, url, styling, overrides }: NavigationItemProps) => {
   const classes = buildClasses(navigationItemClasses, overrides);
   return (
-    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'atom' }}>
+    <BaseComponent
+      as="div"
+      className={classes.root}
+      styling={styling}
+      stylingOptions={{ atomicType: 'atom', textType: 'text' }}
+    >
       <Link className={classes.link} href={url} key={id}>
         {name}
       </Link>

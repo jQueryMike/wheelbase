@@ -675,6 +675,11 @@
           "DEFAULT": "#8fce00",
           "light": "#ffe599",
           "dark": "#b4a7d6"
+        },
+        "body": {
+          "DEFAULT": "#FFFFFF",
+          "light": "#ffe599",
+          "dark": "#b4a7d6"
         }
       }
     }
