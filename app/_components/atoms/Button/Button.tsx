@@ -1,6 +1,5 @@
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
-// import { ButtonSize, ButtonStyle } from '@utils/constants';
 import cn from 'classnames';
 import NextLink from 'next/link';
 
@@ -27,28 +26,33 @@ const Button = ({
   }
 
   return (
-    <NextLink
-      href={href || ''}
-      target={target || '_self'}
-      className={cn(classes?.buttonContent, {
-        [classes?.buttonContentLoading || '']: loading,
-      })}
-    >
+    <NextLink data-testid="button-link" href={href || ''} target={target || '_self'}>
       <BaseComponent
+        data-testid="button-root"
         as="span"
         className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
         styling={styling}
         stylingOptions={{ atomicType: 'atom' }}
       >
-        <span className={classes.buttonContent}>
+        <span
+          data-testid="button-content"
+          className={cn(classes?.buttonContent, {
+            [classes?.buttonContentLoading || '']: loading,
+          })}
+        >
           {leftIcon && (
-            <span className={classes.leftIcon}>
+            <span data-testid="button-left-icon" className={classes.leftIcon}>
               <Icon icon={leftIcon} styling={{}} />
             </span>
           )}
           <span className={classes?.textContainer}>{text}</span>
+          {text && (
+            <span data-testid="button-text" className={classes?.textContainer}>
+              {text}
+            </span>
+          )}
           {rightIcon && (
-            <span className={classes.rightIcon}>
+            <span data-testid="button-right-icon" className={classes.rightIcon}>
               <Icon icon={rightIcon} styling={{}} />
             </span>
           )}
