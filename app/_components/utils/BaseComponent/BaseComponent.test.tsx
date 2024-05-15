@@ -9,8 +9,7 @@ describe('BaseComponent test suite', () => {
   });
 
   it('should have no accessibility violations', async () => {
-    const ResolvedComponent = await BaseComponent();
-    const { container } = render(ResolvedComponent);
+    const { container } = render(<BaseComponent styling={{}} />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

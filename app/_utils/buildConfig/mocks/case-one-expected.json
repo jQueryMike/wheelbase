@@ -1,1 +1,13 @@
-{}
+{
+  "hero": {
+    "content": {
+      "title": "Hero Title",
+      "subtitle": "Hero Subtitle",
+      "description": "Hero Description",
+      "button": {
+        "text": "Hero Button",
+        "link": "#"
+      }
+    }
+  }
+}

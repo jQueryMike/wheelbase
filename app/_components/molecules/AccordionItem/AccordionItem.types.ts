@@ -1,4 +1,4 @@
-import { HeadingProps } from '@components/atoms';
+import { HeadingProps, IconProps } from '@components/atoms';
 import { BaseProps } from '@components/types';
 import { Block } from '@types';
 
@@ -9,9 +9,7 @@ export type AccordionItemClasses<T = string> = {
 export type AccordionItemProps = BaseProps<{
   heading: HeadingProps;
   contentArea: Block[];
-  isOpen: any;
-  onClick: any;
-  icon: any;
+  icon?: IconProps;
   overrides?: {
     [key in keyof AccordionItemClasses]?: string;
   };

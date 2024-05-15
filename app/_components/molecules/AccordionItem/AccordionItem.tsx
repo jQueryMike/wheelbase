@@ -32,7 +32,7 @@ const AccordionItem = ({ heading, contentArea = [], styling, overrides, icon }: 
           TODO: Fix a11y issue with keyboard control
         */}
         <span>
-          <Icon icon="fa fa-chevron-down" styling={icon.styling} />
+          <Icon icon="fa fa-chevron-down" styling={icon?.styling || {}} />
         </span>
       </div>
       <div className={cn(!isOpen ? 'hidden' : '', 'overflow-clip bg-gray-100 px-6 py-3')}>

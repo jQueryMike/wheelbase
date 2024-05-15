@@ -8,7 +8,7 @@ import { Suspense } from 'react';
 import featureItemClasses from './FeatureItem.classes';
 import { FeatureItemProps } from './FeatureItem.types';
 
-const FeatureItem = async ({ contentArea = [], icon, styling, overrides }: FeatureItemProps) => {
+const FeatureItem = ({ contentArea = [], icon, styling, overrides }: FeatureItemProps) => {
   const classes = buildClasses(featureItemClasses, overrides);
   const components = contentArea.map(({ name, id, ...props }: any) => [
     name,
@@ -17,9 +17,15 @@ const FeatureItem = async ({ contentArea = [], icon, styling, overrides }: Featu
     props,
   ]);
   return (
-    <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: 'molecule' }} className="{itemContainer}">
+    <BaseComponent
+      as="div"
+      styling={styling}
+      stylingOptions={{ atomicType: 'molecule' }}
+      className="{itemContainer}"
+      data-testid="feature-item"
+    >
       <div className="{root} space-y-2 text-center xs:text-left">
-        <Icon styling={styling} {...icon} />
+        {icon && <Icon {...icon} data-testid="icon" />}
         {components?.length > 0 && (
           <div className={classes?.contentAreaContainer} data-testid="content-area">
             {components.map(([name, Component, id, props]: any) => (
