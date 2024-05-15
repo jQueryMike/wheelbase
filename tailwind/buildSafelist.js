@@ -143,7 +143,6 @@ const buildSafelist = async (pages) => {
     const customClasses = await (async () => {
       const response = await fetch(
         `${process.env.API_URL}/umbraco/delivery/api/v1/content/item/${process.env.API_ROOT_NODE_PATH}/home`,
-        // `${process.env.API_URL}/umbraco/delivery/api/v2/content?fetch=children:${process.env.API_ROOT_NODE_GUID}`,
       );
       const data = await response.json();
       return getCustomClasses(data.properties?.organismGrid?.items || []);

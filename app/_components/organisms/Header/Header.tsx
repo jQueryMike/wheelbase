@@ -35,7 +35,7 @@ const Header = async ({ logo, link, styling, overrides }: HeaderProps) => {
             <div className={classes.navContainer}>
               <nav className={classes.nav}>
                 {homeObject.children.map((item: any) => (
-                  <NavigationItem {...item} />
+                  <NavigationItem key={item.id} {...item} />
                 ))}
               </nav>
             </div>
