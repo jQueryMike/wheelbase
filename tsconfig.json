@@ -26,7 +26,9 @@
       "@utils": ["app/_utils"],
       "@utils/*": ["app/_utils/*"],
       "@types": ["app/_types"],
-      "@types/*": ["app/_types/*"]
+      "@types/*": ["app/_types/*"],
+      "@hooks": ["app/_hooks"],
+      "@hooks/*": ["app/_hooks/*"]
     },
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },

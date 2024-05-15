@@ -1,3 +1,4 @@
+import { IconProps } from '@components/atoms';
 import { BaseProps } from '@components/types';
 import { Block, Spacing } from '@types';
 
@@ -14,7 +15,7 @@ export type Icon = {
 export type FeatureItemProps = BaseProps<{
   contentArea: Block[];
   classes?: FeatureItemClasses<string>;
-  icon?: Icon;
+  icon?: IconProps;
   overrides?: {
     [key in keyof FeatureItemClasses]?: string;
   };

@@ -47,7 +47,7 @@ export default function (plop) {
     actions: [
       {
         type: 'addMany',
-        destination: 'app/_utils/{{kebabCase name}}',
+        destination: 'app/_utils/{{camelCase name}}',
         base: 'plop-templates/Utility/',
         templateFiles: 'plop-templates/Utility/*',
       },

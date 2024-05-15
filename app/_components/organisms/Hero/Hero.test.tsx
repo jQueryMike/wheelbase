@@ -90,7 +90,7 @@ describe('Hero Organism test suite', () => {
   });
 
   it('should have no accessibility violations', async () => {
-    const ResolvedComponent = await Hero({
+    const ResolvedComponent = Hero({
       id: 'one',
       name: 'Hero',
       heading: { text: 'example', tag: HeadingTag.H1, size: HeadingSize.Large },
