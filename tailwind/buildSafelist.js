@@ -161,8 +161,8 @@ const buildSafelist = async (pages, globalConfig) => {
         ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
         ...buildSafelistColors([
           ...pages.map((page) => page.properties?.organismGrid?.items || []),
-          globalConfig.header?.items || [],
-          globalConfig.footer?.items || [],
+          globalConfig?.header?.items || [],
+          globalConfig?.footer?.items || [],
         ]),
         ...gradientClasses,
         ...borders,
