@@ -56,6 +56,36 @@ function getCustomClasses(
   return [bgColors, borderColors, textColors, classSet, maxWidth];
 }
 
+function buildSafelistColors(data) {
+  return data
+    .map((items) => getCustomClasses(items))
+    .reduce(
+      (prev, [bgColors, borderColors, textColors, classSet]) => {
+        Array.from(bgColors).forEach((x) => prev[0].add(x));
+        Array.from(borderColors).forEach((x) => prev[1].add(x));
+        Array.from(textColors).forEach((x) => prev[2].add(x));
+        Array.from(classSet)
+          .flat()
+          .forEach((x) => prev[3].add(x));
+        return prev;
+      },
+      [new Set(), new Set(), new Set(), new Set()],
+    )
+    .map((x, i) => {
+      switch (i) {
+        case 0:
+          return Array.from(x).map((y) => `bg-${y}`);
+        case 1:
+          return Array.from(x).map((y) => `border-${y}`);
+        case 2:
+          return Array.from(x).map((y) => `text-${y}`);
+        default:
+          return Array.from(x).flat();
+      }
+    })
+    .flat();
+}
+
 const buildSafelist = async (pages, globalConfig) => {
   try {
     const safelist = new Set();
@@ -117,39 +147,6 @@ const buildSafelist = async (pages, globalConfig) => {
         .map((x) => `gradient-to-${x}`),
     ].map((x) => `bg-${x}`);
 
-    const customClasses = [
-      ...pages.map((page) => page.properties?.organismGrid?.items || []),
-      globalConfig.header?.items || [],
-      globalConfig.footer?.items || [],
-    ]
-      .map((items) => getCustomClasses(items))
-      .reduce(
-        (prev, [bgColors, borderColors, textColors, classSet]) => {
-          Array.from(bgColors).forEach((x) => prev[0].add(x));
-          Array.from(borderColors).forEach((x) => prev[1].add(x));
-          Array.from(textColors).forEach((x) => prev[2].add(x));
-          Array.from(classSet)
-            .flat()
-            .forEach((x) => prev[3].add(x));
-          return prev;
-        },
-        [new Set(), new Set(), new Set(), new Set()],
-      );
-    const colors = customClasses
-      .map((x, i) => {
-        switch (i) {
-          case 0:
-            return Array.from(x).map((y) => `bg-${y}`);
-          case 1:
-            return Array.from(x).map((y) => `border-${y}`);
-          case 2:
-            return Array.from(x).map((y) => `text-${y}`);
-          default:
-            return Array.from(x).flat();
-        }
-      })
-      .flat();
-
     const borders = [
       ...buildPossibilities([['rounded'], ['none', 'sm', 'md', 'lg', 'xl', 'full']]),
       ...buildPossibilities([['border'], ['none', 'solid', 'dashed', 'dotted', 'double', '0', '', '2', '4']]),
@@ -162,7 +159,11 @@ const buildSafelist = async (pages, globalConfig) => {
         ...safelist,
         ...colCounts.map((colCount) => `grid-cols-${colCount}`),
         ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
-        ...colors,
+        ...buildSafelistColors([
+          ...pages.map((page) => page.properties?.organismGrid?.items || []),
+          globalConfig.header?.items || [],
+          globalConfig.footer?.items || [],
+        ]),
         ...gradientClasses,
         ...borders,
         ...['font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl', 'text-md', 'overflow-hidden'],
