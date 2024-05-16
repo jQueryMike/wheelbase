@@ -18,4 +18,4 @@ const buildFontFamily = (theme) => {
   }
 };
 
-module.exports = buildFontFamily;
+export default buildFontFamily;

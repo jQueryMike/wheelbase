@@ -1,28 +1,30 @@
-require('dotenv').config();
+/* eslint-disable import/extensions */
+import { writeFile } from 'fs/promises';
 
-const fs = require('fs/promises');
+import dotenv from 'dotenv';
+import fetchData from './tailwind/fetchData.js';
 
-const fetchData = require('./tailwind/fetchData');
+import buildContent from './tailwind/buildContent.js';
+import buildSafelist from './tailwind/buildSafelist.js';
 
-const buildContent = require('./tailwind/buildContent');
-const buildSafelist = require('./tailwind/buildSafelist');
+import buildContainer from './tailwind/buildContainer.js';
 
-const buildContainer = require('./tailwind/buildContainer');
+import buildColors from './tailwind/buildColors.js';
+import buildFontFamily from './tailwind/buildFontFamily.js';
+import buildScreens from './tailwind/buildScreens.js';
+import buildTypography from './tailwind/buildTypography.js';
 
-const buildColors = require('./tailwind/buildColors');
-const buildFontFamily = require('./tailwind/buildFontFamily');
-const buildScreens = require('./tailwind/buildScreens');
-const buildTypography = require('./tailwind/buildTypography');
+dotenv.config()
 
 const generateTailwindConfig = async () => {
   try {
-    const { pages, theme } = await fetchData();
+    const { pages, theme, globalConfig } = await fetchData();
 
     const colors = await buildColors(theme);
 
     const config = {
       content: buildContent(pages),
-      safelist: await buildSafelist(pages),
+      safelist: await buildSafelist(pages, globalConfig),
       theme: {
         container: buildContainer(),
         extend: {
@@ -34,7 +36,8 @@ const generateTailwindConfig = async () => {
       },
     };
 
-    await fs.writeFile(
+
+    await writeFile(
       process.env.ENVIRONMENT_NAME === 'local' ? './tailwind.config.local.json' : './tailwind.config.json',
       JSON.stringify(config, null, 2),
     );

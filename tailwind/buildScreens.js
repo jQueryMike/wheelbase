@@ -3,4 +3,4 @@ const buildScreens = () => ({
   xs: '480px',
 });
 
-module.exports = buildScreens;
+export default buildScreens;

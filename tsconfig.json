@@ -39,9 +39,9 @@
     ".next/types/**/*.ts",
     "elastic-apm-node.js",
     "next.config.js",
-    "postcss.config.js",
-    "tailwind.builder.js",
-    "tailwind/**/*.js",
+    "postcss.config.cjs",
+    "tailwind.builder.mjs",
+    "tailwind/*.js",
     ".storybook/**/*.ts",
     ".storybook/**/*.tsx",
     "plopfile.mjs"

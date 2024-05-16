@@ -2,9 +2,10 @@
   "name": "click-websites",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "node tailwind.builder.js && next dev",
-    "build": "node tailwind.builder.js && next build",
+    "dev": "node tailwind.builder.mjs && next dev",
+    "build": "node tailwind.builder.mjs && next build",
     "start": "NODE_OPTIONS=--require=elastic-apm-node/start-next.js next start",
     "test": "jest",
     "lint": "npx eslint .",

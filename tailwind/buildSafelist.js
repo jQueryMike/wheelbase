@@ -1,4 +1,5 @@
-const flatten = require('flat');
+import flatten from 'flat';
+// import getStylingClasses from './getStylingClasses.js';
 
 const TAILWIND_PREFIX = 'tw_';
 
@@ -60,7 +61,7 @@ function getCustomClasses(
   return [bgColors, borderColors, textColors, classSet, maxWidth];
 }
 
-const buildSafelist = async (pages) => {
+const buildSafelist = async (pages, globalConfig) => {
   try {
     const safelist = new Set();
 
@@ -151,6 +152,7 @@ const buildSafelist = async (pages) => {
       const data = await response.json();
       return getCustomClasses(data.properties?.organismGrid?.items || []);
     })();
+    
     const colors = customClasses
       .map((x, i) => {
         switch (i) {
@@ -170,6 +172,7 @@ const buildSafelist = async (pages) => {
       ...buildPossibilities([['rounded'], ['none', 'sm', 'md', 'lg', 'xl', 'full']]),
       ...buildPossibilities([['border'], ['none', 'solid', 'dashed', 'dotted', 'double', '0', '', '2', '4']]),
     ];
+    // console.log(getStylingClasses())
     return [
       ...layoutClasses,
       ...addQueryPrefixes(paddingClasses),
@@ -189,4 +192,4 @@ const buildSafelist = async (pages) => {
   }
 };
 
-module.exports = buildSafelist;
+export default buildSafelist;

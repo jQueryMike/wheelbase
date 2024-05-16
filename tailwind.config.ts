@@ -1,16 +1,19 @@
 import type { Config } from 'tailwindcss';
+import localConfig from './tailwind.config.local.json'
+import stortbookConfig from './tailwind.config.storybook.json';
+import productionConfig from './tailwind.config.json'
 
 let config: Config;
 
 switch (process.env.ENVIRONMENT_NAME) {
   case 'local':
-    config = require(`./tailwind.config.local.json`);
+    config = localConfig;
     break;
   case 'storybook':
-    config = require(`./tailwind.config.storybook.json`);
+    config = stortbookConfig;
     break;
   default:
-    config = require(`./tailwind.config.json`);
+    config = productionConfig;
     break;
 }
 
