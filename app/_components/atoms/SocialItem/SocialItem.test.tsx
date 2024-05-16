@@ -1,16 +1,43 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import { act } from 'react-dom/test-utils';
 
-import SocialItem from "./SocialItem";
+import SocialItem from './SocialItem';
+import { SocialItemProps } from './SocialItem.types';
+
+const testSocialItem: SocialItemProps = {
+  icon: {
+    icon: 'fa-brands fa-facebook-f',
+    styling: {},
+  },
+  link: {
+    href: '/',
+  },
+  styling: {},
+};
+
+const cases: [string, SocialItemProps, () => void][] = [
+  [
+    'render SocialItem with valid icon and link',
+    { ...testSocialItem },
+    async () => {
+      expect(await screen.findByTestId('social-item-link')).toHaveAttribute('href', '/');
+      expect(await screen.findByTestId('social-item-icon')).toBeTruthy();
+    },
+  ],
+];
 
 describe('SocialItem test suite', () => {
-  it('should work', () => {
-    expect(true).toBe(true);
+  it.each(cases)('%s', (_, properties, assertions) => {
+    render(<SocialItem {...properties} />);
+    assertions();
   });
 
   it('should have no accessibility violations', async () => {
-    const { container } = render(<SocialItem title="Test" styling={{}}/>);
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
+    await act(async () => {
+      const { container } = render(<SocialItem {...testSocialItem} />);
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
   });
 });

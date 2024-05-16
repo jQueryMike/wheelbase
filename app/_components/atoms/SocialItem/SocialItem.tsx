@@ -12,8 +12,8 @@ const SocialItem = ({ icon, link, styling, overrides }: SocialItemProps) => {
   const classes = buildClasses(socialItemClasses, overrides);
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'atom' }}>
-      <Link className={classes.iconWrapper} {...parsedLink}>
-        <Icon {...icon} />
+      <Link data-testid="social-item-link" className={classes.iconWrapper} {...parsedLink}>
+        <Icon data-testid="social-item-icon" {...icon} />
       </Link>
     </BaseComponent>
   );

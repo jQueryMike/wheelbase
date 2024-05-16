@@ -9,7 +9,7 @@ export type SocialItemClasses<T = string> = {
 
 export type SocialItemProps = BaseProps<{
   icon: IconProps;
-  link: LinkProps;
+  link?: LinkProps;
   overrides?: {
     [key in keyof SocialItemClasses]?: string;
   };
