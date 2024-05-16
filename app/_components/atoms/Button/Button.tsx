@@ -21,6 +21,11 @@ const Button = ({
   styling,
 }: ButtonProps) => {
   const classes = buildClasses(buttonClasses, overrides);
+
+  if (!text) {
+    return;
+  }
+
   return (
     <NextLink
       href={href || ''}
@@ -41,7 +46,7 @@ const Button = ({
               <Icon icon={leftIcon} styling={{}} />
             </span>
           )}
-          {text && <span className={classes?.textContainer}>{text}</span>}
+          <span className={classes?.textContainer}>{text}</span>
           {rightIcon && (
             <span className={classes.rightIcon}>
               <Icon icon={rightIcon} styling={{}} />
