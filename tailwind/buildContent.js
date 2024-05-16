@@ -1,4 +1,4 @@
-const flatten = require('flat');
+import flatten from 'flat';
 
 const EXTENSION = '{js,ts,jsx,tsx,mdx}';
 const PAGE_SECTION_CONTENT_TYPES = ['OneColumn', 'TwoColumn'];
@@ -62,4 +62,4 @@ const buildContentArray = (pages) => {
   }
 };
 
-module.exports = buildContentArray;
+export default buildContentArray;

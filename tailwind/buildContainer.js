@@ -6,4 +6,4 @@ const buildContainer = () => ({
   },
 });
 
-module.exports = buildContainer;
+export default buildContainer;

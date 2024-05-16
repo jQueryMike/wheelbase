@@ -22,4 +22,4 @@ async function buildColors(theme) {
   return colorMap;
 }
 
-module.exports = buildColors;
+export default buildColors;

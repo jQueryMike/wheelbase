@@ -53,4 +53,4 @@ const buildTypography = (colors) => {
   }
 };
 
-module.exports = buildTypography;
+export default buildTypography;

@@ -1,15 +1,5 @@
 import { LetterSpacingOption } from '@types';
-
-const letterSpacingMapping: {
-  [Key in Capitalize<LetterSpacingOption>]: string;
-} = {
-  Tighter: 'tracking-tighter',
-  Tight: 'tracking-tight',
-  Normal: 'tracking-normal',
-  Wide: 'tracking-wide',
-  Wider: 'tracking-wider',
-  Widest: 'tracking-widest',
-};
+import mappings from '../mappings.json'
 
 /**
  * Get letter spacing
@@ -17,5 +7,5 @@ const letterSpacingMapping: {
  * @returns letter spacing classes
  */
 export function getLetterSpacing(letterSpacing: Capitalize<LetterSpacingOption> = 'Normal'): string {
-  return letterSpacingMapping[letterSpacing];
+  return mappings.letterSpacing[letterSpacing];
 }

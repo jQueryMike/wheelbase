@@ -10,6 +10,7 @@
     "import/no-dynamic-require": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-named-as-default": "off",
+    "import/extensions": "off",
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-plusplus": "off",
     "no-param-reassign": "off",

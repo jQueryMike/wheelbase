@@ -1,7 +1,3 @@
-const flatten = require('flat');
-
-const TAILWIND_PREFIX = 'tw_';
-
 const childFields = [
   'content_contentArea_content',
   'content_buttonList_items',
@@ -60,32 +56,39 @@ function getCustomClasses(
   return [bgColors, borderColors, textColors, classSet, maxWidth];
 }
 
-const buildSafelist = async (pages) => {
+function buildSafelistColors(data) {
+  return data
+    .map((items) => getCustomClasses(items))
+    .reduce(
+      (prev, [bgColors, borderColors, textColors, classSet]) => {
+        Array.from(bgColors).forEach((x) => prev[0].add(x));
+        Array.from(borderColors).forEach((x) => prev[1].add(x));
+        Array.from(textColors).forEach((x) => prev[2].add(x));
+        Array.from(classSet)
+          .flat()
+          .forEach((x) => prev[3].add(x));
+        return prev;
+      },
+      [new Set(), new Set(), new Set(), new Set()],
+    )
+    .map((x, i) => {
+      switch (i) {
+        case 0:
+          return Array.from(x).map((y) => `bg-${y}`);
+        case 1:
+          return Array.from(x).map((y) => `border-${y}`);
+        case 2:
+          return Array.from(x).map((y) => `text-${y}`);
+        default:
+          return Array.from(x).flat();
+      }
+    })
+    .flat();
+}
+
+const buildSafelist = async (pages, globalConfig) => {
   try {
     const safelist = new Set();
-
-    pages.forEach((page) => {
-      const flatPage = flatten(page);
-      const keys = Object.keys(flatPage);
-
-      keys.forEach((key) => {
-        const separatedKeys = key.split('.');
-        const lastKey = separatedKeys[separatedKeys.length - 1];
-
-        if (lastKey.startsWith(TAILWIND_PREFIX)) {
-          if (flatPage[key] && typeof flatPage[key] === 'string') {
-            const classes = flatPage[key].split(' ');
-
-            classes.forEach((className) => {
-              if (className) {
-                safelist.add(className);
-              }
-            });
-          }
-        }
-      });
-    });
-
     const queries = [
       '2xs',
       'xs',
@@ -144,44 +147,28 @@ const buildSafelist = async (pages) => {
         .map((x) => `gradient-to-${x}`),
     ].map((x) => `bg-${x}`);
 
-    const customClasses = await (async () => {
-      const response = await fetch(
-        `${process.env.API_URL}/umbraco/delivery/api/v1/content/item/${process.env.API_ROOT_NODE_PATH}/home`,
-      );
-      const data = await response.json();
-      return getCustomClasses(data.properties?.organismGrid?.items || []);
-    })();
-    const colors = customClasses
-      .map((x, i) => {
-        switch (i) {
-          case 0:
-            return Array.from(x).map((y) => `bg-${y}`);
-          case 1:
-            return Array.from(x).map((y) => `border-${y}`);
-          case 2:
-            return Array.from(x).map((y) => `text-${y}`);
-          default:
-            return Array.from(x).flat();
-        }
-      })
-      .flat();
-
     const borders = [
       ...buildPossibilities([['rounded'], ['none', 'sm', 'md', 'lg', 'xl', 'full']]),
       ...buildPossibilities([['border'], ['none', 'solid', 'dashed', 'dotted', 'double', '0', '', '2', '4']]),
     ];
-    return [
-      ...layoutClasses,
-      ...addQueryPrefixes(paddingClasses),
-      ...addQueryPrefixes(marginClasses),
-      ...safelist,
-      ...colCounts.map((colCount) => `grid-cols-${colCount}`),
-      ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
-      ...colors,
-      ...gradientClasses,
-      ...borders,
-      ...['font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl', 'text-md', 'overflow-hidden'],
-    ];
+    return Array.from(
+      new Set([
+        ...layoutClasses,
+        ...addQueryPrefixes(paddingClasses),
+        ...addQueryPrefixes(marginClasses),
+        ...safelist,
+        ...colCounts.map((colCount) => `grid-cols-${colCount}`),
+        ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
+        ...buildSafelistColors([
+          ...pages.map((page) => page.properties?.organismGrid?.items || []),
+          globalConfig.header?.items || [],
+          globalConfig.footer?.items || [],
+        ]),
+        ...gradientClasses,
+        ...borders,
+        ...['font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl', 'text-md', 'overflow-hidden'],
+      ]),
+    );
   } catch (error) {
     console.error('Something went wrong while trying to build the safe list.');
     console.error(error);
@@ -189,4 +176,4 @@ const buildSafelist = async (pages) => {
   }
 };
 
-module.exports = buildSafelist;
+export default buildSafelist;

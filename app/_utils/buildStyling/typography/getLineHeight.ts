@@ -1,15 +1,5 @@
 import { LineHeightOption } from '@types';
-
-const lineHeightMapping: {
-  [key in Capitalize<LineHeightOption>]: string;
-} = {
-  None: 'leading-none',
-  Tight: 'leading-tight',
-  Snug: 'leading-snug',
-  Normal: 'leading-normal',
-  Relaxed: 'leading-relaxed',
-  Loose: 'leading-loose',
-};
+import mappings from '../mappings.json'
 
 /**
  * Get line height
@@ -17,5 +7,5 @@ const lineHeightMapping: {
  * @returns line height classes
  */
 export function getLineHeight(lineHeight: Capitalize<LineHeightOption> = 'Normal'): string {
-  return lineHeightMapping[lineHeight];
+  return mappings.lineHeight[lineHeight];
 }
