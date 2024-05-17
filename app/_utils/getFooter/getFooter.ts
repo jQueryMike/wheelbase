@@ -13,7 +13,6 @@ const getFooter = (globalConfig: any) => {
     const [companyInfo] = companyInfoItemsItems
       ? [companyInfoItemsItems?.[0]?.content]?.map((x: any) => buildConfig(x)) || [null]
       : [null];
-
     return { items, companyInfo };
   }
 

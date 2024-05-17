@@ -21,7 +21,6 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
     socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
     styling: socialStyling,
   }));
-
   return (
     <BaseComponent as="footer" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.footerContainer}>

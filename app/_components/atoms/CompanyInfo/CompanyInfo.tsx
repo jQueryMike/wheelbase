@@ -11,7 +11,7 @@ const CompanyInfo = ({ companyNumber, fcaNumber, vatNumber, styling, overrides }
       as="div"
       className={classes.root}
       styling={styling}
-      stylingOptions={{ atomicType: 'atom' }}
+      stylingOptions={{ atomicType: 'atom', textType: 'text' }}
       aria-label="Company information"
     >
       {companyNumber && <div className={classes.infoItem}>Company No.{companyNumber}</div>}
