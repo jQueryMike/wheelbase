@@ -10,7 +10,6 @@ const Text = ({ text, overrides, styling }: TextProps) => {
   if (!text) return null;
 
   const classes = buildClasses(textContentClasses, overrides);
-
   return (
     <BaseComponent as="div" styling={styling} stylingOptions={{ atomicType: 'atom' }} className={classes?.root}>
       <div className={classes?.textContent} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }} />

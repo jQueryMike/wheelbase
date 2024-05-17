@@ -1,10 +1,3 @@
-const childFields = [
-  'content_contentArea_content',
-  'content_buttonList_items',
-  'content_features_items',
-  'content_reviews_items',
-];
-
 function buildPossibilities(data, delimiter = '-') {
   return data.reduceRight((prev, curr) => {
     if (!prev.length) return curr;
@@ -48,7 +41,7 @@ function getCustomClasses(
       if (key.endsWith('_maxWidth') && value) {
         maxWidth.add(`max-w-[${value}px]`);
       }
-      if (childFields.includes(key) && value) {
+      if (/(_content|_items)$/.test(key) && value) {
         getCustomClasses(value?.items, bgColors, borderColors, textColors, classSet, maxWidth);
       }
     });
@@ -163,6 +156,7 @@ const buildSafelist = async (pages, globalConfig) => {
           ...pages.map((page) => page.properties?.organismGrid?.items || []),
           globalConfig?.header?.items || [],
           globalConfig?.footer?.items || [],
+          globalConfig?.companyInfoItems?.items || [],
         ]),
         ...gradientClasses,
         ...borders,
