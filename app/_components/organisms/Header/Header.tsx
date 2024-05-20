@@ -1,5 +1,5 @@
+import BLOCKS from '@components/Blocks';
 import { Image, NavigationItem } from '@components/atoms';
-import { ButtonList } from '@components/molecules';
 import { BaseComponent } from '@components/utils';
 import { getNavUrl } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
@@ -7,9 +7,16 @@ import { buildClasses } from '@utils/buildClasses';
 import headerClasses from './Header.classes';
 import { HeaderProps } from './Header.types';
 
-const Header = async ({ logo, link, styling, overrides }: HeaderProps) => {
+const Header = async ({ logo, contentArea = [], styling, overrides }: HeaderProps) => {
   const homeObject = (await getNavUrl()).find((item: { name: string }) => item.name === 'Home');
   const classes = buildClasses(headerClasses, overrides);
+  const components = contentArea.map(({ name, id, ...props }: any) => [
+    name,
+    BLOCKS[name as keyof typeof BLOCKS],
+    id,
+    props,
+  ]);
+
   return (
     <BaseComponent as="header" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.headerContainer}>
@@ -48,9 +55,11 @@ const Header = async ({ logo, link, styling, overrides }: HeaderProps) => {
               </div>
             </button>
           </div>
-          {link && (
+          {components.length > 0 && (
             <div className={classes.headerSlot}>
-              <ButtonList {...link} />
+              {components.map(([name, Component, id, props]: any) => (
+                <Component key={id} {...props} />
+              ))}
             </div>
           )}
         </div>
