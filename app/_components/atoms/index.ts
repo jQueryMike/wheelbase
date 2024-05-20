@@ -3,6 +3,7 @@ export * from './Avatar';
 export * from './Address';
 export * from './Button';
 export * from './CompanyInfo';
+export * from './DrawerNavigation';
 export * from './EmailAddress';
 export * from './Heading';
 export * from './Image';
