@@ -19,7 +19,7 @@ function getCustomClasses(
   classSet = new Set(),
   maxWidth = new Set(),
 ) {
-  data.forEach(({ content: { properties } }) => {
+  data?.forEach(({ content: { properties } }) => {
     Object.entries(properties).forEach(([key, value]) => {
       if (key.endsWith('_backgroundColor') && value) {
         updateColourSet(value, bgColors);
@@ -99,7 +99,6 @@ const buildSafelist = async (pages, globalConfig) => {
           ...pages.map((page) => page.properties?.organismGrid?.items || []),
           globalConfig?.header?.items || [],
           globalConfig?.footer?.items || [],
-          globalConfig?.companyInfoItems?.items || [],
         ]),
         ...gradientClasses,
       ]),
