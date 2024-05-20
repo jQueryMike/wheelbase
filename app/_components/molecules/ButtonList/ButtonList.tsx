@@ -16,11 +16,15 @@ const ButtonList = async ({ gap = Sizes.Medium, items = [], overrides, styling }
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'molecule' }}>
       <ul className={cn(classes.list, classes[`gap-${gap}`])}>
-        {buttons.map((item: ButtonProps & Block) => (
-          <li key={item.id} className={classes.listItem}>
-            <Button {...item} />
-          </li>
-        ))}
+        {buttons?.length > 1 ? (
+          buttons.map((item: ButtonProps & Block) => (
+            <li key={item.id} className={classes.listItem}>
+              <Button {...item} />
+            </li>
+          ))
+        ) : (
+          <Button {...buildConfig(items[0].content)} />
+        )}
       </ul>
     </BaseComponent>
   );
