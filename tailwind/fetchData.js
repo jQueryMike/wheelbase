@@ -1,4 +1,4 @@
-//without &take=9999 limit is 10 causing issue with building classes
+// without &take=9999 limit is 10 causing issue with building classes
 const fetchData = async () => {
   const CONTENT_API_URL = `${process.env.API_URL}/umbraco/delivery/api/v2/content?fetch=descendants:${process.env.API_ROOT_NODE_GUID}&take=9999`;
   try {

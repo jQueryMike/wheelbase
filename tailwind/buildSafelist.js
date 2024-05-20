@@ -1,9 +1,4 @@
-function buildPossibilities(data, delimiter = '-') {
-  return data.reduceRight((prev, curr) => {
-    if (!prev.length) return curr;
-    return curr.reduce((p, c) => [...p, ...prev.map((x) => (x ? [c, x].join(delimiter) : c))], []);
-  }, []);
-}
+import getStylingClasses from "./getStylingClasses.js";
 
 function updateColourSet(value, dataSet) {
   if (!value) return;
@@ -81,55 +76,6 @@ function buildSafelistColors(data) {
 
 const buildSafelist = async (pages, globalConfig) => {
   try {
-    const safelist = new Set();
-    const queries = [
-      '2xs',
-      'xs',
-      'sm',
-      'md',
-      'lg',
-      'xl',
-      '2xl',
-      '@xs',
-      '@sm',
-      '@md',
-      '@lg',
-      '@xl',
-      '@2xl',
-      '@3xl',
-      '@4xl',
-      '@5xl',
-      '@6xl',
-      '@7xl',
-    ];
-    const colCounts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
-    const paddingPrefixes = ['p', 'px', 'py', 'pt', 'pr', 'pb', 'pl'];
-    const marginPrefixes = ['m', 'mx', 'my', 'mt', 'mr', 'mb', 'ml'];
-
-    const paddingClasses = [];
-    const marginClasses = [];
-
-    const addQueryPrefixes = (classes) => {
-      const prefixed = classes.map((cssClass) => queries.map((query) => `${query}:${cssClass}`));
-      return [...classes, ...prefixed.flat(1)];
-    };
-
-    for (let v = 0; v < 21; v++) {
-      const value = v;
-      paddingPrefixes.map((prefix) => paddingClasses.push(`${prefix}-${value}`));
-      marginPrefixes.map((prefix) => marginClasses.push(`${prefix}-${value}`));
-    }
-    // TODO: will need to expand on these and separate into other functions
-    const layoutClasses = ['w-1/2', 'col-start-2', 'col-span-2'];
-    for (let v = 0; v < 6; v++) {
-      const value = v;
-      queries.map((query) => layoutClasses.push(`${query}:gap-${value}`));
-      queries.map((query) => layoutClasses.push(`${query}:grid-cols-${value}`));
-    }
-    /**
-     * Build up all of the available gradient classes.
-     */
     const gradientClasses = [
       'none',
       ...['t', 'b']
@@ -139,19 +85,9 @@ const buildSafelist = async (pages, globalConfig) => {
         )
         .map((x) => `gradient-to-${x}`),
     ].map((x) => `bg-${x}`);
-
-    const borders = [
-      ...buildPossibilities([['rounded'], ['none', 'sm', 'md', 'lg', 'xl', 'full']]),
-      ...buildPossibilities([['border'], ['none', 'solid', 'dashed', 'dotted', 'double', '0', '', '2', '4']]),
-    ];
     return Array.from(
       new Set([
-        ...layoutClasses,
-        ...addQueryPrefixes(paddingClasses),
-        ...addQueryPrefixes(marginClasses),
-        ...safelist,
-        ...colCounts.map((colCount) => `grid-cols-${colCount}`),
-        ...queries.map((size) => colCounts.map((colCount) => `${size}:grid-cols-${colCount}`)).flat(),
+        ...getStylingClasses(),
         ...buildSafelistColors([
           ...pages.map((page) => page.properties?.organismGrid?.items || []),
           globalConfig?.header?.items || [],
@@ -159,8 +95,6 @@ const buildSafelist = async (pages, globalConfig) => {
           globalConfig?.companyInfoItems?.items || [],
         ]),
         ...gradientClasses,
-        ...borders,
-        ...['font-medium', 'md:text-base', 'lg:text-xl', 'xl:text-2xl', 'text-md', 'overflow-hidden'],
       ]),
     );
   } catch (error) {
