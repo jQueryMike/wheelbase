@@ -8,7 +8,7 @@ let classes: ButtonClasses<ClassesProperty> = {};
 
 classes = {
   root: tw`inline-block`,
-  buttonContent: tw`flex flex-row flex-nowrap`,
+  buttonContent: tw`flex-inline flex-row flex-nowrap`,
   buttonContentLoading: tw`opacity-0`,
   primaryButton: {
     default: tw`bg-primary text-primary-contrast`,

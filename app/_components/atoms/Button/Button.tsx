@@ -27,18 +27,18 @@ const Button = ({
   }
 
   return (
-    <BaseComponent
-      as="span"
-      className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
-      styling={styling}
-      stylingOptions={{ atomicType: 'atom' }}
+    <NextLink
+      href={href || ''}
+      target={target || '_self'}
+      className={cn(classes?.buttonContent, {
+        [classes?.buttonContentLoading || '']: loading,
+      })}
     >
-      <NextLink
-        href={href || ''}
-        target={target || '_self'}
-        className={cn(classes?.buttonContent, {
-          [classes?.buttonContentLoading || '']: loading,
-        })}
+      <BaseComponent
+        as="span"
+        className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
+        styling={styling}
+        stylingOptions={{ atomicType: 'atom' }}
       >
         <span className={classes.buttonContent}>
           {leftIcon && (
@@ -53,8 +53,8 @@ const Button = ({
             </span>
           )}
         </span>
-      </NextLink>
-    </BaseComponent>
+      </BaseComponent>
+    </NextLink>
   );
 };
 
