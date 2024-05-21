@@ -7,7 +7,7 @@ import { buildConfig } from '@utils/buildConfig';
 import contactClasses from './Contact.classes';
 import { ContactProps } from './Contact.types';
 
-const Contact = async ({ address, telephoneNumbers, email, map, socials, styling, overrides }: ContactProps) => {
+const Contact = async ({ address, telephoneNumbers, email, map, socials, styling, detailsBlock, overrides }: ContactProps) => {
   const classes = buildClasses(contactClasses, overrides);
   const {
     properties: { displayName: companyName },
@@ -57,7 +57,7 @@ const Contact = async ({ address, telephoneNumbers, email, map, socials, styling
       <div className={classes.container}>
         <div className={classes.contactWrapper}>
           {(chosenAddress || chosenEmail || chosenPhone) && (
-            <div className={classes.contact}>
+            <BaseComponent as="div" className={classes.contact} styling={detailsBlock?.styling}>
               {chosenAddress && (
                 <Address
                   companyName={companyName}
@@ -97,7 +97,7 @@ const Contact = async ({ address, telephoneNumbers, email, map, socials, styling
                   </div>
                 </div>
               )}
-            </div>
+            </BaseComponent>
           )}
           <Map src={map.googleMapsURL} styling={{}} />
         </div>
