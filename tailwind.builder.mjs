@@ -23,8 +23,6 @@ const generateTailwindConfig = async () => {
     const colors = await buildColors(theme);
     const safelist = await buildSafelist(pages, globalConfig)
 
-    // console.log(safelist)
-
     const config = {
       content: buildContent(pages),
       safelist,
