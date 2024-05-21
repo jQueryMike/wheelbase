@@ -9,9 +9,6 @@ import { DrawerNavigationProps } from './DrawerNavigation.types';
 
 const DrawerNavigation = ({ homeObject }: DrawerNavigationProps) => {
   const [isOpen, toggle] = useToggle();
-  const toggleDrawer = () => {
-    toggle(!isOpen);
-  };
 
   return (
     <>
@@ -20,7 +17,7 @@ const DrawerNavigation = ({ homeObject }: DrawerNavigationProps) => {
           data-testid="open-navigation"
           aria-label="Open navigation"
           className={classes.hamburger}
-          onClick={toggleDrawer}
+          onClick={toggle}
         >
           <div className={classes.hamburgerWrapper}>
             <div className={classes.topBun} />
@@ -35,7 +32,7 @@ const DrawerNavigation = ({ homeObject }: DrawerNavigationProps) => {
             data-testid="close-navigation"
             aria-label="Close navigation"
             className={classes.closeButton}
-            onClick={toggleDrawer}
+            onClick={toggle}
           >
             <Icon icon="fa fa-times" styling={{}} />
           </button>
