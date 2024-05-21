@@ -7,8 +7,8 @@ const location = 'TextContent/TextContent.classes';
 let classes: TextClasses<ClassesProperty> = {};
 
 classes = {
-  root: tw`prose`,
-  textContent: tw`max-w-full text-sm`,
+  root: tw`prose max-w-full`,
+  textContent: tw`text-sm`,
 };
 
 const textContentClasses = new ClassesBuilder({ location, classes }).classes;
