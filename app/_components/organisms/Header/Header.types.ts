@@ -22,7 +22,7 @@ export type HeaderClasses<T = string> = {
 
 export type HeaderProps = BaseProps<{
   logo: ImageProps & Block;
-  link: any;
+  contentArea: Block[];
   overrides?: {
     [key in keyof HeaderClasses]?: string;
   };
