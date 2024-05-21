@@ -29,16 +29,17 @@ const Accordion = ({
           </div>
         )}
         {items.length > 0 && (
-          <div
+          <BaseComponent as="div"
             className={cn(
               classes.itemsContainer,
               accordionBlock.maxWidth ? `max-w-[${accordionBlock.maxWidth}px] mx-auto` : '',
             )}
+            styling={accordionBlock.styling}
           >
             {items.map((item: any) => (
               <AccordionItem {...item} icon={fixedIcon} key={item.id} />
             ))}
-          </div>
+          </BaseComponent>
         )}
       </div>
     </BaseComponent>
