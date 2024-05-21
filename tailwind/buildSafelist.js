@@ -1,4 +1,4 @@
-import getStylingClasses from "./getStylingClasses.js";
+import getStylingClasses from './getStylingClasses.js';
 
 function updateColourSet(value, dataSet) {
   if (!value) return;
@@ -48,16 +48,17 @@ function buildSafelistColors(data) {
   return data
     .map((items) => getCustomClasses(items))
     .reduce(
-      (prev, [bgColors, borderColors, textColors, classSet]) => {
+      (prev, [bgColors, borderColors, textColors, classSet, maxWidth]) => {
         Array.from(bgColors).forEach((x) => prev[0].add(x));
         Array.from(borderColors).forEach((x) => prev[1].add(x));
         Array.from(textColors).forEach((x) => prev[2].add(x));
         Array.from(classSet)
           .flat()
           .forEach((x) => prev[3].add(x));
+        Array.from(maxWidth).forEach((x) => prev[4].add(x));
         return prev;
       },
-      [new Set(), new Set(), new Set(), new Set()],
+      [new Set(), new Set(), new Set(), new Set(), new Set()],
     )
     .map((x, i) => {
       switch (i) {
@@ -67,6 +68,10 @@ function buildSafelistColors(data) {
           return Array.from(x).map((y) => `border-${y}`);
         case 2:
           return Array.from(x).map((y) => `text-${y}`);
+        case 3:
+          return Array.from(x).flat();
+        case 4:
+          return Array.from(x);
         default:
           return Array.from(x).flat();
       }
