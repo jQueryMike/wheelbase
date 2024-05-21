@@ -14,8 +14,6 @@ export type DrawerNavigationClasses<T = string> = {
 };
 
 export type DrawerNavigationProps = BaseProps<{
-  isOpen?: boolean;
-  onClose?: () => void;
   homeObject?: any;
   overrides?: {
     [key in keyof DrawerNavigationClasses]?: string;
