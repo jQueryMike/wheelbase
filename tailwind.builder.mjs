@@ -21,10 +21,13 @@ const generateTailwindConfig = async () => {
     const { pages, theme, globalConfig } = await fetchData();
 
     const colors = await buildColors(theme);
+    const safelist = await buildSafelist(pages, globalConfig)
+
+    // console.log(safelist)
 
     const config = {
       content: buildContent(pages),
-      safelist: await buildSafelist(pages, globalConfig),
+      safelist,
       theme: {
         container: buildContainer(),
         extend: {

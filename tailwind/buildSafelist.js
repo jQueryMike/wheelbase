@@ -74,6 +74,8 @@ function buildSafelistColors(data) {
     .flat();
 }
 
+const stylingClasses = getStylingClasses();
+
 const buildSafelist = async (pages, globalConfig) => {
   try {
     const gradientClasses = [
@@ -87,7 +89,7 @@ const buildSafelist = async (pages, globalConfig) => {
     ].map((x) => `bg-${x}`);
     return Array.from(
       new Set([
-        ...getStylingClasses(),
+        ...stylingClasses,
         ...buildSafelistColors([
           ...pages.map((page) => page.properties?.organismGrid?.items || []),
           globalConfig?.header?.items || [],
