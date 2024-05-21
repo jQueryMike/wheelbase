@@ -57,7 +57,7 @@ const Contact = async ({ address, telephoneNumbers, email, map, socials, styling
       <div className={classes.container}>
         <div className={classes.contactWrapper}>
           {(chosenAddress || chosenEmail || chosenPhone) && (
-            <BaseComponent as="div" className={classes.contact} styling={detailsBlock.styling}>
+            <BaseComponent as="div" className={classes.contact} styling={detailsBlock?.styling}>
               {chosenAddress && (
                 <Address
                   companyName={companyName}
