@@ -19,7 +19,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
     <html lang="en">
       <body className={inter.className}>
         {header !== null && (
-          <Header logo={{ ...header?.image1 }} link={header?.buttons.content} styling={header.styling} />
+          <Header logo={{ ...header?.image1 }} link={header?.buttons?.content} styling={header.styling} />
         )}
         {children}
         <Suspense fallback={null}>
