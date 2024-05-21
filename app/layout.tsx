@@ -12,12 +12,12 @@ const inter = Inter({ subsets: ['latin'] });
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const globalConfig = await getGlobalConfig();
-  const header = getHeader(globalConfig);
+  const { image1, ...header } = getHeader(globalConfig);
   const { items, companyInfo } = getFooter(globalConfig);
   return (
     <html lang="en">
       <body className={inter.className}>
-        {header !== null && <Header {...header} logo={{ ...header?.image1 }} />}
+        {header !== null && <Header {...header} logo={{ ...image1 }} />}
         {children}
         <Suspense fallback={null}>
           <Script

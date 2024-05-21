@@ -57,7 +57,7 @@ const Header = async ({ logo, contentArea = [], styling, overrides }: HeaderProp
           </div>
           {components.length > 0 && (
             <div className={classes.headerSlot}>
-              {components.map(([name, Component, id, props]: any) => (
+              {components.map(([, Component, id, props]: any) => (
                 <Component key={id} {...props} />
               ))}
             </div>
