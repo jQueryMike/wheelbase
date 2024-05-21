@@ -23,7 +23,7 @@ const Button = ({
   const classes = buildClasses(buttonClasses, overrides);
 
   if (!text) {
-    return;
+    return null;
   }
 
   return (

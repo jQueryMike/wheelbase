@@ -1,5 +1,6 @@
 import BLOCKS from '@components/Blocks';
 import { Image, NavigationItem } from '@components/atoms';
+import { DrawerNavigation } from '@components/atoms/DrawerNavigation';
 import { BaseComponent } from '@components/utils';
 import { getNavUrl } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
@@ -47,13 +48,7 @@ const Header = async ({ logo, contentArea = [], styling, overrides }: HeaderProp
             </div>
           )}
           <div className={classes.menuIconWrapper}>
-            <button aria-label="Open navigation" className={classes.hamburger}>
-              <div className={classes.hamburgerWrapper}>
-                <div className={classes.topBun} />
-                <div className={classes.meat} />
-                <div className={classes.bottomBun} />
-              </div>
-            </button>
+            <DrawerNavigation homeObject={homeObject} styling={{}} />
           </div>
           {components.length > 0 && (
             <div className={classes.headerSlot}>

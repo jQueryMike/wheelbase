@@ -29,6 +29,8 @@ const atoms: Comps<
   | 'Address'
   | 'Map'
   | 'NavigationItem'
+  | 'CompanyInfo'
+  | 'DrawerNavigation'
 > = {
   Button: dynamic(() => import('./atoms/Button/Button'), {}),
   Heading: dynamic(() => import('./atoms/Heading/Heading'), {}),
