@@ -7,7 +7,7 @@ import { Icon } from '../Icon';
 import classes from './DrawerNavigation.classes';
 import { DrawerNavigationProps } from './DrawerNavigation.types';
 
-const DrawerNavigation = ({ homeObject }: DrawerNavigationProps) => {
+const DrawerNavigation = ({ homeObject, icon }: DrawerNavigationProps) => {
   const [isOpen, toggle] = useToggle();
 
   return (
@@ -19,11 +19,7 @@ const DrawerNavigation = ({ homeObject }: DrawerNavigationProps) => {
           className={classes.hamburger}
           onClick={toggle}
         >
-          <div className={classes.hamburgerWrapper}>
-            <div className={classes.topBun} />
-            <div className={classes.meat} />
-            <div className={classes.bottomBun} />
-          </div>
+          {icon && <Icon icon={icon.icon} styling={icon.styling} />}
         </button>
       </div>
       {isOpen && (

@@ -1,3 +1,4 @@
+import { IconProps } from '@components/atoms';
 import { BaseProps } from '@components/types';
 import { Block } from '@types';
 import { ImageProps } from 'next/image';
@@ -22,6 +23,7 @@ export type HeaderClasses<T = string> = {
 
 export type HeaderProps = BaseProps<{
   logo: ImageProps & Block;
+  icon: IconProps;
   contentArea: Block[];
   overrides?: {
     [key in keyof HeaderClasses]?: string;

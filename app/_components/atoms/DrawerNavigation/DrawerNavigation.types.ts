@@ -1,5 +1,7 @@
 import { BaseProps } from '@components/types';
 
+import { IconProps } from '../Icon';
+
 export type DrawerNavigationClasses<T = string> = {
   [key in
     | 'root'
@@ -15,6 +17,7 @@ export type DrawerNavigationClasses<T = string> = {
 
 export type DrawerNavigationProps = BaseProps<{
   homeObject?: any;
+  icon?: IconProps;
   overrides?: {
     [key in keyof DrawerNavigationClasses]?: string;
   };

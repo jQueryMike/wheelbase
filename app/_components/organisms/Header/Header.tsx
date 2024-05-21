@@ -8,7 +8,7 @@ import { buildClasses } from '@utils/buildClasses';
 import headerClasses from './Header.classes';
 import { HeaderProps } from './Header.types';
 
-const Header = async ({ logo, contentArea = [], styling, overrides }: HeaderProps) => {
+const Header = async ({ logo, icon, contentArea = [], styling, overrides }: HeaderProps) => {
   const homeObject = (await getNavUrl()).find((item: { name: string }) => item.name === 'Home');
   const classes = buildClasses(headerClasses, overrides);
   const components = contentArea.map(({ name, id, ...props }: any) => [
@@ -48,7 +48,7 @@ const Header = async ({ logo, contentArea = [], styling, overrides }: HeaderProp
             </div>
           )}
           <div className={classes.menuIconWrapper}>
-            <DrawerNavigation homeObject={homeObject} styling={{}} />
+            <DrawerNavigation homeObject={homeObject} icon={icon} styling={{}} />
           </div>
           {components.length > 0 && (
             <div className={classes.headerSlot}>
