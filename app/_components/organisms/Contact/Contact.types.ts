@@ -1,4 +1,5 @@
 import { BaseProps } from '@components/types';
+import { Block } from '@types';
 
 export type ContactClasses<T = string> = {
   [key in
@@ -18,6 +19,7 @@ export type ContactProps = BaseProps<{
   email: any;
   map: any;
   socials: any;
+  detailsBlock: Block;
   overrides?: {
     [key in keyof ContactClasses]?: string;
   };
