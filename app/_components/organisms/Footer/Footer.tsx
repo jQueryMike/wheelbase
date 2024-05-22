@@ -24,8 +24,8 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
 
   const companyInfoContent = companyInfo?.items?.items?.map(buildConfigForItem) || [];
   const chosenCompanyInfo = {
-    styling: companyInfoContent[0].styling,
-    items: companyInfoContent[0].companyInfoItems,
+    styling: companyInfoContent[0]?.styling || {},
+    items: companyInfoContent[0]?.companyInfoItems || [],
   };
   return (
     <BaseComponent as="footer" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>

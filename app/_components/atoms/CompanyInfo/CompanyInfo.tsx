@@ -6,6 +6,10 @@ import companyInfoClasses from './CompanyInfo.classes';
 import { CompanyInfoProps } from './CompanyInfo.types';
 
 const CompanyInfo = ({ items, styling, overrides }: CompanyInfoProps) => {
+  if (!items) {
+    return null;
+  }
+
   const companyInfoItems = items.map((x: any) => buildConfig(x));
   const classes = buildClasses(companyInfoClasses, overrides);
   return (
@@ -18,7 +22,7 @@ const CompanyInfo = ({ items, styling, overrides }: CompanyInfoProps) => {
     >
       {companyInfoItems.length > 0 &&
         companyInfoItems.map((item: any) => (
-          <div className={classes.infoItem}>
+          <div className={classes.infoItem} key={item.id}>
             {item.companyInfo.label}
             {item.companyInfo.number}
           </div>
