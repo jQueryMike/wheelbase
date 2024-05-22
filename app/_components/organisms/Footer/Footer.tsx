@@ -21,12 +21,18 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
     socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
     styling: socialStyling,
   }));
+
+  const companyInfoContent = companyInfo?.items?.items?.map(buildConfigForItem) || [];
+  const chosenCompanyInfo = {
+    styling: companyInfoContent[0]?.styling || {},
+    items: companyInfoContent[0]?.companyInfoItems || [],
+  };
   return (
     <BaseComponent as="footer" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.footerContainer}>
         <div className={classes.component}>
           <div className={classes.footerSlotOne}>
-            {companyInfo && <CompanyInfo {...companyInfo} />}
+            {companyInfo && <CompanyInfo {...chosenCompanyInfo} />}
             {footerText && (
               <div className={classes.contentContainer}>
                 <div className={classes.content}>
