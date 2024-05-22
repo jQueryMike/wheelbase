@@ -17,7 +17,7 @@ const EmailAddress = ({ icon, email, styling, overrides }: EmailAddressProps) =>
     >
       <div className={classes.emailAddressWrapper}>
         {icon && <Icon {...icon} />}
-        <Link className={classes.emailAddressLink} href={`mailto:${email}`}>
+        <Link href={`mailto:${email}`}>
           <div className={classes.emailAddress}>{email}</div>
         </Link>
       </div>

@@ -36,7 +36,7 @@ function getCustomClasses(
       if (key.endsWith('_maxWidth') && value) {
         maxWidth.add(`max-w-[${value}px]`);
       }
-      if (/(_content|_items)$/.test(key) && value) {
+      if (/(_content|_items|_socials|_telephoneNumbers|_email)$/.test(key) && value) {
         getCustomClasses(value?.items, bgColors, borderColors, textColors, classSet, maxWidth);
       }
     });
