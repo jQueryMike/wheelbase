@@ -19,13 +19,14 @@ const Contact = async ({ address, telephoneNumbers, email, map, socials, styling
     item?.items?.[0] ? buildConfigForItem(item.items[0]) : undefined,
   );
 
-  const socialsContent = socials?.items?.map(buildConfigForItem) || [];
-
-  const chosenSocials = socialsContent.map(({ icon, socials: socialItem, styling: socialStyling }: any) => ({
-    icon,
-    socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
-    styling: socialStyling,
-  }));
+  const socialsContent = socials?.items?.map(buildConfigForItem) || undefined;
+  const chosenSocials = socialsContent 
+    ? socialsContent.map(({ icon, socials: socialItem, styling: socialStyling }: any) => ({
+        icon,
+        socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
+        styling: socialStyling,
+    })) 
+    : undefined;
 
   const chosenAddress = addressContent?.addresses?.[0]
     ? {
@@ -56,7 +57,7 @@ const Contact = async ({ address, telephoneNumbers, email, map, socials, styling
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
       <div className={classes.container}>
         <div className={classes.contactWrapper}>
-          {(chosenAddress || chosenEmail || chosenPhone) && (
+          {(chosenAddress || chosenEmail || chosenPhone || chosenSocials) && (
             <BaseComponent as="div" className={classes.contact} styling={detailsBlock?.styling}>
               {chosenAddress && (
                 <Address
@@ -99,7 +100,7 @@ const Contact = async ({ address, telephoneNumbers, email, map, socials, styling
               )}
             </BaseComponent>
           )}
-          <Map src={map.googleMapsURL} styling={{}} />
+          <Map src={map.googleMapsURL} fullWidth={!chosenAddress && !chosenEmail && !chosenPhone && !chosenSocials} styling={{}} />
         </div>
       </div>
     </BaseComponent>

@@ -16,14 +16,12 @@ const extractSrcFromGoogleMaps = (googleMapLink: string): string | undefined => 
   return undefined;
 };
 
-const Map = ({ src, styling, overrides }: MapProps) => {
+const Map = ({ src, fullWidth, styling, overrides }: MapProps) => {
   const parsedSrc = extractSrcFromGoogleMaps(src);
   const classes = buildClasses(mapClasses, overrides);
   return (
-    <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'atom' }}>
-      <div className={classes.mapContainer}>
-        <iframe src={parsedSrc} title="google map" width="600" height="450" loading="lazy" className={classes.map} />
-      </div>
+    <BaseComponent as="div" className={fullWidth ? classes.rootFullWidth : classes.root} styling={styling} stylingOptions={{ atomicType: 'atom' }}>
+        <iframe src={parsedSrc} title="google map" loading="lazy" className={classes.map} />
     </BaseComponent>
   );
 };
