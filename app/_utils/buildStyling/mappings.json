@@ -243,6 +243,23 @@
         "lg": "text-[40px]",
         "xl": "text-[44px]"
       }
+    },
+    "icon": {
+      "Extra Small": {
+        "sm": "text-2xl"
+      },
+      "Small": {
+        "sm": "text-2xl"
+      },
+      "Medium": {
+        "sm": "text-2xl"
+      },
+      "Large": {
+        "sm": "text-2xl"
+      },
+      "Extra Large": {
+        "sm": "text-2xl"
+      }
     }
   },
   "fontWeight": ["Thin", "Extralight", "Light", "Normal", "Medium", "Semibold", "Bold", "Extrabold"],
