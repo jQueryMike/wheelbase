@@ -7,7 +7,16 @@ import { buildConfig } from '@utils/buildConfig';
 import contactClasses from './Contact.classes';
 import { ContactProps } from './Contact.types';
 
-const Contact = async ({ address, telephoneNumbers, email, map, socials, styling, detailsBlock, overrides }: ContactProps) => {
+const Contact = async ({
+  address,
+  telephoneNumbers,
+  email,
+  map,
+  socials,
+  styling,
+  detailsBlock,
+  overrides,
+}: ContactProps) => {
   const classes = buildClasses(contactClasses, overrides);
   const {
     properties: { displayName: companyName },
@@ -20,12 +29,12 @@ const Contact = async ({ address, telephoneNumbers, email, map, socials, styling
   );
 
   const socialsContent = socials?.items?.map(buildConfigForItem) || undefined;
-  const chosenSocials = socialsContent 
+  const chosenSocials = socialsContent
     ? socialsContent.map(({ icon, socials: socialItem, styling: socialStyling }: any) => ({
         icon,
         socials: socialItem?.socials?.[0] ? buildConfig(socialItem.socials[0]) : undefined,
         styling: socialStyling,
-    })) 
+      }))
     : undefined;
 
   const chosenAddress = addressContent?.addresses?.[0]
@@ -49,7 +58,7 @@ const Contact = async ({ address, telephoneNumbers, email, map, socials, styling
     ? {
         email: buildConfig(emailContent.email.email[0]).email,
         icon: emailContent.icon,
-        styling: emailContent.styling,
+        styling: emailContent.email.styling,
       }
     : undefined;
 
@@ -100,7 +109,11 @@ const Contact = async ({ address, telephoneNumbers, email, map, socials, styling
               )}
             </BaseComponent>
           )}
-          <Map src={map.googleMapsURL} fullWidth={!chosenAddress && !chosenEmail && !chosenPhone && !chosenSocials} styling={{}} />
+          <Map
+            src={map.googleMapsURL}
+            fullWidth={!chosenAddress && !chosenEmail && !chosenPhone && !chosenSocials}
+            styling={{}}
+          />
         </div>
       </div>
     </BaseComponent>

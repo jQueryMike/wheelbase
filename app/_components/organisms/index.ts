@@ -1,5 +1,6 @@
 /* eslint-disable import/no-cycle */
 export * from './Accordion';
+export * from './Header';
 export * from './Hero';
 export * from './TextAndImage';
 export * from './Features';

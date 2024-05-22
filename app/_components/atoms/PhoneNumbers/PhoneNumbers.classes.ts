@@ -8,7 +8,7 @@ const classes: PhoneNumbersClasses = {
   root: tw``,
   phoneNumbersWrapper: tw`flex items-center gap-2`,
   phoneNumbersLink: tw``,
-  phoneNumbers: tw`text-normal text-sm`,
+  phoneNumbers: tw``,
 };
 
 const phoneNumbersClasses = new ClassesBuilder({ location, classes }).classes;
