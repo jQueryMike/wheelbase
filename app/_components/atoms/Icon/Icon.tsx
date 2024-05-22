@@ -7,7 +7,7 @@ import { IconProps } from './Icon.types';
 const Icon = ({ icon, styling, overrides }: IconProps) => {
   const classes = buildClasses(iconClasses, overrides);
   return (
-    <BaseComponent className={classes.root} as="div" styling={styling} stylingOptions={{ atomicType: 'atom' }}>
+    <BaseComponent className={classes.root} as="div" styling={styling} stylingOptions={{ atomicType: 'atom', textType: "icon" }}>
       <i className={`${icon}`} />
     </BaseComponent>
   );
