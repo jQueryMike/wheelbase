@@ -68,7 +68,7 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
               </div>
             )}
             <div className={classes.imageContainer}>
-              <Link target="_blank" href="https://www.clickdealer.co.uk">
+              <Link target="_blank" href="https://www.clickdealer.co.uk" rel='nofollow'>
                 <Image
                   alt="Click Dealer Ltd"
                   loading="lazy"
