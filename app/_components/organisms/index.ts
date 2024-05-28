@@ -2,6 +2,7 @@
 export * from './Accordion';
 export * from './Header';
 export * from './Hero';
+export * from './ImageBlock';
 export * from './TextAndImage';
 export * from './Features';
 export * from './Reviews';
