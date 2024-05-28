@@ -46,6 +46,7 @@ const organisms: Comps<Omit<typeof Organisms, 'Header' | 'Footer'>> = {
   Hero: dynamic(() => import('./organisms/Hero/Hero'), {}),
   TextAndImage: dynamic(() => import('./organisms/TextAndImage/TextAndImage'), {}),
   Features: dynamic(() => import('./organisms/Features/Features')),
+  FeaturesList: dynamic(() => import('./organisms/FeaturesList/FeaturesList')),
   Reviews: dynamic(() => import('./organisms/Reviews/Reviews')),
   Accordion: dynamic(() => import('./organisms/Accordion/Accordion')),
   Contact: dynamic(() => import('./organisms/Contact/Contact')),
