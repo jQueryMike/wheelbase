@@ -1,3 +1,4 @@
+import { Grid } from '@components/_layouts';
 import { Heading, Image } from '@components/atoms';
 import { FeaturesListItem } from '@components/molecules/FeaturesListItem';
 import { BaseComponent } from '@components/utils';
@@ -29,25 +30,23 @@ const FeaturesList = ({
         </div>
       )}
       <div className={classes.container}>
-        <BaseComponent as="div" styling={featuresListBlock.styling}>
-          <div className={classes.featuresWrapper}>
-            <div className={reverse ? classes.imageWrapperReverse : classes.imageWrapper}>
-              {image1?.src && <Image {...image1} />}
-            </div>
-            <div className={reverse ? classes.featuresListWrapperReverse : classes.featuresListWrapper}>
-              <div className={classes.featuresList}>
-                {items.length > 0 &&
-                  items.map((item: any, index: number) => (
-                    <FeaturesListItem
-                      {...item}
-                      id={item.id}
-                      indicator={{ value: index + 1, styling: indicatorStyling }}
-                    />
-                  ))}
-              </div>
+        <Grid styling={featuresListBlock.styling}>
+          <div className={reverse ? classes.imageWrapperReverse : classes.imageWrapper}>
+            {image1?.src && <Image {...image1} />}
+          </div>
+          <div className={reverse ? classes.featuresListWrapperReverse : classes.featuresListWrapper}>
+            <div className={classes.featuresList}>
+              {items.length > 0 &&
+                items.map((item: any, index: number) => (
+                  <FeaturesListItem
+                    {...item}
+                    id={item.id}
+                    indicator={{ value: index + 1, styling: indicatorStyling }}
+                  />
+                ))}
             </div>
           </div>
-        </BaseComponent>
+        </Grid>
       </div>
     </BaseComponent>
   );
