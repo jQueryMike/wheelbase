@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
 import { Image, NavigationItem } from '@components/atoms';
 import { DrawerNavigation } from '@components/atoms/DrawerNavigation';
