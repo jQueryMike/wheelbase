@@ -22,9 +22,12 @@ export function getBackground(background?: Background): [string, CSSProperties] 
         } as CSSProperties,
       ];
     }
-    return [getColour(backgroundColor, 'bg'), {
-      '--tw-bg-opacity': backgroundColor.opacity / 100,
-    } as CSSProperties];
+    return [
+      getColour(backgroundColor, 'bg'),
+      {
+        '--tw-bg-opacity': backgroundColor.opacity / 100,
+      } as CSSProperties,
+    ];
   }
   return ['', {}];
 }

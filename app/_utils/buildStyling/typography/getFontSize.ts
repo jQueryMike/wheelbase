@@ -1,5 +1,5 @@
 import { FontSizeOptions, TextType } from '@types';
-import mappings from '../mappings.json'
+import mappings from '../mappings.json';
 
 /**
  * @description Get font sizes for an specified text type

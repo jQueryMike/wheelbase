@@ -1,5 +1,5 @@
 import { AtomicType, ScreenSizes, Size, SpacingConfig, SpacingType } from '@types';
-import mappings from '../mappings.json'
+import mappings from '../mappings.json';
 
 /**
  * @description Mapping function to map data to tailwind classes

@@ -1,5 +1,5 @@
 import { BorderWidthOptions } from '@types';
-import mappings from '../mappings.json'
+import mappings from '../mappings.json';
 
 /**
  * Return tailwind class for border colour

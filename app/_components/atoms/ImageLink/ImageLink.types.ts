@@ -9,7 +9,7 @@ export type ImageLinkClasses<T = string> = {
 
 // type LinkProps = {
 //   children: Element;
-//   title?: string; 
+//   title?: string;
 //   target?: string;
 //   href?: Url;
 //   text?: string;

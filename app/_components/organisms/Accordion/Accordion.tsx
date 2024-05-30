@@ -29,7 +29,8 @@ const Accordion = ({
           </div>
         )}
         {items.length > 0 && (
-          <BaseComponent as="div"
+          <BaseComponent
+            as="div"
             className={cn(
               classes.itemsContainer,
               accordionBlock.maxWidth ? `max-w-[${accordionBlock.maxWidth}px] mx-auto` : '',

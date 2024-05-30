@@ -1,11 +1,9 @@
-import mapClasses from "./Map.classes";
-import { MapProps } from "./Map.types";
-import { BaseComponent } from "@components/utils";
-import { buildClasses } from "@utils/buildClasses";
+import mapClasses from './Map.classes';
+import { MapProps } from './Map.types';
+import { BaseComponent } from '@components/utils';
+import { buildClasses } from '@utils/buildClasses';
 
-const extractSrcFromGoogleMaps = (
-  googleMapLink: string
-): string | undefined => {
+const extractSrcFromGoogleMaps = (googleMapLink: string): string | undefined => {
   if (!googleMapLink) return undefined;
   const regex = /src="([^"]+)"/;
   const match = googleMapLink.match(regex);
@@ -26,17 +24,11 @@ const Map = ({ src, fullWidth, styling, overrides }: MapProps) => {
       data-testid="map-container"
       className={fullWidth ? classes.rootFullWidth : classes.root}
       styling={styling}
-      stylingOptions={{ atomicType: "atom" }}
+      stylingOptions={{ atomicType: 'atom' }}
     >
       <div className={classes.mapContainer}>
         {parsedSrc && (
-          <iframe
-            data-testid="map-iframe"
-            src={parsedSrc}
-            title="google map"
-            loading="lazy"
-            className={classes.map}
-          />
+          <iframe data-testid="map-iframe" src={parsedSrc} title="google map" loading="lazy" className={classes.map} />
         )}
       </div>
     </BaseComponent>
