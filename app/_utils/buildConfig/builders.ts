@@ -30,6 +30,7 @@ function imageBuilder(
     ...(isFill ? { sizes: `${appearance.width ?? w}px`, objectFit: 'contain' } : { width: w, height: h }),
     styling: config.styling,
     ...content,
+    fullscreen: appearance?.fullscreen
   };
 
   return image;

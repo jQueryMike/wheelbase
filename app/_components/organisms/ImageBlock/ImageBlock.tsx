@@ -15,24 +15,26 @@ const ImageBlock = ({
   }
 
   const classes = buildClasses(imageBlockClasses, overrides);
+  const fullscreen = image.fullscreen;
 
   return (
     <BaseComponent
       as="div"
-      className={classes?.root}
+      className={!fullscreen ? classes.root : classes.rootFullscreen}
       styling={styling}
       stylingOptions={{ atomicType: 'organism' }}
     >
       <div
-        className={classes?.imageContainer}
+        className={
+          !fullscreen
+            ? classes.imageContainer
+            : classes.imageContainerFullscreen
+        }
         data-testid="fullscreen-image-container"
       >
         <NextImage
-          className={classes?.image}
+          className={!fullscreen ? classes.image : classes.imageFullscreen}
           {...image}
-          sizes="100vw"
-          width="0"
-          height="0"
         />
       </div>
     </BaseComponent>
