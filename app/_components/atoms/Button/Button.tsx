@@ -29,11 +29,7 @@ const Button = ({
       <BaseComponent
         data-testid="button-root"
         as="span"
-        className={cn(
-          classes.root,
-          classes[`${style}Button`],
-          classes[`${size}Button`]
-        )}
+        className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
         styling={styling}
         stylingOptions={{ atomicType: 'atom' }}
       >

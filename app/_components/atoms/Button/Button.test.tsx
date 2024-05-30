@@ -25,17 +25,10 @@ const cases: [string, ButtonProps, () => void][] = [
       ...testButton,
     },
     async () => {
-      expect(await screen.findByTestId('button-text')).toHaveTextContent(
-        'Get a valuations'
-      );
+      expect(await screen.findByTestId('button-text')).toHaveTextContent('Get a valuations');
       expect(await screen.findByTestId('button-root')).toHaveClass('bg-accent');
-      expect(await screen.findByTestId('button-root')).toHaveClass(
-        'text-[12px]'
-      );
-      expect(await screen.findByTestId('button-link')).toHaveAttribute(
-        'target',
-        '_self'
-      );
+      expect(await screen.findByTestId('button-root')).toHaveClass('text-[12px]');
+      expect(await screen.findByTestId('button-link')).toHaveAttribute('target', '_self');
     },
   ],
   [
@@ -47,13 +40,8 @@ const cases: [string, ButtonProps, () => void][] = [
     async () => {
       expect(await screen.findByTestId('button-left-icon')).toBeTruthy();
       expect(await screen.findByTestId('button-root')).toHaveClass('bg-accent');
-      expect(await screen.findByTestId('button-root')).toHaveClass(
-        'text-[12px]'
-      );
-      expect(await screen.findByTestId('button-link')).toHaveAttribute(
-        'target',
-        '_self'
-      );
+      expect(await screen.findByTestId('button-root')).toHaveClass('text-[12px]');
+      expect(await screen.findByTestId('button-link')).toHaveAttribute('target', '_self');
     },
   ],
   [
@@ -65,13 +53,8 @@ const cases: [string, ButtonProps, () => void][] = [
     async () => {
       expect(await screen.findByTestId('button-right-icon')).toBeTruthy();
       expect(await screen.findByTestId('button-root')).toHaveClass('bg-accent');
-      expect(await screen.findByTestId('button-root')).toHaveClass(
-        'text-[12px]'
-      );
-      expect(await screen.findByTestId('button-link')).toHaveAttribute(
-        'target',
-        '_self'
-      );
+      expect(await screen.findByTestId('button-root')).toHaveClass('text-[12px]');
+      expect(await screen.findByTestId('button-link')).toHaveAttribute('target', '_self');
     },
   ],
   [
@@ -82,18 +65,10 @@ const cases: [string, ButtonProps, () => void][] = [
       target: '_blank',
     },
     async () => {
-      expect(await screen.findByTestId('button-link')).toHaveAttribute(
-        'href',
-        '/link-blank'
-      );
-      expect(await screen.findByTestId('button-link')).toHaveAttribute(
-        'target',
-        '_blank'
-      );
+      expect(await screen.findByTestId('button-link')).toHaveAttribute('href', '/link-blank');
+      expect(await screen.findByTestId('button-link')).toHaveAttribute('target', '_blank');
       expect(await screen.findByTestId('button-root')).toHaveClass('bg-accent');
-      expect(await screen.findByTestId('button-root')).toHaveClass(
-        'text-[12px]'
-      );
+      expect(await screen.findByTestId('button-root')).toHaveClass('text-[12px]');
     },
   ],
   [
@@ -103,17 +78,10 @@ const cases: [string, ButtonProps, () => void][] = [
       loading: true,
     },
     async () => {
-      expect(await screen.findByTestId('button-content')).toHaveClass(
-        'opacity-0'
-      );
+      expect(await screen.findByTestId('button-content')).toHaveClass('opacity-0');
       expect(await screen.findByTestId('button-root')).toHaveClass('bg-accent');
-      expect(await screen.findByTestId('button-root')).toHaveClass(
-        'text-[12px]'
-      );
-      expect(await screen.findByTestId('button-link')).toHaveAttribute(
-        'target',
-        '_self'
-      );
+      expect(await screen.findByTestId('button-root')).toHaveClass('text-[12px]');
+      expect(await screen.findByTestId('button-link')).toHaveAttribute('target', '_self');
     },
   ],
 ];
@@ -127,12 +95,7 @@ describe('Button test suite', () => {
   it('should have no accessibility violations', async () => {
     await act(async () => {
       const { container } = render(
-        <Button
-          text={testButton.text}
-          style={testButton.style}
-          size={testButton.size}
-          styling={{}}
-        />
+        <Button text={testButton.text} style={testButton.style} size={testButton.size} styling={{}} />,
       );
       const results = await axe(container);
       expect(results).toHaveNoViolations();
