@@ -11,7 +11,7 @@ const ImageBlock = ({
   overrides,
 }: ImageBlockProps & Block) => {
   if (!image) {
-    return;
+    return null;
   }
 
   const classes = buildClasses(imageBlockClasses, overrides);
