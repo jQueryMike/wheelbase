@@ -7,6 +7,7 @@ import { MapProps } from './Map.types';
 
 const testMap: MapProps = {
   src: '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12961.468307172101!2d139.6911889!3d35.6925835!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b57a2b85795%3A0x8548635f1933c70e!2sHilton%20Tokyo!5e0!3m2!1sen!2suk!4v1715683063080!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
+  fullWidth: false,
   styling: {},
 };
 
@@ -33,6 +34,7 @@ const cases: [string, MapProps, () => void][] = [
     'render Map with missing source',
     {
       src: '',
+      fullWidth: false,
       styling: {},
     },
     async () => {

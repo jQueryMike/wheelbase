@@ -1,23 +1,22 @@
+import { Icon } from '../Icon';
+import buttonClasses from './Button.classes';
+import { ButtonProps } from './Button.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import cn from 'classnames';
 import NextLink from 'next/link';
 
-import { Icon } from '../Icon';
-import buttonClasses from './Button.classes';
-import { ButtonProps } from './Button.types';
-
 const Button = ({
   style,
   size,
   text,
-  href,
+  href = '',
   target = '_self',
-  leftIcon,
-  rightIcon,
+  leftIcon = undefined,
+  rightIcon = undefined,
   loading = false,
-  overrides,
-  styling,
+  overrides = undefined,
+  styling = {},
 }: ButtonProps) => {
   const classes = buildClasses(buttonClasses, overrides);
 
@@ -26,11 +25,15 @@ const Button = ({
   }
 
   return (
-    <NextLink data-testid="button-link" href={href || ''} target={target || '_self'}>
+    <NextLink data-testid="button-link" href={href || ''} target={target}>
       <BaseComponent
         data-testid="button-root"
         as="span"
-        className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
+        className={cn(
+          classes.root,
+          classes[`${style}Button`],
+          classes[`${size}Button`]
+        )}
         styling={styling}
         stylingOptions={{ atomicType: 'atom' }}
       >

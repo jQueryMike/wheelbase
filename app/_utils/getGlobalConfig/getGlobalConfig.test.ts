@@ -27,7 +27,7 @@ describe('getGlobalConfig', () => {
     const result = await getGlobalConfig();
 
     // Assert that the fetch function was called with the correct URL
-    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/global-config`, {
+    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/global-config?expand=all`, {
       next: { tags: [] },
     });
 
@@ -44,7 +44,7 @@ describe('getGlobalConfig', () => {
     await expect(getGlobalConfig()).rejects.toThrow(mockError);
 
     // Assert that the fetch function was called with the correct URL
-    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/global-config`, {
+    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/global-config?expand=all`, {
       next: { tags: [] },
     });
   });
@@ -70,7 +70,7 @@ describe('getGlobalConfig', () => {
     const result = await getGlobalConfig();
 
     // Assert that the fetch function was called with the correct URL
-    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/global-config`, {
+    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/global-config?expand=all`, {
       next: { tags: ['global-config'] },
     });
 
