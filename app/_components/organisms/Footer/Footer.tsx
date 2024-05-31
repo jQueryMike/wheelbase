@@ -44,7 +44,7 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
                 <nav className={classes.socialItems} role="navigation" aria-label="Social media links">
                   {chosenSocials.map((item: any) => (
                     <SocialItem
-                      key={item.id}
+                      key={item.socials?.id}
                       icon={item.icon}
                       link={item.socials?.link?.[0] || {}}
                       styling={item.styling}
