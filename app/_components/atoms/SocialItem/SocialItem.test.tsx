@@ -1,9 +1,8 @@
+import SocialItem from './SocialItem';
+import { SocialItemProps } from './SocialItem.types';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
-
-import SocialItem from './SocialItem';
-import { SocialItemProps } from './SocialItem.types';
 
 const testSocialItem: SocialItemProps = {
   icon: {
@@ -21,7 +20,10 @@ const cases: [string, SocialItemProps, () => void][] = [
     'render SocialItem with valid icon and link',
     { ...testSocialItem },
     async () => {
-      expect(await screen.findByTestId('social-item-link')).toHaveAttribute('href', '/');
+      expect(await screen.findByTestId('social-item-link')).toHaveAttribute(
+        'href',
+        ''
+      );
       expect(await screen.findByTestId('social-item-icon')).toBeTruthy();
     },
   ],

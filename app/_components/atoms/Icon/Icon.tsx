@@ -13,7 +13,7 @@ const Icon = ({ icon, styling, overrides }: IconProps) => {
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'icon' }}
     >
-      <i className={`${icon}`} />
+     {icon && <i className={`${icon}`} />}
     </BaseComponent>
   );
 };
