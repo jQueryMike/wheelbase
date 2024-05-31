@@ -10,7 +10,6 @@ const CompanyInfo = ({ items, styling, overrides }: CompanyInfoProps) => {
     return null;
   }
 
-  const companyInfoItems = items.map((x: any) => buildConfig(x));
   const classes = buildClasses(companyInfoClasses, overrides);
   return (
     <BaseComponent
@@ -20,11 +19,11 @@ const CompanyInfo = ({ items, styling, overrides }: CompanyInfoProps) => {
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
       aria-label="Company information"
     >
-      {companyInfoItems.length > 0 &&
-        companyInfoItems.map((item: any) => (
+      {items.length > 0 &&
+        items.map((item: any) => (
           <div className={classes.infoItem} key={item.id}>
-            {item.companyInfo.label}
-            {item.companyInfo.number}
+            {item.companyInfo?.label}
+            {item.companyInfo?.number}
           </div>
         ))}
     </BaseComponent>
