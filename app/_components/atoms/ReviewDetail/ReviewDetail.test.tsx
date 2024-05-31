@@ -27,9 +27,7 @@ describe('ReviewDetail test suite', () => {
   });
 
   it('should have no accessibility violations', async () => {
-    const { container } = render(
-      <ReviewDetail reviewDetail={reviewDetail} styling={{}} />
-    );
+    const { container } = render(<ReviewDetail reviewDetail={reviewDetail} styling={{}} />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
