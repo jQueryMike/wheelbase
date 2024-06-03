@@ -17,7 +17,7 @@ const PhoneNumbers = ({ icon, number, styling, overrides }: PhoneNumbersProps) =
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
     >
       <div className={classes.phoneNumbersWrapper}>
-        {icon && <Icon data-testid="phone-numbers-icon" {...icon} />}
+        {icon && <Icon {...icon} />}
         <Link data-testid="phone-numbers-link" href={`tel:${number}`}>
           <div data-testid="phone-numbers-number" className={classes.phoneNumbers}>
             {number}

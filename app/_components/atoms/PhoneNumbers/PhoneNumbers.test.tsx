@@ -36,7 +36,7 @@ const cases: [string, PhoneNumbersProps, () => void][] = [
       expect(linkElement).toHaveAttribute('href', `tel:${testPhoneNumbers[0].number}`);
       const numberElement = await screen.findByTestId('phone-numbers-number');
       expect(numberElement).toHaveTextContent(testPhoneNumbers[0].number);
-      expect(await screen.findByTestId('phone-numbers-icon')).toBeTruthy();
+      expect(await screen.findByTestId('icon')).toBeTruthy();
     },
   ],
   [
@@ -50,7 +50,7 @@ const cases: [string, PhoneNumbersProps, () => void][] = [
       expect(linkElement).toHaveAttribute('href', `tel:${testPhoneNumbers[1].number}`);
       const numberElement = await screen.findByTestId('phone-numbers-number');
       expect(numberElement).toHaveTextContent(testPhoneNumbers[1].number);
-      expect(await screen.findByTestId('phone-numbers-icon')).toBeTruthy();
+      expect(await screen.findByTestId('icon')).toBeTruthy();
     },
   ],
 ];
