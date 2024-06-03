@@ -34,7 +34,7 @@ const cases: [string, ImageLinkProps, () => void][] = [
       const linkElement = await screen.findByTestId('image-link');
       expect(linkElement).toHaveAttribute('href', testImageLink.link.href);
       expect(linkElement).toHaveAttribute('target', testImageLink.link.target);
-      
+
       const imageElement = await screen.findByTestId('image-link-image');
       expect(imageElement).toHaveAttribute('src', testImageLink.image.src);
       expect(imageElement).toHaveAttribute('alt', testImageLink.image.alt);
@@ -51,8 +51,8 @@ const cases: [string, ImageLinkProps, () => void][] = [
       alt: testImageLink.image.alt,
     },
     async () => {
-      expect(screen.queryByTestId('image-link')).toBeNull(); 
-      
+      expect(screen.queryByTestId('image-link')).toBeNull();
+
       const imageElement = await screen.findByTestId('image-link-image');
       expect(imageElement).toHaveAttribute('src', testImageLink.image.src);
       expect(imageElement).toHaveAttribute('alt', testImageLink.image.alt);

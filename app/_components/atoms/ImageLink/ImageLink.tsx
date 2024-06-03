@@ -27,7 +27,13 @@ const ImageLink = ({ link, image, styling, overrides }: ImageLinkProps) => {
   );
   return (
     <BaseComponent styling={styling} stylingOptions={{ atomicType: 'atom' }} className={classes?.root}>
-      {link?.href ? <Link {...nextLink} data-testid="image-link">{renderImage}</Link> : renderImage}
+      {link?.href ? (
+        <Link {...nextLink} data-testid="image-link">
+          {renderImage}
+        </Link>
+      ) : (
+        renderImage
+      )}
     </BaseComponent>
   );
 };

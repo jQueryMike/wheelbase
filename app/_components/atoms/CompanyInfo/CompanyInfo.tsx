@@ -20,11 +20,7 @@ const CompanyInfo = ({ items, styling, overrides }: CompanyInfoProps) => {
     >
       {items.length > 0 &&
         items.map((item: any) => (
-          <div
-            className={classes.infoItem}
-            key={item.id}
-            data-testid={`company-info-text-${item.id}`}
-          >
+          <div className={classes.infoItem} key={item.id} data-testid={`company-info-text-${item.id}`}>
             {item.companyInfo?.label}
             {item.companyInfo?.number}
           </div>
