@@ -173,9 +173,9 @@ const cases: [string, AddressProps, () => void][] = [
 ];
 
 describe('Address test suite', () => {
-  it.each(cases)('%s', (_, properties, assertions) => {
+  it.each(cases)('%s', async (_, properties, assertions) => {
     render(<Address {...properties} />);
-    assertions();
+    await assertions();
   });
 
   it('should have no accessibility violations', async () => {

@@ -52,9 +52,9 @@ const cases: [string, DrawerNavigationProps, () => void][] = [
 ];
 
 describe('DrawerNavigation test suite', () => {
-  it.each(cases)('%s', (_, properties, assertions) => {
+  it.each(cases)('%s', async (_, properties, assertions) => {
     render(<DrawerNavigation {...properties} />);
-    assertions();
+    await assertions();
   });
 
   it('should have no accessibility violations', async () => {

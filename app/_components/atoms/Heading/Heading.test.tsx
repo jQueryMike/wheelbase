@@ -31,9 +31,9 @@ const cases: [string, HeadingProps, () => void][] = [
 ];
 
 describe('Heading test suite', () => {
-  it.each(cases)('%s', (_, properties, assertions) => {
+  it.each(cases)('%s', async (_, properties, assertions) => {
     render(<Heading {...properties} />);
-    assertions();
+    await assertions();
   });
 
   it('should have no accessibility violations', async () => {
