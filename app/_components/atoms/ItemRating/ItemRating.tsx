@@ -1,14 +1,20 @@
+import { Icon } from '../Icon';
+import itemRatingClasses from './ItemRating.classes';
+import { ItemRatingProps } from './ItemRating.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import { getColour } from '@utils/buildStyling/colours/getColour';
 
-import { Icon } from '../Icon';
-import itemRatingClasses from './ItemRating.classes';
-import { ItemRatingProps } from './ItemRating.types';
-
-const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) => {
+const ItemRating = ({
+  itemRating,
+  icon,
+  overrides,
+  styling,
+}: ItemRatingProps) => {
   const classes = buildClasses(itemRatingClasses, overrides);
-  const secondaryColor = `text-${getColour(icon.secondaryColor).substring(3)}` || 'text-black opacity-25';
+  const secondaryColor =
+    `text-${getColour(icon.secondaryColor).substring(3)}` ||
+    'text-black opacity-25';
 
   const calculateStarRating = (rating: number) => {
     const wholeStars = Math.floor(rating);
@@ -34,8 +40,15 @@ const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) =
   const { wholeStars } = calculateStarRating(itemRating);
   const stars = renderStars(wholeStars);
   return (
-    <div className={classes.ratingContainer}>
-      <BaseComponent styling={icon.styling} stylingOptions={{ atomicType: 'atom' }}>
+    <div
+      className={classes.ratingContainer}
+      data-testid="item-rating-container"
+    >
+      <BaseComponent
+        styling={icon.styling}
+        stylingOptions={{ atomicType: 'atom' }}
+        datatestid="item-rating-star"
+      >
         <div className={classes.ratingStars}>{stars}</div>
       </BaseComponent>
       <BaseComponent
@@ -43,6 +56,7 @@ const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) =
         styling={styling}
         stylingOptions={{ atomicType: 'atom', textType: 'text' }}
         className={classes.ratingFigure}
+        datatestid="item-rating-figure"
       >
         {itemRating}/5
       </BaseComponent>

@@ -15,7 +15,7 @@ const cases: [string, IconProps, () => void][] = [
       styling: testIcon.styling,
     },
     async () => {
-      expect(await screen.findByTestId('icon')).toHaveClass('fa fa-envelope');
+      expect(await screen.findByTestId('icon-svg')).toHaveClass('fa fa-envelope');
     },
   ],
 ];
