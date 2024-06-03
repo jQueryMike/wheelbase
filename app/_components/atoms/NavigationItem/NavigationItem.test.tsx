@@ -56,9 +56,9 @@ describe('NavigationItem test suite', () => {
     }));
   });
 
-  it.each(cases)('%s', (_, properties, assertions) => {
+  it.each(cases)('%s', async (_, properties, assertions) => {
     render(<NavigationItem {...properties} />);
-    assertions();
+    await assertions();
   });
 
   it.each(cases)('%s', (_, properties, assertions) => {

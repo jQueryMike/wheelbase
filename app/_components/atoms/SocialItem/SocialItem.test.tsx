@@ -27,9 +27,9 @@ const cases: [string, SocialItemProps, () => void][] = [
 ];
 
 describe('SocialItem test suite', () => {
-  it.each(cases)('%s', (_, properties, assertions) => {
+  it.each(cases)('%s', async (_, properties, assertions) => {
     render(<SocialItem {...properties} />);
-    assertions();
+    await assertions();
   });
 
   it('should have no accessibility violations', async () => {

@@ -21,9 +21,9 @@ const cases: [string, ReviewDetailProps, () => void][] = [
 ];
 
 describe('ReviewDetail test suite', () => {
-  it.each(cases)('%s', (_, properties, assertions) => {
+  it.each(cases)('%s', async (_, properties, assertions) => {
     render(<ReviewDetail {...properties} />);
-    assertions();
+    await assertions();
   });
 
   it('should have no accessibility violations', async () => {
