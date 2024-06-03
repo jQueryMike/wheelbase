@@ -1,15 +1,19 @@
 // eslint-disable-next-line import/no-cycle
+import avatarClasses from './Avatar.classes';
+import { AvatarProps } from './Avatar.types';
 import { Image } from '@components/atoms';
 import { BaseComponent, Gravatar } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 
-import avatarClasses from './Avatar.classes';
-import { AvatarProps } from './Avatar.types';
-
 const Avatar = ({ gravatarName, styling, overrides, ...image }: AvatarProps) => {
   const classes = buildClasses(avatarClasses, overrides);
   return (
-    <BaseComponent className={classes?.root} stylingOptions={{ atomicType: 'atom' }} styling={styling}>
+    <BaseComponent
+      className={classes?.root}
+      stylingOptions={{ atomicType: 'atom' }}
+      styling={styling}
+      data-testid="avatar"
+    >
       {image?.src ? (
         <Image
           alt={image?.alt || 'Avatar'}

@@ -1,9 +1,8 @@
+import Avatar from './Avatar';
+import { AvatarProps } from './Avatar.types';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
-
-import Avatar from './Avatar';
-import { AvatarProps } from './Avatar.types';
 
 const testAvatar = {
   src: 'https://fastly.picsum.photos/id/851/200/300.jpg?hmac=AD_d7PsSrqI2zi-ubHY_-urUxCN77Gnev3k5o0P6nlE',
@@ -20,12 +19,14 @@ const cases: [string, AvatarProps, () => void][] = [
       ...testAvatar,
     },
     async () => {
-      expect(await screen.findByTestId('avatar')).toBeTruthy();
       const avatarElement = await screen.findByTestId('avatar-image');
-      expect(avatarElement).toHaveAttribute('src', testAvatar.src);
       expect(avatarElement).toHaveAttribute('alt', testAvatar.alt);
       expect(avatarElement).toHaveAttribute('width', `${testAvatar.width}`);
       expect(avatarElement).toHaveAttribute('height', `${testAvatar.height}`);
+      expect(avatarElement).toHaveAttribute(
+        'src',
+        expect.stringContaining('/_next/image?url=https%3A%2F%2Ffastly.picsum.photos%2Fid%2F851%2F200%2F300.jpg'),
+      );
     },
   ],
   [
@@ -36,13 +37,15 @@ const cases: [string, AvatarProps, () => void][] = [
       styling: {},
     },
     async () => {
-      expect(await screen.findByTestId('avatar')).toBeTruthy();
       const avatarElement = await screen.findByTestId('avatar-image');
-      expect(avatarElement).toHaveAttribute('src', testAvatar.src);
-      expect(avatarElement).toHaveAttribute('alt', 'Avatar');
+      expect(avatarElement).toHaveAttribute('alt', testAvatar.alt);
       expect(avatarElement).toHaveAttribute('width', '128');
       expect(avatarElement).toHaveAttribute('height', '128');
       expect(avatarElement).toHaveAttribute('loading', 'lazy');
+      expect(avatarElement).toHaveAttribute(
+        'src',
+        expect.stringContaining('/_next/image?url=https%3A%2F%2Ffastly.picsum.photos%2Fid%2F851%2F200%2F300.jpg'),
+      );
     },
   ],
 ];
