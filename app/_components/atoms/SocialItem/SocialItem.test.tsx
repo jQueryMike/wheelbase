@@ -21,7 +21,7 @@ const cases: [string, SocialItemProps, () => void][] = [
     { ...testSocialItem },
     async () => {
       expect(await screen.findByTestId('social-item-link')).toHaveAttribute('href', '');
-      expect(await screen.findByTestId('social-item-icon')).toBeTruthy();
+      expect(await screen.findByTestId('icon')).toBeTruthy();
     },
   ],
 ];

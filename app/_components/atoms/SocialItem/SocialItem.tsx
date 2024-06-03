@@ -12,7 +12,7 @@ const SocialItem = ({ icon, link, styling, overrides }: SocialItemProps) => {
   return (
     <BaseComponent as="div" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'atom' }}>
       <Link data-testid="social-item-link" className={classes.iconWrapper} {...parsedLink}>
-        <Icon data-testid="social-item-icon" {...icon} />
+        <Icon {...icon} />
       </Link>
     </BaseComponent>
   );
