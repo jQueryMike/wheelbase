@@ -11,7 +11,7 @@ const ReviewDetail = ({ reviewDetail, styling, overrides }: ReviewDetailProps) =
       styling={styling}
       className={classes.root}
       stylingOptions={{ atomicType: 'atom' }}
-      data-testid="review-detail"
+      datatestid="review-detail"
     >
       {reviewDetail}
     </BaseComponent>

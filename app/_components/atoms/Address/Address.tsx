@@ -29,9 +29,9 @@ const Address = ({
       className={classes.root}
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
-      data-testid="address"
+      datatestid="address-wrapper"
     >
-      <address className={cn(classes.address, inline ? 'flex-row flex-nowrap' : 'flex flex-col')}>
+      <address className={cn(classes.address, inline ? 'flex-row flex-nowrap' : 'flex flex-col')} data-testid="address">
         {companyName ? (
           <span data-testid="company-name">
             {companyName}

@@ -7,7 +7,7 @@ const Icon = ({ icon, styling, overrides }: IconProps) => {
   const classes = buildClasses(iconClasses, overrides);
   return (
     <BaseComponent
-      data-testid="icon"
+      datatestid="icon"
       className={classes.root}
       as="div"
       styling={styling}

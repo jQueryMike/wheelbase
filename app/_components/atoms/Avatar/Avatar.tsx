@@ -12,7 +12,7 @@ const Avatar = ({ gravatarName, styling, overrides, ...image }: AvatarProps) => 
       className={classes?.root}
       stylingOptions={{ atomicType: 'atom' }}
       styling={styling}
-      data-testid="avatar"
+      datatestid="avatar"
     >
       {image?.src ? (
         <Image

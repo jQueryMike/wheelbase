@@ -13,7 +13,7 @@ const Text = ({ text, overrides, styling }: TextProps) => {
   return (
     <BaseComponent
       as="div"
-      data-testid="text-content"
+      datatestid="text-content"
       styling={styling}
       stylingOptions={{ atomicType: 'atom' }}
       className={classes?.root}

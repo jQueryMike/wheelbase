@@ -27,7 +27,7 @@ const Button = ({
   return (
     <NextLink data-testid="button-link" href={href || ''} target={target}>
       <BaseComponent
-        data-testid="button-root"
+        datatestid="button-root"
         as="span"
         className={cn(classes.root, classes[`${style}Button`], classes[`${size}Button`])}
         styling={styling}

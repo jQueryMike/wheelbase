@@ -5,8 +5,8 @@ export type CompanyInfoClasses<T = string> = {
 };
 
 type CompanyInfoItemProps = {
-  label: string;
-  number: string;
+  id: string;
+  companyInfo: { label: string; number: string };
 };
 
 export type CompanyInfoProps = BaseProps<{

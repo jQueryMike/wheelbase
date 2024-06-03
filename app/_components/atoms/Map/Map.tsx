@@ -21,7 +21,7 @@ const Map = ({ src, fullWidth, styling, overrides }: MapProps) => {
   return (
     <BaseComponent
       as="div"
-      data-testid="map-container"
+      datatestid="map-container"
       className={fullWidth ? classes.rootFullWidth : classes.root}
       styling={styling}
       stylingOptions={{ atomicType: 'atom' }}

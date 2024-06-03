@@ -19,7 +19,7 @@ const Heading = ({
       className={classes.root}
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType }}
-      data-testid={dataTestId}
+      datatestid={dataTestId}
     >
       {text}
     </BaseComponent>

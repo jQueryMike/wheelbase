@@ -43,7 +43,7 @@ const cases: [string, AddressProps, () => void][] = [
       styling: {},
     },
     async () => {
-      expect(await screen.findByTestId('address')).toBeTruthy();
+      expect(await screen.findByTestId('address-wrapper')).toBeTruthy();
       expect(await screen.findByTestId('company-name')).toHaveTextContent(companyNameTest);
       expect(await screen.findByTestId('address-line-one')).toHaveTextContent(addressLineOneTest);
       expect(await screen.findByTestId('address-line-two')).toHaveTextContent(addressLineTwoTest);
@@ -64,7 +64,7 @@ const cases: [string, AddressProps, () => void][] = [
       styling: {},
     },
     async () => {
-      expect(await screen.findByTestId('address')).toBeTruthy();
+      expect(await screen.findByTestId('address-wrapper')).toBeTruthy();
       expect(screen.queryByTestId('company-name')).toBeFalsy();
       expect(await screen.findByTestId('address-line-one')).toHaveTextContent(addressLineOneTest);
       expect(screen.queryByTestId('address-line-two')).toBeFalsy();
@@ -82,7 +82,7 @@ const cases: [string, AddressProps, () => void][] = [
       styling: {},
     },
     async () => {
-      expect(await screen.findByTestId('address')).toBeTruthy();
+      expect(await screen.findByTestId('address-wrapper')).toBeTruthy();
       expect(screen.queryByTestId('company-name')).toBeFalsy();
       expect(screen.queryByTestId('address-line-one')).toBeFalsy();
       expect(screen.queryByTestId('address-line-two')).toBeFalsy();

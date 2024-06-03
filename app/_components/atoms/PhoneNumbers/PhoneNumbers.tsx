@@ -11,7 +11,7 @@ const PhoneNumbers = ({ icon, number, styling, overrides }: PhoneNumbersProps) =
   return (
     <BaseComponent
       as="div"
-      data-testid="phone-numbers"
+      datatestid="phone-numbers"
       className={classes.root}
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
