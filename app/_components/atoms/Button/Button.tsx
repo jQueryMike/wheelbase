@@ -44,7 +44,6 @@ const Button = ({
               <Icon icon={leftIcon} styling={{}} />
             </span>
           )}
-          <span className={classes?.textContainer}>{text}</span>
           {text && (
             <span data-testid="button-text" className={classes?.textContainer}>
               {text}
