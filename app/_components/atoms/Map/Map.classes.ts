@@ -1,6 +1,5 @@
-import { ClassesBuilder, tw } from '@utils';
-
 import { MapClasses } from './Map.types';
+import { ClassesBuilder, tw } from '@utils';
 
 const location = 'Map/Map.classes';
 

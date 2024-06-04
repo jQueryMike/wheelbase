@@ -3,7 +3,9 @@ import { MapProps } from './Map.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 
-const extractSrcFromGoogleMaps = (googleMapLink: string): string | undefined => {
+const extractSrcFromGoogleMaps = (
+  googleMapLink: string
+): string | undefined => {
   if (!googleMapLink) return undefined;
   const regex = /src="([^"]+)"/;
   const match = googleMapLink.match(regex);
@@ -28,7 +30,14 @@ const Map = ({ src, fullWidth, styling, overrides }: MapProps) => {
     >
       <div className={classes.mapContainer}>
         {parsedSrc && (
-          <iframe data-testid="map-iframe" src={parsedSrc} title="google map" loading="lazy" className={classes.map} />
+          <iframe
+            data-testid="map-iframe"
+            src={parsedSrc}
+            title="google map"
+            loading="lazy"
+            className={classes.map}
+            onLoad={() => console.log('Iframe loaded')}
+          />
         )}
       </div>
     </BaseComponent>
