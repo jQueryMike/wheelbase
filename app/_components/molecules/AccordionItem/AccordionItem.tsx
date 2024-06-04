@@ -8,7 +8,7 @@ import BLOCKS from '@components/Blocks';
 import { Heading, Icon } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
-import { useToggle } from 'app/_hooks';
+import { useToggle } from '@hooks';
 import cn from 'classnames';
 import { Suspense } from 'react';
 

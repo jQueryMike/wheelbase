@@ -29,6 +29,7 @@ export type ButtonClasses<T = string> = {
 export type ButtonProps = BaseProps<{
   classes?: ButtonClasses<string>;
   text?: string;
+  testId?: string;
   href?: string;
   target?: HTMLAttributeAnchorTarget;
   leftIcon?: string;

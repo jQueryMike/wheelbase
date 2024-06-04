@@ -12,7 +12,7 @@ classes = {
   avatar: tw`rounded-full`,
   captionContainer: tw`flex items-center gap-3`,
   avatarContainer: tw``,
-  citeContainer: tw``,
+  citeContainer: tw`flex flex-col`,
   reviewerName: tw``,
   reviewDate: tw``,
   reviewContentContainer: tw`flex-1 space-y-1`,

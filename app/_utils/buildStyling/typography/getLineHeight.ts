@@ -1,5 +1,5 @@
 import { LineHeightOption } from '@types';
-import mappings from '../mappings.json'
+import mappings from '../mappings.json';
 
 /**
  * Get line height

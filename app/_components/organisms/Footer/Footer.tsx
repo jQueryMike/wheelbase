@@ -1,3 +1,5 @@
+import footerClasses from './Footer.classes';
+import { FooterProps } from './Footer.types';
 import { CompanyInfo, NavigationItem, SocialItem, Text } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
 import { getLegalUrl } from '@utils';
@@ -5,9 +7,6 @@ import { buildClasses } from '@utils/buildClasses';
 import { buildConfig } from '@utils/buildConfig';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import footerClasses from './Footer.classes';
-import { FooterProps } from './Footer.types';
 
 const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: FooterProps) => {
   const classes = buildClasses(footerClasses, overrides);
@@ -25,7 +24,7 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
   const companyInfoContent = companyInfo?.items?.items?.map(buildConfigForItem) || [];
   const chosenCompanyInfo = {
     styling: companyInfoContent[0]?.styling || {},
-    items: companyInfoContent[0]?.companyInfoItems || [],
+    items: companyInfoContent[0]?.companyInfoItems.map((x: any) => buildConfig(x)) || [],
   };
   return (
     <BaseComponent as="footer" className={classes.root} styling={styling} stylingOptions={{ atomicType: 'organism' }}>
@@ -45,7 +44,7 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
                 <nav className={classes.socialItems} role="navigation" aria-label="Social media links">
                   {chosenSocials.map((item: any) => (
                     <SocialItem
-                      key={item.id}
+                      key={item.socials?.id}
                       icon={item.icon}
                       link={item.socials?.link?.[0] || {}}
                       styling={item.styling}
@@ -68,7 +67,7 @@ const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: 
               </div>
             )}
             <div className={classes.imageContainer}>
-              <Link target="_blank" href="https://www.clickdealer.co.uk" rel='nofollow'>
+              <Link target="_blank" href="https://www.clickdealer.co.uk" rel="nofollow">
                 <Image
                   alt="Click Dealer Ltd"
                   loading="lazy"

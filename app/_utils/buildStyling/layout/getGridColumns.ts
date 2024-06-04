@@ -1,5 +1,5 @@
 import { GridColumnOptions } from '@types';
-import mappings from '../mappings.json'
+import mappings from '../mappings.json';
 
 /**
  * @description Get grid cols classes for a specified column number

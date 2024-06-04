@@ -12,6 +12,6 @@ describe('buildClasses', () => {
     // Add your assertions here
     // For example, you can expect the result to be a string or an array of strings
     expect(result).toBeDefined();
-    expect(typeof result).toBe('string');
+    expect(typeof result).toBe('object');
   });
 });

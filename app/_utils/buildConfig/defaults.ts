@@ -18,5 +18,5 @@ export const DefaultsMap = new Map([
       },
       settings: {},
     },
-  ]
+  ],
 ]);

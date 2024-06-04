@@ -1,10 +1,8 @@
+import { Text } from '@components/atoms';
 import Avatar from '@components/atoms/Avatar/Avatar';
 import { ImageLink } from '@components/atoms/ImageLink';
 import { ItemRating } from '@components/atoms/ItemRating';
-import { ReviewContent } from '@components/atoms/ReviewContent';
-import { ReviewDate } from '@components/atoms/ReviewDate';
-import { ReviewTitle } from '@components/atoms/ReviewTitle';
-import { ReviewerName } from '@components/atoms/ReviewerName';
+import { ReviewDetail } from '@components/atoms/ReviewDetail';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 
@@ -36,14 +34,14 @@ const ReviewItem = ({
           <Avatar {...avatar} />
         </div>
         <div className={classes.citeContainer}>
-          <ReviewerName reviewerName={reviewerName.text} styling={reviewerName.styling} />
-          {reviewDate && <ReviewDate reviewDate={reviewDate.text} styling={reviewDate.styling} />}
+          {reviewerName && <ReviewDetail reviewDetail={reviewerName.text} styling={reviewerName.styling} />}
+          {reviewDate && <ReviewDetail reviewDetail={reviewDate.text} styling={reviewDate.styling} />}
         </div>
       </figcaption>
       <blockquote className={classes.reviewContentContainer}>
-        {reviewTitle && <ReviewTitle reviewTitle={reviewTitle.text} styling={reviewTitle.styling} />}
+        {reviewTitle && <ReviewDetail reviewDetail={reviewTitle.text} styling={reviewTitle.styling} />}
         {reviewContent.text.markup.length > 0 && (
-          <ReviewContent reviewContent={reviewContent.text.markup} styling={reviewContent.styling} />
+          <Text text={reviewContent.text.markup} styling={reviewContent.styling} />
         )}
       </blockquote>
       <div className={classes.bottomContainer}>

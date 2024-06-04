@@ -19,7 +19,6 @@ const Address = ({
   overrides,
 }: AddressProps) => {
   const classes = buildClasses(addressClasses, overrides);
-
   const delimiter =
     displayType.toLocaleLowerCase().includes('comma') && !displayType.toLocaleLowerCase().includes('no') ? ', ' : ' ';
   const inline = displayType.toLocaleLowerCase().startsWith('inline');
@@ -30,45 +29,46 @@ const Address = ({
       className={classes.root}
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
+      datatestid="address-wrapper"
     >
-      <address className={cn(classes.address, inline ? 'flex-row flex-nowrap' : 'flex flex-col')}>
+      <address className={cn(classes.address, inline ? 'flex-row flex-nowrap' : 'flex flex-col')} data-testid="address">
         {companyName ? (
-          <span>
+          <span data-testid="company-name">
             {companyName}
             {delimiter}
           </span>
         ) : undefined}
         {addressLineOne ? (
-          <span>
+          <span data-testid="address-line-one">
             {addressLineOne}
             {delimiter}
           </span>
         ) : undefined}
         {addressLineTwo ? (
-          <span>
+          <span data-testid="address-line-two">
             {addressLineTwo}
             {delimiter}
           </span>
         ) : undefined}
         {city ? (
-          <span>
+          <span data-testid="city">
             {city}
             {delimiter}
           </span>
         ) : undefined}
         {county ? (
-          <span>
+          <span data-testid="county">
             {county}
             {delimiter}
           </span>
         ) : undefined}
         {country && showCountry ? (
-          <span>
+          <span data-testid="country">
             {country}
             {delimiter}
           </span>
         ) : undefined}
-        {postcode ? <span>{postcode}</span> : undefined}
+        {postcode ? <span data-testid="postcode">{postcode}</span> : undefined}
       </address>
     </BaseComponent>
   );

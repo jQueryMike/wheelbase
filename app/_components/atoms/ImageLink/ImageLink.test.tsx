@@ -1,30 +1,70 @@
-import { render } from '@testing-library/react';
-import { axe } from 'jest-axe';
-
 import ImageLink from './ImageLink';
+import { ImageLinkProps } from './ImageLink.types';
+import { render, screen } from '@testing-library/react';
+import { axe } from 'jest-axe';
+import { act } from 'react-dom/test-utils';
+
+const testImageLink = {
+  href: '/test-link',
+  target: '_blank',
+  src: 'https://fastly.picsum.photos/id/851/200/300.jpg?hmac=AD_d7PsSrqI2zi-ubHY_-urUxCN77Gnev3k5o0P6nlE',
+  alt: 'Test ImageLink',
+  width: 200,
+  height: 150,
+  styling: {},
+  priority: true,
+};
+
+const cases: [string, ImageLinkProps, () => void][] = [
+  [
+    'render ImageLink with link and image',
+    testImageLink,
+    async () => {
+      const linkElement = await screen.findByTestId('image-link');
+      expect(linkElement).toHaveAttribute('href', testImageLink.href);
+      expect(linkElement).toHaveAttribute('target', testImageLink.target);
+
+      const imageElement = await screen.findByTestId('image-link-image');
+      expect(imageElement.getAttribute('src')).toContain(encodeURIComponent(testImageLink.src));
+      expect(imageElement).toHaveAttribute('alt', testImageLink.alt);
+      expect(imageElement).toHaveAttribute('width', `${testImageLink.width}`);
+      expect(imageElement).toHaveAttribute('height', `${testImageLink.height}`);
+    },
+  ],
+  [
+    'render ImageLink without link',
+    {
+      href: '',
+      target: '_blank',
+      src: 'https://fastly.picsum.photos/id/851/200/300.jpg?hmac=AD_d7PsSrqI2zi-ubHY_-urUxCN77Gnev3k5o0P6nlE',
+      alt: 'Test ImageLink',
+      width: 200,
+      height: 150,
+      styling: {},
+    },
+    async () => {
+      expect(screen.queryByTestId('image-link')).toBeNull();
+
+      const imageElement = await screen.findByTestId('image-link-image');
+      expect(imageElement.getAttribute('src')).toContain(encodeURIComponent(testImageLink.src));
+      expect(imageElement).toHaveAttribute('alt', testImageLink.alt);
+      expect(imageElement).toHaveAttribute('width', `${testImageLink.width}`);
+      expect(imageElement).toHaveAttribute('height', `${testImageLink.height}`);
+    },
+  ],
+];
 
 describe('ImageLink test suite', () => {
-  it('should work', () => {
-    expect(true).toBe(true);
+  it.each(cases)('%s', async (_, properties, assertions) => {
+    render(<ImageLink {...properties} />);
+    await assertions();
   });
 
   it('should have no accessibility violations', async () => {
-    const { container } = render(
-      <ImageLink
-        title="ImageLink"
-        spacing={{
-          marginBottom: '0',
-          marginTop: '0',
-          marginLeft: '0',
-          marginRight: '0',
-          paddingBottom: '0',
-          paddingTop: '0',
-          paddingLeft: '0',
-          paddingRight: '0',
-        }}
-      />,
-    );
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
+    await act(async () => {
+      const { container } = render(<ImageLink {...testImageLink} />);
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
   });
 });

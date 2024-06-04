@@ -10,11 +10,12 @@ const NavigationItem = ({ name, id, url, styling, overrides }: NavigationItemPro
   return (
     <BaseComponent
       as="div"
+      datatestid="navigation-item"
       className={classes.root}
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
     >
-      <Link className={classes.link} href={url} key={id}>
+      <Link data-testid="navigation-item-link" className={classes.link} href={url} key={id}>
         {name}
       </Link>
     </BaseComponent>

@@ -1,16 +1,13 @@
-import { BaseComponent } from '@components/utils';
-import { buildClasses } from '@utils/buildClasses';
-import { buildConfig } from '@utils/buildConfig';
-
 import companyInfoClasses from './CompanyInfo.classes';
 import { CompanyInfoProps } from './CompanyInfo.types';
+import { BaseComponent } from '@components/utils';
+import { buildClasses } from '@utils/buildClasses';
 
 const CompanyInfo = ({ items, styling, overrides }: CompanyInfoProps) => {
   if (!items) {
     return null;
   }
 
-  const companyInfoItems = items.map((x: any) => buildConfig(x));
   const classes = buildClasses(companyInfoClasses, overrides);
   return (
     <BaseComponent
@@ -19,12 +16,13 @@ const CompanyInfo = ({ items, styling, overrides }: CompanyInfoProps) => {
       styling={styling}
       stylingOptions={{ atomicType: 'atom', textType: 'text' }}
       aria-label="Company information"
+      datatestid="company-info"
     >
-      {companyInfoItems.length > 0 &&
-        companyInfoItems.map((item: any) => (
-          <div className={classes.infoItem} key={item.id}>
-            {item.companyInfo.label}
-            {item.companyInfo.number}
+      {items.length > 0 &&
+        items.map((item: any) => (
+          <div className={classes.infoItem} key={item.id} data-testid={`company-info-text-${item.id}`}>
+            {item.companyInfo?.label}
+            {item.companyInfo?.number}
           </div>
         ))}
     </BaseComponent>

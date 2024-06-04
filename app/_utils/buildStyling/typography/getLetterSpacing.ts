@@ -1,5 +1,5 @@
 import { LetterSpacingOption } from '@types';
-import mappings from '../mappings.json'
+import mappings from '../mappings.json';
 
 /**
  * Get letter spacing

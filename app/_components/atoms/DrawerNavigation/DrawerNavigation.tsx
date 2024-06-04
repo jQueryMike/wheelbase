@@ -1,15 +1,13 @@
 'use client';
 
-import { useToggle } from '@hooks';
-import Link from 'next/link';
-
 import { Icon } from '../Icon';
 import classes from './DrawerNavigation.classes';
 import { DrawerNavigationProps } from './DrawerNavigation.types';
+import { useToggle } from '@hooks';
+import Link from 'next/link';
 
 const DrawerNavigation = ({ homeObject, icon }: DrawerNavigationProps) => {
   const [isOpen, toggle] = useToggle();
-
   return (
     <>
       <div className={classes.menuIconWrapper}>

@@ -23,7 +23,7 @@ describe('getPage', () => {
     // Call the getPage function
     const result = await getPage(['slug']);
     // Assert that the fetch function was called with the correct URL
-    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/slug`, {
+    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/slug?expand=all`, {
       next: { tags: [] },
     });
     // Assert that the result matches the expected mock response
@@ -37,7 +37,7 @@ describe('getPage', () => {
     // Call the getPage function
     await expect(getPage(['slug'])).rejects.toThrow(mockError);
     // Assert that the fetch function was called with the correct URL
-    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/slug`, {
+    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/slug?expand=all`, {
       next: { tags: [] },
     });
   });
@@ -60,7 +60,7 @@ describe('getPage', () => {
     // Call the getPage function
     await getPage(['slug']);
     // Assert that the fetch function was called with the correct URL
-    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/slug`, {
+    expect(global.fetch).toHaveBeenCalledWith(`${ROOT_URL}/slug?expand=all`, {
       next: { tags: ['theme', 'page-slug'] },
     });
   });

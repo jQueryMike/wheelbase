@@ -1,5 +1,5 @@
 import { GridGapOptions } from '@types';
-import mappings from '../mappings.json'
+import mappings from '../mappings.json';
 
 /**
  * @description Get grid gap classes for a specified column gap

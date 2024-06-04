@@ -5,11 +5,7 @@ import { Block } from '@types';
 import { buildClasses } from '@utils/buildClasses';
 import NextImage from 'next/image';
 
-const ImageBlock = ({
-  imageLink: image,
-  styling,
-  overrides,
-}: ImageBlockProps & Block) => {
+const ImageBlock = ({ imageLink: image, styling, overrides }: ImageBlockProps & Block) => {
   if (!image) {
     return null;
   }
@@ -25,17 +21,10 @@ const ImageBlock = ({
       stylingOptions={{ atomicType: 'organism' }}
     >
       <div
-        className={
-          !fullscreen
-            ? classes.imageContainer
-            : classes.imageContainerFullscreen
-        }
+        className={!fullscreen ? classes.imageContainer : classes.imageContainerFullscreen}
         data-testid="fullscreen-image-container"
       >
-        <NextImage
-          className={!fullscreen ? classes.image : classes.imageFullscreen}
-          {...image}
-        />
+        <NextImage className={!fullscreen ? classes.image : classes.imageFullscreen} {...image} />
       </div>
     </BaseComponent>
   );

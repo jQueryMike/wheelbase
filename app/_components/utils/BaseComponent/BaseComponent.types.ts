@@ -6,4 +6,5 @@ export type BaseComponentProps<T extends keyof HTMLElementTagNameMap> = BaseProp
 }> & {
   as?: T;
   stylingOptions?: any;
+  datatestid?: string;
 } & React.HTMLProps<HTMLElementTagNameMap[T]>;
