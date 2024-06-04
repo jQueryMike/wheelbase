@@ -3,7 +3,7 @@ import { buildPageContent } from '@utils';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-const route = (params: any) => Array.from(new Set(['home', ...params.slug]))
+const route = (params: any) => Array.from(new Set(['home', ...params.slug]));
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const { seo } = await buildPageContent(route(params));
