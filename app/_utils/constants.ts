@@ -30,7 +30,12 @@ export const ROOT_URL = `${CONTENT_API_URL}/item/${process.env.API_ROOT_NODE_PAT
 /**
  * Root URL v2 API
  */
-export const ROOT_URL_V2 = `${CONTENT_API_URL}?fetch=descendants:${process.env.API_ROOT_NODE_GUID}&take=9999`;
+export const ROOT_URL_V2_DESC = `${CONTENT_API_URL}?fetch=descendants:${process.env.API_ROOT_NODE_GUID}&take=9999`;
+
+/**
+ * Root URL v2 API
+ */
+export const ROOT_URL_V2 = `${CONTENT_API_URL_V2}/item/${process.env.API_ROOT_NODE_PATH}`;
 
 /**
  * Merge vars

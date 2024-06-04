@@ -3,15 +3,17 @@ import { buildPageContent } from '@utils';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
+const route = (params: any) => Array.from(new Set(['home', ...params.slug]))
+
 export async function generateMetadata({ params }: any): Promise<Metadata> {
-  const { seo } = await buildPageContent(params.slug);
+  const { seo } = await buildPageContent(route(params));
   return {
     ...seo,
   } as Metadata;
 }
 
 export default async function Page({ params }: any) {
-  const { content } = await buildPageContent(params.slug);
+  const { content } = await buildPageContent(route(params));
   const components = content.map(({ name, id, ...props }: any) => [
     name,
     BLOCKS[name as keyof typeof BLOCKS],

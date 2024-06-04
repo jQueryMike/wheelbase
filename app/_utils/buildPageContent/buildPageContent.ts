@@ -10,7 +10,7 @@ export default async function buildPageContent(slug: string[]) {
   const { properties: globalConfig } = await getGlobalConfig();
   const { properties: sharedContent } = await getSharedContent();
   const content = (
-    mergeVars(pageData.items[0].properties?.organismGrid?.items ?? [], globalConfig, sharedContent) ?? []
+    mergeVars(pageData.properties?.organismGrid?.items ?? [], globalConfig, sharedContent) ?? []
   ).map((item: any) => buildConfig(item.content));
-  return { content, globalConfig, seo: buildSEO(pageData.items[0]) };
+  return { content, globalConfig, seo: buildSEO(pageData) };
 }
