@@ -8,6 +8,11 @@
 export const CONTENT_API_URL = `${process.env.API_URL!}/umbraco/delivery/api/v1/content`;
 
 /**
+ * Content API URL v2 API
+ */
+export const CONTENT_API_URL_V2 = `${process.env.API_URL!}/umbraco/delivery/api/v2/content`;
+
+/**
  * Shared content URL
  */
 export const SHARED_CONTENT_URL = `${CONTENT_API_URL}/item/shared-content`;
@@ -21,6 +26,11 @@ export const IS_PRODUCTION = process.env.ENVIRONMENT_NAME === 'production';
  * Root URL
  */
 export const ROOT_URL = `${CONTENT_API_URL}/item/${process.env.API_ROOT_NODE_PATH}`;
+
+/**
+ * Root URL v2 API
+ */
+export const ROOT_URL_V2 = `${CONTENT_API_URL}?fetch=descendants:${process.env.API_ROOT_NODE_GUID}&take=9999`;
 
 /**
  * Merge vars
