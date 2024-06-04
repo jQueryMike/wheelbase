@@ -3,9 +3,7 @@ import { MapProps } from './Map.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 
-const extractSrcFromGoogleMaps = (
-  googleMapLink: string
-): string | undefined => {
+const extractSrcFromGoogleMaps = (googleMapLink: string): string | undefined => {
   if (!googleMapLink) return undefined;
   const regex = /src="([^"]+)"/;
   const match = googleMapLink.match(regex);
