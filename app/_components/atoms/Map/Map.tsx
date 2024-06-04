@@ -28,13 +28,7 @@ const Map = ({ src, fullWidth, styling, overrides }: MapProps) => {
     >
       <div className={classes.mapContainer}>
         {parsedSrc && (
-          <iframe
-            data-testid="map-iframe"
-            src={parsedSrc}
-            title="google map"
-            loading="lazy"
-            className={classes.map}
-          />
+          <iframe data-testid="map-iframe" src={parsedSrc} title="google map" loading="lazy" className={classes.map} />
         )}
       </div>
     </BaseComponent>
