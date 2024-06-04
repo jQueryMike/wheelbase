@@ -28,6 +28,7 @@ export type TextAndImageProps = BaseProps<{
   backgroundGradientColor?: Color;
   gradientDirection?: 'Left to Right' | 'Right to Left';
   spacing: Spacing;
+  tint: any;
   overrides?: {
     [key in keyof TextAndImageClasses]?: string;
   };

@@ -17,6 +17,7 @@ const TextAndImage = async ({
   contentArea = [],
   reverse,
   overrides,
+  tint,
   ...rest
 }: TextAndImageProps) => {
   const classes = buildClasses(textAndImageClasses, overrides);
@@ -31,11 +32,12 @@ const TextAndImage = async ({
     ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
     : undefined;
   return (
-    <BaseComponent className={cn(classes.root, { 'grid-flow-dense': reverse })} {...rest}>
+    <BaseComponent className={cn(image?.imageAsBackground ? "relative overflow-hidden" :  classes.root, { 'grid-flow-dense': reverse })} {...rest}>
       <div className={classes.rootInner}>
         <div className={classes.container}>
           <div
-            className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}
+            // eslint-disable-next-line no-nested-ternary
+            className={image?.imageAsBackground ? "z-20" : reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}
           >
             {(heading || subheading) && (
               <div className={classes?.headingsContainer} data-testid="headings-container">
@@ -54,12 +56,16 @@ const TextAndImage = async ({
             )}
           </div>
           {image && (
-            <div
-              className={cn(reverse ? classes?.imageContainerReverse : classes?.imageContainer)}
-              data-testid="image-container"
-            >
-              <Image className={classes?.image} {...image} />
-            </div>
+            <>
+              <BaseComponent as="span" styling={tint.styling} className="absolute top-0 left-0 h-full w-full pointer-events-none z-10" />
+              <div
+                // eslint-disable-next-line no-nested-ternary
+                className={cn(image.imageAsBackground ? "[&>div>img]:absolute [&>div>img]:top-1/2 [&>div>img]:left-1/2 [&>div>img]:h-full [&>div>img]:w-full [&>div>img]:translate-y-[-50%] [&>div>img]:translate-x-[-50%]" : reverse ? classes?.imageContainerReverse : classes?.imageContainer)}
+                data-testid="image-container"
+              >
+                <Image className={classes?.image} {...image} />
+              </div>
+            </>
           )}
         </div>
       </div>

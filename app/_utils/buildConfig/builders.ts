@@ -31,6 +31,7 @@ function imageBuilder(
     styling: config.styling,
     ...content,
     fullscreen: appearance?.fullscreen,
+    imageAsBackground: appearance?.imageAsBackground
   };
 
   return image;
