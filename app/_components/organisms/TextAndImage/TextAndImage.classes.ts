@@ -1,7 +1,7 @@
-import { TextAndImageClasses } from "./TextAndImage.types";
-import { ClassesBuilder, ClassesProperty, tw } from "@utils";
+import { TextAndImageClasses } from './TextAndImage.types';
+import { ClassesBuilder, ClassesProperty, tw } from '@utils';
 
-const location = "TextAndImage/TextAndImage.classes";
+const location = 'TextAndImage/TextAndImage.classes';
 
 let classes: TextAndImageClasses<ClassesProperty> = {};
 
@@ -33,7 +33,7 @@ classes = {
   },
   contentAreaContainer: {
     default: tw`space-y-4`,
-    "@xl/image-with-text": tw``,
+    '@xl/image-with-text': tw``,
   },
   imageContainer: {
     default: tw`relative`,
@@ -42,8 +42,8 @@ classes = {
     default: tw`relative order-1`,
   },
   imageAsBackground:
-    "[&>div>img]:absolute [&>div>img]:top-1/2 [&>div>img]:left-1/2 [&>div>img]:h-full [&>div>img]:w-full [&>div>img]:translate-y-[-50%] [&>div>img]:translate-x-[-50%]",
-  tint: "absolute top-0 left-0 h-full w-full pointer-events-none z-10",
+    '[&>div>img]:absolute [&>div>img]:top-1/2 [&>div>img]:left-1/2 [&>div>img]:h-full [&>div>img]:w-full [&>div>img]:translate-y-[-50%] [&>div>img]:translate-x-[-50%]',
+  tint: 'absolute top-0 left-0 h-full w-full pointer-events-none z-10',
   image: tw`object-cover`,
 };
 
