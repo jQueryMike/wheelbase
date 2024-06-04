@@ -25,10 +25,10 @@ const cases: [string, ItemRatingProps, () => void][] = [
       const ratingFigure = await screen.findByTestId('item-rating-figure');
       expect(ratingFigure).toHaveTextContent('3.5/5');
 
-    //   const starIcons = await screen.findAllByTestId('item-rating-star');
-    //   expect(starIcons).toHaveLength(5);
-    //   expect(starIcons.slice(0, 3)).toHaveClass('fa-star');
-    //   expect(starIcons.slice(3)).toHaveClass('fa-star text-gray-300');
+      //   const starIcons = await screen.findAllByTestId('item-rating-star');
+      //   expect(starIcons).toHaveLength(5);
+      //   expect(starIcons.slice(0, 3)).toHaveClass('fa-star');
+      //   expect(starIcons.slice(3)).toHaveClass('fa-star text-gray-300');
     },
   ],
   [
@@ -43,10 +43,10 @@ const cases: [string, ItemRatingProps, () => void][] = [
       const ratingFigure = await screen.findByTestId('item-rating-figure');
       expect(ratingFigure).toHaveTextContent('4/5');
 
-    //   const starIcons = await screen.findAllByTestId('item-rating-star');
-    //   expect(starIcons).toHaveLength(5);
-    //   expect(starIcons.slice(0, 4)).toHaveClass('fa-star');
-    //   expect(starIcons.slice(4)).toHaveClass('fa-star text-gray-300');
+      //   const starIcons = await screen.findAllByTestId('item-rating-star');
+      //   expect(starIcons).toHaveLength(5);
+      //   expect(starIcons.slice(0, 4)).toHaveClass('fa-star');
+      //   expect(starIcons.slice(4)).toHaveClass('fa-star text-gray-300');
     },
   ],
 ];
