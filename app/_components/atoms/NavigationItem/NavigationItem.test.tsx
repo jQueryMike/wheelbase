@@ -41,29 +41,16 @@ const cases: [string, NavigationItemProps, () => void][] = [
     async () => {
       expect(await screen.findByTestId('navigation-item')).toBeTruthy();
       const linkElement = await screen.findByTestId('navigation-item-link');
-      expect(linkElement).toHaveTextContent('Aboutzz');
-      expect(linkElement).toHaveAttribute('href', '/abourt');
+      expect(linkElement).toHaveTextContent(testNavigationItem[1].name);
+      expect(linkElement).toHaveAttribute('href', testNavigationItem[1].url);
     },
   ],
 ];
 
 describe('NavigationItem test suite', () => {
-  beforeAll(() => {
-    // Mock components within the content area
-    jest.mock('../../atoms/NavigationItem/NavigationItem', () => ({
-      __esModule: true,
-      default: () => <div data-testid="text-component" />,
-    }));
-  });
-
   it.each(cases)('%s', async (_, properties, assertions) => {
     render(<NavigationItem {...properties} />);
     await assertions();
-  });
-
-  it.each(cases)('%s', (_, properties, assertions) => {
-    render(<NavigationItem {...properties} />);
-    assertions();
   });
 
   it('should have no accessibility violations', async () => {

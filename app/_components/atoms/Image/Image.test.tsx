@@ -11,6 +11,7 @@ const testImage = {
   width: 200,
   height: 150,
   styling: {},
+  'data-testid': 'image-element'
 };
 
 const cases: [string, ImageProps, () => void][] = [
@@ -22,7 +23,7 @@ const cases: [string, ImageProps, () => void][] = [
     async () => {
       expect(await screen.findByTestId('image')).toBeTruthy();
       const imageElement = await screen.findByTestId('image-element');
-      expect(imageElement).toHaveAttribute('src', testImage.src);
+      expect(imageElement.getAttribute('src')).toContain(encodeURIComponent(testImage.src));
       expect(imageElement).toHaveAttribute('alt', testImage.alt);
       expect(imageElement).toHaveAttribute('width', `${testImage.width}`);
       expect(imageElement).toHaveAttribute('height', `${testImage.height}`);
