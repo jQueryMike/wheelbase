@@ -36,7 +36,6 @@ const Map = ({ src, fullWidth, styling, overrides }: MapProps) => {
             title="google map"
             loading="lazy"
             className={classes.map}
-            onLoad={() => console.log('Iframe loaded')}
           />
         )}
       </div>
