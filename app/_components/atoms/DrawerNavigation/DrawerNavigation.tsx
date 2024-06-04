@@ -34,9 +34,7 @@ const DrawerNavigation = ({ homeObject, icon }: DrawerNavigationProps) => {
             homeObject.children.map((item: any) => (
               <Link
                 key={item.id}
-                data-testid={`nav-link-${item.name
-                  .toLowerCase()
-                  .replace(/\s+/g, '-')}`}
+                data-testid={`nav-link-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                 className={classes.navLink}
                 href={item.url}
               >
