@@ -23,9 +23,7 @@ const cases: [string, MapProps, () => void][] = [
     async () => {
       const mapContainer = await screen.findByTestId('map-container');
       expect(mapContainer).toBeTruthy();
-      expect(mapContainer).toHaveClass(
-        'col-span-12 lg:col-span-7 xl:col-span-8'
-      );
+      expect(mapContainer).toHaveClass('col-span-12 lg:col-span-7 xl:col-span-8');
 
       const iframeElement = await screen.findByTestId('map-iframe');
       expect(iframeElement).toHaveAttribute('src', mapSrc);
