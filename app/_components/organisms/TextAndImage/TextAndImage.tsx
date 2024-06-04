@@ -1,14 +1,14 @@
 // eslint-disable-next-line import/no-cycle
-import BLOCKS from '@components/Blocks';
-import { Heading, Image } from '@components/atoms';
-import { BaseComponent } from '@components/utils/BaseComponent';
-import { buildClasses } from '@utils/buildClasses';
-import cn from 'classnames';
-import { Suspense } from 'react';
-
-import textAndImageClasses from './TextAndImage.classes';
+import textAndImageClasses from "./TextAndImage.classes";
 // eslint-disable-next-line import/no-cycle
-import { TextAndImageProps } from './TextAndImage.types';
+import { TextAndImageProps } from "./TextAndImage.types";
+// eslint-disable-next-line import/no-cycle
+import BLOCKS from "@components/Blocks";
+import { Heading, Image } from "@components/atoms";
+import { BaseComponent } from "@components/utils/BaseComponent";
+import { buildClasses } from "@utils/buildClasses";
+import cn from "classnames";
+import { Suspense } from "react";
 
 const TextAndImage = async ({
   heading,
@@ -29,24 +29,55 @@ const TextAndImage = async ({
   ]);
   const resolvedHeading = heading ? await Heading(heading) : undefined;
   const resolvedSubheading = subheading
-    ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
+    ? await Heading({
+        ...subheading,
+        "data-testid": "subheading",
+        textType: "subheading",
+      })
     : undefined;
+
+  const rootClassName = cn(
+    image?.imageAsBackground ? "relative overflow-hidden" : classes.root,
+    { "grid-flow-dense": reverse }
+  );
+
+  let textAndImageContentContainerClassName;
+  if (image?.imageAsBackground) {
+    textAndImageContentContainerClassName = "z-20";
+  } else {
+    textAndImageContentContainerClassName = reverse
+      ? classes?.textAndImageContentContainerReverse
+      : classes?.textAndImageContentContainer;
+  }
+
+  let imageContainerClassName;
+  if (image?.imageAsBackground) {
+    imageContainerClassName = classes.imageAsBackground;
+  } else {
+    imageContainerClassName = reverse
+      ? classes?.imageContainerReverse
+      : classes?.imageContainer;
+  }
+
   return (
-    <BaseComponent className={cn(image?.imageAsBackground ? "relative overflow-hidden" :  classes.root, { 'grid-flow-dense': reverse })} {...rest}>
+    <BaseComponent className={rootClassName} {...rest}>
       <div className={classes.rootInner}>
         <div className={classes.container}>
-          <div
-            // eslint-disable-next-line no-nested-ternary
-            className={image?.imageAsBackground ? "z-20" : reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}
-          >
+          <div className={textAndImageContentContainerClassName}>
             {(heading || subheading) && (
-              <div className={classes?.headingsContainer} data-testid="headings-container">
+              <div
+                className={classes?.headingsContainer}
+                data-testid="headings-container"
+              >
                 {resolvedHeading}
                 {resolvedSubheading}
               </div>
             )}
             {components?.length > 0 && (
-              <div className={classes?.contentAreaContainer} data-testid="content-area">
+              <div
+                className={classes?.contentAreaContainer}
+                data-testid="content-area"
+              >
                 {components.map(([name, Component, id, props]: any) => (
                   <Suspense fallback={<div>Loading {name}...</div>} key={id}>
                     <Component {...props} />
@@ -57,10 +88,15 @@ const TextAndImage = async ({
           </div>
           {image && (
             <>
-              <BaseComponent as="span" styling={tint.styling} className="absolute top-0 left-0 h-full w-full pointer-events-none z-10" />
+              {image.imageAsBackground && (
+                <BaseComponent
+                  as="span"
+                  styling={tint.styling}
+                  className={classes.tint}
+                />
+              )}
               <div
-                // eslint-disable-next-line no-nested-ternary
-                className={cn(image.imageAsBackground ? "[&>div>img]:absolute [&>div>img]:top-1/2 [&>div>img]:left-1/2 [&>div>img]:h-full [&>div>img]:w-full [&>div>img]:translate-y-[-50%] [&>div>img]:translate-x-[-50%]" : reverse ? classes?.imageContainerReverse : classes?.imageContainer)}
+                className={imageContainerClassName}
                 data-testid="image-container"
               >
                 <Image className={classes?.image} {...image} />
