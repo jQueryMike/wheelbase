@@ -1,15 +1,13 @@
 'use client';
 
-import { useToggle } from '@hooks';
-import Link from 'next/link';
-
 import { Icon } from '../Icon';
 import classes from './DrawerNavigation.classes';
 import { DrawerNavigationProps } from './DrawerNavigation.types';
+import { useToggle } from '@hooks';
+import Link from 'next/link';
 
 const DrawerNavigation = ({ homeObject, icon }: DrawerNavigationProps) => {
   const [isOpen, toggle] = useToggle();
-
   return (
     <>
       <div className={classes.menuIconWrapper}>
@@ -36,7 +34,9 @@ const DrawerNavigation = ({ homeObject, icon }: DrawerNavigationProps) => {
             homeObject.children.map((item: any) => (
               <Link
                 key={item.id}
-                data-testid={`nav-link-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                data-testid={`nav-link-${item.name
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')}`}
                 className={classes.navLink}
                 href={item.url}
               >
