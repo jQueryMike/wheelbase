@@ -11,7 +11,7 @@ const testImage = {
   width: 200,
   height: 150,
   styling: {},
-  'data-testid': 'image-element'
+  'data-testid': 'image-element',
 };
 
 const cases: [string, ImageProps, () => void][] = [

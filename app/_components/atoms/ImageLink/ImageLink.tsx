@@ -6,13 +6,7 @@ import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import Link from 'next/link';
 
-const ImageLink = ({
-  href,
-  target,
-  styling,
-  overrides,
-  ...image
-}: ImageLinkProps) => {
+const ImageLink = ({ href, target, styling, overrides, ...image }: ImageLinkProps) => {
   const classes = buildClasses(imageLinkClasses, overrides);
   const imageSrc = image?.src || '';
 
@@ -29,11 +23,7 @@ const ImageLink = ({
     />
   );
   return (
-    <BaseComponent
-      styling={styling}
-      stylingOptions={{ atomicType: 'atom' }}
-      className={classes?.root}
-    >
+    <BaseComponent styling={styling} stylingOptions={{ atomicType: 'atom' }} className={classes?.root}>
       {href ? (
         <Link href={href} target={target} data-testid="image-link">
           {renderImage}
