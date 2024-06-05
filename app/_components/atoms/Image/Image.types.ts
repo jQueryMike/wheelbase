@@ -6,5 +6,5 @@ export type ImageClasses<T = string> = {
 };
 
 export type ImageProps = BaseProps<
-  NextImageProps & { overrides?: { [key in keyof ImageClasses]?: string }; imageAsBackground: boolean }
+  NextImageProps & { overrides?: { [key in keyof ImageClasses]?: string }; imageAsBackground: boolean, maxHeight: string }
 >;
