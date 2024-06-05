@@ -100,7 +100,7 @@ const Contact = async ({
                       <SocialItem
                         key={item.id}
                         icon={item.icon}
-                        link={{ ...item.socials.link[0] }}
+                        link={{ ...item.socials.link?.[0] }}
                         styling={item.styling}
                       />
                     ))}

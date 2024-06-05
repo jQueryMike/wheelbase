@@ -5,12 +5,12 @@ import { ImageBlockClasses } from './ImageBlock.types';
 const location = 'ImageBlock/ImageBlock.classes';
 
 const classes: ImageBlockClasses = {
-  root: tw``,
-  rootFullscreen: tw`relative overflow-hidden w-full max-h-[360px] md:max-h-[420] lg:md:max-h-[500] aspect-[1/1] md:aspect-[3/1] lg:aspect-[4/1] lg:max-h-[500px]`,
+  root: tw`relative overflow-hidden w-full aspect-[4/3] md:aspect-[16/9]`,
+  rootFullscreen: tw`relative overflow-hidden w-full aspect-[4/3] md:aspect-[16/9]`,
   imageContainer: tw``,
   imageContainerFullscreen: tw`absolute inset-0`,
-  image: tw``,
-  imageFullscreen: tw`h-full w-full object-cover object-center`,
+  image: tw`absolute top-0 left-0 h-full w-full object-contain`,
+  imageFullscreen: tw`absolute top-1/2 left-1/2 h-full w-full translate-y-[-50%] translate-x-[-50%] object-cover`,
 };
 
 const imageBlockClasses = new ClassesBuilder({ location, classes }).classes;

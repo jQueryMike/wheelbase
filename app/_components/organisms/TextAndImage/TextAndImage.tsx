@@ -3,44 +3,40 @@ import BLOCKS from '@components/Blocks';
 import { Heading, Image } from '@components/atoms';
 import { BaseComponent } from '@components/utils/BaseComponent';
 import { buildClasses } from '@utils/buildClasses';
-import cn from 'classnames';
 import { Suspense } from 'react';
-
-import textAndImageClasses from './TextAndImage.classes';
-// eslint-disable-next-line import/no-cycle
 import { TextAndImageProps } from './TextAndImage.types';
+import textAndImageClasses from './TextAndImage.classes';
 
-const TextAndImage = async ({
+const TextAndImage = ({
   heading,
   subheading,
   image1: image,
   contentArea = [],
   reverse,
   overrides,
+  tint,
   ...rest
 }: TextAndImageProps) => {
-  const classes = buildClasses(textAndImageClasses, overrides);
+  const classes = buildClasses(
+    textAndImageClasses({ imageAsBackground: image?.imageAsBackground, reverse }),
+    overrides,
+  );
   const components = contentArea.map(({ name, id, ...props }: any) => [
     name,
     BLOCKS[name as keyof typeof BLOCKS],
     id,
     props,
   ]);
-  const resolvedHeading = heading ? await Heading(heading) : undefined;
-  const resolvedSubheading = subheading
-    ? await Heading({ ...subheading, 'data-testid': 'subheading', textType: 'subheading' })
-    : undefined;
+
   return (
-    <BaseComponent className={cn(classes.root, { 'grid-flow-dense': reverse })} {...rest}>
+    <BaseComponent className={classes.root} {...rest}>
       <div className={classes.rootInner}>
         <div className={classes.container}>
-          <div
-            className={reverse ? classes?.textAndImageContentContainerReverse : classes?.textAndImageContentContainer}
-          >
+          <div className={classes.contentContainer}>
             {(heading || subheading) && (
               <div className={classes?.headingsContainer} data-testid="headings-container">
-                {resolvedHeading}
-                {resolvedSubheading}
+                {heading && <Heading {...heading} />}
+                {subheading && <Heading {...subheading} data-testid="subheading" textType="subheading" />}
               </div>
             )}
             {components?.length > 0 && (
@@ -54,12 +50,12 @@ const TextAndImage = async ({
             )}
           </div>
           {image && (
-            <div
-              className={cn(reverse ? classes?.imageContainerReverse : classes?.imageContainer)}
-              data-testid="image-container"
-            >
-              <Image className={classes?.image} {...image} />
-            </div>
+            <>
+              {image.imageAsBackground && <BaseComponent as="span" styling={tint.styling} className={classes.tint} />}
+              <div className={classes.imageContainer} data-testid="image-container">
+                <Image className={classes?.image} {...image} />
+              </div>
+            </>
           )}
         </div>
       </div>

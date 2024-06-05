@@ -10,11 +10,14 @@ export type TextAndImageClasses<T = string> = {
     | 'contentContainer'
     | 'headingsContainer'
     | 'contentAreaContainer'
+    | 'textAndImageContentIndex'
     | 'textAndImageContentContainerReverse'
     | 'textAndImageContentContainer'
     | 'imageContainerReverse'
     | 'imageContainer'
-    | 'image']?: T;
+    | 'image'
+    | 'imageAsBackground'
+    | 'tint']?: T;
 };
 
 export type TextAndImageProps = BaseProps<{
@@ -28,6 +31,7 @@ export type TextAndImageProps = BaseProps<{
   backgroundGradientColor?: Color;
   gradientDirection?: 'Left to Right' | 'Right to Left';
   spacing: Spacing;
+  tint: any;
   overrides?: {
     [key in keyof TextAndImageClasses]?: string;
   };

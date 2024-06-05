@@ -6,8 +6,9 @@ import { buildLink } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
 import NextImage from 'next/image';
 import Link from 'next/link';
+import cn from 'classnames';
 
-const ImageBlock = ({ imageLink: image, styling, overrides }: ImageBlockProps & Block) => {
+const ImageBlock = ({ imageLink: image, maxHeight, styling, overrides }: ImageBlockProps & Block) => {
   if (!image) {
     return null;
   }
@@ -21,7 +22,7 @@ const ImageBlock = ({ imageLink: image, styling, overrides }: ImageBlockProps & 
   return (
     <BaseComponent
       as="div"
-      className={!fullscreen ? classes.root : classes.rootFullscreen}
+      className={cn(!fullscreen ? classes.root : classes.rootFullscreen, `max-h-[${maxHeight}px]`)}
       styling={styling}
       stylingOptions={{ atomicType: 'organism' }}
     >

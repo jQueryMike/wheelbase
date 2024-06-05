@@ -18,6 +18,7 @@ function getCustomClasses(
   textColors = new Set(),
   classSet = new Set(),
   maxWidth = new Set(),
+  maxHeight = new Set(),
 ) {
   data?.forEach(({ content: { properties } }) => {
     Object.entries(properties).forEach(([key, value]) => {
@@ -36,19 +37,22 @@ function getCustomClasses(
       if (key.endsWith('_maxWidth') && value) {
         maxWidth.add(`max-w-[${value}px]`);
       }
+      if (key.endsWith('_maxHeight') && value) {
+        maxHeight.add(`max-h-[${value}px]`);
+      }
       if (/(_content|_items|_socials|_telephoneNumbers|_email)$/.test(key) && value) {
-        getCustomClasses(value?.items, bgColors, borderColors, textColors, classSet, maxWidth);
+        getCustomClasses(value?.items, bgColors, borderColors, textColors, classSet, maxWidth, maxHeight);
       }
     });
   });
-  return [bgColors, borderColors, textColors, classSet, maxWidth];
+  return [bgColors, borderColors, textColors, classSet, maxWidth, maxHeight];
 }
 
 function buildSafelistColors(data) {
   return data
     .map((items) => getCustomClasses(items))
     .reduce(
-      (prev, [bgColors, borderColors, textColors, classSet, maxWidth]) => {
+      (prev, [bgColors, borderColors, textColors, classSet, maxWidth, maxHeight]) => {
         Array.from(bgColors).forEach((x) => prev[0].add(x));
         Array.from(borderColors).forEach((x) => prev[1].add(x));
         Array.from(textColors).forEach((x) => prev[2].add(x));
@@ -56,9 +60,10 @@ function buildSafelistColors(data) {
           .flat()
           .forEach((x) => prev[3].add(x));
         Array.from(maxWidth).forEach((x) => prev[4].add(x));
+        Array.from(maxHeight).forEach((x) => prev[5].add(x));
         return prev;
       },
-      [new Set(), new Set(), new Set(), new Set(), new Set()],
+      [new Set(), new Set(), new Set(), new Set(), new Set(), new Set()],
     )
     .map((x, i) => {
       switch (i) {
