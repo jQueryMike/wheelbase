@@ -22,6 +22,7 @@ classes = {
     lg: tw`lg:my-20`,
     xl: tw`xl:my-14`,
   },
+  textAndImageContentIndex: 'z-20',
   textAndImageContentContainerReverse: {
     default: tw`order-2 my-8 flex flex-col justify-center`,
     md: tw`md:my-16`,
