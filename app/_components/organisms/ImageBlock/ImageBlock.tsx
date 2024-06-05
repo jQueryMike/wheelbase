@@ -1,5 +1,3 @@
-import imageBlockClasses from './ImageBlock.classes';
-import { ImageBlockProps } from './ImageBlock.types';
 import { BaseComponent } from '@components/utils';
 import { Block } from '@types';
 import { buildLink } from '@utils';
@@ -7,6 +5,8 @@ import { buildClasses } from '@utils/buildClasses';
 import NextImage from 'next/image';
 import Link from 'next/link';
 import cn from 'classnames';
+import { ImageBlockProps } from './ImageBlock.types';
+import imageBlockClasses from './ImageBlock.classes';
 
 const ImageBlock = ({ imageLink: image, maxHeight, styling, overrides }: ImageBlockProps & Block) => {
   if (!image) {
@@ -14,7 +14,7 @@ const ImageBlock = ({ imageLink: image, maxHeight, styling, overrides }: ImageBl
   }
 
   const classes = buildClasses(imageBlockClasses, overrides);
-  const fullscreen = image.fullscreen;
+  const {fullscreen} = image;
   const parsedLink = buildLink(image.link);
 
   const renderImage = <NextImage className={!fullscreen ? classes.image : classes.imageFullscreen} {...image} />;

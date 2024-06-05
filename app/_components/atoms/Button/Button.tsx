@@ -1,10 +1,10 @@
-import { Icon } from '../Icon';
-import buttonClasses from './Button.classes';
-import { ButtonProps } from './Button.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import cn from 'classnames';
 import NextLink from 'next/link';
+import { ButtonProps } from './Button.types';
+import buttonClasses from './Button.classes';
+import { Icon } from '../Icon';
 
 const Button = ({
   style,

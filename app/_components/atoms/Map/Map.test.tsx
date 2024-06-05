@@ -1,8 +1,8 @@
-import Map from './Map';
-import { MapProps } from './Map.types';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
+import { MapProps } from './Map.types';
+import Map from './Map';
 
 const mapSrc =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2400.534453557178!2d-2.186499722799641!3d53.010754772193884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487a6836a6dbdc67%3A0x221ce2abd2bb1b75!2sClick%20Dealer%20Ltd!5e0!3m2!1sen!2suk!4v1717484787089!5m2!1sen!2suk';

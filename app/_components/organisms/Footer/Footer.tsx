@@ -1,5 +1,3 @@
-import footerClasses from './Footer.classes';
-import { FooterProps } from './Footer.types';
 import { CompanyInfo, NavigationItem, SocialItem, Text } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
 import { getLegalUrl } from '@utils';
@@ -7,6 +5,8 @@ import { buildClasses } from '@utils/buildClasses';
 import { buildConfig } from '@utils/buildConfig';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FooterProps } from './Footer.types';
+import footerClasses from './Footer.classes';
 
 const Footer = async ({ companyInfo, footerText, socials, styling, overrides }: FooterProps) => {
   const classes = buildClasses(footerClasses, overrides);

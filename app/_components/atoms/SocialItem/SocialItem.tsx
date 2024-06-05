@@ -1,10 +1,10 @@
-import { Icon } from '../Icon';
-import socialItemClasses from './SocialItem.classes';
-import { SocialItemProps } from './SocialItem.types';
 import { BaseComponent } from '@components/utils';
 import { buildLink } from '@utils';
 import { buildClasses } from '@utils/buildClasses';
 import Link from 'next/link';
+import { SocialItemProps } from './SocialItem.types';
+import socialItemClasses from './SocialItem.classes';
+import { Icon } from '../Icon';
 
 const SocialItem = ({ icon, link, styling, overrides }: SocialItemProps) => {
   const parsedLink = buildLink(link);

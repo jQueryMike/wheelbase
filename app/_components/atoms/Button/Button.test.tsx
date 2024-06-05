@@ -1,9 +1,9 @@
-import Button from './Button';
-import { ButtonProps } from './Button.types';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { ButtonSize, ButtonStyle } from '@utils/constants';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
+import { ButtonProps } from './Button.types';
+import Button from './Button';
 
 const testButton: ButtonProps = {
   style: ButtonStyle.Accent,

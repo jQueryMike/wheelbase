@@ -1,8 +1,8 @@
-import CompanyInfo from './CompanyInfo';
-import { CompanyInfoProps } from './CompanyInfo.types';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
+import { CompanyInfoProps } from './CompanyInfo.types';
+import CompanyInfo from './CompanyInfo';
 
 const [testCompanyNumber, testFcaNumber, testVatNumber] = ['123456789', '012345678', '123456780'];
 const cases: [string, CompanyInfoProps, () => void][] = [
@@ -14,21 +14,21 @@ const cases: [string, CompanyInfoProps, () => void][] = [
           id: 'bb334492-1587-4ac1-876b-795c2d0932b9',
           companyInfo: {
             label: 'Company No. ',
-            number: '12345678',
+            number: testCompanyNumber,
           },
         },
         {
           id: 'fb1b7788-53f8-4342-abc5-0f5227e7fbcf',
           companyInfo: {
             label: 'FCA No. ',
-            number: '12345678',
+            number: testFcaNumber,
           },
         },
         {
           id: 'e9fb85df-f81b-47f5-b959-37ead7bfd81a',
           companyInfo: {
             label: 'VAT No. ',
-            number: '12345678',
+            number: testVatNumber,
           },
         },
       ],

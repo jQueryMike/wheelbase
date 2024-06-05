@@ -1,8 +1,8 @@
-import Avatar from './Avatar';
-import { AvatarProps } from './Avatar.types';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
+import { AvatarProps } from './Avatar.types';
+import Avatar from './Avatar';
 
 const testAvatar = {
   src: 'https://fastly.picsum.photos/id/851/200/300.jpg?hmac=AD_d7PsSrqI2zi-ubHY_-urUxCN77Gnev3k5o0P6nlE',
@@ -10,6 +10,10 @@ const testAvatar = {
   width: 64,
   height: 64,
   styling: {},
+  overrides: {},
+  imageAsBackground: false,
+  reverse: false,
+  maxHeight: "100%"
 };
 
 const cases: [string, AvatarProps, () => void][] = [
@@ -32,6 +36,7 @@ const cases: [string, AvatarProps, () => void][] = [
   [
     'render Avatar with default image values',
     {
+      ...testAvatar,
       src: testAvatar.src,
       alt: testAvatar.alt,
       styling: {},

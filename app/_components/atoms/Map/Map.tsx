@@ -1,7 +1,7 @@
-import mapClasses from './Map.classes';
-import { MapProps } from './Map.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
+import mapClasses from './Map.classes';
+import { MapProps } from './Map.types';
 
 const extractSrcFromGoogleMaps = (googleMapLink: string): string | undefined => {
   if (!googleMapLink) return undefined;

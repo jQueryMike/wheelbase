@@ -1,8 +1,8 @@
-import SocialItem from './SocialItem';
-import { SocialItemProps } from './SocialItem.types';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
+import { SocialItemProps } from './SocialItem.types';
+import SocialItem from './SocialItem';
 
 const testSocialItem: SocialItemProps = {
   icon: {

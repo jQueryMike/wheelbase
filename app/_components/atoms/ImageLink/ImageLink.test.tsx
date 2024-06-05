@@ -1,8 +1,8 @@
-import ImageLink from './ImageLink';
-import { ImageLinkProps } from './ImageLink.types';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
+import { ImageLinkProps } from './ImageLink.types';
+import ImageLink from './ImageLink';
 
 const testImageLink = {
   href: '/test-link',
@@ -13,6 +13,9 @@ const testImageLink = {
   height: 150,
   styling: {},
   priority: true,
+  overrides: {},
+  imageAsBackground: false,
+  maxHeight: "100%"
 };
 
 const cases: [string, ImageLinkProps, () => void][] = [
@@ -41,6 +44,9 @@ const cases: [string, ImageLinkProps, () => void][] = [
       width: 200,
       height: 150,
       styling: {},
+      overrides: {},
+      imageAsBackground: false,
+      maxHeight: "100%"
     },
     async () => {
       expect(screen.queryByTestId('image-link')).toBeNull();

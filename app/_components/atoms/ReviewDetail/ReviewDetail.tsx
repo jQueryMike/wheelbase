@@ -1,7 +1,7 @@
-import reviewDetailClasses from './ReviewDetail.classes';
-import { ReviewDetailProps } from './ReviewDetail.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
+import reviewDetailClasses from './ReviewDetail.classes';
+import { ReviewDetailProps } from './ReviewDetail.types';
 
 const ReviewDetail = ({ reviewDetail, styling, overrides }: ReviewDetailProps) => {
   const classes = buildClasses(reviewDetailClasses, overrides);

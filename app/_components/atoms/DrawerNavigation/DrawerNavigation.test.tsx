@@ -1,8 +1,8 @@
-import DrawerNavigation from './DrawerNavigation';
-import { DrawerNavigationProps } from './DrawerNavigation.types';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
+import { DrawerNavigationProps } from './DrawerNavigation.types';
+import DrawerNavigation from './DrawerNavigation';
 
 const homeObject = {
   homeObject: {

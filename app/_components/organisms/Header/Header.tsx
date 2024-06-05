@@ -35,7 +35,8 @@ const Header = async ({ logo, icon, contentArea = [], styling, overrides }: Head
                   src={logo.src}
                   id=""
                   styling={logo.styling}
-                />
+                  imageAsBackground={false}
+                  maxHeight='' />
               </a>
             </div>
           )}

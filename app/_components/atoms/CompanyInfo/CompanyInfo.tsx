@@ -1,7 +1,7 @@
-import companyInfoClasses from './CompanyInfo.classes';
-import { CompanyInfoProps } from './CompanyInfo.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
+import companyInfoClasses from './CompanyInfo.classes';
+import { CompanyInfoProps } from './CompanyInfo.types';
 
 const CompanyInfo = ({ items, styling, overrides }: CompanyInfoProps) => {
   if (!items) {

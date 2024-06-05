@@ -1,10 +1,10 @@
 // eslint-disable-next-line import/no-cycle
-import imageLinkClasses from './ImageLink.classes';
-import { ImageLinkProps } from './ImageLink.types';
 import { Image } from '@components/atoms';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import Link from 'next/link';
+import { ImageLinkProps } from './ImageLink.types';
+import imageLinkClasses from './ImageLink.classes';
 
 const ImageLink = ({ href, target, styling, overrides, ...image }: ImageLinkProps) => {
   const classes = buildClasses(imageLinkClasses, overrides);
@@ -20,7 +20,8 @@ const ImageLink = ({ href, target, styling, overrides, ...image }: ImageLinkProp
       src={imageSrc}
       styling={{}}
       data-testid="image-link-image"
-    />
+      imageAsBackground={false}
+      maxHeight='' />
   );
   return (
     <BaseComponent styling={styling} stylingOptions={{ atomicType: 'atom' }} className={classes?.root}>

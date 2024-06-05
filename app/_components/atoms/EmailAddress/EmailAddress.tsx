@@ -1,9 +1,9 @@
-import { Icon } from '../Icon';
-import emailAddressClasses from './EmailAddress.classes';
-import { EmailAddressProps } from './EmailAddress.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import Link from 'next/link';
+import { Icon } from '../Icon';
+import emailAddressClasses from './EmailAddress.classes';
+import { EmailAddressProps } from './EmailAddress.types';
 
 const EmailAddress = ({ icon, email, styling, overrides }: EmailAddressProps) => {
   const classes = buildClasses(emailAddressClasses, overrides);

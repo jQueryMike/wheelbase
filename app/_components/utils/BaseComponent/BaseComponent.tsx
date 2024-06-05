@@ -1,7 +1,7 @@
-import { BaseComponentProps } from './BaseComponent.types';
 import { buildStyling } from '@utils/buildStyling';
 import cn from 'classnames';
 import { PropsWithChildren } from 'react';
+import { BaseComponentProps } from './BaseComponent.types';
 
 const BaseComponent = <T extends keyof HTMLElementTagNameMap>({
   as,

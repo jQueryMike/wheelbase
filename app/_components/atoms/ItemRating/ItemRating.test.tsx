@@ -1,8 +1,8 @@
-import ItemRating from './ItemRating';
-import { ItemRatingProps } from './ItemRating.types';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
+import { ItemRatingProps } from './ItemRating.types';
+import ItemRating from './ItemRating';
 
 const testItemRating: ItemRatingProps = {
   itemRating: 3.5,

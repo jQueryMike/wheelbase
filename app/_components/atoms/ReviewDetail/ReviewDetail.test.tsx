@@ -1,8 +1,7 @@
-import ReviewDetail from './ReviewDetail';
-import { ReviewDetailProps } from './ReviewDetail.types';
 import { render, screen, within } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { act } from 'react-dom/test-utils';
+import { ReviewDetailProps } from './ReviewDetail.types';
+import ReviewDetail from './ReviewDetail';
 
 const reviewDetail = 'Sample test text!';
 
@@ -10,7 +9,7 @@ const cases: [string, ReviewDetailProps, () => void][] = [
   [
     'Render Review Detail with Text',
     {
-      reviewDetail: reviewDetail,
+      reviewDetail,
       styling: {},
     },
     async () => {

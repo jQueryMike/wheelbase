@@ -1,9 +1,9 @@
-import { Icon } from '../Icon';
-import itemRatingClasses from './ItemRating.classes';
-import { ItemRatingProps } from './ItemRating.types';
 import { BaseComponent } from '@components/utils';
 import { buildClasses } from '@utils/buildClasses';
 import { getColour } from '@utils/buildStyling/colours/getColour';
+import { Icon } from '../Icon';
+import itemRatingClasses from './ItemRating.classes';
+import { ItemRatingProps } from './ItemRating.types';
 
 const ItemRating = ({ itemRating, icon, overrides, styling }: ItemRatingProps) => {
   const classes = buildClasses(itemRatingClasses, overrides);
