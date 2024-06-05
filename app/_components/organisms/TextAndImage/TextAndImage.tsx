@@ -1,16 +1,13 @@
 // eslint-disable-next-line import/no-cycle
-import textAndImageClasses from './TextAndImage.classes';
-// eslint-disable-next-line import/no-cycle
-import { TextAndImageProps } from './TextAndImage.types';
-// eslint-disable-next-line import/no-cycle
 import BLOCKS from '@components/Blocks';
 import { Heading, Image } from '@components/atoms';
 import { BaseComponent } from '@components/utils/BaseComponent';
 import { buildClasses } from '@utils/buildClasses';
-import cn from 'classnames';
 import { Suspense } from 'react';
+import { TextAndImageProps } from './TextAndImage.types';
+import textAndImageClasses from './TextAndImage.classes';
 
-const TextAndImage = async ({
+const TextAndImage = ({
   heading,
   subheading,
   image1: image,
@@ -20,51 +17,23 @@ const TextAndImage = async ({
   tint,
   ...rest
 }: TextAndImageProps) => {
-  const classes = buildClasses(textAndImageClasses, overrides);
+  const classes = buildClasses(textAndImageClasses({imageAsBackground: image?.imageAsBackground, reverse}), overrides);
   const components = contentArea.map(({ name, id, ...props }: any) => [
     name,
     BLOCKS[name as keyof typeof BLOCKS],
     id,
     props,
   ]);
-  const resolvedHeading = heading ? await Heading(heading) : undefined;
-  const resolvedSubheading = subheading
-    ? await Heading({
-        ...subheading,
-        'data-testid': 'subheading',
-        textType: 'subheading',
-      })
-    : undefined;
-
-  const rootClassName = cn(image?.imageAsBackground ? 'relative overflow-hidden' : classes.root, {
-    'grid-flow-dense': reverse,
-  });
-
-  let textAndImageContentContainerClassName;
-  if (image?.imageAsBackground) {
-    textAndImageContentContainerClassName = classes?.textAndImageContentIndex;
-  } else {
-    textAndImageContentContainerClassName = reverse
-      ? classes?.textAndImageContentContainerReverse
-      : classes?.textAndImageContentContainer;
-  }
-
-  let imageContainerClassName;
-  if (image?.imageAsBackground) {
-    imageContainerClassName = classes.imageAsBackground;
-  } else {
-    imageContainerClassName = reverse ? classes?.imageContainerReverse : classes?.imageContainer;
-  }
 
   return (
-    <BaseComponent className={rootClassName} {...rest}>
+    <BaseComponent className={classes.root} {...rest}>
       <div className={classes.rootInner}>
         <div className={classes.container}>
-          <div className={textAndImageContentContainerClassName}>
-            {(heading || subheading) && (
+          <div className={classes.contentContainer}>
+          {(heading || subheading) && (
               <div className={classes?.headingsContainer} data-testid="headings-container">
-                {resolvedHeading}
-                {resolvedSubheading}
+                {heading && <Heading {...heading} />}
+                {subheading && <Heading {...subheading} data-testid="subheading" textType="subheading" />}
               </div>
             )}
             {components?.length > 0 && (
@@ -80,7 +49,7 @@ const TextAndImage = async ({
           {image && (
             <>
               {image.imageAsBackground && <BaseComponent as="span" styling={tint.styling} className={classes.tint} />}
-              <div className={imageContainerClassName} data-testid="image-container">
+              <div className={classes.imageContainer} data-testid="image-container">
                 <Image className={classes?.image} {...image} />
               </div>
             </>
