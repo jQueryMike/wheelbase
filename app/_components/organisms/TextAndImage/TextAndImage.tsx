@@ -17,7 +17,10 @@ const TextAndImage = ({
   tint,
   ...rest
 }: TextAndImageProps) => {
-  const classes = buildClasses(textAndImageClasses({imageAsBackground: image?.imageAsBackground, reverse}), overrides);
+  const classes = buildClasses(
+    textAndImageClasses({ imageAsBackground: image?.imageAsBackground, reverse }),
+    overrides,
+  );
   const components = contentArea.map(({ name, id, ...props }: any) => [
     name,
     BLOCKS[name as keyof typeof BLOCKS],
@@ -30,7 +33,7 @@ const TextAndImage = ({
       <div className={classes.rootInner}>
         <div className={classes.container}>
           <div className={classes.contentContainer}>
-          {(heading || subheading) && (
+            {(heading || subheading) && (
               <div className={classes?.headingsContainer} data-testid="headings-container">
                 {heading && <Heading {...heading} />}
                 {subheading && <Heading {...subheading} data-testid="subheading" textType="subheading" />}
