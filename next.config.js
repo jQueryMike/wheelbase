@@ -35,7 +35,7 @@ const nextConfig = {
         destination: '/:slug',
         permanent: true,
       },
-    ]
+    ];
   },
 };
 
