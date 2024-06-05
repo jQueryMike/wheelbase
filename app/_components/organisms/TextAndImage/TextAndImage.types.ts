@@ -1,22 +1,23 @@
-import { HeadingProps, ImageProps } from '@components/atoms';
-import { BaseProps } from '@components/types';
-import { Block, Color, Spacing } from '@types';
+import { HeadingProps, ImageProps } from "@components/atoms";
+import { BaseProps } from "@components/types";
+import { Block, Color, Spacing } from "@types";
 
 export type TextAndImageClasses<T = string> = {
   [key in
-    | 'root'
-    | 'rootInner'
-    | 'container'
-    | 'contentContainer'
-    | 'headingsContainer'
-    | 'contentAreaContainer'
-    | 'textAndImageContentContainerReverse'
-    | 'textAndImageContentContainer'
-    | 'imageContainerReverse'
-    | 'imageContainer'
-    | 'image'
-    | 'imageAsBackground'
-    | 'tint']?: T;
+    | "root"
+    | "rootInner"
+    | "container"
+    | "contentContainer"
+    | "headingsContainer"
+    | "contentAreaContainer"
+    | "textAndImageContentIndex"
+    | "textAndImageContentContainerReverse"
+    | "textAndImageContentContainer"
+    | "imageContainerReverse"
+    | "imageContainer"
+    | "image"
+    | "imageAsBackground"
+    | "tint"]?: T;
 };
 
 export type TextAndImageProps = BaseProps<{
@@ -28,7 +29,7 @@ export type TextAndImageProps = BaseProps<{
   reverse?: boolean;
   backgroundColor?: Color;
   backgroundGradientColor?: Color;
-  gradientDirection?: 'Left to Right' | 'Right to Left';
+  gradientDirection?: "Left to Right" | "Right to Left";
   spacing: Spacing;
   tint: any;
   overrides?: {
