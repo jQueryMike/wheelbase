@@ -1,9 +1,9 @@
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { redirect } from 'next/navigation';
+import Page from './[...slug]/page';
 
 config.autoAddCss = false;
 
 export default async function Home() {
-  redirect('/home');
+  return <Page params={{ slug: '' }} />;
 }
