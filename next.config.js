@@ -6,9 +6,9 @@ if (process.env.MEDIA_URL) domains.push(process.env.MEDIA_URL.replace('https://'
 
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    domains,
-  },
+  // images: {
+  //   domains,
+  // },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(mjml|txt)$/i,
